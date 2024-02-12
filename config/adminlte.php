@@ -382,7 +382,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'js/sweetAlert',
+                    'location' => 'js/sweetAlert.js',
                 ],
             ],
         ],
