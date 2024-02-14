@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Http\Requests\Role\Create;
 use App\Http\Requests\Role\Read;
 use App\Http\Requests\Role\Update;
 use App\Http\Requests\Role\Delete;
+use App\Http\Requests\Role\Permisos;
 
 class RoleController extends Controller
 {
@@ -19,8 +21,9 @@ class RoleController extends Controller
         if( auth()->user()->id ){
 
             $roles = Role::all();
+            $permisos = Permission::all();
 
-            return view('usuarios.roles.index', compact('roles'));
+            return view('usuarios.roles.index', compact('roles', 'permisos'));
 
         }else{
 
@@ -32,9 +35,32 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Permisos $request)
     {
-        //
+        try {
+            
+            $role = Role::find( $request->id );
+
+            if( $role->id ){
+
+                foreach( $request->permisos as $permiso ){
+
+                    $role->givePermissionTo( $permiso );
+
+                }
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
