@@ -20,7 +20,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Usuario', 'Email', 'Acciones']
+                $heads = ['Usuario', 'Email', 'Acciones'];
             @endphp
 
             <x-adminlte-datatable id="usuarios" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
