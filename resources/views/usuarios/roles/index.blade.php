@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-5 my-2">
                 <a href="{{ url('/usuarios') }}" class="btn btn-secondary p-2 fw-semibold rounded mx-1">Usuarios <i class="fas fa-user"></i></a>
-                <a href="" class="btn btn-dark p-2 fw-semibold rounded mx-1">Permisos de roles <i class="fas fa-user-cog"></i></a>
+                <a href="{{ url('/permisos') }}" class="btn btn-dark p-2 fw-semibold rounded mx-1">Permisos de usuario <i class="fas fa-user-cog"></i></a>
             </div>
             <div class="col-lg-1 my-2">
                 <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus"></x-adminlte-button>
