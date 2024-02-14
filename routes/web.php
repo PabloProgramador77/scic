@@ -26,3 +26,9 @@ Route::post('usuario/agregar', [App\Http\Controllers\UsuarioController::class, '
 Route::post('usuario/buscar', [App\Http\Controllers\UsuarioController::class, 'show'])->name('buscar-usuario');
 Route::post('usuario/actualizar', [App\Http\Controllers\UsuarioController::class, 'update'])->name('actualizar-usuario');
 Route::post('usuario/borrar', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('borrar-usuario');
+
+Route::get('roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
+Route::post('role/agregar', [App\Http\Controllers\RoleController::class, 'store'])->name('agregar-role');
+Route::post('role/buscar', [App\Http\Controllers\RoleController::class, 'show'])->name('buscar-role');
+Route::post('role/actualizar', [App\Http\Controllers\RoleController::class, 'update'])->name('actualizar-role');
+Route::post('role/borrar', [App\Http\Controllers\RoleController::class, 'destroy'])->name('borrar-role');
