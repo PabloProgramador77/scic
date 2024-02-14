@@ -5,15 +5,17 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-9">
+            <div class="col-lg-6">
                 <h1 class="fs-3 fw-semibold text-primary">Usuarios</h1>
                 <p class="fs-6 fw-semibold text-secondary">Panel de Administrador</p>
             </div>
-
-            <div class="col-lg-3 my-2">
-                <x-adminlte-button label="Nuevo Usuario" theme="primary" data-toggle="modal" data-target="#modalNuevo"></x-adminlte-button>
+            <div class="col-lg-5 my-2">
+                <a href="" class="btn btn-secondary p-2 fw-semibold rounded mx-1">Roles de Usuarios <i class="fas fa-user-tag"></i></a>
+                <a href="" class="btn btn-dark p-2 fw-semibold rounded mx-1">Permisos de Usuarios <i class="fas fa-user-cog"></i></a>
             </div>
-
+            <div class="col-lg-1 my-2">
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus"></x-adminlte-button>
+            </div>
         </div>
 
         <div class="container-fluid row p-2">
@@ -30,8 +32,9 @@
                             <td>{{ $usuario->name }}</td>
                             <td>{{ $usuario->email }}</td>
                             <td>
-                                <x-adminlte-button class="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $usuario->id }}"></x-adminlte-button>
-                                <x-adminlte-button class="borrar" label="Borrar" theme="danger" data-id="{{ $usuario->id }}"></x-adminlte-button>
+                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $usuario->id }}"></x-adminlte-button>
+                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $usuario->id }}"></x-adminlte-button>
+                                <x-adminlte-button class="permisos" icon="fas fa-user-cog" theme="secondary" data-id="{{ $usuario->id }}" data-toggle="modal" data-target="#modalPermisos"></x-adminlte-button>
                             </td>
                         </tr>
                         
