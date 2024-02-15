@@ -12,6 +12,20 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-input name="telefonoEditar" id="telefonoEditar" placeholder="Telefono">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+                <x-adminlte-input name="direccionEditar" id="direccionEditar" placeholder="Dirección">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
             </div>
             <input type="hidden" name="id" id="id">
         </form>

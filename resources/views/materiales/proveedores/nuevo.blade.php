@@ -3,19 +3,24 @@
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>
             <div class="form-group">
-                <x-adminlte-input name="nombre" id="nombre" placeholder="Nombre de material">
+                <x-adminlte-input name="nombre" id="nombre" placeholder="Nombre de proveedor">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-user">*</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-            </div>
-            <div class="form-group">
-                <x-adminlte-input name="concepto" id="concepto" placeholder="Concepto de material">
+                <x-adminlte-input name="telefono" id="telefono" placeholder="Telefono">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
-                            <i class="fas fa-user">*</i>
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+                <x-adminlte-input name="direccion" id="direccion" placeholder="Dirección">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-user"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
