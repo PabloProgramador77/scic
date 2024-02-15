@@ -291,8 +291,12 @@ return [
 
     'menu' => [
         [
-            'text'        => 'Usuarios',
-            'url'         => 'usuarios',
+            'text' => 'Usuarios',
+            'url' => 'usuarios',
+        ],
+        [
+            'text' => 'Materiales',
+            'url' => 'materiales',
         ],
     ],
 

@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -39,3 +28,9 @@ Route::post('permiso/agregar', [App\Http\Controllers\PermisoController::class, '
 Route::post('permiso/buscar', [App\Http\Controllers\PermisoController::class, 'show'])->name('buscar-permiso');
 Route::post('permiso/actualizar', [App\Http\Controllers\PermisoController::class, 'update'])->name('actualizar-permiso');
 Route::post('permiso/borrar', [App\Http\Controllers\PermisoController::class, 'destroy'])->name('borrar-permiso');
+
+Route::get('materiales', [App\Http\Controllers\MaterialController::class, 'index'])->name('materiales');
+Route::post('material/agregar', [App\Http\Controllers\MaterialController::class, 'store'])->name('agregar-material');
+Route::post('material/buscar', [App\Http\Controllers\MaterialController::class, 'show'])->name('buscar-material');
+Route::post('material/actualizar', [App\Http\Controllers\MaterialController::class, 'update'])->name('actualizar-material');
+Route::post('material/borrar', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('borrar-material');
