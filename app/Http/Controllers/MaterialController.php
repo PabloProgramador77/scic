@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Material;
+use App\Models\Proveedor;
+use App\Models\ProveedorHasMateriales;
 use Illuminate\Http\Request;
 use App\Http\Requests\Material\Create;
 use App\Http\Requests\Material\Read;
@@ -19,8 +21,9 @@ class MaterialController extends Controller
         try {
             
             $materiales = Material::all();
+            $proveedores = Proveedor::all();
 
-            return view('materiales.index', compact('materiales'));
+            return view('materiales.index', compact('materiales', 'proveedores'));
 
         } catch (\Throwable $th) {
             
@@ -44,15 +47,24 @@ class MaterialController extends Controller
     {
         try {
             
-            $material = Material::create([
+            $material = new Material;
+            $material->nombre = $request->nombre;
+            $material->concepto = $request->concepto;
+            $material->precio = $request->precio;
+            $material->save();
 
-                'nombre' => $request->nombre,
-                'concepto' => $request->concepto,
-                'precio' => $request->precio
+            if( $material->id ){
 
-            ]);
+                $provHasMat = ProveedorHasMateriales::create([
 
-            $datos['exito'] = true;
+                    'idProveedor' => $request->proveedor,
+                    'idMaterial' => $material->id 
+    
+                ]);
+
+                $datos['exito'] = true;
+
+            }
 
         } catch (\Throwable $th) {
             
@@ -80,6 +92,13 @@ class MaterialController extends Controller
                 $datos['concepto'] = $material->concepto;
                 $datos['precio'] = $material->precio;
                 $datos['id'] = $material->id;
+                
+                foreach($material->proveedores as $proveedor){
+
+                    $datos['proveedor'] = $proveedor->nombre;
+                    $datos['idProveedor'] = $proveedor->id;
+
+                }
 
             }
 
@@ -114,6 +133,13 @@ class MaterialController extends Controller
                     'nombre' => $request->nombre,
                     'concepto' => $request->concepto,
                     'precio' => $request->precio
+
+                ]);
+
+            $provHasMat = ProveedorHasMateriales::where('idMaterial', '=', $request->id)
+                ->update([
+
+                    'idProveedor' => $request->proveedor
 
                 ]);
 

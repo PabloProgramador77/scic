@@ -34,6 +34,7 @@ class Create extends FormRequest
             'nombre' => 'required|string',
             'concepto' => 'required|string',
             'precio' => 'required|numeric',
+            'proveedor' => 'required|integer',
             
         ];
     }

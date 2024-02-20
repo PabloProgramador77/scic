@@ -17,4 +17,10 @@ class Material extends Model
 
     ];
 
+    public function proveedores(){
+
+        return $this->belongsToMany( Proveedor::class, 'proveedor_has_materiales', 'idMaterial', 'idProveedor' );
+
+    }
+
 }

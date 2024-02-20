@@ -32,7 +32,8 @@ jQuery(document).ready(function(){
                         'nombre' : $("#nombreEditar").val(),
                         'concepto' : $("#conceptoEditar").val(),
                         'precio' : $("#precioEditar").val(),
-                        'id' : $("#id").val()
+                        'id' : $("#id").val(),
+                        'proveedor' : $("#proveedorEditar").val()
 
                     },
                     dataType: 'json',

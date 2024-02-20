@@ -29,6 +29,19 @@
                     </x-slot>
                 </x-adminlte-input>
             </div>
+            <div class="form-group">
+                <x-adminlte-select2 id="proveedor" name="proveedor" label-class="info">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <img src="{{ asset('media/icons/proveedor.png') }}" alt="Icono Cargo" width="20px" height="auto">*
+                        </div>
+                    </x-slot>
+                    @foreach($proveedores as $proveedor)
+                        <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
+                    @endforeach
+                </x-adminlte-select2>
+            </div>
+            
         </form>
     </div>
     <x-slot name="footerSlot">

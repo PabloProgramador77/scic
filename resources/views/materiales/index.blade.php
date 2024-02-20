@@ -29,7 +29,11 @@
 
                         <tr>
                             <td>{{ $material->concepto }}</td>
-                            <td></td>
+                            <td>
+                                @foreach($material->proveedores as $proveedor)
+                                    {{ $proveedor->nombre }}
+                                @endforeach
+                            </td>
                             <td>{{ $material->nombre }}</td>
                             <td>$ {{ $material->precio }} MXN</td>
                             <td>

@@ -31,7 +31,8 @@ jQuery(document).ready(function(){
 
                         'nombre' : $("#nombre").val(),
                         'concepto' : $("#concepto").val(),
-                        'precio' : $("#precio").val()
+                        'precio' : $("#precio").val(),
+                        'proveedor' : $("#proveedor").val()
 
                     },
                     dataType: 'json',

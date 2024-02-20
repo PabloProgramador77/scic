@@ -27,6 +27,10 @@ jQuery(document).ready(function(){
                 $("#conceptoEditar").val( respuesta.concepto );
                 $("#precioEditar").val( respuesta.precio );
 
+                $("#proveedorEditar").prepend('<option value="'+respuesta.idProveedor+'">'+respuesta.proveedor+'</option>');
+                $("#proveedorEditar").val(respuesta.idProveedor);
+                $("#proveedorEditar option[value='"+respuesta.idProveedor+"']:not(:first)").remove();
+
                 $("#id").val( respuesta.id );
 
                 $("#actualizar").attr('disabled', false);
