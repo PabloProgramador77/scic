@@ -40,3 +40,9 @@ Route::post('proveedor/agregar', [App\Http\Controllers\ProveedorController::clas
 Route::post('proveedor/buscar', [App\Http\Controllers\ProveedorController::class, 'show'])->name('buscar-proveedor');
 Route::post('proveedor/actualizar', [App\Http\Controllers\ProveedorController::class, 'update'])->name('actualizar-proveedor');
 Route::post('proveedor/borrar', [App\Http\Controllers\ProveedorController::class, 'destroy'])->name('borrar-proveedor');
+
+Route::get('piezas', [App\Http\Controllers\PiezaController::class, 'index'])->name('piezas');
+Route::post('pieza/agregar', [App\Http\Controllers\PiezaController::class, 'store'])->name('agregar-pieza');
+Route::post('pieza/buscar', [App\Http\Controllers\PiezaController::class, 'show'])->name('buscar-pieza');
+Route::post('pieza/actualizar', [App\Http\Controllers\PiezaController::class, 'update'])->name('actualizar-pieza');
+Route::post('pieza/borrar', [App\Http\Controllers\PiezaController::class, 'destroy'])->name('borrar-pieza');

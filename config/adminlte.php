@@ -298,6 +298,10 @@ return [
             'text' => 'Materiales',
             'url' => 'materiales',
         ],
+        [
+            'text' => 'Piezas',
+            'url' => 'piezas',
+        ],
     ],
 
     /*
