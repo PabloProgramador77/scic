@@ -306,6 +306,10 @@ return [
             'text' => 'Costos',
             'url' => 'costos',
         ],
+        [
+            'text' => 'Modelos',
+            'url' =>'modelos', 
+        ],
     ],
 
     /*

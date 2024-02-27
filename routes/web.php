@@ -52,3 +52,9 @@ Route::post('costo/agregar', [App\Http\Controllers\CostoController::class, 'stor
 Route::post('costo/buscar', [App\Http\Controllers\CostoController::class, 'show'])->name('buscar-costo');
 Route::post('costo/actualizar', [App\Http\Controllers\CostoController::class, 'update'])->name('actualizar-costo');
 Route::post('costo/borrar', [App\Http\Controllers\CostoController::class, 'destroy'])->name('borrar-costo');
+
+Route::get('modelos', [App\Http\Controllers\ModeloController::class, 'index'])->name('modelos');
+Route::post('modelo/agregar', [App\Http\Controllers\ModeloController::class, 'store'])->name('agregar-modelo');
+Route::post('modelo/buscar', [App\Http\Controllers\ModeloController::class, 'show'])->name('buscar-modelo');
+Route::post('modelo/actualizar', [App\Http\Controllers\ModeloController::class, 'update'])->name('actualizar-modelo');
+Route::post('modelo/borrar', [App\Http\Controllers\ModeloController::class, 'destroy'])->name('borrar-modelo');
