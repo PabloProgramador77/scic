@@ -38,6 +38,10 @@ class VerifyCsrfToken extends Middleware
         'pieza/actualizar',
         'pieza/borrar',
         'pieza/buscar',
+        'costo/agregar',
+        'costo/buscar',
+        'costo/actualizar',
+        'costo/borrar',
         
     ];
 }

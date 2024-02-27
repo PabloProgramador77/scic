@@ -46,3 +46,9 @@ Route::post('pieza/agregar', [App\Http\Controllers\PiezaController::class, 'stor
 Route::post('pieza/buscar', [App\Http\Controllers\PiezaController::class, 'show'])->name('buscar-pieza');
 Route::post('pieza/actualizar', [App\Http\Controllers\PiezaController::class, 'update'])->name('actualizar-pieza');
 Route::post('pieza/borrar', [App\Http\Controllers\PiezaController::class, 'destroy'])->name('borrar-pieza');
+
+Route::get('costos', [App\Http\Controllers\CostoController::class, 'index'])->name('costos');
+Route::post('costo/agregar', [App\Http\Controllers\CostoController::class, 'store'])->name('agregar-costo');
+Route::post('costo/buscar', [App\Http\Controllers\CostoController::class, 'show'])->name('buscar-costo');
+Route::post('costo/actualizar', [App\Http\Controllers\CostoController::class, 'update'])->name('actualizar-costo');
+Route::post('costo/borrar', [App\Http\Controllers\CostoController::class, 'destroy'])->name('borrar-costo');
