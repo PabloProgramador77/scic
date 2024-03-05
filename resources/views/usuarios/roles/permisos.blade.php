@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalPermisos" title="Permisos de Rol de Usuario" size="xl" theme="secondary" static-backdrop scrollable>
+<x-adminlte-modal id="modalPermisos" title="Permisos de Rol de Usuario" size="xl" theme="secondary" icon="fas fa-user-cog" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Elige los permisos que deseas agregar al rol de usuario.</p>
         <form novalidate>
@@ -17,7 +17,7 @@
             @if ( count( $permisos ) > 0 )
                 @foreach($permisos as $permiso)
 
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-3">
                     <x-adminlte-input-switch id="permiso{{ $permiso->id }}" name="permiso" label="{{ $permiso->name }}" data-on-text="Permiso de {{ $permiso->name }}" data-off-text="Sin permiso de {{ $permiso->name }}" data-id="{{ $permiso->name }}">
                     </x-adminlte-input-switch>
                 </div>
@@ -34,7 +34,7 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" id="agregar"></x-adminlte-button>
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Agregar" id="agregar" icon="fas fa-save"></x-adminlte-button>
+        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-window-close"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

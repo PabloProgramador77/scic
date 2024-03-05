@@ -6,11 +6,11 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary">Proveedores de materiales</h1>
-                <p class="fs-6 fw-semibold text-secondary">Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-people-carry"></i> Proveedores de materiales</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
-                <a href="{{ url('/materiales') }}" class="btn btn-secondary p-2 fw-semibold rounded mx-1">Materiales</i></a>
+                <a href="{{ url('/materiales') }}" class="btn btn-secondary p-2 fw-semibold rounded mx-1">Materiales <i class="fas fa-boxes"></i></a>
             </div>
             <div class="col-lg-1 my-2">
                 <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus"></x-adminlte-button>

@@ -6,8 +6,8 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary">Usuarios</h1>
-                <p class="fs-6 fw-semibold text-secondary">Panel de Administrador</p>
+                <h1 class="fs-5 fw-semibold text-primary"><i class="fas fa-users"></i> Usuarios</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
                 <a href="{{ url('/roles') }}" class="btn btn-secondary p-2 fw-semibold rounded mx-1">Roles de Usuarios <i class="fas fa-user-tag"></i></a>

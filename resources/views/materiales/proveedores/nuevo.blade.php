@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevo" title="Nuevo Proveedor" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalNuevo" title="Nuevo Proveedor" theme="primary" icon="fas fa-plus" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>
@@ -13,14 +13,14 @@
                 <x-adminlte-input name="telefono" id="telefono" placeholder="Telefono">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
                 <x-adminlte-input name="direccion" id="direccion" placeholder="Dirección">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>

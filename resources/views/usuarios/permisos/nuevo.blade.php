@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevo" title="Nuevo Permiso de Usuario" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalNuevo" title="Nuevo Permiso de Usuario" theme="primary" icon="fas fa-user-cog" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>
@@ -6,7 +6,7 @@
                 <x-adminlte-input name="nombre" id="nombre" placeholder="Nombre de permiso de usuario">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
-                            <i class="fas fa-user">*</i>
+                            <i class="fas fa-user-cog">*</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>

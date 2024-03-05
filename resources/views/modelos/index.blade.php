@@ -6,8 +6,8 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary">Modelos</h1>
-                <p class="fs-6 fw-semibold text-secondary">Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-shoe-prints"></i> Modelos</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-1 my-2">
                 <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus"></x-adminlte-button>
@@ -27,7 +27,13 @@
                         <tr>
                             <td>{{ $modelo->nombre }}</td>
                             <td>{{ $modelo->numero }}</td>
-                            <td>{{ $modelo->descripcion }}</td>
+                            <td>
+                                @if( $modelo->descripcion == NULL )
+                                    Descripción desconocida
+                                @else
+                                    {{ $modelo->descripcion }}
+                                @endif
+                            </td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $modelo->id }}"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $modelo->id }}"></x-adminlte-button>
