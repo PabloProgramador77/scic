@@ -14,20 +14,20 @@
             <p class="text-secondary border-bottom">Permisos</p>
             <div class="form-group row">
 
-            @if ( count( $permisos ) > 0 )
-                @foreach($permisos as $permiso)
+                @if ( count( $permisos ) > 0 )
+                    @foreach($permisos as $permiso)
 
-                <div class="col-md-6 col-lg-3">
-                    <x-adminlte-input-switch id="permiso{{ $permiso->id }}" name="permiso" label="{{ $permiso->name }}" data-on-text="Permiso de {{ $permiso->name }}" data-off-text="Sin permiso de {{ $permiso->name }}" data-id="{{ $permiso->name }}">
-                    </x-adminlte-input-switch>
-                </div>
+                    <div class="col-md-6 col-lg-3">
+                        <x-adminlte-input-switch id="permiso{{ $permiso->id }}" name="permiso" label="{{ $permiso->name }}" data-on-text="Permiso de {{ $permiso->name }}" data-off-text="Sin permiso de {{ $permiso->name }}" data-id="{{ $permiso->name }}">
+                        </x-adminlte-input-switch>
+                    </div>
 
-                @endforeach
-            @else
-                <div class="col-12">
-                    <p class="fw-semibold fs-5 text-center">Sin permisos de usuario registrados. <a href="{{ url('/permisos') }}">Agregar permisos ahora</a></p>
-                </div>
-            @endif
+                    @endforeach
+                @else
+                    <div class="col-12">
+                        <p class="fw-semibold fs-5 text-center">Sin permisos de usuario registrados. <a href="{{ url('/permisos') }}">Agregar permisos ahora</a></p>
+                    </div>
+                @endif
                 
             </div>
             <input type="hidden" name="idRolPermiso" id="idRolPermiso">

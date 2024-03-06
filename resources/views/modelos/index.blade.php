@@ -40,6 +40,7 @@
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $modelo->id }}"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $modelo->id }}"></x-adminlte-button>
+                                <a href="{{ url('modelo/piezas') }}/{{ $modelo->id }}" class="btn btn-secondary rounded" theme="secondary"><i class="fas fa-socks"></i></a>
                             </td>
                         </tr>
                         

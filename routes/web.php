@@ -58,3 +58,5 @@ Route::post('modelo/agregar', [App\Http\Controllers\ModeloController::class, 'st
 Route::post('modelo/buscar', [App\Http\Controllers\ModeloController::class, 'show'])->name('buscar-modelo');
 Route::post('modelo/actualizar', [App\Http\Controllers\ModeloController::class, 'update'])->name('actualizar-modelo');
 Route::post('modelo/borrar', [App\Http\Controllers\ModeloController::class, 'destroy'])->name('borrar-modelo');
+Route::get('modelo/piezas/{id}', [App\Http\Controllers\ModeloController::class, 'create'])->name('piezas-modelo');
+Route::post('modelo/piezas', [App\Http\Controllers\ModelHasPiezaController::class, 'store'])->name('modelo-piezas');

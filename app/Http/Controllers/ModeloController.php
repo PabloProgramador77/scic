@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Modelo;
+use App\Models\Pieza;
 use Illuminate\Http\Request;
 use App\Http\Requests\Modelo\Create;
 use App\Http\Requests\Modelo\Read;
@@ -32,9 +33,20 @@ class ModeloController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        try {
+            
+            $modelo = Modelo::find( $id );
+            $piezas = Pieza::all();
+
+            return view('modelos.piezas', compact('modelo', 'piezas'));
+
+        } catch (\Throwable $th) {
+            
+            return redirect('/');
+
+        }
     }
 
     /**
@@ -96,7 +108,7 @@ class ModeloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Modelo $modelo)
+    public function edit()
     {
         //
     }
