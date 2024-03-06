@@ -10,6 +10,7 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
+                <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
                 <a href="{{ url('/materiales') }}" class="btn btn-secondary p-2 fw-semibold rounded mx-1">Materiales <i class="fas fa-boxes"></i></a>
             </div>
             <div class="col-lg-1 my-2">
