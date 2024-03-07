@@ -6,6 +6,7 @@ jQuery(document).ready(function(){
 
         $("#nombrePieza").val('');
         $("#idPieza").val('');
+        $("#cantidad").val('');
 
         if( $(this).is(':checked') ){
 
@@ -13,11 +14,18 @@ jQuery(document).ready(function(){
             $("#idPieza").val( $(this).attr('data-id') );
             $("#agregar").attr('disabled', false);
 
-        }else{
-
-            $("#agregar").attr('disabled', true);
+            $("#modalPiezas").css('display', 'block');
 
         }
+        
+    });
+
+    //Cierre del modal
+    $("#cancelar").on('click', function(){
+
+        $("#modalPiezas").css('display', 'none');
+        $(".modal-backdrop").remove();
+        $("input[type=checkbox].pieza:not(:disabled)").prop('checked', false);
         
     });
 
@@ -72,6 +80,10 @@ jQuery(document).ready(function(){
                         }).then((resultado)=>{
 
                             if( resultado.isConfirmed ){
+
+                                $("#cantidad").attr('disabled', false);
+                                $("#cantidad").val('');
+                                $("#agregar").attr('disabled', false);
 
                                 $("#modalPiezas").css('display', 'none');
                                 $(".modal-backdrop").remove();

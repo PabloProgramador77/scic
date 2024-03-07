@@ -29,9 +29,13 @@
                 @if ( count( $piezas ) > 0 )
                     @foreach($piezas as $pieza)
 
-                    <div class="form-check">
+                    <!--<div class="form-check m-1">
                         <input class="form-check-input pieza" type="checkbox" value="{{ $pieza->nombre }}" id="pieza{{ $pieza->id }}" data-id="{{ $pieza->id }}" data-toggle="modal" data-target="#modalPiezas">
                         <label class="form-check-label" for="pieza{{ $pieza->id }}">{{ $pieza->nombre }}</label>
+                    </div>-->
+                    <div class="custom-control custom-switch col-lg-2 col-md-4 col-sm-6" style="float: left; margin-bottom: 15px;">
+                        <input type="checkbox" class="custom-control-input pieza" name="nota" id="{{ $pieza->id }}" value="{{ $pieza->nombre }}" data-id="{{ $pieza->id }}" data-toggle="modal" data-target="#modalPiezas">
+                        <label class="custom-control-label" for="{{ $pieza->id }}">{{ $pieza->nombre }}    
                     </div>
                         
 
