@@ -47,6 +47,7 @@ class VerifyCsrfToken extends Middleware
         'modelo/actualizar',
         'modelo/borrar',
         'modelo/piezas',
+        'modelo/cotizacion',
         
     ];
 }

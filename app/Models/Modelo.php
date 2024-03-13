@@ -16,4 +16,10 @@ class Modelo extends Model
         'nombre', 'numero', 'descripcion',
 
     ];
+
+    public function piezas(){
+
+        return $this->belongsToMany( Pieza::class, 'model_has_piezas', 'idModelo', 'idPieza' );
+
+    }
 }

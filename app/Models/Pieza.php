@@ -18,4 +18,10 @@ class Pieza extends Model
         'dm2', 'mts'
 
     ];
+
+    public function modelo(){
+
+        return $this->belongsToMany( Modelo::class, 'model_has_piezas', 'idPieza', 'idModelo' );
+        
+    }
 }
