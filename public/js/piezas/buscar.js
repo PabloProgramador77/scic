@@ -26,6 +26,7 @@ jQuery(document).ready(function(){
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#altoEditar").val( respuesta.alto );
                 $("#largoEditar").val( respuesta.largo );
+                $("#cantidadEditar").val( respuesta.cantidad );
                 $("#descripcionEditar").val( respuesta.descripcion );
                 $("#idPieza").val( respuesta.id );
 
@@ -44,7 +45,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/piezas';
+                        window.location.href = '/modelo/piezas/' + $("#idModelo").val();
 
                     }
 

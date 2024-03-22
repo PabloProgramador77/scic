@@ -32,7 +32,9 @@ jQuery(document).ready(function(){
                         'nombre' : $("#nombre").val(),
                         'alto' : $("#alto").val(),
                         'largo' : $("#largo").val(),
-                        'descripcion' : $("#descripcion").val()
+                        'descripcion' : $("#descripcion").val(),
+                        'cantidad' : $("#cantidad").val(),
+                        'idModelo' : $("#idModelo").val(),
 
                     },
                     dataType: 'json',
@@ -53,7 +55,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/piezas';
+                                window.location.href = '/modelo/piezas/' + $("#idModelo").val();
 
                             }
 
@@ -72,7 +74,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/piezas';
+                                window.location.href = '/modelo/piezas/' + $("#idModelo").val();
 
                             }
 
@@ -104,7 +106,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/piezas';
+                        window.location.href = '/modelo/piezas/' + $("#idModelo").val();
 
                     }
 

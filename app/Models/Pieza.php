@@ -13,15 +13,18 @@ class Pieza extends Model
 
     protected $fillable = [
 
-        'nombre', 'alto', 'largo',
-        'descripcion', 'area', 'cm2', 
-        'dm2', 'mts'
+        'nombre', 
+        'alto', 
+        'largo',
+        'descripcion',
+        'idModelo', 
+        'cantidad',
 
     ];
 
     public function modelo(){
 
-        return $this->belongsToMany( Modelo::class, 'model_has_piezas', 'idPieza', 'idModelo' );
+        return $this->hasOne( Modelo::class, 'id', 'idModelo' );
         
     }
 }

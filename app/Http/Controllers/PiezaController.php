@@ -57,7 +57,9 @@ class PiezaController extends Controller
                 'nombre' => $request->nombre,
                 'alto' => $request->alto,
                 'largo' => $request->largo,
-                'descripcion' => $request->descripcion
+                'descripcion' => $request->descripcion,
+                'idModelo' => $request->idModelo,
+                'cantidad' => $request->cantidad,
 
             ]);
 
@@ -88,6 +90,7 @@ class PiezaController extends Controller
                 $datos['nombre'] = $pieza->nombre;
                 $datos['alto'] = $pieza->alto;
                 $datos['largo'] = $pieza->largo;
+                $datos['cantidad'] = $pieza->cantidad;
                 $datos['descripcion'] = $pieza->descripcion;
                 $datos['id'] = $pieza->id;
 
@@ -124,7 +127,9 @@ class PiezaController extends Controller
                     'nombre' => $request->nombre,
                     'alto' => $request->alto,
                     'largo' => $request->largo,
-                    'descripcion' => $request->descripcion
+                    'cantidad' => $request->cantidad,
+                    'descripcion' => $request->descripcion,
+                    'idModelo' => $request->idModelo,
 
                 ]);
 

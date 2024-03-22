@@ -46,7 +46,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/piezas';
+                                window.location.href = '/modelo/piezas/' + $("#idModelo").val();
 
                             }
 
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/piezas';
+                                window.location.href = '/modelo/piezas/' + $("#idModelo").val();
 
                             }
 

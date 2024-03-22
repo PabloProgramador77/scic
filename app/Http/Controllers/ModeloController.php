@@ -38,13 +38,13 @@ class ModeloController extends Controller
         try {
             
             $modelo = Modelo::find( $id );
-            $piezas = Pieza::all();
+            $piezas = Pieza::where('idModelo', '=', $modelo->id)->get();
 
             return view('modelos.piezas', compact('modelo', 'piezas'));
 
         } catch (\Throwable $th) {
             
-            return redirect('/');
+            echo $th->getMessage();
 
         }
     }

@@ -6,7 +6,7 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-socks"></i> Piezas de Modelos</h1>
+                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-socks"></i> Configuración de Modelo</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-4 my-2">
@@ -17,46 +17,66 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <input type="hidden" name="idModelo" id="idModelo" value="{{ $modelo->id }}">
             </div>
             <div class="col-lg-2 my-2">
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-plus"></x-adminlte-button>
             </div>
         </div>
 
         <div class="container-fluid row p-2">
-            <p class="bg-light fs-6 fw-semibold text-info d-block p-2 col-lg-12">A continuación, elige las piezas para el modelo e introduce la cantidad de estas:</p>            
-                
-                @if ( count( $piezas ) > 0 )
-                    @foreach($piezas as $pieza)
 
-                    <!--<div class="form-check m-1">
-                        <input class="form-check-input pieza" type="checkbox" value="{{ $pieza->nombre }}" id="pieza{{ $pieza->id }}" data-id="{{ $pieza->id }}" data-toggle="modal" data-target="#modalPiezas">
-                        <label class="form-check-label" for="pieza{{ $pieza->id }}">{{ $pieza->nombre }}</label>
-                    </div>-->
-                    <div class="custom-control custom-switch col-lg-2 col-md-4 col-sm-6" style="float: left; margin-bottom: 15px;">
-                        <input type="checkbox" class="custom-control-input pieza" name="nota" id="{{ $pieza->id }}" value="{{ $pieza->nombre }}" data-id="{{ $pieza->id }}" data-toggle="modal" data-target="#modalPiezas">
-                        <label class="custom-control-label" for="{{ $pieza->id }}">{{ $pieza->nombre }}    
-                    </div>
-                        
+            @php
+                $heads = ['Pieza', 'Alto x Largo', 'Cantidad de Piezas', 'Descripción', '']
+            @endphp
+            <x-adminlte-datatable id="piezas" :heads="$heads" theme="light" striped hoverable bordered compressed beatify>
+
+                @if( count( $piezas ) > 0 )
+                
+                    @foreach( $piezas as $pieza )
+                    
+                        <tr>
+                            <td>{{ $pieza->nombre }}</td>
+                            <td>{{ $pieza->alto }} X {{ $pieza->largo }}</td>
+                            <td>{{ $pieza->cantidad }}</td>
+                            @if( $pieza->descripcion == NULL )
+                                <td>Descripción desconocida</td>
+                            @else
+                                <td>{{ $pieza->descripcion }}</td>
+                            @endif
+                            
+                            <td>
+                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pieza->id }}"></x-adminlte-button>
+                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $pieza->id }}"></x-adminlte-button>
+                            </td>
+                        </tr>
 
                     @endforeach
 
                 @else
-                    
-                    <div class="col-12">
-                        <p class="fw-semibold fs-5 text-center">Sin piezas registradas. <a href="{{ url('/piezas') }}">Agregar piezas ahora</a></p>
-                    </div>
+
+                    <tr>
+                        <td colspan="5" class="text-center text-danger"><i class="fas fa-info-circle"></i> Sin piezas registradas en el modelo</td>
+                    </tr>
 
                 @endif
 
+            </x-adminlte-datatable>
+
         </div>
 
-        @include('modelos.cantidad')
+        @include('modelos.piezas.nuevo')
+        @include('modelos.piezas.editar')
 
     </section>
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/piezas.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/piezas/agregar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/piezas/buscar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/piezas/actualizar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/piezas/borrar.js') }}" type="text/javascript"></script>
 
 @stop

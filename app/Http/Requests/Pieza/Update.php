@@ -36,6 +36,8 @@ class Update extends FormRequest
             'alto' => 'required|numeric',
             'largo' => 'required|numeric',
             'descripcion' => 'string|nullable',
+            'idModelo' => 'required|integer',
+            'cantidad' => 'required|integer',
             
         ];
     }

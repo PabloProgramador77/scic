@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevo" title="Nueva Pieza" theme="primary" icon="fas fa-plus" static-backdrop scrollable>
+<x-adminlte-modal id="modalPieza" title="Nueva Pieza" theme="primary" icon="fas fa-plus" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>
@@ -25,6 +25,15 @@
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
                             <i class="fas fa-ruler-horizontal">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="form-group">
+                <x-adminlte-input name="cantidad" id="cantidad" placeholder="Cantidad de piezas">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-secondary">
+                            <i class="fas fa-tag">*</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>

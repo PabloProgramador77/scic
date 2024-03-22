@@ -31,6 +31,15 @@
                 </x-adminlte-input>
             </div>
             <div class="form-group">
+                <x-adminlte-input name="cantidadEditar" id="cantidadEditar" placeholder="Cantidad de piezas">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-secondary">
+                            <i class="fas fa-tag">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="form-group">
                 <x-adminlte-textarea name="descripcionEditar" id="descripcionEditar" placeholder="Descripción de pieza" label-text="text-info">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
