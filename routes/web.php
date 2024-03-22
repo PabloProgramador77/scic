@@ -63,3 +63,9 @@ Route::post('modelo/piezas', [App\Http\Controllers\ModelHasPiezaController::clas
 
 Route::get('cotizacion', [App\Http\Controllers\NotaController::class, 'index'])->name('cotizacion');
 Route::post('modelo/cotizacion', [App\Http\Controllers\NotaController::class, 'create'])->name('modelo-cotizacion');
+
+Route::get('consumibles', [App\Http\Controllers\ConsumibleController::class, 'index'])->name('consumibles');
+Route::post('consumible/agregar', [App\Http\Controllers\ConsumibleController::class, 'store'])->name('agregar-consumible');
+Route::post('consumible/buscar', [App\Http\Controllers\ConsumibleController::class, 'show'])->name('buscar-consumible');
+Route::post('consumible/actualizar', [App\Http\Controllers\ConsumibleController::class, 'update'])->name('actualizar-consumible');
+Route::post('consumible/borrar', [App\Http\Controllers\ConsumibleController::class, 'destroy'])->name('borrar-consumible');

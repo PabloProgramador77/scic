@@ -299,8 +299,8 @@ return [
             'url' => 'materiales',
         ],
         [
-            'text' => 'Piezas',
-            'url' => 'piezas',
+            'text' => 'Consumibles',
+            'url' => 'consumibles',
         ],
         [
             'text' => 'Costos',
