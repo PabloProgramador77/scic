@@ -38,7 +38,6 @@ jQuery(document).ready(function(){
                                 '<td><b>Unidades</b></td>'+
                                 '<td><b>MtsXPar</b></td>'+
                                 '<td><b>Costo</b></td>'+
-                                '<td><b>Total</b></td>'+
                             '</tr>'+
                         '</thead>';
 
@@ -66,7 +65,6 @@ jQuery(document).ready(function(){
                                     '<td><input type="text" class="form-control col-lg-6 m-auto unidades'+pieza.id+'" id="unidades'+pieza.id+'" name="unidades" placeholder="Unidades de compra" value="0"></td>'+
                                     '<td class="mts'+pieza.id+'">0</td>'+
                                     '<td class="bg-info costo'+pieza.id+'" id="costo'+pieza.id+'">0</td>'+
-                                    '<td class="bg-success total'+pieza.id+'" id="total'+pieza.id+'">0</td>'+
                                 '</tr>';
 
                     });

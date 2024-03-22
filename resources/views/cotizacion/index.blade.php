@@ -35,7 +35,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['', 'Pieza', 'Material', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo', 'Total']
+                $heads = ['', 'Pieza', 'Material', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo']
             @endphp
 
             <x-adminlte-datatable id="contenedorPiezas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
