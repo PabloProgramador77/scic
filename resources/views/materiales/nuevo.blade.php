@@ -30,6 +30,15 @@
                 </x-adminlte-input>
             </div>
             <div class="form-group">
+                <x-adminlte-input name="unidades" id="unidades" placeholder="Unidades de Compra">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-secondary">
+                            <i class="fas fa-chart-area">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="form-group">
                 <x-adminlte-select2 id="proveedor" name="proveedor" label-class="info">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">

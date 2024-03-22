@@ -13,7 +13,10 @@ class Material extends Model
 
     protected $fillable = [
 
-        'nombre', 'concepto', 'precio'
+        'nombre', 
+        'concepto', 
+        'precio', 
+        'unidades',
 
     ];
 

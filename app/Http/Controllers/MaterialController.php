@@ -51,6 +51,7 @@ class MaterialController extends Controller
             $material->nombre = $request->nombre;
             $material->concepto = $request->concepto;
             $material->precio = $request->precio;
+            $material->unidades = $request->unidades;
             $material->save();
 
             if( $material->id ){
@@ -91,6 +92,7 @@ class MaterialController extends Controller
                 $datos['nombre'] = $material->nombre;
                 $datos['concepto'] = $material->concepto;
                 $datos['precio'] = $material->precio;
+                $datos['unidades'] = $material->unidades;
                 $datos['id'] = $material->id;
                 
                 foreach($material->proveedores as $proveedor){
@@ -132,7 +134,8 @@ class MaterialController extends Controller
 
                     'nombre' => $request->nombre,
                     'concepto' => $request->concepto,
-                    'precio' => $request->precio
+                    'precio' => $request->precio,
+                    'unidades' => $request->unidades
 
                 ]);
 
