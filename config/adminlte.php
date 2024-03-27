@@ -307,6 +307,10 @@ return [
             'url' => 'costos',
         ],
         [
+            'text' => 'Suelas',
+            'url' => 'suelas',
+        ],
+        [
             'text' => 'Modelos',
             'url' =>'modelos', 
         ],

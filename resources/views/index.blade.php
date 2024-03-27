@@ -5,6 +5,13 @@
 
         <div class="container-fluid row">
 
+            <div class="col-lg-12 p-2 m-1">
+
+                <div class="col-lg-4 col-md-3 col-sm-6">
+                    <x-adminlte-small-box title="Cotizaciones" text="Cotizaciones de modelos" icon="fas fa-file-invoice-dollar text-dark" theme="primary" url="{{ url('cotizacion') }}" url-text="Nueva Cotización"></x-adminlte-small-box>
+                </div>
+                
+            </div>
             <div class="col-lg-12 border-bottom">
                 <h1 class="fs-2 fw-semibold text-primary">Resumen Empresarial</h1>
             </div>
@@ -30,13 +37,7 @@
                     <x-adminlte-small-box title="0" text="Proveedores registrados" icon="fas fa-people-carry" theme="purple"></x-adminlte-small-box>
                 </div>
             </div>
-            <div class="col-lg-12 p-2 m-1">
-
-                <div class="col-lg-4 col-md-3 col-sm-6">
-                    <x-adminlte-small-box title="Cotizaciones" text="Cotizaciones de modelos" icon="fas fa-file-invoice-dollar text-dark" theme="primary" url="{{ url('cotizacion') }}" url-text="Nueva Cotización"></x-adminlte-small-box>
-                </div>
-                
-            </div>
+            
 
         </div>
 

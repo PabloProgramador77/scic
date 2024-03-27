@@ -69,3 +69,9 @@ Route::post('consumible/agregar', [App\Http\Controllers\ConsumibleController::cl
 Route::post('consumible/buscar', [App\Http\Controllers\ConsumibleController::class, 'show'])->name('buscar-consumible');
 Route::post('consumible/actualizar', [App\Http\Controllers\ConsumibleController::class, 'update'])->name('actualizar-consumible');
 Route::post('consumible/borrar', [App\Http\Controllers\ConsumibleController::class, 'destroy'])->name('borrar-consumible');
+
+Route::get('suelas', [App\Http\Controllers\SuelaController::class, 'index'])->name('suelas');
+Route::post('suela/agregar', [App\Http\Controllers\SuelaController::class, 'store'])->name('agregar-suela');
+Route::post('suela/buscar', [App\Http\Controllers\SuelaController::class, 'show'])->name('buscar-suela');
+Route::post('suela/actualizar', [App\Http\Controllers\SuelaController::class, 'update'])->name('actualizar-suela');
+Route::post('suela/borrar', [App\Http\Controllers\SuelaController::class, 'destroy'])->name('borrar-suela');

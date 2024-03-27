@@ -52,6 +52,10 @@ class VerifyCsrfToken extends Middleware
         'consumible/buscar',
         'consumible/actualizar',
         'consumible/borrar',
+        'suela/agregar',
+        'suela/buscar',
+        'suela/actualizar',
+        'suela/borrar',
         
     ];
 }

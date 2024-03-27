@@ -42,7 +42,7 @@
 
                 @if( count( $modelos ) > 0 )
                     <tr>
-                        <td colspan="12" class="fw-semibold">Elige el modelo, introduce la cantidad de pares y elije los materiales de cada pieza.</td>
+                        <td colspan="12" class="fw-bold text-info">Elige el modelo, elije los materiales de cada pieza y por último configura los consumibles y costos.</td>
                     </tr>
                 @else
                     <tr>
