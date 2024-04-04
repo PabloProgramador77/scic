@@ -20,9 +20,8 @@ class NotaController extends Controller
         try {
             
             $modelos = Modelo::all();
-            $costos = Costo::all();
 
-            return view('cotizacion.index', compact('modelos', 'costos'));
+            return view('cotizacion.index', compact('modelos'));
 
         } catch (\Throwable $th) {
             

@@ -28,7 +28,7 @@
                 </x-adminlte-input>
             </div>
             <div class="col-lg-2 my-2">
-                <x-adminlte-button class="mx-2" theme="warning" data-toggle="modal" data-target="#modalCostos" icon="fas fa-dollar-sign" label="Costos"></x-adminlte-button>
+                <x-adminlte-button id="costos" class="mx-2" theme="warning" data-toggle="modal" data-target="#modalCostos" icon="fas fa-dollar-sign" label="Costos"></x-adminlte-button>
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
             </div>
         </div>

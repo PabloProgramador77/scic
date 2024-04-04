@@ -50,6 +50,7 @@ class VerifyCsrfToken extends Middleware
         'modelo/cotizacion',
         'modelo/costos',
         'modelo/costos/agregar',
+        'modelo/costos/buscar',
         'consumible/agregar',
         'consumible/buscar',
         'consumible/actualizar',

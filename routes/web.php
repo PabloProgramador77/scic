@@ -62,6 +62,7 @@ Route::get('modelo/piezas/{id}', [App\Http\Controllers\ModeloController::class, 
 Route::post('modelo/piezas', [App\Http\Controllers\ModelHasPiezaController::class, 'store'])->name('modelo-piezas');
 Route::post('modelo/costos', [App\Http\Controllers\ModeloHasCostoController::class, 'index'])->name('modelo-costos');
 Route::post('modelo/costos/agregar', [App\Http\Controllers\ModeloHasCostoController::class, 'store'])->name('agregar-costos');
+Route::post('modelo/costos/buscar', [App\Http\Controllers\ModeloHasCostoController::class, 'show'])->name('buscar-costos-modelo');
 
 Route::get('cotizacion', [App\Http\Controllers\NotaController::class, 'index'])->name('cotizacion');
 Route::post('modelo/cotizacion', [App\Http\Controllers\NotaController::class, 'create'])->name('modelo-cotizacion');

@@ -4,39 +4,21 @@
         <form novalidate>
             <div class="form-group">
                 @php
-                    $heads = ['', 'Costo', 'Tipo', 'Descripción', 'Monto']
+                    $heads = ['', 'Costo', 'Tipo', 'Total']
                 @endphp
 
                 <x-adminlte-datatable id="contenedorCostos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
 
-                    @if( count( $costos ) > 0 )
-                        @foreach( $costos as $costo)
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="costo" id="costo" class="form-control" value="{{ $costo->total }}">
-                                </td>
-                                <td>{{ $costo->nombre }}</td>
-                                <td>{{ $costo->tipo }}</td>
-                                @if( $costo->descripcion == '' )
-                                    <td>Descripción desconocida</td>
-                                @else
-                                    <td>{{ $costo->descripcion }}</td>
-                                @endif
-                                <td>${{ $costo->total }}</td>
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="12" class="fw-semibold">No hay costos registrados. Por favor, registralos en <a href="url('costos')">este enlace.</a></td>
-                        </tr>
-                    @endif
+                    <tr>
+                        <td colspan="12" class="fw-semibold text-center bg-light"><i class="fas fa-info-circle"></i> Elige un modelo para observar los costos.</td>
+                    </tr>
 
                 </x-adminlte-datatable>
             </div>
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label=" Agregar" id="agregar" icon="fas fa-save"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label=" Agregar" id="agregar" icon="fas fa-save" disabled="true"></x-adminlte-button>
         <x-adminlte-button theme="danger" label=" Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-window-close"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

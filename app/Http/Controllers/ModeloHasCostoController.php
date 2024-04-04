@@ -6,6 +6,7 @@ use App\Models\ModeloHasCosto;
 use App\Models\Costo;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloHasCostos\Create;
+use App\Http\Requests\ModeloHasCostos\Read;
 
 class ModeloHasCostoController extends Controller
 {
@@ -86,9 +87,30 @@ class ModeloHasCostoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ModeloHasCosto $modeloHasCosto)
+    public function show(Read $request)
     {
-        //
+        try {
+            
+            $costos = Costo::select('costos.id', 'costos.nombre', 'costos.tipo', 'costos.total')
+                    ->join('modelo_has_costos', 'costos.id', '=', 'modelo_has_costos.idCosto')
+                    ->where('modelo_has_costos.idModelo', '=', $request->modelo)
+                    ->get();
+
+            if( count( $costos ) > 0 ){
+
+                $datos['exito'] = true;
+                $datos['costos'] = $costos;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
