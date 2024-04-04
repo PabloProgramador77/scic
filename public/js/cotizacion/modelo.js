@@ -45,10 +45,10 @@ jQuery(document).ready(function(){
 
                 if( respuesta.piezas.length > 0 && respuesta.materiales.length > 0 ){
 
-                    var opcionesMateriales = '';
+                    var opcionesMateriales = '<option value="0, 0">Elige un material</option>';
 
                     respuesta.materiales.forEach( function(material){
-                        opcionesMateriales += '<option value="' + material.precio + '">' + material.nombre + ' - $' +material.precio + '</option>';
+                        opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +'">' + material.nombre + ' - $' +material.precio + '</option>';
                     });
 
                     respuesta.piezas.forEach( function(pieza){
@@ -62,9 +62,9 @@ jQuery(document).ready(function(){
                                     '<td>'+ (pieza.largo * pieza.alto).toFixed(4) +'</td>'+
                                     '<td>'+ ((pieza.largo * pieza.alto)*pieza.cantidad).toFixed(4) +'</td>'+
                                     '<td>'+ (((pieza.largo * pieza.alto)*pieza.cantidad)/100).toFixed(4) +'</td>'+
-                                    '<td><input type="text" class="form-control col-lg-6 m-auto unidades'+pieza.id+'" id="unidades'+pieza.id+'" name="unidades" placeholder="Unidades de compra" value="0"></td>'+
+                                    '<td class="unidades'+pieza.id+'">0</td>'+
                                     '<td class="mts'+pieza.id+'">0</td>'+
-                                    '<td class="bg-info costo'+pieza.id+'" id="costo'+pieza.id+'">0</td>'+
+                                    '<td class="bg-info costo'+pieza.id+'">0</td>'+
                                 '</tr>';
 
                     });
@@ -76,12 +76,26 @@ jQuery(document).ready(function(){
 
                         $('.material'+pieza.id).on('change', function(){
 
-                            var precioMaterial = $(this).val();
-                            var MtsXPar = ((pieza.largo * pieza.alto)*(pieza.cantidad)/(parseFloat($(".unidades"+pieza.id).val())*100));
-                            var costo = calcularCosto( precioMaterial, MtsXPar );
+                            var valoresMaterial = $(this).val().split(',');
+                            var precioMaterial = valoresMaterial[0]
+                            var unidades = valoresMaterial[1];
 
-                            $('.mts'+pieza.id).text( MtsXPar.toFixed(4) );
-                            $('.costo'+pieza.id).text(costo);
+                            var MtsXPar = ((pieza.largo * pieza.alto)*(pieza.cantidad)/(unidades*100));
+                            var costo = calcularCosto( precioMaterial, MtsXPar );
+                            
+                            $('.unidades' + pieza.id).text(unidades);
+                            $('.mts' + pieza.id).text( MtsXPar.toFixed(4) );
+                            $('.costo' + pieza.id).text(costo);
+
+                            var total = 0;
+
+                            $('.bg-info').each(function(){
+
+                                total += parseFloat( $(this).text() );
+
+                            });
+
+                            $("#total").val( total.toFixed(4) );
 
                         });
 
@@ -115,6 +129,8 @@ jQuery(document).ready(function(){
                         });
 
                     });
+
+                    $("input[type=checkbox]").prop('checked', true);
 
                 }else{
 

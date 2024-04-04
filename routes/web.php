@@ -60,6 +60,8 @@ Route::post('modelo/actualizar', [App\Http\Controllers\ModeloController::class, 
 Route::post('modelo/borrar', [App\Http\Controllers\ModeloController::class, 'destroy'])->name('borrar-modelo');
 Route::get('modelo/piezas/{id}', [App\Http\Controllers\ModeloController::class, 'create'])->name('piezas-modelo');
 Route::post('modelo/piezas', [App\Http\Controllers\ModelHasPiezaController::class, 'store'])->name('modelo-piezas');
+Route::post('modelo/costos', [App\Http\Controllers\ModeloHasCostoController::class, 'index'])->name('modelo-costos');
+Route::post('modelo/costos/agregar', [App\Http\Controllers\ModeloHasCostoController::class, 'store'])->name('agregar-costos');
 
 Route::get('cotizacion', [App\Http\Controllers\NotaController::class, 'index'])->name('cotizacion');
 Route::post('modelo/cotizacion', [App\Http\Controllers\NotaController::class, 'create'])->name('modelo-cotizacion');

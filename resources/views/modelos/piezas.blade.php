@@ -6,7 +6,7 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-socks"></i> Configuración de Modelo</h1>
+                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-cogs"></i> Configuración de Modelo</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-4 my-2">
@@ -21,7 +21,8 @@
             </div>
             <div class="col-lg-2 my-2">
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
-                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-plus"></x-adminlte-button>
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos"></x-adminlte-button>
             </div>
         </div>
 
@@ -30,7 +31,7 @@
             @php
                 $heads = ['Pieza', 'Alto x Largo', 'Cantidad de Piezas', 'Descripción', '']
             @endphp
-            <x-adminlte-datatable id="piezas" :heads="$heads" theme="light" striped hoverable bordered compressed beatify>
+            <x-adminlte-datatable id="piezas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
 
                 @if( count( $piezas ) > 0 )
                 
@@ -68,15 +69,18 @@
 
         @include('modelos.piezas.nuevo')
         @include('modelos.piezas.editar')
+        @include('modelos.costos.costo')
 
     </section>
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/piezas.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/costos.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/agregar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/agregarCostos.js') }}" type="text/javascript"></script>
 
 @stop

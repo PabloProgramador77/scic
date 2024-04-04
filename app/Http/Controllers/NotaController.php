@@ -38,9 +38,8 @@ class NotaController extends Controller
     {
         try {
             
-            $piezas = Pieza::select('piezas.id', 'piezas.nombre', 'piezas.alto', 'piezas.largo', 'model_has_piezas.cantidad')
-                            ->join('model_has_piezas', 'piezas.id', '=', 'model_has_piezas.idPieza')
-                            ->where('model_has_piezas.idModelo', '=', $request->id)
+            $piezas = Pieza::select('piezas.id', 'piezas.nombre', 'piezas.alto', 'piezas.largo', 'piezas.idModelo', 'piezas.cantidad')
+                            ->where('piezas.idModelo', '=', $request->id)
                             ->get();
 
             $materiales = Material::all();
