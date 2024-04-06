@@ -19,7 +19,7 @@
                         <option value="{{ $modelo->id }}">{{ $modelo->nombre }}</option>
                     @endforeach
                 </x-adminlte-select2>
-                <x-adminlte-input class="col-lg-12 mx-1" name="total" id="total" placeholder="Total" value="0" readonly="true">
+                <x-adminlte-input class="col-lg-12 mx-1" name="total" id="total" value="0" readonly="true">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
                             <i class="fas fa-dollar-sign"></i>
