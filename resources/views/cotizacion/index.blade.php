@@ -5,10 +5,10 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-file-invoice-dollar"></i> Cálculo</h1>
             </div>
-            <div class="col-lg-5 my-3 form-group row">
+            <div class="col-lg-6 my-3 form-group row">
                 <x-adminlte-select2 class="col-lg-12 mx-1" id="modelo" name="modelo" label-class="info">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
@@ -64,5 +64,6 @@
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/modelo.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/costos.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/consumibles.js') }}" type="text/javascript"></script>
 
 @stop

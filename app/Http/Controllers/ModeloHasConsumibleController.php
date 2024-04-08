@@ -6,6 +6,7 @@ use App\Models\ModeloHasConsumible;
 use App\Models\Consumible;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloHasConsumible\Create;
+use App\Http\Requests\ModeloHasConsumible\Read;
 
 class ModeloHasConsumibleController extends Controller
 {
@@ -86,9 +87,30 @@ class ModeloHasConsumibleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ModeloHasConsumible $modeloHasConsumible)
+    public function show(Read $request)
     {
-        //
+        try {
+            
+            $consumibles = Consumible::select('consumibles.id', 'consumibles.nombre', 'consumibles.tipo', 'consumibles.precio')
+                        ->join('modelo_has_consumibles', 'consumibles.id', '=', 'modelo_has_consumibles.idConsumible')
+                        ->where('modelo_has_consumibles.idModelo', '=', $request->modelo)
+                        ->get();
+
+            if( count( $consumibles ) > 0 ){
+
+                $datos['exito'] = true;
+                $datos['consumibles'] = $consumibles;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
