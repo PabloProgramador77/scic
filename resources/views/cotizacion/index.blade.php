@@ -8,7 +8,7 @@
             <div class="col-lg-4">
                 <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-file-invoice-dollar"></i> Cálculo</h1>
             </div>
-            <div class="col-lg-6 my-3 form-group row">
+            <div class="col-lg-5 my-3 form-group row">
                 <x-adminlte-select2 class="col-lg-12 mx-1" id="modelo" name="modelo" label-class="info">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
@@ -27,8 +27,9 @@
                     </x-slot>
                 </x-adminlte-input>
             </div>
-            <div class="col-lg-2 my-2">
+            <div class="col-lg-3 my-2">
                 <x-adminlte-button id="costos" class="mx-2" theme="warning" data-toggle="modal" data-target="#modalCostos" icon="fas fa-dollar-sign" label="Costos"></x-adminlte-button>
+                <x-adminlte-button id="consumibles" class="mx-2" theme="secondary" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" label="Consumibles"></x-adminlte-button>
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
             </div>
         </div>
@@ -57,6 +58,7 @@
     </section>
 
     @include('cotizacion.costos')
+    @include('cotizacion.consumible')
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
