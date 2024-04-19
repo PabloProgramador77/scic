@@ -9,7 +9,7 @@
                 <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-cogs"></i> Configuración de Modelo</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            <div class="col-lg-4 my-2">
+            <div class="col-lg-3 my-2">
                 <x-adminlte-input name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
@@ -19,11 +19,12 @@
                 </x-adminlte-input>
                 <input type="hidden" name="idModelo" id="idModelo" value="{{ $modelo->id }}">
             </div>
-            <div class="col-lg-2 my-2">
+            <div class="col-lg-3 my-2">
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
                 <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos"></x-adminlte-button>
                 <x-adminlte-button theme="warning" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="consumibles"></x-adminlte-button>
+                <x-adminlte-button theme="info" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="suelas"></x-adminlte-button>
             </div>
         </div>
 
@@ -72,6 +73,7 @@
         @include('modelos.piezas.editar')
         @include('modelos.costos.costo')
         @include('modelos.consumible.consumible')
+        @include('modelos.suelas.suelas')
 
     </section>
 
@@ -79,6 +81,7 @@
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/piezas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/costos.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/suelas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/agregar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/actualizar.js') }}" type="text/javascript"></script>
@@ -86,5 +89,6 @@
     <script src="{{ asset('js/modelos/agregarCostos.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/consumible.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarConsumibles.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/agregarSuelas.js') }}" type="text/javascript"></script>
 
 @stop

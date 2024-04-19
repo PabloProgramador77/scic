@@ -21,7 +21,7 @@ class NotaController extends Controller
             
             $modelos = Modelo::all();
 
-            return view('cotizacion.index', compact('modelos'));
+            return view('cotizacion.cotizador', compact('modelos'));
 
         } catch (\Throwable $th) {
             

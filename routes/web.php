@@ -66,6 +66,9 @@ Route::post('modelo/costos/buscar', [App\Http\Controllers\ModeloHasCostoControll
 Route::post('modelo/consumibles', [App\Http\Controllers\ModeloHasConsumibleController::class, 'index'])->name('modelo-consumibles');
 Route::post('modelo/consumibles/agregar', [App\Http\Controllers\ModeloHasConsumibleController::class, 'store'])->name('agregar-consumibles');
 Route::post('modelo/consumibles/buscar', [App\Http\Controllers\ModeloHasConsumibleController::class, 'show'])->name('buscar-consumibles-modelo');
+Route::post('modelo/suelas', [App\Http\Controllers\ModeloHasSuelaController::class, 'index'])->name('modelo-suelas');
+Route::post('modelo/suelas/agregar', [App\Http\Controllers\ModeloHasSuelaController::class, 'store'])->name('agregar-suelas-modelo');
+Route::post('modelo/suelas/buscar', [App\Http\Controllers\ModeloHasSuelaController::class, 'show'])->name('buscar-suelas-modelo');
 
 Route::get('cotizacion', [App\Http\Controllers\NotaController::class, 'index'])->name('cotizacion');
 Route::post('modelo/cotizacion', [App\Http\Controllers\NotaController::class, 'create'])->name('modelo-cotizacion');
