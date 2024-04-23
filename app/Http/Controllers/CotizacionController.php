@@ -11,6 +11,7 @@ use App\Models\Nota;
 use Illuminate\Http\Request;
 use App\Http\Requests\Cotizacion\Modelos;
 use App\Http\Requests\Cotizacion\Create;
+use App\Http\Requests\Cotizacion\Delete;
 
 class CotizacionController extends Controller
 {
@@ -123,8 +124,27 @@ class CotizacionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cotizacion $cotizacion)
+    public function destroy(Delete $request)
     {
-        //
+        try {
+            
+            $cotizacion = Cotizacion::find( $request->id );
+
+            if( $cotizacion->id ){
+
+                $cotizacion->delete();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }

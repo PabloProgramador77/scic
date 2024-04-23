@@ -52,5 +52,6 @@
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/borrar.js') }}" type="text/javascript"></script>
 
 @stop

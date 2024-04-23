@@ -74,6 +74,7 @@ Route::get('cotizaciones', [App\Http\Controllers\CotizacionController::class, 'i
 Route::get('cotizador', [App\Http\Controllers\CotizacionController::class, 'create'])->name('cotizador');
 Route::post('modelo/cotizacion', [App\Http\Controllers\CotizacionController::class, 'show'])->name('modelo-cotizacion');
 Route::post('cotizacion/agregar', [App\Http\Controllers\CotizacionController::class, 'store'])->name('agregar-cotizacion');
+Route::post('cotizacion/borrar', [App\Http\Controllers\CotizacionController::class, 'destroy'])->name('borrar-cotizacion');
 
 Route::get('consumibles', [App\Http\Controllers\ConsumibleController::class, 'index'])->name('consumibles');
 Route::post('consumible/agregar', [App\Http\Controllers\ConsumibleController::class, 'store'])->name('agregar-consumible');
