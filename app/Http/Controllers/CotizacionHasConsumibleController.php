@@ -26,9 +26,30 @@ class CotizacionHasConsumibleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $idCotizacion)
     {
-        //
+        try {
+            
+            foreach($request->consumibles as $consumible){
+
+                $cotizacionHasConsumible = CotizacionHasConsumible::create([
+
+                    'idCotizacion' => $idCotizacion,
+                    'idConsumible' => $consumible
+
+                ]);
+
+            }
+
+            return true;
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+            return false;
+            
+        }
     }
 
     /**

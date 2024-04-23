@@ -40,7 +40,7 @@ jQuery(document).ready(function(){
                     respuesta.costos.forEach(function(costo){
 
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" value="' + costo.total + '"></td>' +
+                                    '<td><input type="checkbox" checked="true" name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" value="' + costo.total + '" data-id="' + costo.id + '"></td>' +
                                     '<td>' + costo.nombre + '</td>' +
                                     '<td>' + costo.tipo + '</td>' +
                                     '<td>$ ' + costo.total + '</td>' +

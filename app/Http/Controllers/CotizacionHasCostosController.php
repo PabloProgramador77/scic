@@ -26,9 +26,30 @@ class CotizacionHasCostosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $idCotizacion)
     {
-        //
+        try {
+            
+            foreach( $request->costos as $costo ){
+
+                $cotizacionHasCostos = CotizacionHasCostos::create([
+
+                    'idCotizacion' => $idCotizacion,
+                    'idCosto' => $costo
+
+                ]);
+
+            }
+
+            return true;
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+            return false;
+            
+        }
     }
 
     /**

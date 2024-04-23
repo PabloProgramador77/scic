@@ -40,7 +40,7 @@ jQuery(document).ready(function(){
                     respuesta.consumibles.forEach(function(consumible){
 
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="consumible" id="consumible' + consumible.id + '" class="form-control consumible' + consumible.id + '" value="' + consumible.precio + '"></td>' +
+                                    '<td><input type="checkbox" checked="true" name="consumible" id="consumible' + consumible.id + '" class="form-control consumible' + consumible.id + '" value="' + consumible.precio + '" data-id="' + consumible.id + '"></td>' +
                                     '<td>' + consumible.nombre + '</td>' +
                                     '<td>' + consumible.tipo + '</td>' +
                                     '<td>$ ' + consumible.precio + '</td>' +

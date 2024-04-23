@@ -37,6 +37,12 @@ class Create extends FormRequest
             'piezas.*' => 'integer',
             'materiales' => 'required|array',
             'materiales.*' => 'integer',
+            'costos' => 'required|array',
+            'costos.*' => 'integer',
+            'consumibles' => 'required|array',
+            'consumibles.*' => 'integer',
+            'suelas' => 'required|array',
+            'suelas.*' => 'integer',
             
         ];
     }

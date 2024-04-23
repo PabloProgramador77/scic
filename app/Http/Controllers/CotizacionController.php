@@ -13,6 +13,9 @@ use App\Http\Requests\Cotizacion\Modelos;
 use App\Http\Requests\Cotizacion\Create;
 use App\Http\Requests\Cotizacion\Delete;
 use App\Http\Controllers\CotizacionHasPiezasController;
+use App\Http\Controllers\CotizacionHasCostosController;
+use App\Http\Controllers\CotizacionHasConsumibleController;
+use App\Http\Controllers\CotizacionHasSuelaController;
 
 class CotizacionController extends Controller
 {
@@ -73,7 +76,40 @@ class CotizacionController extends Controller
 
             if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
 
-                $datos['exito'] = true;
+                $cotizacionHasCostosController = new CotizacionHasCostosController();
+
+                if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
+
+                    $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
+
+                    if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
+
+                        $cotizacionHasSuelaController = new CotizacionHasSuelaController();
+
+                        if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
+
+                            $datos['exito'] = true;
+
+                        }else{
+
+                            $datos['exito'] = false;
+                            $datos['mensaje'] = 'Suelas no registradas';
+
+                        }
+
+                    }else{
+
+                        $datos['exito'] = false;
+                        $datos['mensaje'] = 'Consumibles no registrados';
+
+                    }
+
+                }else{
+
+                    $datos['exito'] = false;
+                    $datos['mensaje'] = 'Costos no registrados';
+
+                }
 
             }else{
 

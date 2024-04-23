@@ -7,6 +7,9 @@ jQuery(document).ready(function(){
 
         var piezas = new Array();
         var materiales = new Array();
+        var costos = new Array();
+        var consumibles = new Array();
+        var suelas = new Array();
 
         $("input[name=pieza]:checked").each(function(){
 
@@ -15,6 +18,24 @@ jQuery(document).ready(function(){
             var valoresMaterial = $(".material" + $(this).attr('id') ).val().split(',');
 
             materiales.push( valoresMaterial[2] );
+
+        });
+
+        $("input[name=costo]:checked").each(function(){
+
+            costos.push( $(this).attr('data-id') );
+
+        });
+
+        $("input[name=consumible]:checked").each(function(){
+
+            consumibles.push( $(this).attr('data-id') );
+
+        });
+
+        $("input[name=suela]:checked").each(function(){
+
+            suelas.push( $(this).attr('data-id') );
 
         });
 
@@ -46,6 +67,9 @@ jQuery(document).ready(function(){
                         'total' : $("#total").val(),
                         'piezas' : piezas,
                         'materiales' : materiales,
+                        'costos' : costos,
+                        'consumibles' : consumibles,
+                        'suelas' : suelas,
 
                     },
                     dataType: 'json',
