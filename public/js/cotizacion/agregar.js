@@ -5,6 +5,19 @@ jQuery(document).ready(function(){
 
         e.preventDefault();
 
+        var piezas = new Array();
+        var materiales = new Array();
+
+        $("input[name=pieza]:checked").each(function(){
+
+            piezas.push( $(this).attr('id') );
+
+            var valoresMaterial = $(".material" + $(this).attr('id') ).val().split(',');
+
+            materiales.push( valoresMaterial[2] );
+
+        });
+
         let procesamiento;
 
         Swal.fire({
@@ -31,6 +44,8 @@ jQuery(document).ready(function(){
 
                         'modelo' : $("#modelo").val(),
                         'total' : $("#total").val(),
+                        'piezas' : piezas,
+                        'materiales' : materiales,
 
                     },
                     dataType: 'json',

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Cotizacion\Modelos;
 use App\Http\Requests\Cotizacion\Create;
 use App\Http\Requests\Cotizacion\Delete;
+use App\Http\Controllers\CotizacionHasPiezasController;
 
 class CotizacionController extends Controller
 {
@@ -66,7 +67,20 @@ class CotizacionController extends Controller
 
             ]);
 
-            $datos['exito'] = true;
+            $idCotizacion = $cotizacion->id;
+
+            $cotizacionHasPiezaController = new CotizacionHasPiezasController();
+
+            if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Piezas no registradas.';
+
+            }
 
         } catch (\Throwable $th) {
             

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Cotizacion;
+namespace App\Http\Requests\CotizacionHasPieza;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,13 +31,9 @@ class Create extends FormRequest
     {
         return [
             
-            'modelo' => 'required|integer',
-            'total' => 'required|numeric',
             'piezas' => 'required|array',
             'piezas.*' => 'integer',
-            'materiales' => 'required|array',
-            'materiales.*' => 'integer',
-            
+
         ];
     }
 }
