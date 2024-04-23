@@ -8,7 +8,6 @@ use App\Models\Pieza;
 use App\Models\Material;
 use App\Models\Costo;
 use Illuminate\Http\Request;
-use App\Http\Requests\Cotizacion\Modelos;
 
 class NotaController extends Controller
 {
@@ -17,17 +16,7 @@ class NotaController extends Controller
      */
     public function index()
     {
-        try {
-            
-            $modelos = Modelo::all();
-
-            return view('cotizacion.cotizador', compact('modelos'));
-
-        } catch (\Throwable $th) {
-            
-            return redirect('/');
-
-        }
+        //
     }
 
     /**
@@ -35,26 +24,7 @@ class NotaController extends Controller
      */
     public function create(Modelos $request)
     {
-        try {
-            
-            $piezas = Pieza::select('piezas.id', 'piezas.nombre', 'piezas.alto', 'piezas.largo', 'piezas.idModelo', 'piezas.cantidad')
-                            ->where('piezas.idModelo', '=', $request->id)
-                            ->get();
-
-            $materiales = Material::all();
-
-            $datos['exito'] = true;
-            $datos['piezas'] = $piezas;
-            $datos['materiales'] = $materiales;
-
-        } catch (\Throwable $th) {
-            
-            $datos['exito'] = false;
-            $datos['mensaje'] = $th->getMessage();
-
-        }
-
-        return response()->json( $datos );
+        //
     }
 
     /**

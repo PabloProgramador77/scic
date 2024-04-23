@@ -8,7 +8,7 @@
             <div class="col-lg-12 p-2 m-1">
 
                 <div class="col-lg-4 col-md-3 col-sm-6">
-                    <x-adminlte-small-box title="Cotizaciones" text="Cotizaciones de modelos" icon="fas fa-file-invoice-dollar text-dark" theme="primary" url="{{ url('cotizacion') }}" url-text="Nueva Cotización"></x-adminlte-small-box>
+                    <x-adminlte-small-box title="Cotizaciones" text="Cotizaciones de modelos" icon="fas fa-file-invoice-dollar text-dark" theme="primary" url="{{ url('cotizaciones') }}" url-text="Nueva Cotización"></x-adminlte-small-box>
                 </div>
                 
             </div>

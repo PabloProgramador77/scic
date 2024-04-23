@@ -8,7 +8,7 @@
             <div class="col-lg-2">
                 <h1 class="fs-3 fw-semibold text-primary my-2"><i class="fas fa-file-invoice-dollar"></i> Cotizador</h1>
             </div>
-            <div class="col-lg-5 my-3 form-group row">
+            <div class="col-lg-5 my-2 form-group row">
                 <x-adminlte-select2 class="col-lg-6" id="modelo" name="modelo" label-class="info">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
@@ -32,6 +32,7 @@
                 <x-adminlte-button id="consumibles" class="mx-1" theme="secondary" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" label="Consumibles"></x-adminlte-button>
                 <x-adminlte-button id="suelas" class="mx-1" theme="primary" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" label="Suelas"></x-adminlte-button>
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
+                <x-adminlte-button id="guardar" theme="success" icon="fas fa-save"></x-adminlte-button>
             </div>
         </div>
 
@@ -68,5 +69,6 @@
     <script src="{{ asset('js/cotizacion/costos.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/consumibles.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/suelas.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/agregar.js') }}" type="text/javascript"></script>
 
 @stop
