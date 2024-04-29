@@ -13,13 +13,13 @@ class Nota extends Model
 
     protected $fillable = [
 
-        'idModelo', 'pares', 'total'
+        'idCliente', 'pares', 'total'
 
     ];
 
-    public function modelo(){
+    public function cliente(){
 
-        return $this->hasOne( Modelo::class, 'id', 'idModelo' );
+        return $this->hasOne( Cliente::class, 'id', 'idCliente' );
         
     }
 }

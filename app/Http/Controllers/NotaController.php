@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nota;
-use App\Models\Modelo;
-use App\Models\Pieza;
-use App\Models\Material;
-use App\Models\Costo;
+use App\Models\Cotizacion;
 use Illuminate\Http\Request;
 
 class NotaController extends Controller
@@ -16,7 +13,18 @@ class NotaController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            
+            $notas = Nota::all();
+            $cotizaciones = Cotizacion::where('estado', '=', 'Pendiente')->get();
+
+            return view('notas.index', compact('notas', 'cotizaciones'));
+
+        } catch (\Throwable $th) {
+            
+            return redirect('/');
+
+        }
     }
 
     /**
@@ -30,9 +38,28 @@ class NotaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store( $idCliente )
     {
-        //
+        try {
+            
+            $nota = Nota::create([
+
+                'idCliente' => $idCliente,
+                'pares' => 0,
+                'total' => 0,
+                'estado' => 'Pendiente',
+
+            ]);
+
+            return true;
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+            return false;
+
+        }
     }
 
     /**

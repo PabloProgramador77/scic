@@ -8,6 +8,7 @@ use App\Models\Pieza;
 use App\Models\Material;
 use App\Models\Costo;
 use App\Models\Nota;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Requests\Cotizacion\Modelos;
 use App\Http\Requests\Cotizacion\Create;
@@ -27,8 +28,9 @@ class CotizacionController extends Controller
         try {
             
             $cotizaciones = Cotizacion::all();
+            $clientes = Cliente::all();
 
-            return view('cotizacion.index', compact('cotizaciones'));
+            return view('cotizacion.index', compact('cotizaciones', 'clientes'));
 
         } catch (\Throwable $th) {
             

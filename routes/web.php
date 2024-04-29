@@ -87,3 +87,6 @@ Route::post('suela/agregar', [App\Http\Controllers\SuelaController::class, 'stor
 Route::post('suela/buscar', [App\Http\Controllers\SuelaController::class, 'show'])->name('buscar-suela');
 Route::post('suela/actualizar', [App\Http\Controllers\SuelaController::class, 'update'])->name('actualizar-suela');
 Route::post('suela/borrar', [App\Http\Controllers\SuelaController::class, 'destroy'])->name('borrar-suela');
+
+Route::get('/notas', [App\Http\Controllers\NotaController::class, 'index'])->name('notas');
+Route::post('/nota/agregar', [App\Http\Controllers\ClienteController::class, 'store'])->name('agregar-cliente');

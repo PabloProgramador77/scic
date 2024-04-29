@@ -5,10 +5,13 @@
 
         <div class="container-fluid row">
 
-            <div class="col-lg-12 p-2 m-1">
+            <div class="col-lg-12 p-2 m-1 row">
 
-                <div class="col-lg-4 col-md-3 col-sm-6">
-                    <x-adminlte-small-box title="Cotizaciones" text="Cotizaciones de modelos" icon="fas fa-file-invoice-dollar text-dark" theme="primary" url="{{ url('cotizaciones') }}" url-text="Nueva Cotización"></x-adminlte-small-box>
+                <div class="col-lg-6 col-md-4 col-sm-6">
+                    <x-adminlte-small-box title="Cotizaciones" text="Cotizaciones de modelos" icon="fas fa-file text-dark" theme="primary" url="{{ url('cotizaciones') }}" url-text="Ver datos"></x-adminlte-small-box>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-6">
+                    <x-adminlte-small-box title="Notas" text="Información de notas" icon="fas fa-file-invoice-dollar text-dark" theme="info" url="{{ url('notas') }}" url-text="Ver datos"></x-adminlte-small-box>
                 </div>
                 
             </div>
