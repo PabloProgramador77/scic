@@ -7,6 +7,7 @@ use App\Models\Cotizacion;
 use Illuminate\Http\Request;
 use App\Http\Requests\Nota\Assign;
 use App\Http\Requests\Nota\Delete;
+use App\Http\Requests\Nota\Read;
 use App\Http\Controllers\NotaHasCotizacionController;
 
 class NotaController extends Controller
@@ -104,9 +105,31 @@ class NotaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Nota $nota)
+    public function show(Read $request)
     {
-        //
+        try {
+            
+            $cotizaciones = Cotizacion::select('nota_has_cotizaciones.idCotizacion', 'cotizaciones.precio', 'modelos.nombre', 'nota_has_cotizaciones.id')
+                            ->join('modelos', 'cotizaciones.idModelo', '=', 'modelos.id')
+                            ->join('nota_has_cotizaciones', 'cotizaciones.id', '=', 'nota_has_cotizaciones.idCotizacion')
+                            ->where('nota_has_cotizaciones.idNota', '=', $request->id)
+                            ->get();
+
+            if( count( $cotizaciones ) > 0 ){
+
+                $datos['exito'] = true;
+                $datos['cotizaciones'] = $cotizaciones;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] =$th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

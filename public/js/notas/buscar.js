@@ -1,16 +1,17 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#actualizar").attr('disabled', true);
+    $(".ver").on('click', function(){
 
-    $(".editar").on('click', function(e){
-
-        e.preventDefault();
+        var valoresNota = $(this).attr('data-value').split(',');
+        $("#nota").val( $(this).attr('data-id') );
+        $("#cliente").val( valoresNota[0] );
+        $("#total").val( valoresNota[1] );
 
         $.ajax({
 
             type: 'POST',
-            url: '/costo/buscar',
+            url: '/nota/buscar',
             data:{
 
                 'id' : $(this).attr('data-id'),
@@ -23,17 +24,27 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                $("#nombreEditar").val( respuesta.nombre );
-                $("#descripcionEditar").val( respuesta.descripcion );
-                $("#totalEditar").val( respuesta.total );
+                var filas = '<thead>' +
+                            '<tr class="bg-info">' +
+                                '<td><b>Folio</b></td>'+
+                                '<td><b>Modelo</b></td>'+
+                                '<td><b>Precio Unitario</b></td>'+
+                                '<td></td>'+
+                            '</tr>'+
+                        '</thead>';
 
-                $("#tipoEditar").prepend('<option value="'+respuesta.tipo+'">'+respuesta.tipo+'</option>');
-                $("#tipoEditar").val(respuesta.tipo);
-                $("#tipoEditar option[value='"+respuesta.tipo+"']:not(:first)").remove();
+                respuesta.cotizaciones.forEach(function(cotizacion){
 
-                $("#id").val( respuesta.id );
+                    filas += '<tr>' +
+                                '<td>'+ cotizacion.idCotizacion +'</td>'+
+                                '<td>'+ cotizacion.nombre+'</td>'+
+                                '<td>$ '+cotizacion.precio+'</td>'+
+                                '<td><a class="btn btn-danger rounded borrar" id="cotizacion'+cotizacion.id+'" data-id="'+cotizacion.id+'"><i class="fas fa-trash"></i></a></td>'+
+                            '</tr>';
 
-                $("#actualizar").attr('disabled', false);
+                });
+
+                $("#contenedorCotizaciones").empty().append( filas );
 
             }else{
 
@@ -48,13 +59,11 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/costos';
+                        window.location.href = '/notas';
 
                     }
 
                 });
-
-                $("#actualizar").attr('disabled', true);
 
             }
 

@@ -54,7 +54,7 @@ class VerifyCsrfToken extends Middleware
         'modelo/consumibles',
         'modelo/consumibles/agregar',
         'modelo/consumibles/buscar',
-        'modelo/suelas',
+        'modelo/suelas',    
         'modelo/suelas/agregar',
         'modelo/suelas/buscar',
         'consumible/agregar',
@@ -71,6 +71,7 @@ class VerifyCsrfToken extends Middleware
         'nota/cliente',
         'nota/cotizacion',
         'nota/borrar',
+        'nota/buscar',
         
     ];
 }

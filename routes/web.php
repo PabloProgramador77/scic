@@ -93,3 +93,4 @@ Route::post('/nota/agregar', [App\Http\Controllers\ClienteController::class, 'st
 Route::post('/nota/cliente', [App\Http\Controllers\NotaController::class, 'create'])->name('cliente-nota');
 Route::post('/nota/cotizacion', [App\Http\Controllers\NotaHasCotizacionController::class, 'create'])->name('cotizacion-nota');
 Route::post('/nota/borrar', [App\Http\Controllers\NotaController::class, 'destroy'])->name('borrar-nota');
+Route::post('/nota/buscar', [App\Http\Controllers\NotaController::class, 'show'])->name('buscar-nota');
