@@ -6,6 +6,7 @@ use App\Models\Nota;
 use App\Models\Cotizacion;
 use Illuminate\Http\Request;
 use App\Http\Requests\Nota\Assign;
+use App\Http\Requests\Nota\Delete;
 use App\Http\Controllers\NotaHasCotizacionController;
 
 class NotaController extends Controller
@@ -127,8 +128,27 @@ class NotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Nota $nota)
+    public function destroy(Delete $request)
     {
-        //
+        try {
+            
+            $nota = Nota::find( $request->id );
+
+            if( $nota->id ){
+
+                $nota->delete();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }

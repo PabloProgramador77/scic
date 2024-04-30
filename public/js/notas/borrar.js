@@ -5,13 +5,15 @@ jQuery(document).ready(function(){
 
         e.preventDefault();
 
+        var nota = $(this).attr('data-id');
+
         Swal.fire({
 
             icon: 'warning',
-            title: '¿En verdad deseas borrar el costo?',
+            title: '¿En verdad deseas la nota con folio '+ $(this).attr('data-id') +'?',
             html: 'Los datos no podrán ser recuperados de ninguna manera.',
             allowOutsideClick: false,
-            confirmButtonText: 'Si, borralo',
+            confirmButtonText: 'Si, borrala',
             showConfirmButton: true,
             showDenyButton: true,
 
@@ -22,10 +24,10 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/costo/borrar',
+                    url: '/nota/borrar',
                     data:{
 
-                        'id' : $(this).attr('data-id'),
+                        'id' : nota,
 
                     },
                     dataType: 'json',
@@ -38,7 +40,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Costo Borrado.',
+                            title: 'Nota Borrada.',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -46,7 +48,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/costos';
+                                window.location.href = '/notas';
 
                             }
 
@@ -65,7 +67,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/costos';
+                                window.location.href = '/notas';
 
                             }
 

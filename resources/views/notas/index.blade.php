@@ -35,7 +35,6 @@
                             <td>{{ $nota->estado }}</td>
                             <td>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $nota->id }}" title="Borrar cotización"></x-adminlte-button>
-                                <x-adminlte-button class="agregar" icon="fas fa-plus-circle" theme="primary" data-id="{{ $nota->id }}" title="Agregar a nota"></x-adminlte-button>
                             </td>
                         </tr>
                         
@@ -54,5 +53,6 @@
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/borrar.js') }}" type="text/javascript"></script>
 
 @stop
