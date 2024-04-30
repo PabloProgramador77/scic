@@ -60,5 +60,6 @@
     <script src="{{ asset('js/cotizacion/borrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/nuevo.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/agregar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/asignar.js') }}" type="text/javascript"></script>
 
 @stop

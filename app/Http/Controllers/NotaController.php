@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Nota;
 use App\Models\Cotizacion;
 use Illuminate\Http\Request;
+use App\Http\Requests\Nota\Assign;
 use App\Http\Controllers\NotaHasCotizacionController;
 
 class NotaController extends Controller
@@ -31,26 +32,37 @@ class NotaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create( $id )
+    public function create( Assign $request )
     {
         try {
             
             $nota = Nota::create([
 
-                'idCliente' => $id,
+                'idCliente' => $request->cliente,
                 'pares' => 0,
                 'total' => 0,
                 'estado' => 'Pendiente',
 
             ]);
 
-            return redirect('/notas');
+            $idNota = $nota->id;
+
+            $notaHasCotizacionController = new NotaHasCotizacionController;
+
+            if( $notaHasCotizacionController->store( $idNota, $request ) ){
+
+                $datos['exito'] = true;
+
+            }
 
         } catch (\Throwable $th) {
             
-            echo $th->getMessage();
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
 
         }
+
+        return response()->json( $datos );
     }
 
     /**

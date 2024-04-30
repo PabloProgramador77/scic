@@ -90,4 +90,4 @@ Route::post('suela/borrar', [App\Http\Controllers\SuelaController::class, 'destr
 
 Route::get('/notas', [App\Http\Controllers\NotaController::class, 'index'])->name('notas');
 Route::post('/nota/agregar', [App\Http\Controllers\ClienteController::class, 'store'])->name('agregar-cliente');
-Route::get('/nota/cliente/{id}', [App\Http\Controllers\NotaController::class, 'create'])->name('cliente-nota');
+Route::post('/nota/cliente', [App\Http\Controllers\NotaController::class, 'create'])->name('cliente-nota');
