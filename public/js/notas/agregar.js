@@ -6,6 +6,13 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
         let procesamiento;
+        var cotizaciones = new Array();
+
+        $("input[name=cotizacion][type=checkbox]:checked").each(function(){
+
+            cotizaciones.push( $(this).attr('data-id') );
+
+        });
 
         Swal.fire({
 
@@ -33,7 +40,7 @@ jQuery(document).ready(function(){
                         'telefono' : $("#telefono").val(),
                         'domicilio' : $("#domicilio").val(),
                         'email' : $("#email").val(),
-                        'cotizaciones' : $("#cotizaciones").val(),
+                        'cotizaciones' : cotizaciones,
 
                     },
                     dataType: 'json',

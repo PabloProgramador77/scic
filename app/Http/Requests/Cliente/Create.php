@@ -35,6 +35,8 @@ class Create extends FormRequest
             'telefono' => 'string|nullable',
             'domicilio' => 'string|nullable',
             'email' => 'string|email|nullable',
+            'cotizaciones' => 'required|array',
+            'cotizaciones.*' => 'integer',
             
         ];
     }

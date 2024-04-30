@@ -43,7 +43,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="5" class="text-info">Sin cotizaciones registradas</td>
+                        <td colspan="6" class="text-info">Sin cotizaciones registradas</td>
                     </tr>
                 @endif
 

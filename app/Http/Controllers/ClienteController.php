@@ -45,7 +45,7 @@ class ClienteController extends Controller
 
             $idCliente = $cliente->id;
 
-            if( $notaController->store( $idCliente ) ){
+            if( $notaController->store( $idCliente, $request ) ){
 
                 $datos['exito'] = true;
 

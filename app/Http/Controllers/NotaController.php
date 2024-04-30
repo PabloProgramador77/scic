@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Nota;
 use App\Models\Cotizacion;
 use Illuminate\Http\Request;
+use App\Http\Controllers\NotaHasCotizacionController;
 
 class NotaController extends Controller
 {
@@ -48,14 +49,14 @@ class NotaController extends Controller
         } catch (\Throwable $th) {
             
             echo $th->getMessage();
-            
+
         }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store( $idCliente )
+    public function store( $idCliente, Request $request )
     {
         try {
             
@@ -68,7 +69,15 @@ class NotaController extends Controller
 
             ]);
 
-            return true;
+            $idNota = $nota->id;
+
+            $notaHasCotizacionController = new NotaHasCotizacionController();
+            
+            if( $notaHasCotizacionController->store( $idNota, $request ) ){
+
+                return true;
+
+            }
 
         } catch (\Throwable $th) {
             

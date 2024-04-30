@@ -27,7 +27,7 @@ class CotizacionController extends Controller
     {
         try {
             
-            $cotizaciones = Cotizacion::all();
+            $cotizaciones = Cotizacion::where('estado', '=', 'Pendiente')->get();
             $clientes = Cliente::all();
 
             return view('cotizacion.index', compact('cotizaciones', 'clientes'));
@@ -160,9 +160,28 @@ class CotizacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cotizacion $cotizacion)
+    public function edit(Request $request)
     {
-        //
+        try {
+            
+            foreach($request->cotizaciones as $cotizacion){
+
+                $cotizacion = Cotizacion::where('id', '=', $cotizacion)
+                            ->update([
+                                
+                                'estado' => 'Nota',
+
+                ]);
+
+            }
+
+            return true;
+
+        } catch (\Throwable $th) {
+
+            return false;
+
+        }
     }
 
     /**
