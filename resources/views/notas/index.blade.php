@@ -13,7 +13,7 @@
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
             </div>
             <div class="col-lg-3 my-2">
-                <x-adminlte-button name="nota" id="nota" theme="success" icon="fas fa-plus-circle" label=" Nota" data-toggle="modal" data-target="#modalNota"></x-adminlte-button>
+                <a href="{{ url('/cotizaciones') }}" class="btn btn-success mx-1 rounded"><i class="fas fa-plus"></i> Nota</a>
                 <a href="{{ url('/cotizador') }}" class="btn btn-primary mx-1 rounded"><i class="fas fa-dollar-sign"></i> Cotizador</a>
             </div>
         </div>

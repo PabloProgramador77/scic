@@ -29,8 +29,9 @@ class CotizacionController extends Controller
             
             $cotizaciones = Cotizacion::where('estado', '=', 'Pendiente')->get();
             $clientes = Cliente::all();
+            $notas = Nota::where('estado', '=', 'Pendiente')->get();
 
-            return view('cotizacion.index', compact('cotizaciones', 'clientes'));
+            return view('cotizacion.index', compact('cotizaciones', 'clientes', 'notas'));
 
         } catch (\Throwable $th) {
             
@@ -187,9 +188,24 @@ class CotizacionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cotizacion $cotizacion)
+    public function update(Request $request)
     {
-        //
+        try {
+            
+            $cotizacion = Cotizacion::where('id', '=', $request->cotizacion)
+                        ->update([
+
+                            'estado' => 'Nota',
+
+            ]);
+
+            return true;
+
+        } catch (\Throwable $th) {
+            
+            return false;
+            
+        }
     }
 
     /**
