@@ -30,9 +30,26 @@ class NotaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Modelos $request)
+    public function create( $id )
     {
-        //
+        try {
+            
+            $nota = Nota::create([
+
+                'idCliente' => $id,
+                'pares' => 0,
+                'total' => 0,
+                'estado' => 'Pendiente',
+
+            ]);
+
+            return redirect('/notas');
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
     }
 
     /**

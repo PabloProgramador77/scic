@@ -20,6 +20,7 @@ jQuery(document).ready(function(){
             $("#domicilio").attr('disabled', false);
             $("#email").attr('disabled', false);
             $("#registrar").attr('disabled', false);
+            $(".cliente").attr('disabled', false);
 
         }else{
 
@@ -37,6 +38,7 @@ jQuery(document).ready(function(){
             $("#domicilio").attr('disabled', true);
             $("#email").attr('disabled', true);
             $("#registrar").attr('disabled', true);
+            $(".cliente").attr('disabled', true);
 
         }
 

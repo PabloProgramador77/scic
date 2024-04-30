@@ -60,7 +60,7 @@
                             <td>{{ $cliente->domicilio }}</td>
                             <td>{{ $cliente->email }}</td>
                             <td>
-                                <a href="#" class="btn btn-info rounded" id="cliente" name="cliente{{ $cliente->id }}"><i class="fas fa-check"></i></a>
+                                <a href="{{ url('/nota/cliente') }}/{{ $cliente->id }}" class="btn btn-info rounded cliente" id="cliente"><i class="fab fa-gratipay"></i></a>
                             </td>
                         </tr>
                     @endforeach
