@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Nota\Assign;
 use App\Http\Requests\Nota\Delete;
 use App\Http\Requests\Nota\Read;
+use App\Http\Requests\Nota\Create;
 use App\Http\Controllers\NotaHasCotizacionController;
 
 class NotaController extends Controller
@@ -70,13 +71,13 @@ class NotaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store( $idCliente, Request $request )
+    public function store( Create $request )
     {
         try {
             
             $nota = Nota::create([
 
-                'idCliente' => $idCliente,
+                'idCliente' => $request->cliente,
                 'pares' => 0,
                 'total' => 0,
                 'estado' => 'Pendiente',
@@ -89,17 +90,19 @@ class NotaController extends Controller
             
             if( $notaHasCotizacionController->store( $idNota, $request ) ){
 
-                return true;
+                $datos['exito'] = true;
+                $datos['id'] = $idNota;
 
             }
 
         } catch (\Throwable $th) {
             
-            echo $th->getMessage();
-
-            return false;
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
 
         }
+
+        return response()->json( $datos );
     }
 
     /**
@@ -135,9 +138,23 @@ class NotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Nota $nota)
+    public function edit( $id )
     {
-        //
+        try {
+            
+            $nota = Nota::find( $id );
+
+            if( $nota->id ){
+
+                return view('notas.edicion', compact('nota'));
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
     }
 
     /**

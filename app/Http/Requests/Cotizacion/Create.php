@@ -31,6 +31,10 @@ class Create extends FormRequest
     {
         return [
             
+            'nombre' => 'string|nullable',
+            'telefono' => 'string|nullable',
+            'domicilio' => 'string|nullable',
+            'email' => 'string|email|nullable',
             'modelo' => 'required|integer',
             'total' => 'required|numeric',
             'piezas' => 'required|array',

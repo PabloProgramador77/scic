@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNota" title="Nueva Nota" size="xl" theme="success" icon="fas fa-plus" static-backdrop scrollable>
+<x-adminlte-modal id="modalNota" title="Nueva Cotización" size="xl" theme="success" icon="fas fa-plus" static-backdrop scrollable>
     <div class="container-fluid row">
         <p class="col-lg-12 text-center bg-light fw-semibold p-1 rounded"><i class="fas fa-info-circle"></i> <b>Captura los datos para un cliente nuevo o elige uno de los ya registrados en la tabla de la derecha</b>.</p>
         <div class="col-lg-3 col-md-3 border rounded">

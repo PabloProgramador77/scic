@@ -5,26 +5,28 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-cogs"></i> Configuración de Modelo</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            <div class="col-lg-3 my-2">
-                <x-adminlte-input name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
+            <div class="col-lg-4 my-2">
+                <x-adminlte-input class="col-md-10 col-lg-10" name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
                             <i class="fas fa-shoe-prints"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                
                 <input type="hidden" name="idModelo" id="idModelo" value="{{ $modelo->id }}">
             </div>
             <div class="col-lg-3 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
+                <a href="{{ url('/home') }}" class="btn btn-danger px-2 rounded"><i class="fas fa-home"></i></a>
                 <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos"></x-adminlte-button>
                 <x-adminlte-button theme="warning" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="consumibles"></x-adminlte-button>
                 <x-adminlte-button theme="info" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="suelas"></x-adminlte-button>
+                <x-adminlte-button theme="dark" data-toggle="modal" data-target="#modalNumeracion" icon="fas fa-hashtag" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="numeraciones"></x-adminlte-button>
             </div>
         </div>
 
@@ -74,6 +76,7 @@
         @include('modelos.costos.costo')
         @include('modelos.consumible.consumible')
         @include('modelos.suelas.suelas')
+        @include('modelos.numeraciones.numeracion')
 
     </section>
 
@@ -82,6 +85,7 @@
     <script src="{{ asset('js/modelos/piezas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/costos.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/suelas.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/numeraciones.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/agregar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/actualizar.js') }}" type="text/javascript"></script>
@@ -90,5 +94,6 @@
     <script src="{{ asset('js/modelos/consumible.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarConsumibles.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarSuelas.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/agregarNumeraciones.js') }}" type="text/javascript"></script>
 
 @stop

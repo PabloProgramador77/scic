@@ -32,7 +32,7 @@
                 <x-adminlte-button id="consumibles" class="mx-1" theme="secondary" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" label="Consumibles"></x-adminlte-button>
                 <x-adminlte-button id="suelas" class="mx-1" theme="primary" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" label="Suelas"></x-adminlte-button>
                 <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
-                <x-adminlte-button id="guardar" theme="success" icon="fas fa-save"></x-adminlte-button>
+                <x-adminlte-button id="guardar" theme="success" icon="fas fa-save" data-toggle="modal" data-target="#modalNota"></x-adminlte-button>
             </div>
         </div>
 
@@ -62,6 +62,7 @@
     @include('cotizacion.costos')
     @include('cotizacion.consumible')
     @include('cotizacion.suelas')
+    @include('cotizacion.nota')
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>

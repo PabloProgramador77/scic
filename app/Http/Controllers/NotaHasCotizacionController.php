@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\NotaHasCotizacion;
 use Illuminate\Http\Request;
 use App\Http\Requests\NotaHasCotizacion\Assign;
+use App\Http\Requests\NotaHasCotizacion\Delete;
 use App\Http\Controllers\CotizacionController;
 
 class NotaHasCotizacionController extends Controller
@@ -108,8 +109,27 @@ class NotaHasCotizacionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NotaHasCotizacion $notaHasCotizacion)
+    public function destroy(Delete $request)
     {
-        //
+        try {
+            
+            $notaHasCotizacion = NotaHasCotizacion::find( $request->id );
+
+            if( $notaHasCotizacion->id ){
+
+                $notaHasCotizacion->delete();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }

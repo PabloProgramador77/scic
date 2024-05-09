@@ -1,49 +1,23 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#registrar").on('click', function(e){
+    $("#agregarNumeracion").on('click', function(e){
 
         e.preventDefault();
 
-        var piezas = new Array();
-        var materiales = new Array();
-        var costos = new Array();
-        var consumibles = new Array();
-        var suelas = new Array();
-
-        $("input[name=pieza]:checked").each(function(){
-
-            piezas.push( $(this).attr('id') );
-
-            var valoresMaterial = $(".material" + $(this).attr('id') ).val().split(',');
-
-            materiales.push( valoresMaterial[2] );
-
-        });
-
-        $("input[name=costo]:checked").each(function(){
-
-            costos.push( $(this).attr('data-id') );
-
-        });
-
-        $("input[name=consumible]:checked").each(function(){
-
-            consumibles.push( $(this).attr('data-id') );
-
-        });
-
-        $("input[name=suela]:checked").each(function(){
-
-            suelas.push( $(this).attr('data-id') );
-
-        });
-
         let procesamiento;
+
+        var numeraciones = new Array();
+
+        $("input[name=numeracion]:checked").each(function(){
+
+            numeraciones.push( $(this).attr('data-id') );
+
+        });
 
         Swal.fire({
 
-            title: 'Registrando Cotización',
+            title: 'Agregando Numeración',
             html: 'Un momento por favor: <b></b>',
             timer: 9975,
             allowOutsideClick: false,
@@ -60,20 +34,11 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/cotizacion/agregar',
+                    url: '/modelo/numeraciones/agregar',
                     data:{
 
-                        'nombre' : $("#nombre").val(),
-                        'telefono' : $("#telefono").val(),
-                        'domicilio' : $("#domicilio").val(),
-                        'email' : $("#email").val(),
-                        'modelo' : $("#modelo").val(),
-                        'total' : $("#total").val(),
-                        'piezas' : piezas,
-                        'materiales' : materiales,
-                        'costos' : costos,
-                        'consumibles' : consumibles,
-                        'suelas' : suelas,
+                        'modelo' : $("#idModeloNumeracion").val(),
+                        'numeraciones' : numeraciones,
 
                     },
                     dataType: 'json',
@@ -86,7 +51,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Cotización Registrada',
+                            title: 'Numeración Agregada',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -94,7 +59,8 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                $("#modalNumeracion").css('display', 'none');
+                                $('.modal-backdrop').remove();
 
                             }
 
@@ -113,7 +79,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/modelos';
 
                             }
 
@@ -145,7 +111,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/cotizaciones';
+                        window.location.href = '/modelos';
 
                     }
 

@@ -16,12 +16,19 @@ class Cotizacion extends Model
         'precio',
         'estado',
         'idModelo',
+        'idCliente',
 
     ];
 
     public function modelo(){
 
         return $this->hasOne( Modelo::class, 'id', 'idModelo' );
+        
+    }
+
+    public function cliente(){
+
+        return $this->hasOne( Cliente::class, 'id', 'idCliente' );
         
     }
 }

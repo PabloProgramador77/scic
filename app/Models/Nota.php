@@ -25,4 +25,10 @@ class Nota extends Model
         return $this->hasOne( Cliente::class, 'id', 'idCliente' );
         
     }
+
+    public function cotizaciones(){
+
+        return $this->belongsToMany( Cotizacion::class, 'nota_has_cotizaciones', 'idNota', 'idCotizacion' );
+        
+    }
 }

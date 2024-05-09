@@ -29,7 +29,6 @@ jQuery(document).ready(function(){
                                 '<td><b>Folio</b></td>'+
                                 '<td><b>Modelo</b></td>'+
                                 '<td><b>Precio Unitario</b></td>'+
-                                '<td></td>'+
                             '</tr>'+
                         '</thead>';
 
@@ -39,7 +38,6 @@ jQuery(document).ready(function(){
                                 '<td>'+ cotizacion.idCotizacion +'</td>'+
                                 '<td>'+ cotizacion.nombre+'</td>'+
                                 '<td>$ '+cotizacion.precio+'</td>'+
-                                '<td><a class="btn btn-danger rounded borrar" id="cotizacion'+cotizacion.id+'" data-id="'+cotizacion.id+'"><i class="fas fa-trash"></i></a></td>'+
                             '</tr>';
 
                 });

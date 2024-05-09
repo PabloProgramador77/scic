@@ -20,7 +20,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['', 'Folio', 'Modelo', 'Precio Unitario', 'Estado', 'Acciones'];
+                $heads = ['', 'Folio', 'Modelo', 'Precio Unitario', 'Cliente', 'Estado', 'Acciones'];
             @endphp
 
             <x-adminlte-datatable id="cotizaciones" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
@@ -29,10 +29,11 @@
                     @foreach ($cotizaciones as $cotizacion)
 
                         <tr>
-                            <td><input type="checkbox" name="cotizacion" id="cotizacion{{ $cotizacion->id }}" class="form-control" data-id="{{ $cotizacion->id }}"></td>
+                            <td><input type="checkbox" name="cotizacion" id="cotizacion{{ $cotizacion->id }}" class="form-control" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->cliente->id }}"></td>
                             <td>{{ $cotizacion->id }}</td>
                             <td>{{ $cotizacion->modelo->nombre }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
+                            <td>{{ $cotizacion->cliente->nombre }}</td>
                             <td title="Cotización pendiente para agregar a nota">{{ $cotizacion->estado }}</td>
                             <td>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" title="Borrar cotización"></x-adminlte-button>
@@ -53,7 +54,6 @@
 
     </section>
 
-    @include('cotizacion.nota')
     @include('cotizacion.notas')
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>

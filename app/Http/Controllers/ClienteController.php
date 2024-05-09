@@ -20,9 +20,28 @@ class ClienteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        try {
+            
+            $cliente = Cliente::create([
+
+                'nombre' => $request->nombre,
+                'telefono' => $request->telefono,
+                'domicilio' => $request->domicilio,
+                'email' => $request->email
+
+            ]);
+
+            $idCliente = $cliente->id;
+            
+            return $idCliente;
+
+        } catch (\Throwable $th) {
+            
+            return 0;
+
+        }
     }
 
     /**

@@ -72,6 +72,13 @@ class VerifyCsrfToken extends Middleware
         'nota/cotizacion',
         'nota/borrar',
         'nota/buscar',
+        'nota/cotizacion/borrar',
+        'numeracion/agregar',
+        'numeracion/buscar',
+        'numeracion/actualizar',
+        'numeracion/borrar',
+        'modelo/numeraciones',
+        'modelo/numeraciones/agregar',
         
     ];
 }

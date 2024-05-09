@@ -38,7 +38,7 @@
                             <td>{{ $cotizacion->modelo->nombre }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td>
-                                <a class="btn btn-danger rounded borrar" id="cotizacion{{ $cotizacion->id }}" data-id="{{ $cotizacion->id }}"><i class="fas fa-trash"></i></a>
+                                <a class="btn btn-danger rounded eliminar" id="cotizacion{{ $cotizacion->id }}" data-id="{{ $cotizacion->id }}"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach

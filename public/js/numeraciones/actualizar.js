@@ -1,49 +1,15 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#registrar").on('click', function(e){
+    $("#actualizar").on('click', function(e){
 
         e.preventDefault();
-
-        var piezas = new Array();
-        var materiales = new Array();
-        var costos = new Array();
-        var consumibles = new Array();
-        var suelas = new Array();
-
-        $("input[name=pieza]:checked").each(function(){
-
-            piezas.push( $(this).attr('id') );
-
-            var valoresMaterial = $(".material" + $(this).attr('id') ).val().split(',');
-
-            materiales.push( valoresMaterial[2] );
-
-        });
-
-        $("input[name=costo]:checked").each(function(){
-
-            costos.push( $(this).attr('data-id') );
-
-        });
-
-        $("input[name=consumible]:checked").each(function(){
-
-            consumibles.push( $(this).attr('data-id') );
-
-        });
-
-        $("input[name=suela]:checked").each(function(){
-
-            suelas.push( $(this).attr('data-id') );
-
-        });
 
         let procesamiento;
 
         Swal.fire({
 
-            title: 'Registrando Cotización',
+            title: 'Actualizando Numeración',
             html: 'Un momento por favor: <b></b>',
             timer: 9975,
             allowOutsideClick: false,
@@ -60,20 +26,11 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/cotizacion/agregar',
+                    url: '/numeracion/actualizar',
                     data:{
 
-                        'nombre' : $("#nombre").val(),
-                        'telefono' : $("#telefono").val(),
-                        'domicilio' : $("#domicilio").val(),
-                        'email' : $("#email").val(),
-                        'modelo' : $("#modelo").val(),
-                        'total' : $("#total").val(),
-                        'piezas' : piezas,
-                        'materiales' : materiales,
-                        'costos' : costos,
-                        'consumibles' : consumibles,
-                        'suelas' : suelas,
+                        'numero' : $("#numeroEditar").val(),
+                        'id' : $("#id").val()
 
                     },
                     dataType: 'json',
@@ -83,10 +40,12 @@ jQuery(document).ready(function(){
 
                     if( respuesta.exito ){
 
+                        $("#actualizar").attr('disabled', true);
+
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Cotización Registrada',
+                            title: 'Numeración Actualizada.',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -94,13 +53,15 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/numeraciones';
 
                             }
 
                         });
 
                     }else{
+
+                        $("#actualizar").attr('disabled', true);
 
                         Swal.fire({
 
@@ -113,7 +74,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/numeraciones';
 
                             }
 
@@ -145,7 +106,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/cotizaciones';
+                        window.location.href = '/numeraciones';
 
                     }
 
@@ -156,5 +117,5 @@ jQuery(document).ready(function(){
         });
 
     });
-    
+
 });

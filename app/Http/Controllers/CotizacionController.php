@@ -17,6 +17,7 @@ use App\Http\Controllers\CotizacionHasPiezasController;
 use App\Http\Controllers\CotizacionHasCostosController;
 use App\Http\Controllers\CotizacionHasConsumibleController;
 use App\Http\Controllers\CotizacionHasSuelaController;
+use App\Http\Controllers\ClienteController;
 
 class CotizacionController extends Controller
 {
@@ -48,8 +49,9 @@ class CotizacionController extends Controller
         try {
             
             $modelos = Modelo::all();
+            $clientes = Cliente::all();
 
-            return view('cotizacion.cotizador', compact('modelos'));
+            return view('cotizacion.cotizador', compact('modelos', 'clientes'));
 
         } catch (\Throwable $th) {
             
@@ -65,59 +67,72 @@ class CotizacionController extends Controller
     {
         try {
             
-            $cotizacion = Cotizacion::create([
+            $clienteController = new ClienteController();
+            $idCliente = $clienteController->create( $request );
 
-                'precio' => $request->total,
-                'estado' => 'Pendiente',
-                'idModelo' => $request->modelo,
+            if( $idCliente !== 0 ){
 
-            ]);
+                $cotizacion = Cotizacion::create([
 
-            $idCotizacion = $cotizacion->id;
-
-            $cotizacionHasPiezaController = new CotizacionHasPiezasController();
-
-            if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
-
-                $cotizacionHasCostosController = new CotizacionHasCostosController();
-
-                if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
-
-                    $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
-
-                    if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
-
-                        $cotizacionHasSuelaController = new CotizacionHasSuelaController();
-
-                        if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
-
-                            $datos['exito'] = true;
-
+                    'precio' => $request->total,
+                    'estado' => 'Pendiente',
+                    'idModelo' => $request->modelo,
+                    'idCliente' => $idCliente,
+    
+                ]);
+    
+                $idCotizacion = $cotizacion->id;
+    
+                $cotizacionHasPiezaController = new CotizacionHasPiezasController();
+    
+                if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
+    
+                    $cotizacionHasCostosController = new CotizacionHasCostosController();
+    
+                    if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
+    
+                        $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
+    
+                        if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
+    
+                            $cotizacionHasSuelaController = new CotizacionHasSuelaController();
+    
+                            if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
+    
+                                $datos['exito'] = true;
+    
+                            }else{
+    
+                                $datos['exito'] = false;
+                                $datos['mensaje'] = 'Suelas no registradas';
+    
+                            }
+    
                         }else{
-
+    
                             $datos['exito'] = false;
-                            $datos['mensaje'] = 'Suelas no registradas';
-
+                            $datos['mensaje'] = 'Consumibles no registrados';
+    
                         }
-
+    
                     }else{
-
+    
                         $datos['exito'] = false;
-                        $datos['mensaje'] = 'Consumibles no registrados';
-
+                        $datos['mensaje'] = 'Costos no registrados';
+    
                     }
-
+    
                 }else{
-
+    
                     $datos['exito'] = false;
-                    $datos['mensaje'] = 'Costos no registrados';
-
+                    $datos['mensaje'] = 'Piezas no registradas.';
+    
                 }
 
             }else{
 
                 $datos['exito'] = false;
-                $datos['mensaje'] = 'Piezas no registradas.';
+                $datos['mensaje'] = 'Cliente no registrado.';
 
             }
 
