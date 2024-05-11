@@ -37,7 +37,7 @@
                             <td title="Cotización pendiente para agregar a nota">{{ $cotizacion->estado }}</td>
                             <td>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" title="Borrar cotización"></x-adminlte-button>
-                                <x-adminlte-button class="agregar" icon="fas fa-plus-circle" theme="primary" data-id="{{ $cotizacion->id }}" title="Agregar a nota" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
+                                <x-adminlte-button class="agregar" icon="fas fa-plus-circle" theme="primary" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->cliente->id }}" title="Agregar a nota" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
                             </td>
                         </tr>
                         
@@ -61,7 +61,7 @@
     <script src="{{ asset('js/cotizacion/borrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/nuevo.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/agregar.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/notas/asignar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/cotizacion.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/agregarCotizacion.js') }}" type="text/javascript"></script>
 
 @stop

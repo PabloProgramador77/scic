@@ -9,6 +9,7 @@ use App\Http\Requests\Nota\Assign;
 use App\Http\Requests\Nota\Delete;
 use App\Http\Requests\Nota\Read;
 use App\Http\Requests\Nota\Create;
+use App\Http\Requests\Nota\Search;
 use App\Http\Controllers\NotaHasCotizacionController;
 
 class NotaController extends Controller
@@ -180,6 +181,39 @@ class NotaController extends Controller
 
                 $datos['exito'] = true;
 
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+
+    }
+
+    /**Búsqueda de notas de cliente */
+    public function notas( Search $request ){
+        try {
+            
+            $notas = Nota::select('notas.id', 'notas.total', 'notas.estado', 'clientes.nombre')
+                    ->join('clientes', 'notas.idCliente', '=', 'clientes.id')
+                    ->where('idCliente', '=', $request->cliente)
+                    ->where('estado', '=', 'Pendiente')
+                    ->get();
+
+            if( count( $notas ) > 0 ){
+
+                $datos['exito'] = true;
+                $datos['notas'] = $notas;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Sin coincidencias.';
+                
             }
 
         } catch (\Throwable $th) {

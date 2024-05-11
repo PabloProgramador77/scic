@@ -2,112 +2,61 @@ jQuery.noConflict();
 jQuery(document).ready(function(){
 
     //Obteniendo ID de cotizacion a agregar a nota
-    $(".agregar").on('click', function(e){
+    $(".agregar").on('click', function(){
+
+        $(".nota").hide();
 
         var cotizacion = $(this).attr('data-id');
+        var cliente = $(this).attr('data-value');
 
         $("#idCotizacion").val( cotizacion );
 
-    });
+        $.ajax({
 
-    //Registrando relacion
-    $(".nota").on('click', function(e){
+            type: 'POST',
+            url: '/notas/cliente',
+            data:{
 
-        e.preventDefault();
-
-        var nota = $(this).attr('data-id');
-
-        Swal.fire({
-
-            title: 'Agregando a Nota',
-            html: 'Un momento por favor: <b></b>',
-            timer: 9975,
-            allowOutsideClick: false,
-            didOpen: ()=>{
-
-                Swal.showLoading();
-                const b = Swal.getHtmlContainer().querySelector('b');
-                procesamiento = setInterval(()=>{
-
-                    b.textContent = Swal.getTimerLeft();
-
-                }, 100);
-
-                $.ajax({
-
-                    type: 'POST',
-                    url: '/nota/cotizacion',
-                    data:{
-
-                        'cotizacion' : $("#idCotizacion").val(),
-                        'nota' : nota,
-
-                    },
-                    dataType: 'json',
-                    encode: true
-
-                }).done(function(respuesta){
-
-                    if( respuesta.exito ){
-
-                        Swal.fire({
-
-                            icon: 'success',
-                            title: 'Cotización Agregada',
-                            allowOutsideClick: false,
-                            showConfirmButton: true
-
-                        }).then((resultado)=>{
-
-                            if( resultado.isConfirmed ){
-
-                                window.location.href = '/cotizaciones';
-
-                            }
-
-                        });
-
-                    }else{
-
-                        Swal.fire({
-
-                            icon: 'error',
-                            title: respuesta.mensaje,
-                            allowOutsideClick: false,
-                            showConfirmButton: true
-
-                        }).then((resultado)=>{
-
-                            if( resultado.isConfirmed ){
-
-                                window.location.href = '/cotizaciones';
-
-                            }
-
-                        });
-
-                    }
-
-                });
+                'cliente' : cliente
 
             },
-            willClose: ()=>{
+            dataType: 'json',
+            encode: true,
 
-                clearInterval(procesamiento);
+        }).done(function(respuesta){
 
-            }
+            if( respuesta.exito ){
 
-        }).then((resultado)=>{
+                if( respuesta.notas.length > 0 ){
 
-            if( resultado.dismiss == Swal.DismissReason.timer ){
+                    delete respuesta.exito;
 
+                    respuesta.notas.forEach(function(nota){
+
+                        $(".nota[data-id='" + nota.id + "']").show();
+                    
+                    });
+                    
+                    
+
+                }else{
+
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Sin notas para el cliente',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                    });
+
+                }
+
+            }else{
+                
                 Swal.fire({
-
-                    icon: 'warning',
-                    title: 'Hubo un inconveniente. Trata de nuevo.',
-                    allowOutsideClick: false,
-                    showConfirmButton: true
-
+                    icon: 'error',
+                    title: respuesta.mensaje,
+                    showConfirmButton: true,
+                    allowOutsideClick: false
                 }).then((resultado)=>{
 
                     if( resultado.isConfirmed ){
@@ -117,7 +66,6 @@ jQuery(document).ready(function(){
                     }
 
                 });
-
             }
 
         });

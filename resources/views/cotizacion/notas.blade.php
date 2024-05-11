@@ -6,7 +6,7 @@
             @php
                 $heads = ['Folio', 'Cliente', 'Total de Nota', 'Estado', ''];
             @endphp
-            <x-adminlte-datatable id="notas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="contenedorNotas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
                 @if ( count( $notas ) > 0 )
                     @foreach ($notas as $nota)
                         <tr>

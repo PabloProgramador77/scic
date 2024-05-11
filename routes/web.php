@@ -98,6 +98,7 @@ Route::post('/nota/borrar', [App\Http\Controllers\NotaController::class, 'destro
 Route::post('/nota/buscar', [App\Http\Controllers\NotaController::class, 'show'])->name('buscar-nota');
 Route::post('/nota/cotizacion/borrar', [App\Http\Controllers\NotaHasCotizacionController::class, 'destroy'])->name('borrar-cotizacion-nota');
 Route::get('/nota/editar/{id}', [App\Http\Controllers\NotaController::class, 'edit'])->name('editar-nota');
+Route::post('/notas/cliente', [App\Http\Controllers\NotaController::class, 'notas'])->name('notas-cliente');
 
 Route::get('/numeraciones', [App\Http\Controllers\NumeracionController::class, 'index'])->name('numeraciones');
 Route::post('/numeracion/agregar', [App\Http\Controllers\NumeracionController::class, 'store'])->name('agregar-numeracion');

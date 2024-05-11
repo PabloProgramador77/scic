@@ -79,6 +79,7 @@ class VerifyCsrfToken extends Middleware
         'numeracion/borrar',
         'modelo/numeraciones',
         'modelo/numeraciones/agregar',
+        'notas/cliente',
         
     ];
 }

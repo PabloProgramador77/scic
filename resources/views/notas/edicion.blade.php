@@ -65,7 +65,7 @@
                     <td>
                         <div class="row">
                             @foreach ($cotizacion->modelo->numeraciones as $numeracion)
-                                <input type="number" name="numeracion" id="numeracion{{ $cotizacion->id }}" data-id="{{ $cotizacion->id }}" class="col-lg-1 col-md-1 col-sm-1 text-center" placeholder="#{{ $numeracion->numero }}">
+                                <input type="number" name="numeracion" id="numeracion{{ $cotizacion->id }}" data-id="{{ $cotizacion->id }}" class="col-lg-1 col-md-1 col-sm-1 text-center" placeholder="#{{ $numeracion->numero }}" value="0">
                             @endforeach
                         </div>
                     </td>
