@@ -17,10 +17,20 @@ jQuery(document).ready(function(){
         });
 
         total = parseFloat( pares * precio );
-        subtotal += total;
 
         $(".pares"+cotizacion).text( pares );
         $('.total'+cotizacion).text( total.toFixed(2) );
+
+        $('.bg-success').each(function(){
+
+            subtotal += parseFloat( $(this).text() );
+
+        });
+
+        $("#total").val('');
+        $("#total").val( subtotal.toFixed(2) );
+
+        console.log( subtotal );
 
     });
 

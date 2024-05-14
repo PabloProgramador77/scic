@@ -70,7 +70,7 @@
                         </div>
                     </td>
                     <td class="bg-light pares{{ $cotizacion->id }}" >0</td>
-                    <td class="bg-success total{{ $cotizacion->id }}" >$ 0.00</td>
+                    <td class="bg-success total{{ $cotizacion->id }}" >0.00</td>
                 </tr>
 
             @endforeach
