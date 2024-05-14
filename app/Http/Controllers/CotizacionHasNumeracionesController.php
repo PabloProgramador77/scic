@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CotizacionHasNumeraciones;
 use Illuminate\Http\Request;
+use App\Http\Requests\CotizacionHasNumeraciones\Create;
 
 class CotizacionHasNumeracionesController extends Controller
 {
@@ -26,9 +27,36 @@ class CotizacionHasNumeracionesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Create $request)
     {
-        //
+        try {
+            
+            foreach( $request->cotizaciones as $cotizacion ){
+
+                foreach( $request->numeraciones as $numeracion ){
+
+                    $cotizacionHasNumeraciones = CotizacionHasNumeraciones::create([
+
+                        'idCotizacion' => $cotizacion,
+                        'idNumeracion' => $numeracion['id'],
+                        'cantidad' => $numeracion['cantidad'],
+
+                    ]);
+
+                }
+
+            }
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
