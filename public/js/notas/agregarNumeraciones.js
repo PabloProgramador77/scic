@@ -6,30 +6,20 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
         let procesamiento;
-        var cotizaciones = new Array();
         var numeraciones = new Array();
-
-        $("input[name=cotizacion][type=hidden]").each(function(){
-
-            cotizaciones.push( $(this).val() );
-
-        });
 
         $("input[name=numeracion]").each(function(){
 
-            var idNumeracion = $(this).attr('id');
-            var cantidad = $(this).val();
-
             numeraciones.push({
 
-                'id': idNumeracion,
-                'cantidad' : cantidad
+                'idNumeracion': $(this).attr('id'),
+                'idCotizacion' : $(this).attr('data-id'),
+                'cantidad' : $(this).val(),
 
             });
 
         });
 
-        console.log( cotizaciones );
         console.log( numeraciones );
 
         Swal.fire({
@@ -54,8 +44,6 @@ jQuery(document).ready(function(){
                     url: '/cotizacion/numeraciones',
                     data:{
 
-                        
-                        'cotizaciones' : cotizaciones,
                         'numeraciones' : numeraciones,
 
                     },

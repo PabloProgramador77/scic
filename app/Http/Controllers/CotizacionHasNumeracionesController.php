@@ -31,19 +31,16 @@ class CotizacionHasNumeracionesController extends Controller
     {
         try {
             
-            foreach( $request->cotizaciones as $cotizacion ){
+            
+            foreach( $request->numeraciones as $numeracion ){
 
-                foreach( $request->numeraciones as $numeracion ){
+                $cotizacionHasNumeraciones = CotizacionHasNumeraciones::create([
 
-                    $cotizacionHasNumeraciones = CotizacionHasNumeraciones::create([
+                    'idCotizacion' => $numeracion['idCotizacion'],
+                    'idNumeracion' => $numeracion['idNumeracion'],
+                    'cantidad' => $numeracion['cantidad'],
 
-                        'idCotizacion' => $cotizacion,
-                        'idNumeracion' => $numeracion['id'],
-                        'cantidad' => $numeracion['cantidad'],
-
-                    ]);
-
-                }
+                ]);
 
             }
 

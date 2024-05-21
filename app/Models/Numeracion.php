@@ -16,4 +16,19 @@ class Numeracion extends Model
         'numero',
 
     ];
+
+    public function cotizaciones(){
+
+        return $this->belongsToMany( Cotizacion::class, 'cotizacion_has_numeraciones', 'idNumeracion', 'idCotizacion' )->withPivot('cantidad');
+
+    }
+
+    public function cantidad( $idCotizacion, $idNumeracion ){
+
+        $cantidad = $this->cotizaciones()->wherePivot('idCotizacion', $idCotizacion)->wherePivot('idNumeracion', $idNumeracion)->value('cantidad');
+
+        return $cantidad ?? 0;
+
+    }
+
 }

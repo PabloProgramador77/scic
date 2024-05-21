@@ -31,8 +31,6 @@ class Create extends FormRequest
     {
         return [
             
-            'cotizaciones' => 'required|array',
-            'cotizaciones.*' => 'integer',
             'numeraciones' => 'required|array',
 
         ];

@@ -31,4 +31,10 @@ class Cotizacion extends Model
         return $this->hasOne( Cliente::class, 'id', 'idCliente' );
         
     }
+
+    public function numeraciones(){
+
+        return $this->belongsToMany( Numeracion::class, 'cotizacion_has_numeraciones', 'idCotizacion', 'idNumeracion' )->withPivot('cantidad');
+    
+    }
 }
