@@ -161,9 +161,25 @@ class NotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Nota $nota)
+    public function update( $pares, $total, $idNota )
     {
-        //
+        try {
+            
+            $nota = Nota::where('id', '=', $idNota)
+                    ->update([
+
+                        'pares' => $pares,
+                        'total' => $total,
+
+                    ]);
+
+            return true;
+
+        } catch (\Throwable $th) {
+            
+            return false;
+            
+        }
     }
 
     /**

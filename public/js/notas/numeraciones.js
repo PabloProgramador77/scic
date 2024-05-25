@@ -18,12 +18,15 @@ jQuery(document).ready(function(){
 
         total = parseFloat( pares * precio );
 
-        $(".pares"+cotizacion).text( pares );
-        $('.total'+cotizacion).text( total.toFixed(2) );
+        $("input[type=text][name=pares][data-id="+cotizacion+"]").val('');
+        $("input[type=text][name=subtotla][data-id="+cotizacion+"]").val('');
 
-        $('.bg-success').each(function(){
+        $("input[type=text][name=pares][data-id="+cotizacion+"]").val( pares );
+        $("input[type=text][name=subtotal][data-id="+cotizacion+"]").val( total.toFixed(2) );
 
-            subtotal += parseFloat( $(this).text() );
+        $("input[name=subtotal]").each(function(){
+
+            subtotal += parseFloat( $(this).val() );
 
         });
 

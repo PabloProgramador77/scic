@@ -32,6 +32,8 @@ class Create extends FormRequest
         return [
             
             'numeraciones' => 'required|array',
+            'pares' => 'required|array',
+            'montos' => 'required|array',
 
         ];
     }

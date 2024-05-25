@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CotizacionHasNumeraciones;
 use Illuminate\Http\Request;
 use App\Http\Requests\CotizacionHasNumeraciones\Create;
+use App\Http\Controllers\NotaHasCotizacionController;
 
 class CotizacionHasNumeracionesController extends Controller
 {
@@ -44,7 +45,17 @@ class CotizacionHasNumeracionesController extends Controller
 
             }
 
-            $datos['exito'] = true;
+            $notaHasCotizacionController = new NotaHasCotizacionController();
+            if( $notaHasCotizacionController->update( $request ) ){
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Montos de nota incompletos';
+
+            }
 
         } catch (\Throwable $th) {
             

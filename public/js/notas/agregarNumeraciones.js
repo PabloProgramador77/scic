@@ -7,6 +7,8 @@ jQuery(document).ready(function(){
 
         let procesamiento;
         var numeraciones = new Array();
+        var pares = new Array();
+        var montos = new Array();
 
         $("input[name=numeracion]").each(function(){
 
@@ -15,6 +17,30 @@ jQuery(document).ready(function(){
                 'idNumeracion': $(this).attr('id'),
                 'idCotizacion' : $(this).attr('data-id'),
                 'cantidad' : $(this).val(),
+
+            });
+
+        });
+
+        $("input[type=text][name=pares]").each(function(){
+
+            pares.push({
+
+                'idNota' : $(this).attr('id'),
+                'idCotizacion' : $(this).attr('data-id'),
+                'pares' : $(this).val(),
+
+            });
+
+        });
+
+        $("input[type=text][name=subtotal]").each(function(){
+
+            montos.push({
+
+                'idNota' : $(this).attr('id'),
+                'idCotizacion' : $(this).attr('data-id'),
+                'monto' : $(this).val(),
 
             });
 
@@ -45,6 +71,8 @@ jQuery(document).ready(function(){
                     data:{
 
                         'numeraciones' : numeraciones,
+                        'pares' : pares,
+                        'montos' : montos,
 
                     },
                     dataType: 'json',

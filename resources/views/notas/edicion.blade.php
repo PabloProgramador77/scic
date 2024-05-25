@@ -70,8 +70,12 @@
                             @endforeach
                         </div>
                     </td>
-                    <td class="bg-light pares{{ $cotizacion->id }}" >0</td>
-                    <td class="bg-success total{{ $cotizacion->id }}" >0.00</td>
+                    <td class="pares{{ $cotizacion->id }}" >
+                        <input class="bg-info border-0 text-center col-lg-12 col-md-12 col-sm-12 monto" type="text" name="pares" id="{{ $nota->id }}" data-id="{{ $cotizacion->id }}" value="{{ $nota->pares( $nota->id, $cotizacion->id ) }}" readonly="true">
+                    </td>
+                    <td class="total{{ $cotizacion->id }}" >
+                        <input class="bg-success border-0 text-center col-lg-12 col-md-12 col-sm-12 monto" type="text" name="subtotal" id="{{ $nota->id }}" data-id="{{ $cotizacion->id }}" value="{{ $nota->monto( $nota->id, $cotizacion->id ) }}" readonly="true">
+                    </td>
                 </tr>
 
             @endforeach

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\NotaHasCotizacion\Assign;
 use App\Http\Requests\NotaHasCotizacion\Delete;
 use App\Http\Controllers\CotizacionController;
+use App\Http\Controllers\NotaController;
 
 class NotaHasCotizacionController extends Controller
 {
@@ -29,6 +30,8 @@ class NotaHasCotizacionController extends Controller
 
                 'idNota' => $request->nota,
                 'idCotizacion' => $request->cotizacion,
+                'totalPares' => 0,
+                'monto' => 0
 
             ]);
 
@@ -63,6 +66,8 @@ class NotaHasCotizacionController extends Controller
 
                     'idNota' => $idNota,
                     'idCotizacion' => $cotizacion,
+                    'totalPares' => 0,
+                    'monto' => 0
     
                 ]);
 
@@ -101,9 +106,60 @@ class NotaHasCotizacionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, NotaHasCotizacion $notaHasCotizacion)
+    public function update(Request $request)
     {
-        //
+        try {
+            
+            $total = 0;
+            $pares = 0;
+            $idNota = 0;
+
+            foreach( $request->pares as $par ){
+
+                $notaHasCotizacion = NotaHasCotizacion::where('idNota', '=', $par['idNota'])
+                                    ->where('idCotizacion', '=', $par['idCotizacion'])
+                                    ->update([
+
+                                        'totalPares' => $par['pares']
+
+                                    ]);
+
+                $pares += $par['pares'];
+                $idNota = $par['idNota'];
+
+            }
+
+            foreach( $request->montos as $monto ){
+
+                $notaHasCotizacion = NotaHasCotizacion::where('idNota', '=', $monto['idNota'])
+                                    ->where('idCotizacion', '=', $monto['idCotizacion'])
+                                    ->update([
+
+                                        'monto' => $monto['monto']
+
+                                    ]);
+
+                $total += $monto['monto'];
+
+            }
+
+            $nota = new NotaController();
+            
+            if( $nota->update( $pares, $total, $idNota ) ){
+
+                return true;
+
+            }else{
+
+                return false;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            return false;
+
+        }
     }
 
     /**

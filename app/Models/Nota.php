@@ -31,4 +31,16 @@ class Nota extends Model
         return $this->belongsToMany( Cotizacion::class, 'nota_has_cotizaciones', 'idNota', 'idCotizacion' );
         
     }
+
+    public function pares( $idNota, $idCotizacion ){
+
+        return $this->cotizaciones()->wherePivot('idCotizacion', $idCotizacion)->wherePivot('idNota', $idNota)->value('totalPares');
+
+    }
+
+    public function monto( $idNota, $idCotizacion ){
+
+        return $this->cotizaciones()->wherePivot('idCotizacion', $idCotizacion)->wherePivot('idNota', $idNota)->value('monto');
+
+    }
 }

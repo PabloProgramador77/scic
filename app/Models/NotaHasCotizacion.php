@@ -15,6 +15,8 @@ class NotaHasCotizacion extends Model
 
         'idNota',
         'idCotizacion',
+        'totalPares',
+        'monto',
 
     ];
 
@@ -29,4 +31,6 @@ class NotaHasCotizacion extends Model
         return $this->belongsToMany( Cotizacion::class, 'nota_has_cotizaciones', 'id', 'idCotizacion' );
 
     }
+
+    
 }
