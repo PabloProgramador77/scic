@@ -35,6 +35,16 @@ class CotizacionHasNumeracionesController extends Controller
             
             foreach( $request->numeraciones as $numeracion ){
 
+                $cotizacionHasNumeraciones = CotizacionHasNumeraciones::where('idCotizacion', '=', $numeracion['idCotizacion'] )
+                                            ->where('idNumeracion', '=', $numeracion['idNumeracion'])
+                                            ->first();
+
+                if( $cotizacionHasNumeraciones->id ){
+
+                    $cotizacionHasNumeraciones->delete();
+                    
+                }
+
                 $cotizacionHasNumeraciones = CotizacionHasNumeraciones::create([
 
                     'idCotizacion' => $numeracion['idCotizacion'],
