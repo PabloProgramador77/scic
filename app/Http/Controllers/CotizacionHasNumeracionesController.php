@@ -39,19 +39,25 @@ class CotizacionHasNumeracionesController extends Controller
                                             ->where('idNumeracion', '=', $numeracion['idNumeracion'])
                                             ->first();
 
-                if( $cotizacionHasNumeraciones->id ){
+                if( $cotizacionHasNumeraciones ){
 
-                    $cotizacionHasNumeraciones->delete();
+                    $cotizacionHasNumeraciones->update([
+
+                        'cantidad' => $numeracion['cantidad']
+
+                    ]);
                     
+                }else{
+
+                    $cotizacionHasNumeraciones = CotizacionHasNumeraciones::create([
+
+                        'idCotizacion' => $numeracion['idCotizacion'],
+                        'idNumeracion' => $numeracion['idNumeracion'],
+                        'cantidad' => $numeracion['cantidad'],
+    
+                    ]);
+
                 }
-
-                $cotizacionHasNumeraciones = CotizacionHasNumeraciones::create([
-
-                    'idCotizacion' => $numeracion['idCotizacion'],
-                    'idNumeracion' => $numeracion['idNumeracion'],
-                    'cantidad' => $numeracion['cantidad'],
-
-                ]);
 
             }
 
@@ -104,8 +110,28 @@ class CotizacionHasNumeracionesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CotizacionHasNumeraciones $cotizacionHasNumeraciones)
+    public function destroy( $idCotizacion )
     {
-        //
+        try {
+            
+            $cotizacionHasNumeraciones = CotizacionHasNumeraciones::where('idCotizacion', '=', $idCotizacion )->get();
+
+            if( count( $cotizacionHasNumeraciones ) > 0 ){
+
+                foreach( $cotizacionHasNumeraciones as $numeracion ){
+
+                    $numeracion->delete();
+
+                }
+
+            }
+
+            return true;
+
+        } catch (\Throwable $th) {
+            
+            return false;
+
+        }
     }
 }

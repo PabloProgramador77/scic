@@ -18,6 +18,7 @@ use App\Http\Controllers\CotizacionHasCostosController;
 use App\Http\Controllers\CotizacionHasConsumibleController;
 use App\Http\Controllers\CotizacionHasSuelaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CotizacionHasNumeracionesController;
 
 class CotizacionController extends Controller
 {
@@ -248,5 +249,39 @@ class CotizacionController extends Controller
         }
 
         return response()->json( $datos );
+    }
+
+    /**
+     * Rollback status
+     */
+    public function resetEstado( $idCotizacion ){
+
+        try {
+            
+            $cotizacion = Cotizacion::where('id', '=', $idCotizacion )
+                        ->update([
+
+                            'estado' => 'Pendiente'
+
+                        ]);
+
+            $cotizacionHasNumeracionesController = new CotizacionHasNumeracionesController();
+
+            if( $cotizacionHasNumeracionesController->destroy( $idCotizacion ) ){
+
+                return true;
+
+            }else{
+
+                return false;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            return false;
+
+        }
+
     }
 }

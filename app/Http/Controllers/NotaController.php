@@ -11,6 +11,7 @@ use App\Http\Requests\Nota\Read;
 use App\Http\Requests\Nota\Create;
 use App\Http\Requests\Nota\Search;
 use App\Http\Controllers\NotaHasCotizacionController;
+use App\Http\Controllers\CotizacionController;
 
 class NotaController extends Controller
 {
@@ -192,6 +193,18 @@ class NotaController extends Controller
             $nota = Nota::find( $request->id );
 
             if( $nota->id ){
+
+                foreach( $nota->cotizaciones as $cotizacion ){
+
+                    $cotizacionController = new CotizacionController();
+
+                    if( $cotizacionController->resetEstado( $cotizacion->id ) == false ){
+
+                        break;
+
+                    }
+
+                }
 
                 $nota->delete();
 
