@@ -356,9 +356,9 @@ class NotaController extends Controller
 
                                     $html ='<tr class="spacing">'.
                                     '<td class="info spacing" style="text-align: center;">'.$cotizacion->modelo->nombre.'</td>'.
-                                    '<td class="info spacing" style="text-align: center;">$ '.$cotizacion->precio.'</td>'.
+                                    '<td class="info spacing" style="text-align: center;">$ '.number_format( $cotizacion->precio, 2).'</td>'.
                                     '<td class="info spacing" style="text-align: center;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>'.
-                                    '<td class="info spacing" style="text-align: center;">$ '.( $cotizacion->precio * $nota->pares( $nota->id, $cotizacion->id ) ).'</td>'.
+                                    '<td class="info spacing" style="text-align: center;">$ '.number_format( $cotizacion->precio * $nota->pares( $nota->id, $cotizacion->id ), 2 ).'</td>'.
                                     '</tr>';
 
                                     $pdf->writeHTML( $html );
@@ -369,19 +369,19 @@ class NotaController extends Controller
                                 </tr>
                                 <tr>
                                   <td colspan="3" class="spacing info" style="text-align: right;">Subtotal:</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.$nota->total.'</td>
+                                  <td class="spacing info" style="text-align: center;">$ '.number_format( $nota->total, 2).'</td>
                                 </tr>
                                 <tr>
                                   <td colspan="3" class="spacing info" style="text-align: right;">IVA (16%):</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.($nota->total * 0.16).'</td>
+                                  <td class="spacing info" style="text-align: center;">$ '.number_format($nota->total * 0.16, 2).'</td>
                                 </tr>
                                 <tr style="background-color: orange;">
                                   <td colspan="3" class="spacing info" style="text-align: right;">Anticipo:</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.(($nota->total * 1.16)/2).'</td>
+                                  <td class="spacing info" style="text-align: center;">$ '.number_format(($nota->total * 1.16)/2, 2).'</td>
                                 </tr>
                                 <tr style="background-color: green;">
                                   <td colspan="3" class="spacing info" style="text-align: right;">TOTAL:</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.($nota->total * 1.16).'</td>
+                                  <td class="spacing info" style="text-align: center;">$ '.number_format($nota->total * 1.16, 2).'</td>
                                 </tr>
                             </tbody>
                         </table>
