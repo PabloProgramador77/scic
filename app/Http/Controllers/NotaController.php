@@ -493,4 +493,59 @@ class NotaController extends Controller
 
         }
     }
+
+    /**
+     * Anticipo de nota
+     * ! Recibe el ID de la nota
+     * * Se cambia de Pendiente a Abierta
+     */
+    public function anticipar( Request $request ){
+        try {
+            
+            $nota = Nota::where('id', '=', $request->nota)
+                    ->update([
+
+                        'estado' => 'Abierta',
+
+            ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
+
+    /**
+     * Cerrando nota
+     * ! Recibe el ID de la nota
+     * * Se cambia de Abierta a Pagada
+     */
+    public function cerrar( Request $request ){
+        try {
+            
+            $nota = Nota::where('id', '=', $request->nota )
+                    ->update([
+
+                        'estado' => 'Pagada',
+
+            ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+
+        }
+
+        return response()->json( $datos );
+    }
 }

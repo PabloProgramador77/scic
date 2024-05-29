@@ -43,7 +43,7 @@
             </x-adminlte-input>
             <div class="col-lg-2 col-md-3 col-sm-4">
                 <x-adminlte-button theme="primary" icon="fas fa-download" id="imprimirNota" data-id="{{ $nota->id }}"></x-adminlte-button>
-                @if( $nota->estado != 'Pagado' )
+                @if( $nota->estado != 'Pagada' )
                     @if( $nota->estado == 'Pendiente' )
                         <x-adminlte-button theme="success" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}"></x-adminlte-button>
                     @else
@@ -97,5 +97,7 @@
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/descarga.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/anticipar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/cerrar.js') }}" type="text/javascript"></script>
 
 @stop

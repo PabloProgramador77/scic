@@ -82,6 +82,8 @@ class VerifyCsrfToken extends Middleware
         'modelo/numeraciones/agregar',
         'notas/cliente',
         'nota/descarga',
+        'nota/anticipar',
+        'nota/cerrar',
         
     ];
 }
