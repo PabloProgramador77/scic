@@ -6,7 +6,7 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-5">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-dollar-sign"></i> Detalles de Nota</h1>
+                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-dollar-sign"></i> Finalizando Nota</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-4 my-2">
@@ -41,16 +41,8 @@
                     </div>
                 </x-slot>
             </x-adminlte-input>
-            <div class="col-lg-2 col-md-3 col-sm-4">
-                <x-adminlte-button theme="primary" icon="fas fa-download" id="imprimirNota" data-id="{{ $nota->id }}"></x-adminlte-button>
-                @if( $nota->estado != 'Pagado' )
-                    @if( $nota->estado == 'Pendiente' )
-                        <x-adminlte-button theme="success" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}"></x-adminlte-button>
-                    @else
-                        <x-adminlte-button theme="warning" icon="fas fa-money-bill-alt" id="cerrarNota" data-id="{{ $nota->id }}"></x-adminlte-button>
-                    @endif
-                @endif
-            
+            <div class="col-lg-1">
+                <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum"></x-adminlte-button>
             </div>
             
         </div>
@@ -73,7 +65,7 @@
                         <div class="row">
                             @foreach ($cotizacion->modelo->numeraciones as $numeracion)
                                 
-                                <input type="number" name="numeracion" id="{{ $numeracion->id }}" data-id="{{ $cotizacion->id }}" class="col-lg-1 col-md-1 col-sm-1 text-center" readonly="true" value="{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id ) }}">
+                                <input type="number" name="numeracion" id="{{ $numeracion->id }}" data-id="{{ $cotizacion->id }}" class="col-lg-1 col-md-1 col-sm-1 text-center" placeholder="#{{ $numeracion->numero }}" value="{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id ) }}">
                                 
                             @endforeach
                         </div>
@@ -96,6 +88,7 @@
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/notas/descarga.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/numeraciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/agregarNumeraciones.js') }}" type="text/javascript"></script>
 
 @stop

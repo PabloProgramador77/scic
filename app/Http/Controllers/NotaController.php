@@ -365,7 +365,7 @@ class NotaController extends Controller
 
                                 }
                                   
-                                $html ='
+                                $html ='    
                                 </tr>
                                 <tr>
                                   <td colspan="3" class="spacing info" style="text-align: right;">Subtotal:</td>
@@ -413,6 +413,83 @@ class NotaController extends Controller
             
             echo $th->getMessage();
             return false;
+
+        }
+    }
+
+    /**
+     * ! Consulta de nota
+     * *Recibe el ID de la nota
+     */
+    public function nota( $id ){
+        try {
+            
+            $nota = Nota::find( $id );
+
+            if( $nota->id ){
+
+                return view('notas.nota', compact('nota'));
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
+
+    /**
+     * ! Verificación de existencia de PDF
+     * * Recibe el ID de la nota
+     */
+    public function descarga( Request $request ){
+        try {
+            
+            $nota = Nota::find( $request->nota );
+
+            if( $nota->id ){
+
+                if( file_exists( public_path('pdf/').'nota'.$nota->id.'.pdf' ) ){
+
+                    $datos['exito'] = true;
+
+                }else{
+
+                    $datos['mensaje'] = 'Archivo no encontrado.';
+                    $datos['exito'] = false;
+
+                }
+
+            }else{
+
+                $datos['mensaje'] = 'Nota no encontrada.';
+                $datos['exito'] = false;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['mensaje'] = $th->getMessage();
+            $datos['exito'] = false;
+
+        }
+
+        return response()->json( $datos );
+    }
+
+    /**
+     * Descarga del archivo PDF
+     * ! Recibe el ID de la nota
+     */
+    public function descargar( $id ){
+        try {
+            
+            return response()->download( public_path('pdf/').'nota'.$id.'.pdf' );
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
 
         }
     }

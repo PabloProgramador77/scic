@@ -36,7 +36,7 @@
                             <td>
                                 <a href="{{ url('/nota/editar') }}/{{ $nota->id }}" class="btn btn-info editar"><i class="fas fa-edit"></i></a>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $nota->id }}" title="Borrar cotización"></x-adminlte-button>
-                                <x-adminlte-button class="ver" icon="fas fa-info-circle" theme="primary" data-id="{{ $nota->id }}" data-value="{{ $nota->cliente->nombre }}, {{ $nota->total }}" title="Ver nota" data-toggle="modal" data-target="#modalNota"></x-adminlte-button>
+                                <a href="{{ url('/nota/ver') }}/{{ $nota->id }}" class="btn btn-primary"><i class="fas fa-info-circle"></i></a>
                             </td>
                         </tr>
                         
@@ -52,8 +52,6 @@
         </div>
 
     </section>
-
-    @include('notas.nota')
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
