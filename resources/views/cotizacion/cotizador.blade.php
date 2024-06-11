@@ -71,5 +71,6 @@
     <script src="{{ asset('js/cotizacion/consumibles.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/suelas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/agregar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/asignar.js') }}" type="text/javascript"></script>
 
 @stop

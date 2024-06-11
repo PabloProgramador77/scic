@@ -6,17 +6,43 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
         var idCliente = $(this).attr('data-id');
-        var cotizaciones = new Array();
+        var piezas = new Array();
+        var costos = new Array();
+        var consumibles = new Array();
+        var suelas = new Array();
+        var materiales = new Array();
 
-        $("input[name=cotizacion][type=checkbox]:checked").each(function(){
+        $("input[name=pieza]:checked").each(function(){
 
-            cotizaciones.push( $(this).attr('data-id') );
+            piezas.push( $(this).attr('id') );
+
+            var valoresMaterial = $(".material" + $(this).attr('id') ).val().split(',');
+
+            materiales.push( valoresMaterial[2] );
+
+        });
+
+        $("input[name=costo]:checked").each(function(){
+
+            costos.push( $(this).attr('data-id') );
+
+        });
+
+        $("input[name=consumible]:checked").each(function(){
+
+            consumibles.push( $(this).attr('data-id') );
+
+        });
+
+        $("input[name=suela]:checked").each(function(){
+
+            suelas.push( $(this).attr('data-id') );
 
         });
 
         Swal.fire({
 
-            title: 'Creando Nota',
+            title: 'Asignando Nota',
             html: 'Un momento por favor: <b></b>',
             timer: 9975,
             allowOutsideClick: false,
@@ -33,11 +59,17 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/nota/cliente',
+                    url: '/cotizacion/cliente',
                     data:{
 
                         'cliente' : idCliente,
-                        'cotizaciones' : cotizaciones,
+                        'modelo' : $("#modelo").val(),
+                        'total' : $("#total").val(),
+                        'piezas' : piezas,
+                        'materiales' : materiales,
+                        'costos' : costos,
+                        'consumibles' : consumibles,
+                        'suelas' : suelas,
 
                     },
                     dataType: 'json',
@@ -58,7 +90,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/notas';
+                                window.location.href = '/cotizaciones';
 
                             }
 

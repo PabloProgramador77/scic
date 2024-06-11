@@ -77,6 +77,7 @@ Route::get('cotizador', [App\Http\Controllers\CotizacionController::class, 'crea
 Route::post('modelo/cotizacion', [App\Http\Controllers\CotizacionController::class, 'show'])->name('modelo-cotizacion');
 Route::post('cotizacion/agregar', [App\Http\Controllers\CotizacionController::class, 'store'])->name('agregar-cotizacion');
 Route::post('cotizacion/borrar', [App\Http\Controllers\CotizacionController::class, 'destroy'])->name('borrar-cotizacion');
+Route::post('/cotizacion/cliente', [App\Http\Controllers\CotizacionController::class, 'assign'])->name('cliente-cotizacion');
 Route::post('cotizacion/numeraciones', [App\Http\Controllers\CotizacionHasNumeracionesController::class, 'store'])->name('cotizacion-numeraciones');
 
 Route::get('consumibles', [App\Http\Controllers\ConsumibleController::class, 'index'])->name('consumibles');
@@ -93,7 +94,6 @@ Route::post('suela/borrar', [App\Http\Controllers\SuelaController::class, 'destr
 
 Route::get('/notas', [App\Http\Controllers\NotaController::class, 'index'])->name('notas');
 Route::post('/nota/agregar', [App\Http\Controllers\NotaController::class, 'store'])->name('agregar-nota');
-Route::post('/nota/cliente', [App\Http\Controllers\NotaController::class, 'create'])->name('cliente-nota');
 Route::post('/nota/cotizacion', [App\Http\Controllers\NotaHasCotizacionController::class, 'create'])->name('cotizacion-nota');
 Route::post('/nota/borrar', [App\Http\Controllers\NotaController::class, 'destroy'])->name('borrar-nota');
 Route::post('/nota/buscar', [App\Http\Controllers\NotaController::class, 'show'])->name('buscar-nota');

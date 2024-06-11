@@ -575,7 +575,7 @@ class NotaController extends Controller
                     'mode' => 'utf-8',
                     'format' => 'A4',
                     'orientation' => 'L',
-                    'autoPageBreak' => false,
+                    'autoPageBreak' => true,
 
                 ]);
 
@@ -613,7 +613,7 @@ class NotaController extends Controller
 
                                         foreach( $cotizacion->piezas as $pieza){
 
-                                            $material = $pieza->pivot->idMaterial;
+                                            $material = $pieza->materiales( $cotizacion->id )->first();
 
                                             $html = '
                                             <tr style="border-bottom: 2px; padding: 5px;">
@@ -624,24 +624,13 @@ class NotaController extends Controller
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->largo.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->cantidad.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format(($pieza->largo*$pieza->alto)*$pieza->cantidad, 2).'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format(((($pieza->largo*$pieza->alto)*$pieza->cantidad)/100), 2).'</td>';
-
-                                                $pdf->writeHTML( $html );
-
-                                                foreach( $pieza->materiales as $material){
-
-                                                    $html = '
-                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100), 2).'</td>
-                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$material->unidades.'</td>
-                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">$ '.$material->precio.'</td>
-                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">$ '.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$material->precio, 2).'</td>
-                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2).'</td>';
-
-                                                    $pdf->writeHTML( $html );
-                                                    
-                                                }
-                                            
-                                            $html = '</tr>';
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format(((($pieza->largo*$pieza->alto)*$pieza->cantidad)/100), 2).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100), 2).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$material->unidades.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">$ '.$material->precio.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">$ '.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$material->precio, 2).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2).'</td>
+                                            </tr>';
 
                                             $pdf->writeHTML( $html );
 

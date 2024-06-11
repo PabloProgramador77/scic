@@ -284,4 +284,78 @@ class CotizacionController extends Controller
         }
 
     }
+
+    /**
+     * Asignacion de cliente a cotizacion
+     */
+    public function assign( Request $request ){
+        try {
+    
+
+            $cotizacion = Cotizacion::create([
+
+                'precio' => $request->total,
+                'estado' => 'Pendiente',
+                'idModelo' => $request->modelo,
+                'idCliente' => $request->cliente,
+
+            ]);
+
+            $idCotizacion = $cotizacion->id;
+
+            $cotizacionHasPiezaController = new CotizacionHasPiezasController();
+
+            if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
+
+                $cotizacionHasCostosController = new CotizacionHasCostosController();
+
+                if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
+
+                    $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
+
+                    if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
+
+                        $cotizacionHasSuelaController = new CotizacionHasSuelaController();
+
+                        if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
+
+                            $datos['exito'] = true;
+
+                        }else{
+
+                            $datos['exito'] = false;
+                            $datos['mensaje'] = 'Suelas no registradas';
+
+                        }
+
+                    }else{
+
+                        $datos['exito'] = false;
+                        $datos['mensaje'] = 'Consumibles no registrados';
+
+                    }
+
+                }else{
+
+                    $datos['exito'] = false;
+                    $datos['mensaje'] = 'Costos no registrados';
+
+                }
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Piezas no registradas.';
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
 }

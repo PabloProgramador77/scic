@@ -28,9 +28,11 @@ class Pieza extends Model
         
     }
 
-    public function materiales (){
+    public function materiales ( $idCotizacion ){
 
-        return $this->belongsToMany( Material::class, 'cotizacion_has_piezas', 'idPieza', 'idMaterial');
+        return $this->belongsToMany( Material::class, 'cotizacion_has_piezas', 'idPieza', 'idMaterial')
+                    ->withPivot('idCotizacion')
+                    ->wherePivot('idCotizacion', '=', $idCotizacion);
 
     }
 
