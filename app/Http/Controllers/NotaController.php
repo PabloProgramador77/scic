@@ -299,7 +299,7 @@ class NotaController extends Controller
                             }
 
                             .info{
-                                font-size: 14px;
+                                font-size: 12px;
                                 font-style: normal;
                             }
 
@@ -509,7 +509,16 @@ class NotaController extends Controller
 
             ]);
 
-            $datos['exito'] = true;
+            if( $this->pdfConsumo( $request->nota )){
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Cálculo de Consumos Interrumpido';
+
+            }
 
         } catch (\Throwable $th) {
             
@@ -547,5 +556,130 @@ class NotaController extends Controller
         }
 
         return response()->json( $datos );
+    }
+
+    /**
+     * Creación de PDF de Consumos
+     * ! Recibe el ID de la nota
+     * * Apartir de esto consulta los datos restantes
+     */
+    public function pdfConsumo( $idNota ){
+        try {
+
+            $nota = Nota::find( $idNota );
+
+            if( $nota->id ){
+
+                $pdf = new \Mpdf\Mpdf([
+
+                    'mode' => 'utf-8',
+                    'format' => 'A4',
+                    'orientation' => 'L',
+                    'autoPageBreak' => false,
+
+                ]);
+
+                $html = '
+                    <html>
+                        <body>
+                            <h2 style="width: 100%; border-bottom: 2px;">Cálculo de Consumos</h2>
+                            <p style="font-size: 12px; font-style: normal; background-color: lightgray; width: 100%;">'.$nota->updated_at.'</p>
+                            ';
+
+                            $pdf->writeHTML( $html );
+
+                            foreach( $nota->cotizaciones as $cotizacion){
+
+                                $html = '
+                                <table>
+                                    <tbody style="width: 100%;">
+                                        <tr style="border: 2px; background-color: lightblue; padding: 5px;">
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Modelo</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Pieza</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Área x Pieza</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Alto</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Largo</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>N° Piezas</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>CM<sup>2</sup></b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>DCM</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Mts x Par</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>U. De Compra</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Precio de Material</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Costo</b></td>
+                                            <td style="font-size: 12px; text-align: center; width: 7.6%;"><b>Mts Totales ('.$nota->pares( $idNota, $cotizacion->id).')</b></td>
+                                        </tr>';
+
+                                        $pdf->writeHTML( $html );
+
+                                        foreach( $cotizacion->piezas as $pieza){
+
+                                            $material = $pieza->pivot->idMaterial;
+
+                                            $html = '
+                                            <tr style="border-bottom: 2px; padding: 5px;">
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$cotizacion->modelo->nombre.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->nombre.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( ($pieza->alto*$pieza->largo), 2 ).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->alto.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->largo.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->cantidad.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format(($pieza->largo*$pieza->alto)*$pieza->cantidad, 2).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format(((($pieza->largo*$pieza->alto)*$pieza->cantidad)/100), 2).'</td>';
+
+                                                $pdf->writeHTML( $html );
+
+                                                foreach( $pieza->materiales as $material){
+
+                                                    $html = '
+                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100), 2).'</td>
+                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$material->unidades.'</td>
+                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">$ '.$material->precio.'</td>
+                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">$ '.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$material->precio, 2).'</td>
+                                                    <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2).'</td>';
+
+                                                    $pdf->writeHTML( $html );
+                                                    
+                                                }
+                                            
+                                            $html = '</tr>';
+
+                                            $pdf->writeHTML( $html );
+
+                                        }
+
+                                        
+                                    $html = '
+                                    </tbody>
+                                </table>';
+
+                                $pdf->writeHTML( $html );
+
+                            }
+                            
+                        $html = '
+                        </body>
+                    </html>
+                ';
+
+                $pdf->writeHTML( $html );
+                $pdf->Output( public_path('pdf/').'consumos'.$idNota.'.pdf', \Mpdf\Output\Destination::FILE );
+                
+                if( file_exists( public_path('pdf/').'consumos'.$idNota.'.pdf')){
+
+                    return true;
+
+                }else{
+
+                    return false;
+
+                }
+
+            }
+            
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 }

@@ -25,4 +25,10 @@ class CotizacionHasPiezas extends Model
 
     }
 
+    public function materiales(){
+
+        return $this->belongsToMany( Material::class, 'cotizacion_has_piezas', 'idPieza', 'idMaterial');
+        
+    }
+
 }

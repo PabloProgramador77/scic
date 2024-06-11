@@ -34,8 +34,10 @@
                             <td>$ {{ $nota->total }}</td>
                             <td>{{ $nota->estado }}</td>
                             <td>
-                                <a href="{{ url('/nota/editar') }}/{{ $nota->id }}" class="btn btn-info editar"><i class="fas fa-edit"></i></a>
-                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $nota->id }}" title="Borrar cotización"></x-adminlte-button>
+                                @if( $nota->estado == 'Pendiente' )
+                                    <a href="{{ url('/nota/editar') }}/{{ $nota->id }}" class="btn btn-info editar"><i class="fas fa-edit"></i></a>
+                                    <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $nota->id }}" title="Borrar cotización"></x-adminlte-button>
+                                @endif
                                 <a href="{{ url('/nota/ver') }}/{{ $nota->id }}" class="btn btn-primary"><i class="fas fa-info-circle"></i></a>
                             </td>
                         </tr>
