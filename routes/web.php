@@ -111,3 +111,8 @@ Route::post('/numeracion/agregar', [App\Http\Controllers\NumeracionController::c
 Route::post('/numeracion/buscar', [App\Http\Controllers\NumeracionController::class, 'show'])->name('buscar-numeracion');
 Route::post('/numeracion/actualizar', [App\Http\Controllers\NumeracionController::class, 'update'])->name('actualizar-numeracion');
 Route::post('/numeracion/borrar', [App\Http\Controllers\NumeracionController::class, 'destroy'])->name('borrar-numeracion');
+
+Route::post('/cliente/agregar', [App\Http\Controllers\ClienteController::class, 'index'])->name('agregar-cliente');
+Route::post('/cliente/buscar', [App\Http\Controllers\ClienteController::class, 'show'])->name('buscar-cliente');
+Route::post('/cliente/actualizar', [App\Http\Controllers\ClienteController::class, 'update'])->name('actualizar-cliente');
+Route::post('/cliente/borrar', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('borrar-cliente');

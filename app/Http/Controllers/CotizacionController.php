@@ -29,11 +29,9 @@ class CotizacionController extends Controller
     {
         try {
             
-            $cotizaciones = Cotizacion::where('estado', '=', 'Pendiente')->get();
             $clientes = Cliente::all();
-            $notas = Nota::where('estado', '=', 'Pendiente')->get();
-
-            return view('cotizacion.index', compact('cotizaciones', 'clientes', 'notas'));
+            
+            return view('cotizacion.index', compact('clientes'));
 
         } catch (\Throwable $th) {
             
