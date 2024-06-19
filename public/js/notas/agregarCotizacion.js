@@ -1,13 +1,9 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    console.log( 'Archivo Cargado...' );
-
     $(".nota").on('click', function(e){
 
         e.preventDefault();
-        
-        console.log( 'Click en Button...');
 
         var nota = $(this).attr('data-id');
 
@@ -55,7 +51,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/nota/editar/'+nota+'/'+$("#idCliente").val();
 
                             }
 
@@ -74,7 +70,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
 
                             }
 
@@ -106,7 +102,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/cotizaciones';
+                        window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
 
                     }
 

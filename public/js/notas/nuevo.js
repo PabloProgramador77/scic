@@ -1,8 +1,6 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    var clientes = new Array();
-
     $("#nota").on('click', function(e){
 
         var cotizaciones = new Array();
@@ -50,7 +48,7 @@ jQuery(document).ready(function(){
                         url: '/nota/agregar',
                         data:{
     
-                            'cliente' : clientes[0],
+                            'cliente' : $("#idCliente").val(),
                             'cotizaciones' : cotizaciones,
     
                         },
@@ -72,7 +70,7 @@ jQuery(document).ready(function(){
     
                                 if( resultado.isConfirmed ){
     
-                                    window.location.href = '/nota/editar/'+respuesta.id;
+                                    window.location.href = '/nota/editar/'+respuesta.id+'/'+$("#idCliente").val();
     
                                 }
     
@@ -91,7 +89,7 @@ jQuery(document).ready(function(){
     
                                 if( resultado.isConfirmed ){
     
-                                    window.location.href = '/cotizaciones';
+                                    window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
     
                                 }
     
@@ -123,7 +121,7 @@ jQuery(document).ready(function(){
     
                         if( resultado.isConfirmed ){
     
-                            window.location.href = '/cotizaciones';
+                            window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
     
                         }
     

@@ -1,7 +1,7 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#registrar").on('click', function(e){
+    $("#guardar").on('click', function(e){
 
         e.preventDefault();
 
@@ -63,10 +63,7 @@ jQuery(document).ready(function(){
                     url: '/cotizacion/agregar',
                     data:{
 
-                        'nombre' : $("#nombre").val(),
-                        'telefono' : $("#telefono").val(),
-                        'domicilio' : $("#domicilio").val(),
-                        'email' : $("#email").val(),
+                        'cliente' : $("#idCliente").val(),
                         'modelo' : $("#modelo").val(),
                         'total' : $("#total").val(),
                         'piezas' : piezas,
@@ -94,7 +91,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
 
                             }
 
@@ -113,7 +110,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cotizaciones';
+                                window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
 
                             }
 
@@ -145,7 +142,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/cotizaciones';
+                        window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
 
                     }
 

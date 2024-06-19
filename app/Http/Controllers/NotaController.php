@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nota;
 use App\Models\Cotizacion;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Requests\Nota\Assign;
 use App\Http\Requests\Nota\Delete;
@@ -141,15 +142,16 @@ class NotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $id )
+    public function edit( $id, $idCliente )
     {
         try {
             
             $nota = Nota::find( $id );
+            $cliente = Cliente::find( $idCliente );
 
             if( $nota->id ){
 
-                return view('notas.edicion', compact('nota'));
+                return view('notas.edicion', compact('nota', 'cliente'));
 
             }
 
@@ -421,14 +423,15 @@ class NotaController extends Controller
      * ! Consulta de nota
      * *Recibe el ID de la nota
      */
-    public function nota( $id ){
+    public function nota( $id, $idCliente ){
         try {
             
             $nota = Nota::find( $id );
+            $cliente = Cliente::find( $idCliente );
 
             if( $nota->id ){
 
-                return view('notas.nota', compact('nota'));
+                return view('notas.nota', compact('nota', 'cliente'));
 
             }
 
@@ -671,4 +674,23 @@ class NotaController extends Controller
 
         }
     }
+
+    /**
+     * Notas de Cliente
+     * ! Recibe el ID del cliente
+     */
+    public function cliente( $idCliente ){
+        try {
+            
+            $notas = Nota::where('idCliente', '=', $idCliente)->get();
+            $cliente = Cliente::find( $idCliente );
+
+            return view('notas.index', compact('notas', 'cliente'));
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    } 
 }

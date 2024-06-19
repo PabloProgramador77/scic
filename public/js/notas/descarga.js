@@ -73,7 +73,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/notas';
+                                window.location.href = '/notas/cliente/'+$("#idCliente").val();
 
                             }
 
@@ -105,7 +105,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/notas';
+                        window.location.href = '/notas/cliente/'+$("#idCliente").val();
 
                     }
 

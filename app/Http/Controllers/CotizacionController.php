@@ -43,14 +43,14 @@ class CotizacionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $idCliente )
     {
         try {
             
             $modelos = Modelo::all();
-            $clientes = Cliente::all();
+            $cliente = Cliente::find( $idCliente );
 
-            return view('cotizacion.cotizador', compact('modelos', 'clientes'));
+            return view('cotizacion.cotizador', compact('modelos', 'cliente'));
 
         } catch (\Throwable $th) {
             
@@ -65,73 +65,61 @@ class CotizacionController extends Controller
     public function store(Create $request)
     {
         try {
-            
-            $clienteController = new ClienteController();
-            $idCliente = $clienteController->create( $request );
 
-            if( $idCliente !== 0 ){
+            $cotizacion = Cotizacion::create([
 
-                $cotizacion = Cotizacion::create([
+                'precio' => $request->total,
+                'estado' => 'Pendiente',
+                'idModelo' => $request->modelo,
+                'idCliente' => $request->cliente,
 
-                    'precio' => $request->total,
-                    'estado' => 'Pendiente',
-                    'idModelo' => $request->modelo,
-                    'idCliente' => $idCliente,
-    
-                ]);
-    
-                $idCotizacion = $cotizacion->id;
-    
-                $cotizacionHasPiezaController = new CotizacionHasPiezasController();
-    
-                if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
-    
-                    $cotizacionHasCostosController = new CotizacionHasCostosController();
-    
-                    if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
-    
-                        $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
-    
-                        if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
-    
-                            $cotizacionHasSuelaController = new CotizacionHasSuelaController();
-    
-                            if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
-    
-                                $datos['exito'] = true;
-    
-                            }else{
-    
-                                $datos['exito'] = false;
-                                $datos['mensaje'] = 'Suelas no registradas';
-    
-                            }
-    
+            ]);
+
+            $idCotizacion = $cotizacion->id;
+
+            $cotizacionHasPiezaController = new CotizacionHasPiezasController();
+
+            if( $cotizacionHasPiezaController->store( $request, $idCotizacion ) ){
+
+                $cotizacionHasCostosController = new CotizacionHasCostosController();
+
+                if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
+
+                    $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
+
+                    if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
+
+                        $cotizacionHasSuelaController = new CotizacionHasSuelaController();
+
+                        if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
+
+                            $datos['exito'] = true;
+
                         }else{
-    
+
                             $datos['exito'] = false;
-                            $datos['mensaje'] = 'Consumibles no registrados';
-    
+                            $datos['mensaje'] = 'Suelas no registradas';
+
                         }
-    
+
                     }else{
-    
+
                         $datos['exito'] = false;
-                        $datos['mensaje'] = 'Costos no registrados';
-    
+                        $datos['mensaje'] = 'Consumibles no registrados';
+
                     }
-    
+
                 }else{
-    
+
                     $datos['exito'] = false;
-                    $datos['mensaje'] = 'Piezas no registradas.';
-    
+                    $datos['mensaje'] = 'Costos no registrados';
+
                 }
 
             }else{
 
                 $datos['exito'] = false;
-                $datos['mensaje'] = 'Cliente no registrado.';
+                $datos['mensaje'] = 'Piezas no registradas.';
 
             }
 
@@ -355,5 +343,25 @@ class CotizacionController extends Controller
         }
 
         return response()->json( $datos );
+    }
+
+    /**
+     * Cotizaciones de Cliente
+     * ! Recibe el ID del cliente
+     */
+    public function cliente( $idCliente ){
+        try {
+            
+            $cotizaciones = Cotizacion::where('idCliente','=', $idCliente)->get();
+            $cliente = Cliente::find( $idCliente );
+            $notas = Nota::where('idCliente', '=', $idCliente)->get();
+
+            return view('cotizacion.cotizaciones', compact('cotizaciones', 'cliente', 'notas'));
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 }

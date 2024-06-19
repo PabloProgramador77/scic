@@ -27,7 +27,7 @@ class Numeracion extends Model
 
         $cantidad = $this->cotizaciones()->wherePivot('idCotizacion', $idCotizacion)->wherePivot('idNumeracion', $idNumeracion)->value('cantidad');
 
-        return $cantidad ?? 0;
+        return $cantidad;
 
     }
 

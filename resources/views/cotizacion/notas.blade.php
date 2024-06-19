@@ -1,21 +1,23 @@
-<x-adminlte-modal id="modalNotas" title="Notas Creadas" size="xl" theme="primary" icon="fas fa-plus" static-backdrop scrollable>
+<x-adminlte-modal id="modalNotas" title="Notas Creadas" size="xl" theme="primary" icon="fas fa-file" static-backdrop scrollable>
     <div class="container-fluid row">
         <div class="col-lg-12 col-md-12 border rounded">
             <input type="hidden" name="idCotizacion" id="idCotizacion">
-            <p class="text-center bg-light p-1 rounded"><i class="fas fa-info-circle"></i> Elige la nota en la que deseas agregar la cotización.</p>
+            <p class="text-center bg-warning p-1 rounded"><i class="fas fa-info-circle"></i> Elige la nota en la que deseas agregar la cotización. Solo a las notas pendientes se les puede agregar cotizaciones.</p>
             @php
-                $heads = ['Folio', 'Cliente', 'Total de Nota', 'Estado', ''];
+                $heads = ['Folio', 'Total de Pares', 'Total de Nota', 'Estado', ''];
             @endphp
             <x-adminlte-datatable id="contenedorNotas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
                 @if ( count( $notas ) > 0 )
                     @foreach ($notas as $nota)
                         <tr>
                             <td>{{ $nota->id }}</td>
-                            <td>{{ $nota->cliente->nombre }}</td>
+                            <td>{{ $nota->pares }}</td>
                             <td>$ {{ $nota->total }}</td>
                             <td>{{ $nota->estado }}</td>
                             <td>
-                                <a class="btn btn-info rounded nota" id="nota{{ $nota->id }}" data-id="{{ $nota->id }}"><i class="fas fa-file-invoice-dollar"></i></a>
+                                @if( $nota->estado == 'Pendiente')
+                                    <a class="btn btn-info rounded nota" id="nota{{ $nota->id }}" data-id="{{ $nota->id }}"><i class="fas fa-plus-circle"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
