@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Nota;
 use App\Models\Cotizacion;
 use App\Models\Cliente;
+use App\Models\Material;
 use Illuminate\Http\Request;
 use App\Http\Requests\Nota\Assign;
 use App\Http\Requests\Nota\Delete;
@@ -512,7 +513,7 @@ class NotaController extends Controller
 
             ]);
 
-            if( $this->pdfConsumo( $request->nota )){
+            if( $this->pdfConsumo( $request->nota ) && $this->tablaConsumos( $request->nota ) ){
 
                 $datos['exito'] = true;
 
@@ -692,5 +693,132 @@ class NotaController extends Controller
             echo $th->getMessage();
 
         }
-    } 
+    }
+    
+    /**
+     * Crea el PDF de la tabla de consumos
+     * ! Recibe el ID de la nota
+     */
+    public function tablaConsumos( $idNota ){
+        try {
+
+            $materiales = Material::select('materiales.nombre', 'materiales.precio', 'materiales.unidades', 'piezas.alto', 'piezas.largo', 'piezas.cantidad', 'nota_has_cotizaciones.totalPares')
+                        ->join('cotizacion_has_piezas', 'materiales.id', '=', 'cotizacion_has_piezas.idMaterial')
+                        ->join('nota_has_cotizaciones', 'cotizacion_has_piezas.idCotizacion', '=', 'nota_has_cotizaciones.idCotizacion')
+                        ->join('piezas', 'cotizacion_has_piezas.idPieza', '=', 'piezas.id')
+                        ->where('nota_has_cotizaciones.idNota', '=', $idNota)
+                        ->orderBy('materiales.nombre', 'asc')
+                        ->get();
+
+            $nota = Nota::find( $idNota );
+
+            if( count( $materiales ) > 0 ){
+
+                $pdf = new \Mpdf\Mpdf([
+
+                    'mode' => 'utf-8',
+                    'format' => 'A4',
+                    'orientation' => 'P',
+                    'autoPageBreak' => true,
+    
+                ]);
+
+                $html = '
+                    <html>
+                    <body>
+                        <p style="font-size: 22px; font-style: bold;">Tabla de Consumos: '.$nota->id.' </p>
+                        <table style="width: 100%; height: auto;">
+                            <thead style="width: 100%; height: auto;">
+                                <tr style="border: 2px; background-color: lightblue; padding: 5px;">
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Material</b></td>
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Precio</b></td>
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Descripción</b></td>
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Mts. Totales</b></td>
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Monto Aprox.</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>';
+
+                            $pdf->writeHTML( $html );
+
+                            $nombreMaterial = '';
+                            $totalMts = 0;
+                            $total = 0;
+
+                            foreach( $materiales as $material ){
+
+                                if( $material->nombre == $nombreMaterial ){
+                            
+                                    $totalMts += (($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares;
+                                    $total += ((($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares)*($precioAnterior);
+                            
+                                }else{
+                            
+                                    if ($nombreMaterial != '') { // Asegura que no es la primera iteración
+                                        $html = '
+                                            <tr style="width: 100%; height: auto; padding: 5px;">
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
+                                            </tr>
+                                        ';
+                            
+                                        $pdf->writeHTML( $html );
+                                    }
+                            
+                                    $nombreMaterial = $material->nombre;
+                                    $precioAnterior = $material->precio; // Guarda el precio actual para usarlo en la siguiente iteración
+                                    $descripcionAnterior = $material->descripcion; // Guarda la descripción actual para usarla en la siguiente iteración
+                                    $totalMts = (($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares;
+                                    $total = ((($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares)*($material->precio);
+                            
+                                }
+                            
+                            }
+                            // Asegúrate de imprimir la última acumulación después del bucle
+                            if ($nombreMaterial != '') {
+                                $html = '
+                                    <tr style="width: 100%; height: auto; padding: 5px;">
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
+                                    </tr>
+                                ';
+                            
+                                $pdf->writeHTML( $html );
+                            }
+
+                            $html = '
+                            </tbody>
+                        </table>
+                    </body>
+                    </html>
+                ';
+
+                $pdf->writeHTML( $html );
+                $pdf->Output( public_path('pdf/').'tabla'.$idNota.'.pdf', \Mpdf\Output\Destination::FILE );
+
+                if( file_exists( public_path('pdf/').'tabla'.$idNota.'.pdf')){
+
+                    return true;
+
+                }else{
+
+                    return false;
+
+                }
+
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
 }
