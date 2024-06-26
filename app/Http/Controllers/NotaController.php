@@ -12,6 +12,7 @@ use App\Http\Requests\Nota\Delete;
 use App\Http\Requests\Nota\Read;
 use App\Http\Requests\Nota\Create;
 use App\Http\Requests\Nota\Search;
+use App\Http\Requests\Nota\Impuestos;
 use App\Http\Controllers\NotaHasCotizacionController;
 use App\Http\Controllers\CotizacionController;
 use Mpdf\Mpdf;
@@ -50,6 +51,8 @@ class NotaController extends Controller
                 'pares' => 0,
                 'total' => 0,
                 'estado' => 'Pendiente',
+                'iva' => 'False',
+                'envio' => 0,
 
             ]);
 
@@ -86,6 +89,8 @@ class NotaController extends Controller
                 'pares' => 0,
                 'total' => 0,
                 'estado' => 'Pendiente',
+                'iva' => 'False',
+                'envio' => 0,
 
             ]);
 
@@ -275,8 +280,11 @@ class NotaController extends Controller
             
             $nota = Nota::find( $idNota );
             $colspan = 0;
+            $totalNota = 0;
 
             if( $nota->id ){
+
+                $totalNota = $nota->total;
 
                 $pdf = new \Mpdf\Mpdf([
 
@@ -395,14 +403,42 @@ class NotaController extends Controller
                                     <td  style="font-size: 12px;">'.$nota->pares.'</td>
                                     <td  style="font-size: 12px; text-align: right;"><b>Subtotal:</b></td>
                                     <td  style="font-size: 12px;">$ '.number_format( $nota->total, 2).'</td>
-                                </tr>
+                                </tr>';
+
+                                if( $nota->iva == 'True' ){
+
+                                    $html .='
+                                    <tr style="background-color: lightgray; padding: 5px;">
+                                        <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>I.V.A:</b></td>
+                                        <td style="font-size: 12px;">$ '.number_format( ($nota->total*0.16), 2).'</td>
+                                    </tr>
+                                    ';
+
+                                    $totalNota += ( $nota->total * 0.16 );
+
+                                }
+
+                                if( $nota->envio > 0 ){
+
+                                    $html .='
+                                    <tr style="background-color: lightgray; padding: 5px;">
+                                        <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Envió:</b></td>
+                                        <td style="font-size: 12px;">$ '.number_format( $nota->envio, 2).'</td>
+                                    </tr>
+                                    ';
+
+                                    $totalNota += $nota->envio;
+
+                                }
+                                
+                                $html .='
                                 <tr style="background-color: green; padding: 5px;">
                                     <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Total:</b></td>
-                                    <td style="font-size: 12px;">$ '.number_format( $nota->total, 2).'</td>
+                                    <td style="font-size: 12px;">$ '.number_format( $totalNota, 2).'</td>
                                 </tr>
                                 <tr style="background-color: yellow; padding: 5px;">
                                     <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Anticipo 50%:</b></td>
-                                    <td style="font-size: 12px;">$ '.number_format($nota->total/2, 2).'</td>
+                                    <td style="font-size: 12px;">$ '.number_format($totalNota/2, 2).'</td>
                                 </tr>
                             </table>
                         </div>
@@ -838,5 +874,32 @@ class NotaController extends Controller
             echo $th->getMessage();
 
         }
+    }
+
+    /**
+     * Agregado de Impuestos
+     * * Recibe el IVA y/o Envió
+     */
+    public function impuestos( Impuestos $request ){
+        try {
+            
+            $nota = Nota::where('id', '=', $request->nota)
+                    ->update([
+
+                        'iva' => $request->iva,
+                        'envio' => $request->envio,
+
+                    ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }

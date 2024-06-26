@@ -17,6 +17,8 @@ class Nota extends Model
         'pares', 
         'total', 
         'estado',
+        'iva',
+        'envio',
 
     ];
 

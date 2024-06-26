@@ -9,6 +9,7 @@
                 <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-dollar-sign"></i> Numeración de Nota</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
+                <input type="hidden" name="idNota" id="idNota" value="{{ $nota->id }}">
             </div>
             <div class="col-lg-4 my-2">
                 <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded"><i class="fas fa-home"></i> Inicio</a>
@@ -40,6 +41,9 @@
             </x-adminlte-input>
             <div class="col-lg-1">
                 <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum"></x-adminlte-button>
+            </div>
+            <div class="col-lg-2">
+                <x-adminlte-button theme="info" icon="fas fa-percentage" id="impuestos" label=" Costo(s) extra" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
             </div>
             
         </div>
@@ -82,11 +86,14 @@
 
         </div>
 
+        @include('notas.impuestos')
+
     </section>
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/numeraciones.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/agregarNumeraciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/impuestos.js') }}" type="text/javascript"></script>
 
 @stop

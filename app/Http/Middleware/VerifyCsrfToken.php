@@ -88,6 +88,7 @@ class VerifyCsrfToken extends Middleware
         'cliente/buscar',
         'cliente/actualizar',
         'cliente/borrar',
+        'nota/impuestos',
         
     ];
 }
