@@ -274,6 +274,7 @@ class NotaController extends Controller
         try {
             
             $nota = Nota::find( $idNota );
+            $colspan = 0;
 
             if( $nota->id ){
 
@@ -286,108 +287,125 @@ class NotaController extends Controller
 
                 ]);
 
+                foreach( $nota->cotizaciones as $cotizacion ){
+
+                    if( count( $cotizacion->numeraciones ) > $colspan ){
+
+                        $colspan = count( $cotizacion->numeraciones );
+
+                    }
+
+                }
+
                 $html ='
                     <html>
                     <head>
                         <style>
-                            .contenedor{
-                                width: 100%;
-                                height: auto,
-                                display: block;
-                            }
-
-                            .titulo{
-                                font-size: 18px;
-                                font-style: bold;
-                            }
-
-                            .info{
-                                font-size: 12px;
-                                font-style: normal;
-                            }
-
-                            .spacing{
-                                padding: 7px;
-                                marging: 7px;
-                            }
-
-                            .tituloNota{
-                                font-size: 24px;
-                                font-style: bold;
-                                color: darkblue;
-                                text-align: right;
-                            }
-
-                            .tituloTabla{
-                                font-size: 16px;
-                                font-style: bold;
-                                text-align: center;
-                            }
                         </style>
                     </head>
-                    <body class="contenedor">
-                        <table class="contenedor">
-                            <tbody class="contenedor">
-                                <tr class="contenedor">
-                                    <td class="spacing">
-                                        <img src="media/icons/calzado.png" width="125px" height="auto" class="spacing">
-                                    </td>
-                                    <td class="spacing" colspan="3">
-                                        <h1 class="titulo">AYDEE FOOTWEAR</h1>
-                                        <p class="info">Tel. 4761021041</p>
-                                        <p class="info">Alv. Obregon 107 Col. Del Carme, Purisima del Rincón, Gto. México</p>
-                                    </td>
+                    <body>
+                        <div style="width: 100%; height: auto; padding: 5px; display: block; overflow: auto;">
+                            <div style="width: 33%; height: auto; display: inline-block; float: left; overflow: auto;">
+                                <img src="media/logo.jpg" width="175px" height="auto">
+                            </div>
+                            <div style="width: 66.5%; height: auto; display: inline-block; float: left; overflow: auto; margin-top: 50px;">
+                                <table style="width: 100%; height: auto; overflow: auto;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align: right; font-size: 12px;"><b>Fecha de Inicio:</b></td>
+                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.$nota->updated_at.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right; font-size: 12px;"><b>Fecha de Entrega Aprox:</b></td>
+                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">---</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right; font-size: 12px;"><b>Pedido:</b></td>
+                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.$nota->id.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right; font-size: 12px;"><b>Vendedor:</b></td>
+                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.auth()->user()->name.'</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div style="width: 100%; height: auto; display: block; overflow: auto; border-bottom: 2px;">
+                            <p style="font-size: 12px; text-align: center; display: block; padding: 5px; background-color: blue; color: white;"><b>DATOS DEL CLIENTE</b></p>
+                            <table style="witdh: 100%; height: auto; overflow: auto;">
+                                <tr>
+                                    <td style="font-size: 12px;"><b>Nombre:</b></td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->nombre.'</td>
                                 </tr>
                                 <tr>
-                                    <td class="spacing" colspan="3">
-                                        <h2 class="tituloNota">NOTA DE VENTA</h2>
-                                        <p class="info">Folio: #'.$idNota.'</p>
-                                        <p class="info">'.$nota->cliente->nombre.'</p>
-                                        <p class="info">'.$nota->created_at->format('Y-m-d').'</p>
-                                    </td>
+                                    <td style="font-size: 12px;"><b>Domicilio:</b></td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->domicilio.'</td>
                                 </tr>
-                                <tr class="spacing" style="border-bottom: 4px; background-color: lightgray;">
-                                    <td class="spacing tituloTabla">Modelo</td>
-                                    <td class="spacing tituloTabla">Precio Unitario</td>
-                                    <td class="spacing tituloTabla">Total de Pares</td>
-                                    <td class="spacing tituloTabla">Monto</td>
-                                </tr';
-                        
-                                $pdf->writeHTML( $html );
-                                  
+                                <tr>
+                                    <td style="font-size: 12px;"><b>Telefono:</b></td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->telefono.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 12px;"><b>Correo:</b></td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->email.'</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width: 100%; height: auto; overflow: auto; display: block;">
+                            <table style="width: 100%; height: auto; overflow: auto;">
+                                <tr style="background-color: blue; padding: 5px;">
+                                    <td style="color: white; font-size: 12px; text-align: center;"><b>Nombre</b></td>
+                                    <td style="color: white; font-size: 12px; text-align: center;"><b>Modelo</b></td>
+                                    <td style="color: white; font-size: 12px; text-align: center;"><b>Descripción</b></td>
+                                    <td style="color: white; font-size: 12px; text-align: center;" colspan="'.$colspan.'"><b>Numeraciones</b></td>
+                                    <td style="color: white; font-size: 12px; text-align: center;"><b>Pares</b></td>
+                                    <td style="color: white; font-size: 12px; text-align: center;"><b>Precio U.</b></td>
+                                    <td style="color: white; font-size: 12px; text-align: center;"><b>Importe</b></td>
+                                </tr>';
+
                                 foreach( $nota->cotizaciones as $cotizacion ){
 
-                                    $html ='<tr class="spacing">'.
-                                    '<td class="info spacing" style="text-align: center;">'.$cotizacion->modelo->nombre.'</td>'.
-                                    '<td class="info spacing" style="text-align: center;">$ '.number_format( $cotizacion->precio, 2).'</td>'.
-                                    '<td class="info spacing" style="text-align: center;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>'.
-                                    '<td class="info spacing" style="text-align: center;">$ '.number_format( $cotizacion->precio * $nota->pares( $nota->id, $cotizacion->id ), 2 ).'</td>'.
-                                    '</tr>';
+                                    $html .= '
+                                    <tr style="padding: 5px;">
+                                        <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->nombre.'</td>
+                                        <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->numero.'</td>
+                                        <td style="border: 2px; font-size: 12px;">---</td>';
 
-                                    $pdf->writeHTML( $html );
+                                        foreach( $cotizacion->numeraciones as $numeracion ){
+
+                                            $html .= '
+                                            <td style="border: 2px; font-size: 12px;">'.$numeracion->numero.'/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                            ';
+
+                                        }
+
+                                    $html .= '
+                                        <td style="border: 2px; font-size: 12px;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
+                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( $cotizacion->precio, 2).'</td>
+                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( $cotizacion->precio * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
+                                    </tr>
+                                    ';
 
                                 }
-                                  
-                                $html ='    
+
+                                $html.= '
+                                <tr style="padding: 5px;">
+                                    <td colspan="'.($colspan+3).'" style="font-size: 12px; text-align: right;"><b>Pares:</b></td>
+                                    <td  style="font-size: 12px;">'.$nota->pares.'</td>
+                                    <td  style="font-size: 12px; text-align: right;"><b>Subtotal:</b></td>
+                                    <td  style="font-size: 12px;">$ '.number_format( $nota->total, 2).'</td>
                                 </tr>
-                                <tr>
-                                  <td colspan="3" class="spacing info" style="text-align: right;">Subtotal:</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.number_format( $nota->total, 2).'</td>
+                                <tr style="background-color: green; padding: 5px;">
+                                    <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Total:</b></td>
+                                    <td style="font-size: 12px;">$ '.number_format( $nota->total, 2).'</td>
                                 </tr>
-                                <tr>
-                                  <td colspan="3" class="spacing info" style="text-align: right;">IVA (16%):</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.number_format($nota->total * 0.16, 2).'</td>
+                                <tr style="background-color: yellow; padding: 5px;">
+                                    <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Anticipo 50%:</b></td>
+                                    <td style="font-size: 12px;">$ '.number_format($nota->total/2, 2).'</td>
                                 </tr>
-                                <tr style="background-color: orange;">
-                                  <td colspan="3" class="spacing info" style="text-align: right;">Anticipo:</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.number_format(($nota->total * 1.16)/2, 2).'</td>
-                                </tr>
-                                <tr style="background-color: green;">
-                                  <td colspan="3" class="spacing info" style="text-align: right;">TOTAL:</td>
-                                  <td class="spacing info" style="text-align: center;">$ '.number_format($nota->total * 1.16, 2).'</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            </table>
+                        </div>
                     </body>
                     </html>
                 ';
