@@ -20,7 +20,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Concepto', 'Proveedor', 'Material', 'Precio', 'Unidades de Compra', 'Acciones'];
+                $heads = ['Concepto', 'Proveedor', 'Material', 'Precio', 'Ancho de Material', 'Acciones'];
             @endphp
 
             <x-adminlte-datatable id="materiales" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
