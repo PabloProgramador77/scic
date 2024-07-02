@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModeloHasSuela;
 use App\Models\Suela;
+use App\Models\Modelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloHasSuela\Create;
 use App\Http\Requests\ModeloHasSuela\Read;
@@ -13,16 +14,21 @@ class ModeloHasSuelaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request )
     {
         try {
+
+            $modelo = Modelo::find( $request->id );
         
             $suelas = Suela::all();
+
+            $configuradas = $modelo->suelas;
 
             if( count( $suelas ) > 0 ){
 
                 $datos['exito'] = true;
                 $datos['suelas'] = $suelas;
+                $datos['configuradas'] = $configuradas;
 
             }else{
 

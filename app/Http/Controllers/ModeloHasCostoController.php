@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModeloHasCosto;
 use App\Models\Costo;
+use App\Models\Modelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloHasCostos\Create;
 use App\Http\Requests\ModeloHasCostos\Read;
@@ -13,26 +14,29 @@ class ModeloHasCostoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request )
     {
         try {
             
             if( auth()->user()->id ){
 
+                $modelo = Modelo::find( $request->id );
+
+                $costes = $modelo->costos;
+                
                 $costos = Costo::all();
 
                 if( count( $costos ) > 0 ){
 
                     $datos['exito'] = true;
                     $datos['costos'] = $costos;
+                    $datos['costes'] = $costes;
 
                 }
 
             }else{
 
-                $datos['exito'] = false;
-                $datos['mensaje'] = 'Sin costos registrados. Agregalos ahora';
-                $datos['url'] = '/costos';
+                return redirect('/');
 
             }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModeloHasNumeraciones;
 use App\Models\Numeracion;
+use App\Models\Modelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloHasNumeraciones\Read;
 use App\Http\Requests\ModeloHasNumeraciones\Create;
@@ -17,12 +18,17 @@ class ModeloHasNumeracionesController extends Controller
     {
         try {
             
+            $modelo = Modelo::find( $request->id );
+
+            $configuradas = $modelo->numeraciones;
+
             $numeraciones = Numeracion::all();
 
             if( count( $numeraciones ) > 0 ){
 
                 $datos['exito'] = true;
                 $datos['numeraciones'] = $numeraciones;
+                $datos['configuradas'] = $configuradas;
 
             }else{
 

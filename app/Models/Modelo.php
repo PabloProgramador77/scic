@@ -25,4 +25,22 @@ class Modelo extends Model
         
     }
 
+    public function costos(){
+
+        return $this->belongsToMany( Costo::class, 'modelo_has_costos', 'idModelo', 'idCosto' );
+
+    }
+
+    public function suelas(){
+
+        return $this->belongsToMany( Suela::class, 'modelo_has_suelas', 'idModelo', 'idSuela' );
+
+    }
+
+    public function consumibles(){
+
+        return $this->belongsToMany( Consumible::class, 'modelo_has_consumibles', 'idModelo', 'idConsumible' );
+        
+    }
+
 }

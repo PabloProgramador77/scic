@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                if( respuesta.costos.length > 0 ){
+                if( respuesta.costos.length > 0 && respuesta.costes.length > 0 ){
 
                     var html = '<thead>' +
                                     '<tr>' +
@@ -41,8 +41,20 @@ jQuery(document).ready(function(){
 
                     respuesta.costos.forEach(function(costo){
 
+                        var checked = false;
+
+                        respuesta.costes.forEach(function( coste ){
+
+                            if( costo.id === coste.id ){
+                                
+                                checked = true;
+
+                            }
+
+                        });
+                        
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" data-id="' + costo.id + '"></td>' +
+                                    '<td><input type="checkbox" ' + (checked ? 'checked="true"' : '') + ' name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" data-id="' + costo.id + '"></td>' +
                                     '<td>' + costo.nombre + '</td>' +
                                     '<td>' + costo.tipo + '</td>' +
                                     '<td>$ ' + costo.total + '</td>' +
@@ -51,6 +63,44 @@ jQuery(document).ready(function(){
                     });
 
                     $("#contenedorCostos").empty().append( html );
+
+                }else{
+
+                    if( respuesta.costos.length > 0 ){
+
+                        respuesta.costos.forEach( function( costo ){
+
+                            html += '<tr>' +
+                                        '<td><input type="checkbox" checked="true" name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" data-id="' + costo.id + '"></td>' +
+                                        '<td>' + costo.nombre + '</td>' +
+                                        '<td>' + costo.tipo + '</td>' +
+                                        '<td>$ ' + costo.total + '</td>' +
+                                    '</tr>';
+    
+                        });
+
+                        $("#contenedorCostos").empty().append( html );
+
+                    }else{
+
+                        Swal.fire({
+
+                            icon: 'warning',
+                            title: 'Sin costos registrados. Registralos ahora.',
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+    
+                        }).then((resultado)=>{
+    
+                            if( resultado.isConfirmed ){
+    
+                                window.location.href = '/costos';
+    
+                            }
+    
+                        });
+
+                    }
 
                 }
 

@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                if( respuesta.consumibles.length > 0 ){
+                if( respuesta.consumibles.length > 0 && respuesta.configurados.length > 0 ){
 
                     var html = '<thead>' +
                                     '<tr>' +
@@ -41,8 +41,20 @@ jQuery(document).ready(function(){
 
                     respuesta.consumibles.forEach(function(consumible){
 
+                        var checked = false;
+
+                        respuesta.configurados.forEach( function( configurado){
+
+                            if( consumible.id === configurado.id ){
+
+                                checked = true;
+
+                            }
+
+                        });
+
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="consumible" id="consumible' + consumible.id + '" class="form-control consumible' + consumible.id + '" data-id="' + consumible.id + '"></td>' +
+                                    '<td><input type="checkbox" '+( checked ? 'checked="true"' : '' )+' name="consumible" id="consumible' + consumible.id + '" class="form-control consumible' + consumible.id + '" data-id="' + consumible.id + '"></td>' +
                                     '<td>' + consumible.nombre + '</td>' +
                                     '<td>' + consumible.tipo + '</td>' +
                                     '<td>$ ' + consumible.precio + '</td>' +
@@ -51,6 +63,44 @@ jQuery(document).ready(function(){
                     });
 
                     $("#contenedorConsumibles").empty().append( html );
+
+                }else{
+
+                    if( respuesta.consumibles.length > 0 ){
+
+                        respuesta.consumibles.forEach( function( consumible ){
+
+                            html += '<tr>' +
+                                    '<td><input type="checkbox" checked="true" name="consumible" id="consumible' + consumible.id + '" class="form-control consumible' + consumible.id + '" data-id="' + consumible.id + '"></td>' +
+                                    '<td>' + consumible.nombre + '</td>' +
+                                    '<td>' + consumible.tipo + '</td>' +
+                                    '<td>$ ' + consumible.precio + '</td>' +
+                                '</tr>';
+
+                        });
+
+                        $("#contenedorConsumibles").empty().append( html );
+
+                    }else{
+
+                        Swal.fire({
+
+                            icon: 'warning',
+                            title: 'Sin consumibles registrados. Registralos ahora.',
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+
+                        }).then((resultado)=>{
+
+                            if( resultado.isConfirmed ){
+
+                                window.location.href = '/consumibles';
+
+                            }
+
+                        });
+
+                    }
 
                 }
 

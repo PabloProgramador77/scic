@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                if( respuesta.numeraciones.length > 0 ){
+                if( respuesta.numeraciones.length > 0 && respuesta.configuradas.length > 0 ){
 
                     var html = '<thead>' +
                                     '<tr>' +
@@ -39,14 +39,62 @@ jQuery(document).ready(function(){
 
                     respuesta.numeraciones.forEach(function(numeracion){
 
+                        var checked = false;
+
+                        respuesta.configuradas.forEach( function( configurada ){
+
+                            if( numeracion.id === configurada.id ){
+
+                                checked = true;
+
+                            }
+
+                        });
+
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="numeracion" id="numeracion' + numeracion.id + '" class="form-control numeracion' + numeracion.id + '" data-id="' + numeracion.id + '"></td>' +
+                                    '<td><input type="checkbox" '+( checked ? 'checked="true"' : '' )+' name="numeracion" id="numeracion' + numeracion.id + '" class="form-control numeracion' + numeracion.id + '" data-id="' + numeracion.id + '"></td>' +
                                     '<td>' + numeracion.numero + '</td>' +
                                 '</tr>';
 
                     });
 
                     $("#contenedorNumeraciones").empty().append( html );
+
+                }else{
+
+                    if( respuesta.numeraciones.length > 0 ){
+
+                        respuesta.numeraciones.forEach( function( numeracion ){
+
+                            html += '<tr>' +
+                                    '<td><input type="checkbox" checked="true" name="numeracion" id="numeracion' + numeracion.id + '" class="form-control numeracion' + numeracion.id + '" data-id="' + numeracion.id + '"></td>' +
+                                    '<td>' + numeracion.numero + '</td>' +
+                                '</tr>';
+
+                        });
+
+                        $("#contenedorNumeraciones").empty().append( html );
+
+                    }else{
+
+                        Swal.fire({
+
+                            icon: 'warning',
+                            title: 'Sin numeraciones registradas. Agregalas ahora.',
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+    
+                        }).then((resultado)=>{
+    
+                            if( resultado.isConfirmed ){
+    
+                                window.location.href = '/numeraciones';
+    
+                            }
+    
+                        });
+
+                    }
 
                 }
 

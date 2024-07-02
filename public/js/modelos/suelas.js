@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                if( respuesta.suelas.length > 0 ){
+                if( respuesta.suelas.length > 0 && respuesta.configuradas.length > 0 ){
 
                     var html = '<thead>' +
                                     '<tr>' +
@@ -41,8 +41,20 @@ jQuery(document).ready(function(){
 
                     respuesta.suelas.forEach(function(suela){
 
+                        var checked = false;
+
+                        respuesta.configuradas.forEach( function( configurada ){
+
+                            if( suela.id === configurada.id ){
+
+                                checked = true;
+
+                            }
+
+                        });
+
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" data-id="' + suela.id + '"></td>' +
+                                    '<td><input type="checkbox" '+( checked ? 'checked="true"' : '' )+' name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" data-id="' + suela.id + '"></td>' +
                                     '<td>' + suela.nombre + '</td>' +
                                     '<td>$ ' + suela.precio + '</td>' +
                                     '<td>' + suela.descripcion + '</td>' +
@@ -51,6 +63,44 @@ jQuery(document).ready(function(){
                     });
 
                     $("#contenedorSuelas").empty().append( html );
+
+                }else{
+
+                    if( respuesta.suelas.length > 0 ){
+
+                        respuesta.suelas.forEach( function( suela ){
+
+                            html += '<tr>' +
+                                        '<td><input type="checkbox" checked="true" name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" data-id="' + suela.id + '"></td>' +
+                                        '<td>' + suela.nombre + '</td>' +
+                                        '<td>' + suela.precio + '</td>' +
+                                        '<td>$ ' + suela.descripcion + '</td>' +
+                                    '</tr>';
+    
+                        });
+
+                        $("#contenedorSuelas").empty().append( html );
+
+                    }else{
+
+                        Swal.fire({
+
+                            icon: 'warning',
+                            title: 'Sin suelas registradas. Registralas ahora.',
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+    
+                        }).then((resultado)=>{
+    
+                            if( resultado.isConfirmed ){
+    
+                                window.location.href = '/suelas';
+    
+                            }
+    
+                        });
+
+                    }
 
                 }
 

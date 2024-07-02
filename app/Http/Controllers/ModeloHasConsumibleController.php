@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModeloHasConsumible;
 use App\Models\Consumible;
+use App\Models\Modelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloHasConsumible\Create;
 use App\Http\Requests\ModeloHasConsumible\Read;
@@ -13,11 +14,15 @@ class ModeloHasConsumibleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $request )
     {
         try {
             
             if( auth()->user()->id ){
+
+                $modelo = Modelo::find( $request->id );
+
+                $configurados = $modelo->consumibles;
 
                 $consumibles = Consumible::all();
     
@@ -25,6 +30,7 @@ class ModeloHasConsumibleController extends Controller
 
                     $datos['exito'] = true;
                     $datos['consumibles'] = $consumibles;
+                    $datos['configurados'] = $configurados;
 
                 }   
     
