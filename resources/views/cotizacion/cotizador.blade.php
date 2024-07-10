@@ -39,10 +39,7 @@
                     </x-adminlte-input>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 my-2">
-                    <x-adminlte-button id="costos" theme="secondary" data-toggle="modal" data-target="#modalCostos" icon="fas fa-dollar-sign" label="Costos"></x-adminlte-button>
-                    <x-adminlte-button id="consumibles" theme="info" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" label="Consumibles"></x-adminlte-button>
-                    <x-adminlte-button id="suelas" theme="warning" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" label="Suelas"></x-adminlte-button>
-                    <x-adminlte-button id="guardar" class="mx-4" theme="primary" icon="fas fa-save" ></x-adminlte-button>
+                    <x-adminlte-button id="costos" data-toggle="modal" data-target="#modalCostos" class="mx-4" theme="success" icon="fas fa-arrow-circle-right" label=" Continuar" disabled="true"></x-adminlte-button>
                 </div>
             </div>
             
@@ -50,7 +47,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['', 'Pieza', 'Material', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo']
+                $heads = ['', 'Pieza', 'Material', 'Color', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo']
             @endphp
 
             <x-adminlte-datatable id="contenedorPiezas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>

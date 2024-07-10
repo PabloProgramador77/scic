@@ -36,6 +36,8 @@ class Create extends FormRequest
             'precio' => 'required|numeric',
             'proveedor' => 'required|integer',
             'unidades' => 'required|numeric',
+            'hex' => 'string|nullable',
+            'color' => 'string|nullable',
             
         ];
     }

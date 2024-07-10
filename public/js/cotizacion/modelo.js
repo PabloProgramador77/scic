@@ -30,6 +30,7 @@ jQuery(document).ready(function(){
                                 '<td></td>'+
                                 '<td><b>Pieza</b></td>'+
                                 '<td><b>Material</b></td>'+
+                                '<td><b>Color</b></td>'+
                                 '<td><b>Largo y Alto</b></td>'+
                                 '<td><b>Piezas</b></td>'+
                                 '<td><b>Área</b></td>'+
@@ -48,7 +49,7 @@ jQuery(document).ready(function(){
                     var opcionesMateriales = '<option value="0, 0">Elige un material</option>';
 
                     respuesta.materiales.forEach( function(material){
-                        opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +', ' + material.id +'">' + material.nombre + ' - $' +material.precio + '</option>';
+                        opcionesMateriales += '<option style="background-color: '+material.hexColor+'" data-value="'+material.hexColor+'" value="' + material.precio + ', '+ material.unidades +', ' + material.id +'">' + material.nombre + ' - $' +material.precio + '</option>';
                     });
 
                     respuesta.piezas.forEach( function(pieza){
@@ -57,6 +58,7 @@ jQuery(document).ready(function(){
                                     '<td><input type="checkbox" name="pieza" id="'+pieza.id+'" class="form-control pieza'+pieza.id+'"></td>' +
                                     '<td>' + pieza.nombre + '</td>' +
                                     '<td><select id="material'+pieza.id+'" name="material" class="form-control material'+pieza.id+'">' + opcionesMateriales + '</select></td>'+
+                                    '<td><input type="color" name="colorPieza" id="colorPieza'+pieza.id+'" value="#FFFFFF" class="colorPieza'+pieza.id+'"></input></td>'+
                                     '<td>' + pieza.largo + ' X ' + pieza.alto + '</td>' +
                                     '<td>'+ pieza.cantidad +'</td>'+
                                     '<td>'+ (pieza.largo * pieza.alto).toFixed(4) +'</td>'+
@@ -131,7 +133,21 @@ jQuery(document).ready(function(){
 
                     });
 
+                    respuesta.piezas.forEach( function(pieza){
+
+                        $('.material'+pieza.id).change(function(){
+
+                            var color = $(this).find('option:selected').data('value');
+
+                            $('.colorPieza'+pieza.id).val( color );
+
+                        });
+
+                    });
+
                     $("input[type=checkbox]").prop('checked', true);
+
+                    $("#costos").attr('disabled', false);
 
                 }else{
 
@@ -145,6 +161,8 @@ jQuery(document).ready(function(){
                         showConfirmButton: true
 
                     });
+
+                    $("#costos").attr('disabled', true);
 
                 }
 

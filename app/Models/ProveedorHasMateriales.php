@@ -16,4 +16,16 @@ class ProveedorHasMateriales extends Model
         'idProveedor', 'idMaterial'
 
     ];
+
+    public function material(){
+
+        return $this->belongsTo( Material::class, 'idMaterial' );
+
+    }
+
+    public function proveedor(){
+
+        return $this->belongsTo( Proveedor::class, 'idProveedor' );
+        
+    }
 }

@@ -34,7 +34,9 @@ jQuery(document).ready(function(){
                         'precio' : $("#precioEditar").val(),
                         'unidades' : $("#unidadesEditar").val(),
                         'id' : $("#id").val(),
-                        'proveedor' : $("#proveedorEditar").val()
+                        'proveedor' : $("#proveedorEditar").val(),
+                        'hex' : $("#colorEditar").val(),
+                        'color' : $("#nombreColorEditar").val(),
 
                     },
                     dataType: 'json',

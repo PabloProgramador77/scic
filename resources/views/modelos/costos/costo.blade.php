@@ -1,17 +1,20 @@
 <x-adminlte-modal id="modalCosto" title="Costos Base y Neutros" size="xl" theme="secondary" icon="fas fa-socks" static-backdrop scrollable>
-    <div class="container-fluid border-bottom">
-        <p class="text-secondary bg-light p-1 rounded text-center"><b><i class="fas fa-info-circle"></i> Elige los costos que deseas agregar el modelo actual</b></p>
-        <form novalidate>
+    <div class="container-fluid border-bottom row">
+        <div class="row col-lg-12 col-md-12 col-sm-12 p-1 m-1">
+            <p class="text-info bg-light p-2 rounded text-center col-lg-10 col-md-8 col-sm-12 m-1"><b><i class="fas fa-info-circle"></i> Elige los costos que deseas agregar el modelo actual o si es necesario agrega uno nuevo presionando el botón "+ Costo"</b></p>
+            <x-adminlte-button id="nuevoCosto" theme="primary" icon="fas fa-plus-circle" label=" Costo" data-toggle="modal" data-target="#modalNuevoCosto" class="m-1"></x-adminlte-button>
+        </div>
+        <form novalidate class="col-lg-12 col-md-12 col-sm-12">
             <div class="form-group">
                 <x-adminlte-input name="nombreModeloCosto" id="nombreModeloCosto" readonly="true" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
-                            <i class="fas fa-shoe-prints"></i>
+                            <i class="fas fa-shoe-prints">Modelo: </i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
             </div>
-            <div class="form-group container-fluid">
+            <div class="row col-lg-12 col-md-12 col-sm-12">
                 @php
                     $heads = [ '', 'Costo', 'Tipo', 'Total' ];
                 @endphp

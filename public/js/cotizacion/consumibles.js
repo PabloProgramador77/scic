@@ -2,7 +2,7 @@ jQuery.noConflict();
 jQuery(document).ready(function(){
 
     //Mostrando consumibles de modelo elegido
-    $("#consumibles").on('click', function(){
+    $("#agregar").on('click', function(){
 
         var modelo = $("#modelo").val();
 
@@ -100,10 +100,24 @@ jQuery(document).ready(function(){
 
         total += consumibles;
 
-        $("#modalConsumible").css('display', 'none');
-        $(".modal-backdrop").remove();
+        document.getElementById('modalConsumible').style.display = 'none';
+        document.getElementById('modalConsumible').classList.remove('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
 
         $("#total").val( total.toFixed(4) );
+
+        document.getElementById('modalSuela').style.display = 'block';
+        document.getElementById('modalSuela').classList.add('show');
+    });
+
+    $("#cancelarConsumible").on('click', function(){
+
+        document.getElementById('modalConsumible').style.display = 'none';
+        document.getElementById('modalConsumible').classList.remove('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
+
+        document.getElementById('modalCostos').style.display = 'block';
+        document.getElementById('modalCostos').classList.add('show');
 
     });
 

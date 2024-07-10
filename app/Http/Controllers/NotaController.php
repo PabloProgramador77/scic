@@ -380,11 +380,24 @@ class NotaController extends Controller
                                         <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->numero.'</td>
                                         <td style="border: 2px; font-size: 12px;">---</td>';
 
+                                        $ultimo = $cotizacion->numeraciones->last();
+
                                         foreach( $cotizacion->numeraciones as $numeracion ){
 
-                                            $html .= '
-                                            <td style="border: 2px; font-size: 12px;">'.$numeracion->numero.'/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
-                                            ';
+                                            if( $numeracion->is( $ultimo ) ){
+
+                                                $html .= '
+                                                <td style="border: 2px; font-size: 12px;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'">'.$numeracion->numero.'/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                ';
+
+                                            }else{
+
+                                                $html .= '
+                                                <td style="border: 2px; font-size: 12px;">'.$numeracion->numero.'/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                ';
+
+                                            }
+                                            
 
                                         }
 
@@ -418,16 +431,29 @@ class NotaController extends Controller
 
                                 }
 
-                                if( $nota->envio > 0 ){
+                                if( $nota->envio != 'Sin envio' ){
 
-                                    $html .='
-                                    <tr style="background-color: lightgray; padding: 5px;">
-                                        <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Envió:</b></td>
-                                        <td style="font-size: 12px;">$ '.number_format( $nota->envio, 2).'</td>
-                                    </tr>
-                                    ';
+                                    if( $nota->envio == 'Por cobrar' ){
 
-                                    $totalNota += $nota->envio;
+                                        $html .='
+                                        <tr style="background-color: lightgray; padding: 5px;">
+                                            <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Envió:</b></td>
+                                            <td style="font-size: 12px;">POR COBRAR</td>
+                                        </tr>
+                                        ';
+
+                                    }else{
+
+                                        $html .='
+                                        <tr style="background-color: lightgray; padding: 5px;">
+                                            <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>Envió:</b></td>
+                                            <td style="font-size: 12px;">$ '.number_format( $nota->envio, 2).'</td>
+                                        </tr>
+                                        ';
+
+                                        $totalNota += $nota->envio;
+
+                                    }
 
                                 }
                                 
@@ -756,7 +782,7 @@ class NotaController extends Controller
     public function tablaConsumos( $idNota ){
         try {
 
-            $materiales = Material::select('materiales.nombre', 'materiales.precio', 'materiales.unidades', 'piezas.alto', 'piezas.largo', 'piezas.cantidad', 'nota_has_cotizaciones.totalPares')
+            $materiales = Material::select('materiales.id', 'materiales.nombre', 'materiales.precio', 'materiales.unidades', 'materiales.color', 'piezas.alto', 'piezas.largo', 'piezas.cantidad', 'nota_has_cotizaciones.totalPares')
                         ->join('cotizacion_has_piezas', 'materiales.id', '=', 'cotizacion_has_piezas.idMaterial')
                         ->join('nota_has_cotizaciones', 'cotizacion_has_piezas.idCotizacion', '=', 'nota_has_cotizaciones.idCotizacion')
                         ->join('piezas', 'cotizacion_has_piezas.idPieza', '=', 'piezas.id')
@@ -784,9 +810,10 @@ class NotaController extends Controller
                         <table style="width: 100%; height: auto;">
                             <thead style="width: 100%; height: auto;">
                                 <tr style="border: 2px; background-color: lightblue; padding: 5px;">
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Proveedor</b></td>
                                     <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Material</b></td>
                                     <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Precio</b></td>
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Descripción</b></td>
+                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Color</b></td>
                                     <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Mts. Totales</b></td>
                                     <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Monto Aprox.</b></td>
                                 </tr>
@@ -808,12 +835,22 @@ class NotaController extends Controller
                             
                                 }else{
                             
-                                    if ($nombreMaterial != '') { // Asegura que no es la primera iteración
+                                    if ($nombreMaterial != '') {
+                                         // Asegura que no es la primera iteración
                                         $html = '
                                             <tr style="width: 100%; height: auto; padding: 5px;">
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">';
+                                                
+                                                foreach( $material->proveedores as $proveedor){
+
+                                                    $html .= $proveedor->nombre;
+
+                                                }
+
+                                                $html .= '</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%; background-color: '.$descripcionAnterior.'">'.$descripcionAnterior.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
                                             </tr>
@@ -824,7 +861,7 @@ class NotaController extends Controller
                             
                                     $nombreMaterial = $material->nombre;
                                     $precioAnterior = $material->precio; // Guarda el precio actual para usarlo en la siguiente iteración
-                                    $descripcionAnterior = $material->descripcion; // Guarda la descripción actual para usarla en la siguiente iteración
+                                    $descripcionAnterior = $material->color; // Guarda la descripción actual para usarla en la siguiente iteración
                                     $totalMts = (($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares;
                                     $total = ((($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares)*($material->precio);
                             
@@ -833,11 +870,21 @@ class NotaController extends Controller
                             }
                             // Asegúrate de imprimir la última acumulación después del bucle
                             if ($nombreMaterial != '') {
+
                                 $html = '
                                     <tr style="width: 100%; height: auto; padding: 5px;">
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">';
+                                                
+                                                foreach( $material->proveedores as $proveedor){
+
+                                                    $html .= $proveedor->nombre;
+
+                                                }
+
+                                        $html .= '</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%; background-color: '.$descripcionAnterior.'">'.$descripcionAnterior.'</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
                                     </tr>
@@ -883,7 +930,19 @@ class NotaController extends Controller
     public function impuestos( Impuestos $request ){
         try {
             
-            $nota = Nota::where('id', '=', $request->nota)
+            if( $request->envio == 'Envio cotizado' ){
+
+                $nota = Nota::where('id', '=', $request->nota)
+                    ->update([
+
+                        'iva' => $request->iva,
+                        'envio' => $request->monto,
+
+                    ]);
+
+            }else{
+
+                $nota = Nota::where('id', '=', $request->nota)
                     ->update([
 
                         'iva' => $request->iva,
@@ -891,6 +950,8 @@ class NotaController extends Controller
 
                     ]);
 
+            }
+            
             $datos['exito'] = true;
 
         } catch (\Throwable $th) {
@@ -901,5 +962,91 @@ class NotaController extends Controller
         }
 
         return response()->json( $datos );
+    }
+
+    /**
+     * Comprobación de PDF de Consumos
+     * ! Si existe lo descarga, sino lo crea y despues lo descarga
+     */
+    public function consumos( Request $request ){
+
+        try {
+            
+            if( file_exists( public_path('pdf/').'consumos'.$request->id.'.pdf' ) ){
+
+                $datos['exito'] = true;
+
+            }else{
+
+                if( $this->pdfConsumo( $request->id ) ){
+
+                    $datos['exito'] = true;
+
+                }else{
+
+                    $datos['exito'] = false;
+                    $datos['mensaje'] = 'Cálculo de Consumos Interrumpido.';
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+
+    }
+
+    /**
+     * Descarga de Consumos
+     */
+    public function consumo( $idNota ){
+        try {
+
+            if( file_exists( public_path('pdf/').'consumos'.$idNota.'.pdf' ) ){
+
+                return response()->download( public_path('pdf/').'consumos'.$idNota.'.pdf' );
+
+            }else{
+
+                return false;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+
+    }
+
+    /**
+     * Descarga de tabla de consumos
+     * *Recibe el ID de la nota
+     */
+    public function tabla( $idNota ){
+        try {
+            
+            if( file_exists( public_path('pdf/').'tabla'.$idNota.'.pdf' ) ){
+
+                return response()->download( public_path('pdf/').'tabla'.$idNota.'.pdf' );
+
+            }else{
+
+                return false;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
     }
 }

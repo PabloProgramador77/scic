@@ -77,6 +77,10 @@
         @include('modelos.consumible.consumible')
         @include('modelos.suelas.suelas')
         @include('modelos.numeraciones.numeracion')
+        @include('modelos.costos.nuevo')
+        @include('modelos.consumible.nuevo')
+        @include('modelos.suelas.nuevo')
+        @include('modelos.numeraciones.nuevo')
 
     </section>
 
@@ -95,5 +99,9 @@
     <script src="{{ asset('js/modelos/agregarConsumibles.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarSuelas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarNumeraciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/nuevoCosto.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/nuevoConsumible.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/nuevaSuela.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/nuevaNumeracion.js') }}" type="text/javascript"></script>
 
 @stop

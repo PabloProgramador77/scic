@@ -107,6 +107,9 @@ Route::post('/nota/anticipar', [App\Http\Controllers\NotaController::class, 'ant
 Route::post('/nota/cerrar', [App\Http\Controllers\NotaController::class, 'cerrar'])->name('cerrar-nota');
 Route::get('/notas/cliente/{idCliente}', [App\Http\Controllers\NotaController::class, 'cliente'])->name('notas-cliente');
 Route::post('/nota/impuestos', [App\Http\Controllers\NotaController::class, 'impuestos'])->name('impuestos-nota');
+Route::post('/nota/consumos', [App\Http\Controllers\NotaController::class, 'consumos'])->name('consumos-nota');
+Route::get('/nota/consumos/{idNota}', [App\Http\Controllers\NotaController::class, 'consumo'])->name('descargar-consumos');
+Route::get('/notas/tabla/{idNota}', [App\Http\Controllers\NotaController::class, 'tabla'])->name('tabla-consumos');
 
 Route::get('/numeraciones', [App\Http\Controllers\NumeracionController::class, 'index'])->name('numeraciones');
 Route::post('/numeracion/agregar', [App\Http\Controllers\NumeracionController::class, 'store'])->name('agregar-numeracion');

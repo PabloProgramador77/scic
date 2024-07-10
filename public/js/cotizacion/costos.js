@@ -100,10 +100,23 @@ jQuery(document).ready(function(){
 
         total += costos;
 
-        $("#modalCostos").css('display', 'none');
-        $(".modal-backdrop").remove();
+        document.getElementById('modalCostos').style.display = 'none';
+        document.getElementById('modalCostos').classList.remove('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
 
         $("#total").val( total.toFixed(4) );
+
+        document.getElementById('modalConsumible').style.display = 'block';
+        document.getElementById('modalConsumible').classList.add('show');
+
+    });
+
+    //Cerrando modal de COSTOS
+    $("#cancelarCosto").on('click', function(){
+
+        document.getElementById('modalCostos').style.display = 'none';
+        document.getElementById('modalCostos').classList.remove('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
 
     });
 

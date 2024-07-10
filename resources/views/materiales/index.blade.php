@@ -20,7 +20,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Concepto', 'Proveedor', 'Material', 'Precio', 'Ancho de Material', 'Acciones'];
+                $heads = ['Concepto', 'Proveedor', 'Material', 'Color', 'Precio', 'Ancho de Material', 'Acciones'];
             @endphp
 
             <x-adminlte-datatable id="materiales" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
@@ -36,6 +36,12 @@
                                 @endforeach
                             </td>
                             <td>{{ $material->nombre }}</td>
+                            @if( $material->color == '' || $material->color == NULL )
+                                <td>Sin color</td>
+                            @else
+                                <td>{{ $material->color }}<input type="color" class="form-control form-control-color" value="{{ $material->hexColor }}" readonly="true" disabled="true"></td>
+                            @endif
+                            
                             <td>$ {{ $material->precio }}</td>
                             <td>{{ $material->unidades }}</td>
                             <td>

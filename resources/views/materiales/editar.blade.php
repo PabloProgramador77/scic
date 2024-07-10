@@ -12,6 +12,16 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <div class="form-group">
+                    <input type="color" class="form-control form-control-color" placeholder="Color de material" id="colorEditar">
+                    <x-adminlte-input name="nombreColorEditar" id="nombreColorEditar" placeholder="Nombre de color">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text text-secondary">
+                                <i class="fas fa-tag">*</i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+                </div>
                 <x-adminlte-input name="conceptoEditar" id="conceptoEditar" placeholder="Concepto de material">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

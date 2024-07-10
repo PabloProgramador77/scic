@@ -32,8 +32,9 @@ class Impuestos extends FormRequest
         return [
             
             'iva' => 'string|nullable',
-            'envio' => 'numeric|nullable',
+            'envio' => 'string|nullable',
             'nota' => 'required|integer',
+            'monto' => 'string|nullable',
             
         ];
     }

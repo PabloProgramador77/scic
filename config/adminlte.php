@@ -445,6 +445,21 @@ return [
                 ],
             ],
         ],
+        'BootstrapColorpicker' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css',
+                ],
+            ],
+        ],
     ],
 
     /*

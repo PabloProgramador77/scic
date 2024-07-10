@@ -17,6 +17,8 @@ class Material extends Model
         'concepto', 
         'precio', 
         'unidades',
+        'color',
+        'hexColor',
 
     ];
 

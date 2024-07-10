@@ -1,6 +1,21 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
+    $("#envio").change(function(){
+
+        if( $(this).val() === 'Envio cotizado'){
+
+            $("#monto").attr('disabled', false);
+            $("#monto").focus();
+
+        }else{
+
+            $("#monto").attr('disabled', true);
+
+        }
+
+    });
+
     $("#agregarImpuestos").on('click', function(e){
 
         e.preventDefault();
@@ -42,6 +57,7 @@ jQuery(document).ready(function(){
 
                         'iva' : iva,
                         'envio' : $("#envio").val(),
+                        'monto' : $("#monto").val(),
                         'nota' : $("#idNota").val(),
 
                     },

@@ -52,6 +52,8 @@ class MaterialController extends Controller
             $material->concepto = $request->concepto;
             $material->precio = $request->precio;
             $material->unidades = $request->unidades;
+            $material->hexColor = $request->hex;
+            $material->color = $request->color;
             $material->save();
 
             if( $material->id ){
@@ -93,6 +95,8 @@ class MaterialController extends Controller
                 $datos['concepto'] = $material->concepto;
                 $datos['precio'] = $material->precio;
                 $datos['unidades'] = $material->unidades;
+                $datos['color'] = $material->color;
+                $datos['hex'] = $material->hexColor;
                 $datos['id'] = $material->id;
                 
                 foreach($material->proveedores as $proveedor){
@@ -135,7 +139,9 @@ class MaterialController extends Controller
                     'nombre' => $request->nombre,
                     'concepto' => $request->concepto,
                     'precio' => $request->precio,
-                    'unidades' => $request->unidades
+                    'unidades' => $request->unidades,
+                    'color' => $request->color,
+                    'hexColor' => $request->hex,
 
                 ]);
 

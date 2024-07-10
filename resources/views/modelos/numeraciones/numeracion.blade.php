@@ -1,6 +1,9 @@
-<x-adminlte-modal id="modalNumeracion" title="Numeraciones para Modelo" size="md" theme="black" icon="fas fa-hashtag" static-backdrop scrollable>
+<x-adminlte-modal id="modalNumeracion" title="Numeraciones para Modelo" size="lg" theme="black" icon="fas fa-hashtag" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
-        <p class="text-secondary bg-light p-1 rounded text-center"><b><i class="fas fa-info-circle"></i> Elige la numeración que deseas agregar el modelo actual</b></p>
+        <div class="row col-lg-12 col-md-12 col-sm-12 p-1 m-1">
+            <p class="text-info bg-light p-2 rounded text-center col-lg-10 col-md-8 col-sm-12 m-1"><b><i class="fas fa-info-circle"></i> Elige las numeraciones que deseas agregar el modelo actual o si es necesario agrega una nueva presiona el botón "+ Numeración"</b></p>
+            <x-adminlte-button id="nuevoNumeracion" theme="primary" icon="fas fa-plus-circle" label=" Numeración" data-toggle="modal" data-target="#modalNuevoNumeracion" class="m-1"></x-adminlte-button>
+        </div>
         <form novalidate>
             <div class="form-group">
                 <x-adminlte-input name="nombreModeloNumeracion" id="nombreModeloNumeracion" readonly="true" >

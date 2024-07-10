@@ -36,6 +36,8 @@
                                 @if( $nota->estado == 'Pendiente' )
                                     <a href="{{ url('/nota/editar') }}/{{ $nota->id }}/{{ $cliente->id }}" class="btn btn-info editar"><i class="fas fa-edit"></i></a>
                                     <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $nota->id }}" title="Borrar cotización"></x-adminlte-button>
+                                @else
+                                    <x-adminlte-button class="consumos" theme="secondary" icon="fas fa-square-root-alt" data-id="{{ $nota->id }}" title="Cálculo de Consumos"></x-adminlte-button>
                                 @endif
                                 <a href="{{ url('/nota/ver') }}/{{ $nota->id }}/{{ $cliente->id }}" class="btn btn-primary"><i class="fas fa-info-circle"></i></a>
                             </td>
@@ -59,5 +61,6 @@
     <script src="{{ asset('js/notas/borrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/borrarCotizacion.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/calculoConsumo.js') }}" type="text/javascript"></script>
 
 @stop

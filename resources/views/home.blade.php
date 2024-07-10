@@ -3,6 +3,7 @@
 @section('plugins.Sweetalert2', true)
 @section('plugins.Datatables', true)
 @section('plugins.BootstrapSwitch', true)
+@section('plugins.BootstrapColorpicker', true)
 @section('content_header')
     @yield('contenido')
 @stop

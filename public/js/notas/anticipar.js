@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Nota en preventa.',
+                            title: 'Datos de Producción de Nota Listos',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -52,7 +52,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/notas/cliente/'+$("#idCliente").val();
+                                window.location.href = '/notas/tabla/'+nota;
 
                             }
 

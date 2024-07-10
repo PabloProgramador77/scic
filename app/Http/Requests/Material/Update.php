@@ -37,6 +37,8 @@ class Update extends FormRequest
             'precio' => 'required|numeric',
             'unidades' => 'required|numeric',
             'proveedor' => 'required|integer',
+            'color' => 'string|nullable',
+            'hex' => 'string|nullable',
             
         ];
     }

@@ -27,6 +27,8 @@ jQuery(document).ready(function(){
                 $("#conceptoEditar").val( respuesta.concepto );
                 $("#precioEditar").val( respuesta.precio );
                 $("#unidadesEditar").val( respuesta.unidades );
+                $("#colorEditar").val( respuesta.hex );
+                $("#nombreColorEditar").val( respuesta.color );
 
                 $("#proveedorEditar").prepend('<option value="'+respuesta.idProveedor+'">'+respuesta.proveedor+'</option>');
                 $("#proveedorEditar").val(respuesta.idProveedor);

@@ -13,7 +13,13 @@ class Proveedor extends Model
 
     protected $fillable = [
 
-        'nombre', 'telefono', 'direccion'
+        'proveedor', 'telefono', 'direccion'
 
     ];
+
+    public function materiales(){
+
+        return $this->belongsToMany( Material::class, 'proveedor_has_materiales', 'idProveedor', 'idMaterial' );
+        
+    }
 }

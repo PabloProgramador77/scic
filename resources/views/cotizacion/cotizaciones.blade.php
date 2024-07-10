@@ -47,11 +47,13 @@
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td>{{ $cotizacion->estado }}</td>
                             <td>
-                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="secondary" data-id="{{ $cotizacion->id }}" title="Editar cotización"></x-adminlte-button>
-                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>
-                                @if( $cotizacion->estado == 'Pendiente')
+                                @if( $cotizacion->estado == "Nota" )
+                                    <a href="" class="btn btn-secondary" role="button" title="Ver nota" ><i class="fas fa-info-circle"></i></a>
+                                @else
+                                    <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>
                                     <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
                                 @endif
+                                
                             </td>
                         </tr>
                         
