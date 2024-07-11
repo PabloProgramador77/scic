@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>SCIC</b> Aydee Footwear',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'media/logo-wbg.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,11 +86,11 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'Auth Logo',
+            'path' => 'media/logo-wbg.png',
+            'alt' => 'Logo Aydee Footwear',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 100,
+            'height' => 100,
         ],
     ],
 
@@ -109,11 +109,11 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'path' => 'media/logo-wbg.png',
+            'alt' => 'Logo Aydee Footwear',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 250,
+            'height' => 250,
         ],
     ],
 
@@ -293,30 +293,44 @@ return [
         [
             'text' => 'Usuarios',
             'url' => 'usuarios',
+            'icon' => 'fas fa-users',
+            'icon_color' => 'warning',
         ],
         [
             'text' => 'Materiales',
             'url' => 'materiales',
+            'icon' => 'fas fa-boxes',
+            'icon_color' => 'warning',
         ],
         [
             'text' => 'Consumibles',
             'url' => 'consumibles',
+            'icon' => 'fas fa-box',
+            'icon_color' => 'warning',
         ],
         [
             'text' => 'Costos',
             'url' => 'costos',
+            'icon' => 'fas fa-file-invoice-dollar',
+            'icon_color' => 'warning',
         ],
         [
             'text' => 'Suelas',
             'url' => 'suelas',
+            'icon' => 'fas fa-shoe-prints',
+            'icon_color' => 'warning',
         ],
         [
             'text' => 'Modelos',
             'url' =>'modelos', 
+            'icon' => 'fas fa-socks',
+            'icon_color' => 'warning',
         ],
         [
             'text' => 'Numeraciones',
             'url' => 'numeraciones',
+            'icon' => 'fas fa-hashtag',
+            'icon_color' => 'warning',
         ],
     ],
 

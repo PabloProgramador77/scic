@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalConsumible" title="Consumibles de Modelo" size="xl" theme="secondary" icon="fas fa-socks" static-backdrop scrollable>
+<x-adminlte-modal id="modalConsumible" title="Consumibles de Modelo" size="xl" theme="secondary" icon="fas fa-box" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary bg-light p-1 rounded text-center"><b><i class="fas fa-info-circle"></i> Elige los consumibles a agregar a la cotización</b></p>
         <form novalidate>

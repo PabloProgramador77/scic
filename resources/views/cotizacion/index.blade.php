@@ -6,14 +6,14 @@
         <div class="container-fluid row border-bottom">
             
             <div class="col-lg-5">
-                <h1 class="fs-3 fw-semibold "><i class="fas fa-users"></i> Cliente de Cotizaciones</h1>
-                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-portrait"></i> Clientes</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-1 rounded shadow" title="Inicio"><i class="fas fa-home"></i></a>
             </div>
             <div class="col-lg-3 my-2">
-                <x-adminlte-button name="cliente" id="cliente" theme="primary" icon="fas fa-plus-circle" label=" Cliente" data-toggle="modal" data-target="#modalNuevo"></x-adminlte-button>
+                <x-adminlte-button name="cliente" id="cliente" theme="primary" icon="fas fa-plus-circle" title=" Nuevo Cliente" data-toggle="modal" data-target="#modalNuevo" class="shadow"></x-adminlte-button>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <p class="fs-5 fw-semibold text-center bg-warning p-1 rounded">
@@ -39,10 +39,10 @@
                             <td>{{ $cliente->email }}</td>
                             <td>{{ $cliente->domicilio }}</td>
                             <td>
-                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="secondary" data-id="{{ $cliente->id }}" data-toggle="modal" data-target="#modalEditar" title="Editar cliente"></x-adminlte-button>
+                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-id="{{ $cliente->id }}" data-toggle="modal" data-target="#modalEditar" title="Editar cliente"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cliente->id }}" data-value="{{ $cliente->nombre }}" title="Borrar cotización"></x-adminlte-button>
-                                <a href="{{ url('/cotizaciones/cliente') }}/{{ $cliente->id}}" class="btn btn-info" title="Cotizaciones"><i class="fas fa-dollar-sign"></i></a>
-                                <a href="{{ url('/notas/cliente') }}/{{ $cliente->id }}" class="btn btn-warning" title="Notas"><i class="fas fa-file"></i></a>
+                                <a href="{{ url('/cotizaciones/cliente') }}/{{ $cliente->id}}" class="btn btn-secondary" title="Cotizaciones de cliente"><i class="fas fa-dollar-sign"></i></a>
+                                <a href="{{ url('/notas/cliente') }}/{{ $cliente->id }}" class="btn btn-light" title="Notas de cliente"><i class="fas fa-file"></i></a>
                             </td>
                         </tr>
                         

@@ -6,19 +6,19 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-8">
-                <h1 class="fs-3 fw-semibold"><i class="fas fa-dollar-sign"></i> Nota de {{ $cliente->nombre }}</h1>
-                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Nota de {{ $cliente->nombre }}</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
             </div>
             <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded"><i class="fas fa-home"></i> Inicio</a>
-                <a href="{{ url('/notas/cliente') }}/{{ $cliente->id }}" class="btn mx-1 rounded text-white" style="background-color: teal;"><i class="fas fa-file-invoice-dollar"></i> Notas</a>
-                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn mx-1 rounded" style="background-color: lime;"><i class="fas fa-dollar-sign"></i> Cotizador</a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
+                <a href="{{ url('/notas/cliente') }}/{{ $cliente->id }}" class="btn btn-secondary rounded text-white" title="Notas"><i class="fas fa-file"></i></a>
+                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-secondary rounded" title="Cotizador"><i class="fas fa-dollar-sign"></i></a>
             </div>
         </div>
 
         <div class="container-fluid row p-1">
-            <p class="col-lg-12 col-md-12 text-center bg-warning p-1 rounded fw-semibold"> 
+            <p class="col-lg-12 col-md-12 text-center bg-info p-1 rounded fs-6 fw-semibold"> 
                 A continuación los datos generales de la nota, no es posible editar los datos. Para descargar la nota presiona el botón con el icono <i class="fas fa-download"></i> y para pasar a producción pulsa el botón con el icono <i class="fas fa-hand-holding-usd"></i>
             </p>
             <x-adminlte-input class="col-lg-2" name="folio" id="folio" readonly="true" value="{{ $nota->id }}">
@@ -43,12 +43,12 @@
                 </x-slot>
             </x-adminlte-input>
             <div class="col-lg-2 col-md-3 col-sm-4">
-                <x-adminlte-button theme="primary" icon="fas fa-download" id="imprimirNota" data-id="{{ $nota->id }}"></x-adminlte-button>
+                <x-adminlte-button theme="primary" icon="fas fa-download" id="imprimirNota" data-id="{{ $nota->id }}" title="Descargar nota"></x-adminlte-button>
                 @if( $nota->estado != 'Pagada' )
                     @if( $nota->estado == 'Pendiente' )
-                        <x-adminlte-button theme="success" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}"></x-adminlte-button>
+                        <x-adminlte-button theme="secondayr" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}" title="Pasar a producción"></x-adminlte-button>
                     @else
-                        <x-adminlte-button theme="warning" icon="fas fa-money-bill-alt" id="cerrarNota" data-id="{{ $nota->id }}"></x-adminlte-button>
+                        <x-adminlte-button theme="danger" icon="fas fa-ban" id="cerrarNota" data-id="{{ $nota->id }}" title="Cerrar nota"></x-adminlte-button>
                     @endif
                 @endif
             

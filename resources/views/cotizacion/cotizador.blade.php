@@ -10,19 +10,19 @@
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
             </div>
             <div class="col-lg-5 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded shadow"><i class="fas fa-home"></i> Inicio</a>
-                <a href="{{ url('/cotizaciones') }}" class="btn p-2 mx-1 rounded text-white shadow" style="background-color: teal;"><i class="fas fa-users"></i> Clientes</a>
-                <a href="{{ url('/cotizaciones/cliente') }}/{{ $cliente->id }}" class="btn p-2 mx-1 rounded text-white shadow" style="background-color: green;"><i class="fas fa-users"></i> Cotizaciones</a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded shadow" title="Inicio"><i class="fas fa-home"></i></a>
+                <a href="{{ url('/cotizaciones') }}" class="btn btn-secondary p-2 rounded text-white shadow" title="Clientes"><i class="fas fa-portrait"></i></a>
+                <a href="{{ url('/cotizaciones/cliente') }}/{{ $cliente->id }}" class="btn btn-secondary p-2 rounded text-white shadow" title="Cotizaciones"><i class="fas fa-file"></i></a>
             </div>
             <div class="col-lg-12 my-2">
-                <p class="p-1 text-center bg-warning"><i class="fas fa-info-circle"></i> Elige un modelo de la lista, posterior selecciona los materiales para pieza, continuar con los costos, consumibles y suelas.</p>
+                <p class="fs-6 fw-semibold p-1 text-center bg-info"><i class="fas fa-info-circle"></i> Elige un modelo de la lista, posterior selecciona los materiales para pieza, continuar con los costos, consumibles y suelas.</p>
             </div>
             <div class="container-fluid row">
                 <div class="col-lg-8 col-md-6 col-sm-12 d-flex align-items-center">
                     <x-adminlte-select2 class="flex-grow-1" id="modelo" name="modelo" label-class="info">
                         <x-slot name="prependSlot">
                             <div class="input-group-text text-secondary">
-                                <i class="fas fa-shoe-prints"></i>
+                                <i class="fas fa-socks"></i>
                             </div>
                         </x-slot>
                         @foreach($modelos as $modelo)

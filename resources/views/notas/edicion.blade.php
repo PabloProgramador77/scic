@@ -6,24 +6,22 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-8">
-                <h1 class="fs-3 fw-semibold"><i class="fas fa-dollar-sign"></i> Nota de {{ $cliente->nombre }}</h1>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Nota de {{ $cliente->nombre }}</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
                 <input type="hidden" name="idNota" id="idNota" value="{{ $nota->id }}">
             </div>
             <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded"><i class="fas fa-home"></i> Inicio</a>
-                <a href="{{ url('/notas/cliente') }}/{{ $cliente->id }}" class="btn mx-1 rounded text-white" style="background-color: teal;"><i class="fas fa-file-invoice-dollar"></i> Notas</a>
-                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn mx-1 rounded" style="background-color: lime;"><i class="fas fa-dollar-sign"></i> Cotizador</a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
             </div>
         </div>
 
         <div class="container-fluid row p-1">
-            <p class="col-lg-12 col-md-12 text-center bg-warning p-1 rounded fw-semibold"><i class="fas fa-info-circle"></i> A continuación, edita las cantidades de las numeraciones de la nota como consideres necesario, y termina pulsando el botón con el icono <i class="fas fa-save"></i></p>
+            <p class="col-lg-12 col-md-12 text-center bg-info p-1 rounded fw-semibold"><i class="fas fa-info-circle"></i> A continuación, edita las cantidades de las numeraciones de la nota como consideres necesario, y termina pulsando el botón con el icono <i class="fas fa-save"></i></p>
             <x-adminlte-input class="col-lg-2" name="folio" id="folio" readonly="true" value="{{ $nota->id }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
-                            <i class="fas fa-file-invoice-dollar"></i> Folio
+                            <i class="fas fa-sticky-note"></i> Folio
                         </div>
                     </x-slot>
             </x-adminlte-input>
@@ -42,10 +40,10 @@
                 </x-slot>
             </x-adminlte-input>
             <div class="col-lg-1">
-                <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum"></x-adminlte-button>
+                <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum" title="Terminar nota"></x-adminlte-button>
             </div>
             <div class="col-lg-2">
-                <x-adminlte-button theme="info" icon="fas fa-percentage" id="impuestos" label=" Costo(s) extra" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" icon="fas fa-truck-loading" id="impuestos" title=" Costo(s) extra y envio" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
             </div>
             
         </div>

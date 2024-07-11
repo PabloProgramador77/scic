@@ -6,29 +6,29 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-8">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-dollar-sign"></i> Numeración de Nota</h1>
-                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Numeración de Nota</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
                 <input type="hidden" name="idNota" id="idNota" value="{{ $nota->id }}">
             </div>
             <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-1 rounded" title="Inicio"><i class="fas fa-home"></i></a>
             </div>
         </div>
 
         <div class="container-fluid row p-1">
-            <p class="col-lg-12 col-md-12 text-center bg-warning p-1 rounded fw-semibold"><i class="fas fa-info-circle"></i> A continuación, introduce la cantidad de pares de cada numeración y termina pulsando el bóton con el icono <i class="fas fa-save"></i></p>
+            <p class="col-lg-12 col-md-12 text-center bg-info p-1 rounded fw-semibold"><i class="fas fa-info-circle"></i> A continuación, introduce la cantidad de pares de cada numeración y termina pulsando el bóton con el icono <i class="fas fa-save"></i></p>
             <x-adminlte-input class="col-lg-2" name="folio" id="folio" readonly="true" value="{{ $nota->id }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
-                            <i class="fas fa-file-invoice-dollar"></i> Folio
+                            <i class="fas fa-sticky-note"></i> Folio
                         </div>
                     </x-slot>
             </x-adminlte-input>
             <x-adminlte-input class="col-lg-7" name="cliente" id="cliente" readonly="true" value="{{ $nota->cliente->nombre }}">
                 <x-slot name="prependSlot">
                     <div class="input-group-text text-info">
-                        <i class="fas fa-user"></i> Cliente
+                        <i class="fas fa-portrait"></i> Cliente
                     </div>
                 </x-slot>
             </x-adminlte-input>
@@ -40,10 +40,10 @@
                 </x-slot>
             </x-adminlte-input>
             <div class="col-lg-1">
-                <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum"></x-adminlte-button>
+                <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum" title="Agregar numeración"></x-adminlte-button>
             </div>
             <div class="col-lg-2">
-                <x-adminlte-button theme="info" icon="fas fa-percentage" id="impuestos" label=" Costo(s) extra" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" icon="fas fa-truck-loading" id="impuestos" title=" Costo(s) extra y envio" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
             </div>
             
         </div>

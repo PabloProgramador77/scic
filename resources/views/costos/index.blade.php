@@ -6,14 +6,14 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-file-invoice-dollar"></i> Costos</h1>
-                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-file-invoice-dollar"></i> Costos</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-1 rounded" title="Inicio"><i class="fas fa-home"></i></a>
             </div>
             <div class="col-lg-1 my-2">
-                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus"></x-adminlte-button>
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nuevo costo"></x-adminlte-button>
             </div>
         </div>
 
@@ -32,8 +32,8 @@
                             <td>{{ $costo->tipo }}</td>
                             <td>$ {{ $costo->total }} MXN</td>
                             <td>
-                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $costo->id }}"></x-adminlte-button>
-                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $costo->id }}"></x-adminlte-button>
+                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $costo->id }}" title="Editar costo"></x-adminlte-button>
+                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $costo->id }}" title="Borrar costo"></x-adminlte-button>
                             </td>
                         </tr>
                         

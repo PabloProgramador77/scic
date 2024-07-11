@@ -6,27 +6,27 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-5">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-cogs"></i> Configuración de Modelo</h1>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-cog"></i> Configuración de Modelo</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            <div class="col-lg-4 my-2">
+            <div class="col-lg-3 my-2">
                 <x-adminlte-input class="col-md-10 col-lg-10" name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
-                            <i class="fas fa-shoe-prints"></i>
+                            <i class="fas fa-socks"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
                 
                 <input type="hidden" name="idModelo" id="idModelo" value="{{ $modelo->id }}">
             </div>
-            <div class="col-lg-3 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-danger px-2 rounded"><i class="fas fa-home"></i></a>
-                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks"></x-adminlte-button>
-                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos"></x-adminlte-button>
-                <x-adminlte-button theme="warning" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-dollar-sign" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="consumibles"></x-adminlte-button>
-                <x-adminlte-button theme="info" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="suelas"></x-adminlte-button>
-                <x-adminlte-button theme="dark" data-toggle="modal" data-target="#modalNumeracion" icon="fas fa-hashtag" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="numeraciones"></x-adminlte-button>
+            <div class="col-lg-4 my-2">
+                <a href="{{ url('/home') }}" class="btn btn-warning px-2 rounded mx-5"><i class="fas fa-home" title="Inicio"></i></a>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks" title="Agregar pieza"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-file-invoice-dollar" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos" title="Agregar costos"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-box" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="consumibles" title="Agregar consumibles"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="suelas" title="Agregar suelas"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalNumeracion" icon="fas fa-hashtag" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="numeraciones" title="Agregar numeración"></x-adminlte-button>
             </div>
         </div>
 
@@ -52,8 +52,8 @@
                             @endif
                             
                             <td>
-                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pieza->id }}"></x-adminlte-button>
-                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $pieza->id }}"></x-adminlte-button>
+                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pieza->id }}" title="Editar pieza"></x-adminlte-button>
+                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $pieza->id }}" title="Borrar pieza"></x-adminlte-button>
                             </td>
                         </tr>
 

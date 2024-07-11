@@ -6,14 +6,14 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-hashtag"></i> Numeraciones</h1>
-                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-hashtag"></i> Numeraciones</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-info p-2 mx-1 rounded"><i class="fas fa-home"></i></a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-1 rounded" title="Inicio"><i class="fas fa-home"></i></a>
             </div>
             <div class="col-lg-1 my-2">
-                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus"></x-adminlte-button>
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nueva numeración"></x-adminlte-button>
             </div>
         </div>
 
@@ -31,8 +31,8 @@
                             <td>{{ $numeracion->id }}</td>
                             <td>{{ $numeracion->numero }}</td>
                             <td>
-                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $numeracion->id }}"></x-adminlte-button>
-                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $numeracion->id }}" data-value="{{ $numeracion->numero }}"></x-adminlte-button>
+                                <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $numeracion->id }}" title="Editar numeración"></x-adminlte-button>
+                                <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $numeracion->id }}" data-value="{{ $numeracion->numero }}" title="Borrar numeración"></x-adminlte-button>
                             </td>
                         </tr>
                         

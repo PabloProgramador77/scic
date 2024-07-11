@@ -5,18 +5,18 @@
 
         <div class="container-fluid row border-bottom">
             
-            <div class="col-lg-7">
-                <h1 class="fs-3 fw-semibold text-primary"><i class="fas fa-file"></i> Cotizaciones de {{ $cliente->nombre }}</h1>
-                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
+            <div class="col-lg-6">
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Cotizaciones de {{ $cliente->nombre }}</h1>
+                <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
             </div>
             <div class="col-lg-3 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-success p-2 mx-1 rounded"><i class="fas fa-home"></i> Inicio</a>
-                <a href="{{ url('/cotizaciones') }}" class="btn p-2 mx-1 rounded text-white" style="background-color: teal;"><i class="fas fa-users"></i> Clientes</a>
+                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
+                <a href="{{ url('/cotizaciones') }}" class="btn btn-secondary p-2 rounded" title="Clientes"><i class="fas fa-portrait"></i></a>
             </div>
-            <div class="col-lg-2 my-2">
-                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-primary p-2 mx-1 rounded"><i class="fas fa-plus-circle"></i> <b>Cotización</b></a>
-                <x-adminlte-button class="p-2" id="nota" theme="primary" label=" Nota" icon="fas fa-plus-circle"></x-adminlte-button>
+            <div class="col-lg-3 my-2">
+                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-primary p-2 mx-1 rounded" title="Nueva cotización"><i class="fas fa-plus-circle"></i> <b>Cotización</b></a>
+                <x-adminlte-button class="p-2" id="nota" theme="primary" label=" Nota" icon="fas fa-plus-circle" title="Nueva nota"></x-adminlte-button>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <p class="fs-5 fw-semibold text-center bg-warning p-1 rounded">
@@ -48,10 +48,11 @@
                             <td>{{ $cotizacion->estado }}</td>
                             <td>
                                 @if( $cotizacion->estado == "Nota" )
-                                    <a href="" class="btn btn-secondary" role="button" title="Ver nota" ><i class="fas fa-info-circle"></i></a>
+                                    <!--<a href="" class="btn btn-secondary" role="button" title="Ver nota"><i class="fas fa-info-circle"></i></a>-->
+                                    <span class="p-2 text-secondary">Agregada a nota</span>
                                 @else
                                     <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>
-                                    <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
+                                    <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota previa" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
                                 @endif
                                 
                             </td>
