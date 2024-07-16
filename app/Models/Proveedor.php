@@ -13,7 +13,7 @@ class Proveedor extends Model
 
     protected $fillable = [
 
-        'proveedor', 'telefono', 'direccion'
+        'nombre', 'telefono', 'direccion'
 
     ];
 
