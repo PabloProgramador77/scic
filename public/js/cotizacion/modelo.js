@@ -79,8 +79,8 @@ jQuery(document).ready(function(){
                         $('.material'+pieza.id).on('change', function(){
 
                             var valoresMaterial = $(this).val().split(',');
-                            var precioMaterial = valoresMaterial[0]
-                            var unidades = valoresMaterial[1];
+                            var precioMaterial = parseFloat( valoresMaterial[0] );
+                            var unidades = parseFloat( valoresMaterial[1] );
 
                             var MtsXPar = ((pieza.largo * pieza.alto)*(pieza.cantidad)/(unidades*100));
                             var costo = calcularCosto( precioMaterial, MtsXPar );
@@ -93,7 +93,13 @@ jQuery(document).ready(function(){
 
                             $('.bg-info').each(function(){
 
-                                total += parseFloat( $(this).text() );
+                                var valor = parseFloat( $(this).text() );
+
+                                if( !isNaN( valor ) ){
+                                    
+                                    total += valor;
+
+                                }
 
                             });
 
