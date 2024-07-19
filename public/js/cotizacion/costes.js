@@ -2,14 +2,14 @@ jQuery.noConflict();
 jQuery(document).ready(function(){
 
     //Mostrando costos de modelo elegido
-    $("#costos").on('click', function(){
+    $("#agregar").on('click', function(){
 
         var modelo = $("#modelo").val();
 
         $.ajax({
 
             type: 'POST',
-            url: '/modelo/costos/buscar',
+            url: '/modelo/costes/buscar',
             data:{
 
                 'modelo' : modelo,
@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
                                     '<tr>' +
                                         '<td></td>'+
                                         '<td><b>Costo</b></td>'+
-                                        '<td><b>Tipo</b></td>'+
+                                        '<td><b>Descripción</b></td>'+
                                         '<td><b>Total</b></td>'+
                                     '</tr>'+
                                 '</thead>';
@@ -40,17 +40,17 @@ jQuery(document).ready(function(){
                     respuesta.costos.forEach(function(costo){
 
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" value="' + costo.total + '" data-id="' + costo.id + '"></td>' +
+                                    '<td><input type="checkbox" checked="true" name="coston" id="coston' + costo.id + '" class="form-control coston' + costo.id + '" value="' + costo.monto + '" data-id="' + costo.id + '"></td>' +
                                     '<td>' + costo.nombre + '</td>' +
                                     '<td>' + costo.descripcion + '</td>' +
-                                    '<td>$ ' + costo.total + '</td>' +
+                                    '<td>$ ' + costo.monto + '</td>' +
                                 '</tr>';
 
                     });
 
-                    $("#contenedorCostos").empty().append( html );
+                    $("#contenedorCostes").empty().append( html );
 
-                    $("#agregar").attr('disabled', false);
+                    $("#agregarCoste").attr('disabled', false);
 
                 }
 
@@ -67,7 +67,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        $("#modalCostos").css('display', 'none');
+                        $("#modalCostes").css('display', 'none');
                         $(".modal-backdrop").remove();
 
                     }
@@ -81,44 +81,47 @@ jQuery(document).ready(function(){
     });
 
     //Agregando costos al precio unitario
-    $("#agregar").on('click', function(e){
+    $("#agregarCoste").on('click', function(e){
 
         e.preventDefault();
 
-        var costos = 0;
+        var costes = 0;
         var total = parseFloat( $("#total").val() );
 
-        $("input[type=checkbox][name=costo]").each(function(){
+        $("input[type=checkbox][name=coston]").each(function(){
 
             if( $(this).is(':checked') ){
 
-                costos += parseFloat( $(this).val() );
+                costes += parseFloat( $(this).val() );
 
             }
 
         });
 
-        total += costos;
+        total += costes;
 
         console.log( total );
 
-        document.getElementById('modalCostos').style.display = 'none';
-        document.getElementById('modalCostos').classList.remove('show');
+        document.getElementById('modalCostes').style.display = 'none';
+        document.getElementById('modalCostes').classList.remove('show');
         document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
 
         $("#total").val( total.toFixed(4) );
 
-        document.getElementById('modalCostes').style.display = 'block';
-        document.getElementById('modalCostes').classList.add('show');
+        document.getElementById('modalConsumible').style.display = 'block';
+        document.getElementById('modalConsumible').classList.add('show');
 
     });
 
     //Cerrando modal de COSTOS
-    $("#cancelarCosto").on('click', function(){
+    $("#cancelarCoste").on('click', function(){
 
-        document.getElementById('modalCostos').style.display = 'none';
-        document.getElementById('modalCostos').classList.remove('show');
+        document.getElementById('modalCostes').style.display = 'none';
+        document.getElementById('modalCostes').classList.remove('show');
         document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
+
+        document.getElementById('modalCostos').style.display = 'block';
+        document.getElementById('modalCostos').classList.add('show');
 
     });
 

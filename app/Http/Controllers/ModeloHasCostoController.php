@@ -95,7 +95,7 @@ class ModeloHasCostoController extends Controller
     {
         try {
             
-            $costos = Costo::select('costos.id', 'costos.nombre', 'costos.tipo', 'costos.total')
+            $costos = Costo::select('costos.id', 'costos.nombre', 'costos.total')
                     ->join('modelo_has_costos', 'costos.id', '=', 'modelo_has_costos.idCosto')
                     ->where('modelo_has_costos.idModelo', '=', $request->modelo)
                     ->get();

@@ -69,6 +69,7 @@
     </section>
 
     @include('cotizacion.costos')
+    @include('cotizacion.costes')
     @include('cotizacion.consumible')
     @include('cotizacion.suelas')
 
@@ -76,6 +77,7 @@
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/modelo.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/costos.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/costes.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/consumibles.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/suelas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/agregar.js') }}" type="text/javascript"></script>

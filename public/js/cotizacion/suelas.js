@@ -100,6 +100,8 @@ jQuery(document).ready(function(){
 
         total += suelas;
 
+        console.log( total );
+
         document.getElementById('modalSuela').style.display = 'none';
         document.getElementById('modalSuela').classList.remove('show');
         document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
@@ -109,6 +111,7 @@ jQuery(document).ready(function(){
         var piezas = new Array();
         var materiales = new Array();
         var costos = new Array();
+        var costes = new Array();
         var consumibles = new Array();
         var suelas = new Array();
 
@@ -125,6 +128,12 @@ jQuery(document).ready(function(){
         $("input[name=costo]:checked").each(function(){
 
             costos.push( $(this).attr('data-id') );
+
+        });
+
+        $("input[name=coston]:checked").each(function(){
+
+            costes.push( $(this).attr('data-id') );
 
         });
 
@@ -170,6 +179,7 @@ jQuery(document).ready(function(){
                         'piezas' : piezas,
                         'materiales' : materiales,
                         'costos' : costos,
+                        'costes' : costes,
                         'consumibles' : consumibles,
                         'suelas' : suelas,
 

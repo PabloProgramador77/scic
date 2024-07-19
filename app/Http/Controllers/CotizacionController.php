@@ -15,6 +15,7 @@ use App\Http\Requests\Cotizacion\Create;
 use App\Http\Requests\Cotizacion\Delete;
 use App\Http\Controllers\CotizacionHasPiezasController;
 use App\Http\Controllers\CotizacionHasCostosController;
+use App\Http\Controllers\CotizacionHasCosteController;
 use App\Http\Controllers\CotizacionHasConsumibleController;
 use App\Http\Controllers\CotizacionHasSuelaController;
 use App\Http\Controllers\ClienteController;
@@ -85,34 +86,45 @@ class CotizacionController extends Controller
 
                 if( $cotizacionHasCostosController->store( $request, $idCotizacion ) ){
 
-                    $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
+                    $cotizacionHasCostesController = new CotizacionHasCosteController();
 
-                    if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
+                    if( $cotizacionHasCostesController->store( $request, $idCotizacion ) ){
 
-                        $cotizacionHasSuelaController = new CotizacionHasSuelaController();
+                        $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
 
-                        if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
+                        if( $cotizacionHasConsumibleController->store( $request, $idCotizacion ) ){
 
-                            $datos['exito'] = true;
-
+                            $cotizacionHasSuelaController = new CotizacionHasSuelaController();
+    
+                            if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
+    
+                                $datos['exito'] = true;
+    
+                            }else{
+    
+                                $datos['exito'] = false;
+                                $datos['mensaje'] = 'Suelas no registradas';
+    
+                            }
+    
                         }else{
-
+    
                             $datos['exito'] = false;
-                            $datos['mensaje'] = 'Suelas no registradas';
-
+                            $datos['mensaje'] = 'Consumibles no registrados';
+    
                         }
 
                     }else{
 
                         $datos['exito'] = false;
-                        $datos['mensaje'] = 'Consumibles no registrados';
+                        $datos['mensaje'] = 'Costos neutros no registrados';
 
                     }
 
                 }else{
 
                     $datos['exito'] = false;
-                    $datos['mensaje'] = 'Costos no registrados';
+                    $datos['mensaje'] = 'Costos base no registrados';
 
                 }
 

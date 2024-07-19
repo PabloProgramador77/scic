@@ -2,7 +2,7 @@ jQuery.noConflict();
 jQuery(document).ready(function(){
 
     //Mostrando consumibles de modelo elegido
-    $("#agregar").on('click', function(){
+    $("#agregarCoste").on('click', function(){
 
         var modelo = $("#modelo").val();
 
@@ -100,6 +100,8 @@ jQuery(document).ready(function(){
 
         total += consumibles;
 
+        console.log( total );
+
         document.getElementById('modalConsumible').style.display = 'none';
         document.getElementById('modalConsumible').classList.remove('show');
         document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
@@ -116,8 +118,8 @@ jQuery(document).ready(function(){
         document.getElementById('modalConsumible').classList.remove('show');
         document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
 
-        document.getElementById('modalCostos').style.display = 'block';
-        document.getElementById('modalCostos').classList.add('show');
+        document.getElementById('modalCostes').style.display = 'block';
+        document.getElementById('modalCostes').classList.add('show');
 
     });
 

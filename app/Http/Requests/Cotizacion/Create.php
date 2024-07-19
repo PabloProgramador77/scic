@@ -44,6 +44,8 @@ class Create extends FormRequest
             'consumibles.*' => 'integer',
             'suelas' => 'required|array',
             'suelas.*' => 'integer',
+            'costes' => 'required|array',
+            'costes.*' => 'integer',
             
         ];
     }
