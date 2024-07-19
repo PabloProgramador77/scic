@@ -21,7 +21,7 @@ class Modelo extends Model
 
     public function numeraciones(){
 
-        return $this->belongsToMany( Numeracion::class, 'modelo_has_numeraciones', 'idModelo', 'idNumeracion' );
+        return $this->belongsToMany( Numeracion::class, 'modelo_has_numeraciones', 'idModelo', 'idNumeracion' )->orderBy('numero', 'asc');
         
     }
 
