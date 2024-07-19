@@ -31,6 +31,12 @@ class Modelo extends Model
 
     }
 
+    public function costes(){
+
+        return $this->belongsToMany( Coste::class, 'modelo_has_costes', 'idModelo', 'idCoste' );
+        
+    }
+
     public function suelas(){
 
         return $this->belongsToMany( Suela::class, 'modelo_has_suelas', 'idModelo', 'idSuela' );

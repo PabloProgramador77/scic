@@ -77,6 +77,9 @@ Route::post('modelo/suelas/agregar', [App\Http\Controllers\ModeloHasSuelaControl
 Route::post('modelo/suelas/buscar', [App\Http\Controllers\ModeloHasSuelaController::class, 'show'])->name('buscar-suelas-modelo');
 Route::post('modelo/numeraciones', [App\Http\Controllers\ModeloHasNumeracionesController::class, 'index'])->name('modelo-numeraciones');
 Route::post('modelo/numeraciones/agregar', [App\Http\Controllers\ModeloHasNumeracionesController::class, 'store'])->name('agregar-numeraciones-modelo');
+Route::post('modelo/costes', [App\Http\Controllers\ModeloHasCosteController::class, 'index'])->name('modelo-costes');
+Route::post('modelo/costes/agregar', [App\Http\Controllers\ModeloHasCosteController::class, 'store'])->name('agregar-costes');
+Route::post('modelo/costes/buscar', [App\Http\Controllers\ModeloHasCosteController::class, 'show'])->name('buscar-costes-modelo');
 
 Route::get('cotizaciones', [App\Http\Controllers\CotizacionController::class, 'index'])->name('cotizaciones');
 Route::get('cotizador/cliente/{idCliente}', [App\Http\Controllers\CotizacionController::class, 'create'])->name('cotizador');

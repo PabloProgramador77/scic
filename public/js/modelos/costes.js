@@ -1,17 +1,17 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $('.costos').on('click', function(){
+    $('.costes').on('click', function(){
 
         var modelo = $(this).attr('data-value');
         var id = $(this).attr('data-id');
 
-        $("#nombreModeloCosto").val( modelo );
+        $("#nombreModeloCoste").val( modelo );
 
         $.ajax({
 
             type: 'POST',
-            url: '/modelo/costos',
+            url: '/modelo/costes',
             data:{
 
                 'id' : id,
@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
 
                     delete respuesta.exito;
 
-                    $("#costos input").remove();
+                    $("#costes input").remove();
 
                     respuesta.costos.forEach(function(costo){
 
@@ -54,15 +54,15 @@ jQuery(document).ready(function(){
                         });
                         
                         html += '<tr>' +
-                                    '<td><input type="checkbox" ' + (checked ? 'checked="true"' : '') + ' name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" data-id="' + costo.id + '"></td>' +
+                                    '<td><input type="checkbox" ' + (checked ? 'checked="true"' : '') + ' name="coston" id="coston' + costo.id + '" class="form-control coston' + costo.id + '" data-id="' + costo.id + '"></td>' +
                                     '<td>' + costo.nombre + '</td>' +
                                     '<td>' + costo.descripcion + '</td>' +
-                                    '<td>$ ' + costo.total + '</td>' +
+                                    '<td>$ ' + costo.monto + '</td>' +
                                 '</tr>';
 
                     });
 
-                    $("#contenedorCostos").empty().append( html );
+                    $("#contenedorCostes").empty().append( html );
 
                 }else{
 
@@ -71,22 +71,22 @@ jQuery(document).ready(function(){
                         respuesta.costos.forEach( function( costo ){
 
                             html += '<tr>' +
-                                        '<td><input type="checkbox" checked="true" name="costo" id="costo' + costo.id + '" class="form-control costo' + costo.id + '" data-id="' + costo.id + '"></td>' +
+                                        '<td><input type="checkbox" checked="true" name="coston" id="coston' + costo.id + '" class="form-control coston' + costo.id + '" data-id="' + costo.id + '"></td>' +
                                         '<td>' + costo.nombre + '</td>' +
                                         '<td>' + costo.descripcion + '</td>' +
-                                        '<td>$ ' + costo.total + '</td>' +
+                                        '<td>$ ' + costo.monto + '</td>' +
                                     '</tr>';
     
                         });
 
-                        $("#contenedorCostos").empty().append( html );
+                        $("#contenedorCostes").empty().append( html );
 
                     }else{
 
                         Swal.fire({
 
                             icon: 'warning',
-                            title: 'Sin costos registrados. Registralos ahora.',
+                            title: 'Sin costos neutros registrados. Registralos ahora.',
                             allowOutsideClick: false,
                             showConfirmButton: true
     
@@ -94,7 +94,7 @@ jQuery(document).ready(function(){
     
                             if( resultado.isConfirmed ){
     
-                                window.location.href = '/costos';
+                                window.location.href = '/costes';
     
                             }
     
@@ -138,7 +138,7 @@ jQuery(document).ready(function(){
 
                         if( resultado.isConfirmed ){
 
-                            $("#modalCosto").css('display', 'none');
+                            $("#modalCoste").css('display', 'none');
                             $(".modal-backdrop").remove();
 
                         }

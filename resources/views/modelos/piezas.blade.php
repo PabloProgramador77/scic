@@ -23,7 +23,8 @@
             <div class="col-lg-4 my-2">
                 <a href="{{ url('/home') }}" class="btn btn-warning px-2 rounded mx-5"><i class="fas fa-home" title="Inicio"></i></a>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks" title="Agregar pieza"></x-adminlte-button>
-                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-file-invoice-dollar" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos" title="Agregar costos"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-file-invoice-dollar" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos" title="Agregar costos base"></x-adminlte-button>
+                <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCoste" icon="fas fa-file-invoice-dollar" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costes" title="Agregar costos neutro"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-box" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="consumibles" title="Agregar consumibles"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="suelas" title="Agregar suelas"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalNumeracion" icon="fas fa-hashtag" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="numeraciones" title="Agregar numeración"></x-adminlte-button>
@@ -81,6 +82,8 @@
         @include('modelos.consumible.nuevo')
         @include('modelos.suelas.nuevo')
         @include('modelos.numeraciones.nuevo')
+        @include('modelos.costes.nuevo')
+        @include('modelos.costes.coste')
 
     </section>
 
@@ -88,6 +91,7 @@
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/piezas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/costos.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/costes.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/suelas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/numeraciones.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/agregar.js') }}" type="text/javascript"></script>
@@ -95,11 +99,13 @@
     <script src="{{ asset('js/piezas/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/piezas/borrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarCostos.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/agregarCoste.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/consumible.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarConsumibles.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarSuelas.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/agregarNumeraciones.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevoCosto.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/nuevoCoste.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevoConsumible.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevaSuela.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevaNumeracion.js') }}" type="text/javascript"></script>
