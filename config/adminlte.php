@@ -309,8 +309,14 @@ return [
             'icon_color' => 'warning',
         ],
         [
-            'text' => 'Costos',
+            'text' => 'Costos Base',
             'url' => 'costos',
+            'icon' => 'fas fa-file-invoice-dollar',
+            'icon_color' => 'warning',
+        ],
+        [
+            'text' => 'Costos Neutros',
+            'url' => 'costes',
             'icon' => 'fas fa-file-invoice-dollar',
             'icon_color' => 'warning',
         ],

@@ -53,6 +53,12 @@ Route::post('costo/buscar', [App\Http\Controllers\CostoController::class, 'show'
 Route::post('costo/actualizar', [App\Http\Controllers\CostoController::class, 'update'])->name('actualizar-costo');
 Route::post('costo/borrar', [App\Http\Controllers\CostoController::class, 'destroy'])->name('borrar-costo');
 
+Route::get('costes', [App\Http\Controllers\CosteController::class, 'index'])->name('costes');
+Route::post('coste/agregar', [App\Http\Controllers\CosteController::class, 'store'])->name('agregar-coste');
+Route::post('coste/buscar', [App\Http\Controllers\CosteController::class, 'show'])->name('buscar-coste');
+Route::post('coste/actualizar', [App\Http\Controllers\CosteController::class, 'update'])->name('actualizar-coste');
+Route::post('coste/borrar', [App\Http\Controllers\CosteController::class, 'destroy'])->name('borrar-coste');
+
 Route::get('modelos', [App\Http\Controllers\ModeloController::class, 'index'])->name('modelos');
 Route::post('modelo/agregar', [App\Http\Controllers\ModeloController::class, 'store'])->name('agregar-modelo');
 Route::post('modelo/buscar', [App\Http\Controllers\ModeloController::class, 'show'])->name('buscar-modelo');

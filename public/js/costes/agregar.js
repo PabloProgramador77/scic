@@ -1,7 +1,7 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#actualizar").on('click', function(e){
+    $("#registrar").on('click', function(e){
 
         e.preventDefault();
 
@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 
         Swal.fire({
 
-            title: 'Actualizando Costo',
+            title: 'Registrando Costo',
             html: 'Un momento por favor: <b></b>',
             timer: 9975,
             allowOutsideClick: false,
@@ -26,13 +26,12 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/costo/actualizar',
+                    url: '/coste/agregar',
                     data:{
 
-                        'nombre' : $("#nombreEditar").val(),
-                        'total' : $("#totalEditar").val(),
-                        'descripcion' : $("#descripcionEditar").val(),
-                        'id' : $("#id").val()
+                        'nombre' : $("#nombre").val(),
+                        'monto' : $("#total").val(),
+                        'descripcion' : $("#descripcion").val()
 
                     },
                     dataType: 'json',
@@ -42,12 +41,10 @@ jQuery(document).ready(function(){
 
                     if( respuesta.exito ){
 
-                        $("#actualizar").attr('disabled', true);
-
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Costo Actualizado.',
+                            title: 'Costo Registrado',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -55,15 +52,13 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/costos';
+                                window.location.href = '/costes';
 
                             }
 
                         });
 
                     }else{
-
-                        $("#actualizar").attr('disabled', true);
 
                         Swal.fire({
 
@@ -76,7 +71,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/costos';
+                                window.location.href = '/costes';
 
                             }
 
@@ -108,7 +103,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/costos';
+                        window.location.href = '/costes';
 
                     }
 
@@ -119,5 +114,5 @@ jQuery(document).ready(function(){
         });
 
     });
-
+    
 });

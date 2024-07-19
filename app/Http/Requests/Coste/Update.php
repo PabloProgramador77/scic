@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Costo;
+namespace App\Http\Requests\Coste;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Create extends FormRequest
+class Update extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,8 +31,9 @@ class Create extends FormRequest
     {
         return [
             
+            'id' => 'required|integer',
             'nombre' => 'required|string',
-            'total' => 'required|numeric',
+            'monto' => 'required|numeric',
             'descripcion' => 'string|nullable',
             
         ];

@@ -30,7 +30,6 @@ jQuery(document).ready(function(){
                     data:{
 
                         'nombre' : $("#nombre").val(),
-                        'tipo' : $("#tipo").val(),
                         'total' : $("#total").val(),
                         'descripcion' : $("#descripcion").val()
 

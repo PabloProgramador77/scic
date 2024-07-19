@@ -6,7 +6,7 @@
         <div class="container-fluid row border-bottom">
 
             <div class="col-lg-6">
-                <h1 class="fs-3 fw-semibold"><i class="fas fa-file-invoice-dollar"></i> Costos</h1>
+                <h1 class="fs-3 fw-semibold"><i class="fas fa-file-invoice-dollar"></i> Costos Base</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
@@ -19,7 +19,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Nombre', 'Tipo', 'Total', 'Acciones'];
+                $heads = ['Nombre', 'Descripción', 'Total', 'Acciones'];
             @endphp
 
             <x-adminlte-datatable id="costos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
@@ -29,7 +29,7 @@
 
                         <tr>
                             <td>{{ $costo->nombre }}</td>
-                            <td>{{ $costo->tipo }}</td>
+                            <td>{{ $costo->descripcion }}</td>
                             <td>$ {{ $costo->total }} MXN</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $costo->id }}" title="Editar costo"></x-adminlte-button>
@@ -40,7 +40,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="5" class="text-info">Sin costos registrados</td>
+                        <td colspan="5" class="text-info">Sin costos base registrados</td>
                     </tr>
                 @endif
 

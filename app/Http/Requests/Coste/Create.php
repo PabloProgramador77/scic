@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Costo;
+namespace App\Http\Requests\Coste;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,9 +30,9 @@ class Create extends FormRequest
     public function rules(): array
     {
         return [
-            
+
             'nombre' => 'required|string',
-            'total' => 'required|numeric',
+            'monto' => 'required|numeric',
             'descripcion' => 'string|nullable',
             
         ];

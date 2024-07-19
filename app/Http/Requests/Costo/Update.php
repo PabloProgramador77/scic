@@ -33,7 +33,6 @@ class Update extends FormRequest
             
             'id' => 'required|integer',
             'nombre' => 'required|string',
-            'tipo' => 'required|string',
             'total' => 'required|numeric',
             'descripcion' => 'string|nullable',
             

@@ -26,11 +26,11 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/costo/actualizar',
+                    url: '/coste/actualizar',
                     data:{
 
                         'nombre' : $("#nombreEditar").val(),
-                        'total' : $("#totalEditar").val(),
+                        'monto' : $("#totalEditar").val(),
                         'descripcion' : $("#descripcionEditar").val(),
                         'id' : $("#id").val()
 
@@ -55,7 +55,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/costos';
+                                window.location.href = '/costes';
 
                             }
 
@@ -76,7 +76,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/costos';
+                                window.location.href = '/costes';
 
                             }
 
@@ -108,7 +108,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/costos';
+                        window.location.href = '/costes';
 
                     }
 

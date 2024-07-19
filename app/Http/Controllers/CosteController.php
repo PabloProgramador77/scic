@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Costo;
+use App\Models\Coste;
 use Illuminate\Http\Request;
-use App\Http\Requests\Costo\Create;
-use App\Http\Requests\Costo\Read;
-use App\Http\Requests\Costo\Update;
-use App\Http\Requests\Costo\Delete;
+use App\Http\Requests\Coste\Create;
+use App\Http\Requests\Coste\Read;
+use App\Http\Requests\Coste\Update;
+use App\Http\Requests\Coste\Delete;
 
-class CostoController extends Controller
+class CosteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,17 +18,9 @@ class CostoController extends Controller
     {
         try {
             
-            if( auth()->user()->id ){
+            $costes = Coste::all();
 
-                $costos = Costo::all();
-
-                return view('costos.index', compact('costos'));
-
-            }else{
-
-                return redirect('/');
-
-            }
+            return view('costes.index', compact('costes'));
 
         } catch (\Throwable $th) {
             
@@ -52,15 +44,19 @@ class CostoController extends Controller
     {
         try {
             
-            $costo = Costo::create([
+            $coste = Coste::create([
 
                 'nombre' => $request->nombre,
-                'total' => $request->total,
-                'descripcion' => $request->descripcion
-                
+                'monto' => $request->monto,
+                'descripcion' => $request->descripcion,
+
             ]);
 
-            $datos['exito'] = true;
+            if( $coste->id ){
+
+                $datos['exito'] = true;
+
+            }
 
         } catch (\Throwable $th) {
             
@@ -79,15 +75,15 @@ class CostoController extends Controller
     {
         try {
             
-            $costo = Costo::find( $request->id );
+            $coste = Coste::find( $request->id );
 
-            if( $costo->id ){
+            if( $coste->id ){
 
                 $datos['exito'] = true;
-                $datos['id'] = $costo->id;
-                $datos['nombre'] = $costo->nombre;
-                $datos['total'] = $costo->total;
-                $datos['descripcion'] = $costo->descripcion;
+                $datos['id'] = $coste->id;
+                $datos['nombre'] = $coste->nombre;
+                $datos['monto'] = $coste->monto;
+                $datos['descripcion'] = $coste->descripcion;
 
             }
 
@@ -104,7 +100,7 @@ class CostoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Costo $costo)
+    public function edit(Coste $coste)
     {
         //
     }
@@ -116,14 +112,14 @@ class CostoController extends Controller
     {
         try {
             
-            $costo = Costo::where('id', '=', $request->id)
-                    ->update([
+            $coste = Coste::where('id', '=', $request->id)
+                        ->update([
 
-                        'nombre' => $request->nombre,
-                        'total' => $request->total,
-                        'descripcion' => $request->descripcion
+                            'nombre' => $request->nombre,
+                            'monto' => $request->monto,
+                            'descripcion' => $request->descripcion,
 
-                    ]);
+                        ]);
 
             $datos['exito'] = true;
 
@@ -143,12 +139,12 @@ class CostoController extends Controller
     public function destroy(Delete $request)
     {
         try {
+            
+            $coste = Coste::find( $request->id );
 
-            $costo = Costo::find( $request->id );
+            if( $coste->id ){
 
-            if( $costo->id ){
-
-                $costo->delete();
+                $coste->delete();
 
                 $datos['exito'] = true;
 

@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
         $.ajax({
 
             type: 'POST',
-            url: '/costo/buscar',
+            url: '/coste/buscar',
             data:{
 
                 'id' : $(this).attr('data-id'),
@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
 
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#descripcionEditar").val( respuesta.descripcion );
-                $("#totalEditar").val( respuesta.total );
+                $("#totalEditar").val( respuesta.monto );
 
                 $("#id").val( respuesta.id );
 
@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/costos';
+                        window.location.href = '/costes';
 
                     }
 
