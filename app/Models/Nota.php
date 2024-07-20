@@ -45,4 +45,10 @@ class Nota extends Model
         return $this->cotizaciones()->wherePivot('idCotizacion', $idCotizacion)->wherePivot('idNota', $idNota)->value('monto');
 
     }
+
+    public function descuento( $idNota, $idCotizacion ){
+
+        return $this->cotizaciones()->wherePivot('idCotizacion', $idCotizacion)->wherePivot('idNota', $idNota)->value('descuento');
+        
+    }
 }

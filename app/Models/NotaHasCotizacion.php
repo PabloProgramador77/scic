@@ -17,6 +17,7 @@ class NotaHasCotizacion extends Model
         'idCotizacion',
         'totalPares',
         'monto',
+        'descuento',
 
     ];
 

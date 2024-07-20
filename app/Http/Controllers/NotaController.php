@@ -403,8 +403,8 @@ class NotaController extends Controller
 
                                     $html .= '
                                         <td style="border: 2px; font-size: 12px;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
-                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( $cotizacion->precio, 2).'</td>
-                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( $cotizacion->precio * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
+                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)), 2).'</td>
+                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)) * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
                                     </tr>
                                     ';
 

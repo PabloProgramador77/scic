@@ -7,6 +7,7 @@ jQuery(document).ready(function(){
 
         let procesamiento;
         var numeraciones = new Array();
+        var descuentos = new Array();
         var pares = new Array();
         var montos = new Array();
 
@@ -17,6 +18,18 @@ jQuery(document).ready(function(){
                 'idNumeracion': $(this).attr('id'),
                 'idCotizacion' : $(this).attr('data-id'),
                 'cantidad' : $(this).val(),
+
+            });
+
+        });
+
+        $("input[name=descuento]").each(function(){
+
+            descuentos.push({
+
+                'idCotizacion' : $(this).attr('data-id'),
+                'idNota' : $(this).attr('id'),
+                'descuento' : $(this).val(),
 
             });
 
@@ -73,6 +86,7 @@ jQuery(document).ready(function(){
                         'numeraciones' : numeraciones,
                         'pares' : pares,
                         'montos' : montos,
+                        'descuentos' : descuentos,
 
                     },
                     dataType: 'json',

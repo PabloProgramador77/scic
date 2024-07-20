@@ -31,7 +31,8 @@ class NotaHasCotizacionController extends Controller
                 'idNota' => $request->nota,
                 'idCotizacion' => $request->cotizacion,
                 'totalPares' => 0,
-                'monto' => 0
+                'monto' => 0,
+                'descuento' => 0,
 
             ]);
 
@@ -67,7 +68,8 @@ class NotaHasCotizacionController extends Controller
                     'idNota' => $idNota,
                     'idCotizacion' => $cotizacion,
                     'totalPares' => 0,
-                    'monto' => 0
+                    'monto' => 0,
+                    'descuento' => 0,
     
                 ]);
 
@@ -141,6 +143,17 @@ class NotaHasCotizacionController extends Controller
 
                 $total += $monto['monto'];
 
+            }
+
+            foreach( $request->descuentos as $descuento ){
+
+                $notaHasCotizacion = NotaHasCotizacion::where('idNota', '=', $descuento['idNota'])
+                                    ->where('idCotizacion', '=', $descuento['idCotizacion'])
+                                    ->update([
+
+                                        'descuento' => $descuento['descuento'],
+
+                                    ]);
             }
 
             $nota = new NotaController();
