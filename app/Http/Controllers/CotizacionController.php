@@ -30,7 +30,7 @@ class CotizacionController extends Controller
     {
         try {
             
-            $clientes = Cliente::all();
+            $clientes = Cliente::orderBy('updated_at', 'desc')->get();
             
             return view('cotizacion.index', compact('clientes'));
 
@@ -48,7 +48,7 @@ class CotizacionController extends Controller
     {
         try {
             
-            $modelos = Modelo::all();
+            $modelos = Modelo::orderBy('nombre', 'asc')->get();
             $cliente = Cliente::find( $idCliente );
 
             return view('cotizacion.cotizador', compact('modelos', 'cliente'));
@@ -154,9 +154,10 @@ class CotizacionController extends Controller
             
             $piezas = Pieza::select('piezas.id', 'piezas.nombre', 'piezas.alto', 'piezas.largo', 'piezas.idModelo', 'piezas.cantidad')
                             ->where('piezas.idModelo', '=', $request->id)
+                            ->orderBy('piezas.nombre', 'asc')
                             ->get();
 
-            $materiales = Material::all();
+            $materiales = Material::orderBy('nombre', 'asc')->get();
 
             $datos['exito'] = true;
             $datos['piezas'] = $piezas;

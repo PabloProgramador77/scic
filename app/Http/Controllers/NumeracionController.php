@@ -18,7 +18,7 @@ class NumeracionController extends Controller
     {
         try {
             
-            $numeraciones = Numeracion::all();
+            $numeraciones = Numeracion::orderBy('numero', 'asc')->get();
 
             return view('numeraciones.index', compact('numeraciones'));
 

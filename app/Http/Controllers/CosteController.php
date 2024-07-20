@@ -18,7 +18,7 @@ class CosteController extends Controller
     {
         try {
             
-            $costes = Coste::all();
+            $costes = Coste::orderBy('nombre', 'asc')->get();
 
             return view('costes.index', compact('costes'));
 

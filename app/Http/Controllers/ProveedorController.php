@@ -18,7 +18,7 @@ class ProveedorController extends Controller
     {
         try {
             
-            $proveedores = Proveedor::all();
+            $proveedores = Proveedor::orderBy('nombre', 'asc')->get();
 
             return view('materiales.proveedores.index', compact('proveedores'));
 

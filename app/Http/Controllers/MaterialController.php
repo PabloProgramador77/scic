@@ -20,8 +20,8 @@ class MaterialController extends Controller
     {
         try {
             
-            $materiales = Material::all();
-            $proveedores = Proveedor::all();
+            $materiales = Material::orderBy('nombre', 'asc')->get();
+            $proveedores = Proveedor::orderBy('nombre', 'asc')->get();
 
             return view('materiales.index', compact('materiales', 'proveedores'));
 

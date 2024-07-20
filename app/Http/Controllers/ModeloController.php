@@ -19,7 +19,7 @@ class ModeloController extends Controller
     {
         try {
             
-            $modelos = Modelo::all();
+            $modelos = Modelo::orderBy('nombre', 'asc')->get();
 
             return view('modelos.index', compact('modelos'));
 

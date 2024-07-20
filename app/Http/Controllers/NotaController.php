@@ -26,7 +26,7 @@ class NotaController extends Controller
     {
         try {
             
-            $notas = Nota::all();
+            $notas = Nota::orderBy('updated_at', 'desc')->get();
             $cotizaciones = Cotizacion::where('estado', '=', 'Pendiente')->get();
 
             return view('notas.index', compact('notas', 'cotizaciones'));
@@ -248,6 +248,7 @@ class NotaController extends Controller
                     ->join('clientes', 'notas.idCliente', '=', 'clientes.id')
                     ->where('idCliente', '=', $request->cliente)
                     ->where('estado', '=', 'Pendiente')
+                    ->orderBy('notas.id', 'desc')
                     ->get();
 
             if( count( $notas ) > 0 ){

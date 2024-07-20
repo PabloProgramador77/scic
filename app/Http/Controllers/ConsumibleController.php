@@ -18,7 +18,7 @@ class ConsumibleController extends Controller
     {
         if( auth()->user()->id ){
 
-            $consumibles = Consumible::all();
+            $consumibles = Consumible::orderBy('nombre', 'asc')->get();
 
             return view('consumibles.index', compact('consumibles'));
 

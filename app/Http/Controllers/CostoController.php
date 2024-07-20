@@ -20,7 +20,7 @@ class CostoController extends Controller
             
             if( auth()->user()->id ){
 
-                $costos = Costo::all();
+                $costos = Costo::orderBy('nombre', 'asc')->get();
 
                 return view('costos.index', compact('costos'));
 

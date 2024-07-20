@@ -20,8 +20,8 @@ class RoleController extends Controller
     {
         if( auth()->user()->id ){
 
-            $roles = Role::all();
-            $permisos = Permission::all();
+            $roles = Role::orderBy('name', 'asc')->get();
+            $permisos = Permission::orderBy('name', 'asc')->get();
 
             return view('usuarios.roles.index', compact('roles', 'permisos'));
 

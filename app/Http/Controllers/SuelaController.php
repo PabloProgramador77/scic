@@ -20,7 +20,7 @@ class SuelaController extends Controller
             
             if( auth()->user()->id ){
 
-                $suelas = Suela::all();
+                $suelas = Suela::orderBy('nombre', 'asc')->get();
 
                 return view('suelas.index', compact('suelas'));
 

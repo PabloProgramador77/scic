@@ -24,7 +24,7 @@ class ModeloHasConsumibleController extends Controller
 
                 $configurados = $modelo->consumibles;
 
-                $consumibles = Consumible::all();
+                $consumibles = Consumible::orderBy('nombre', 'asc')->get();
     
                 if( count( $consumibles ) > 0 ){
 
@@ -127,6 +127,7 @@ class ModeloHasConsumibleController extends Controller
             $consumibles = Consumible::select('consumibles.id', 'consumibles.nombre', 'consumibles.tipo', 'consumibles.precio')
                         ->join('modelo_has_consumibles', 'consumibles.id', '=', 'modelo_has_consumibles.idConsumible')
                         ->where('modelo_has_consumibles.idModelo', '=', $request->modelo)
+                        ->orderBy('consumibles.nombre', 'asc')
                         ->get();
 
             if( count( $consumibles ) > 0 ){

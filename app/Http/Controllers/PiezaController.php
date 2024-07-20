@@ -20,7 +20,7 @@ class PiezaController extends Controller
             
             if( auth()->user()->id ){
 
-                $piezas = Pieza::all();
+                $piezas = Pieza::orderBy('nombre', 'asc')->get();
 
                 return view('piezas.index', compact('piezas'));
 
