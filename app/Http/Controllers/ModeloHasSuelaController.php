@@ -62,19 +62,46 @@ class ModeloHasSuelaController extends Controller
     public function store(Create $request)
     {
         try {
-            
-            foreach( $request->suelas as $suela ){
 
-                $modeloHasSuela = ModeloHasSuela::create([
+            $suelas = ModeloHasSuela::where('idModelo', '=', $request->modelo)->get();
 
-                    'idModelo' => $request->modelo,
-                    'idSuela' => $suela
+            if( count( $suelas ) > 0 ){
 
-                ]);
+                foreach( $suelas as $suela ){
+
+                    $suela->delete();
+
+                }
+
+                foreach( $request->suelas as $suela ){
+
+                    $modeloHasSuela = ModeloHasSuela::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idSuela' => $suela
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
+
+            }else{
+
+                foreach( $request->suelas as $suela ){
+
+                    $modeloHasSuela = ModeloHasSuela::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idSuela' => $suela
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
 
             }
-
-            $datos['exito'] = true;
 
         } catch (\Throwable $th) {
             

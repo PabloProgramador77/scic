@@ -66,19 +66,46 @@ class ModeloHasConsumibleController extends Controller
     public function store(Create $request)
     {
         try {
-            
-            foreach( $request->consumibles as $consumible ){
 
-                $modeloHasConsumible = ModeloHasConsumible::create([
+            $consumibles = ModeloHasConsumible::where('idModelo', '=', $request->modelo)->get();
 
-                    'idModelo' => $request->modelo,
-                    'idConsumible' => $consumible
+            if( count( $consumibles ) > 0 ){
 
-                ]);
+                foreach( $consumibles as $consumible ){
+
+                    $consumible->delete();
+
+                }
+
+                foreach( $request->consumibles as $consumible ){
+
+                    $modeloHasConsumible = ModeloHasConsumible::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idConsumible' => $consumible
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
+
+            }else{
+
+                foreach( $request->consumibles as $consumible ){
+
+                    $modeloHasConsumible = ModeloHasConsumible::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idConsumible' => $consumible
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
 
             }
-
-            $datos['exito'] = true;
 
         } catch (\Throwable $th) {
             

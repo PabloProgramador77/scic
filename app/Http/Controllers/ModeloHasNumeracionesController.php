@@ -62,19 +62,46 @@ class ModeloHasNumeracionesController extends Controller
     public function store(create $request)
     {
         try {
-            
-            foreach($request->numeraciones as $numeracion){
 
-                $modeloHasNumeraciones = ModeloHasNumeraciones::create([
+            $numeraciones = ModeloHasNumeraciones::where('idModelo', '=', $request->modelo)->get();
 
-                    'idModelo' => $request->modelo,
-                    'idNumeracion' => $numeracion,
+            if( count( $numeraciones ) > 0 ){
 
-                ]);
+                foreach( $numeraciones as $numeracion ){
 
+                    $numeracion->delete();
+
+                }
+
+                foreach($request->numeraciones as $numeracion){
+
+                    $modeloHasNumeraciones = ModeloHasNumeraciones::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idNumeracion' => $numeracion,
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
+
+            }else{
+
+                foreach($request->numeraciones as $numeracion){
+
+                    $modeloHasNumeraciones = ModeloHasNumeraciones::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idNumeracion' => $numeracion,
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
+                
             }
-
-            $datos['exito'] = true;
 
         } catch (\Throwable $th) {
             

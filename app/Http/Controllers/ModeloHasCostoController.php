@@ -64,19 +64,46 @@ class ModeloHasCostoController extends Controller
     public function store(Create $request)
     {
         try {
-            
-            foreach( $request->costos as $costo ){
 
-                $modeloHasCosto = ModeloHasCosto::create([
+            $costos = ModeloHasCosto::where('idModelo', '=', $request->modelo)->get();
 
-                    'idModelo' => $request->modelo,
-                    'idCosto' => $costo
+            if( count( $costos ) > 0 ){
 
-                ]);
+                foreach( $costos as $costo ){
+
+                    $costo->delete();
+
+                }
+
+                foreach( $request->costos as $costo ){
+
+                    $modeloHasCosto = ModeloHasCosto::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idCosto' => $costo
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
+
+            }else{
+
+                foreach( $request->costos as $costo ){
+
+                    $modeloHasCosto = ModeloHasCosto::create([
+    
+                        'idModelo' => $request->modelo,
+                        'idCosto' => $costo
+    
+                    ]);
+    
+                }
+    
+                $datos['exito'] = true;
 
             }
-
-            $datos['exito'] = true;
 
         } catch (\Throwable $th) {
             
