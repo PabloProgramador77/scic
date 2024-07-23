@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
                     var opcionesMateriales = '<option value="0, 0">Elige un material</option>';
 
                     respuesta.materiales.forEach( function(material){
-                        opcionesMateriales += '<option style="background-color: '+material.hexColor+'" data-value="'+material.hexColor+'" value="' + material.precio + ', '+ material.unidades +', ' + material.id +'">' + material.nombre + ' - $' +material.precio + '</option>';
+                        opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +', ' + material.id +', '+material.nombre+'">' + material.nombre + ' - $' +material.precio + '</option>';
                     });
 
                     respuesta.piezas.forEach( function(pieza){
@@ -58,7 +58,7 @@ jQuery(document).ready(function(){
                                     '<td><input type="checkbox" name="pieza" id="'+pieza.id+'" class="form-control pieza'+pieza.id+'"></td>' +
                                     '<td>' + pieza.nombre + '</td>' +
                                     '<td><select id="material'+pieza.id+'" name="material" class="form-control material'+pieza.id+'">' + opcionesMateriales + '</select></td>'+
-                                    '<td><input type="color" name="colorPieza" id="colorPieza'+pieza.id+'" value="#FFFFFF" class="colorPieza'+pieza.id+'"></input></td>'+
+                                    '<td><select name="colorPieza" id="color'+pieza.id+'" class="form-control colorPieza'+pieza.id+'"></select></td>'+
                                     '<td>' + pieza.largo + ' X ' + pieza.alto + '</td>' +
                                     '<td>'+ pieza.cantidad +'</td>'+
                                     '<td>'+ (pieza.largo * pieza.alto).toFixed(4) +'</td>'+
@@ -81,6 +81,7 @@ jQuery(document).ready(function(){
                             var valoresMaterial = $(this).val().split(',');
                             var precioMaterial = parseFloat( valoresMaterial[0] );
                             var unidades = parseFloat( valoresMaterial[1] );
+                            var material = valoresMaterial[3];
 
                             var MtsXPar = ((pieza.largo * pieza.alto)*(pieza.cantidad)/(unidades*100));
                             var costo = calcularCosto( precioMaterial, MtsXPar );
@@ -105,6 +106,67 @@ jQuery(document).ready(function(){
 
                             console.log( total );
                             $("#total").val( total.toFixed(4) );
+
+                            $.ajax({
+
+                                type: 'POST',
+                                url: '/material/colores',
+                                data:{
+
+                                    'material' : material,
+
+                                },
+                                dataType: 'json',
+                                encode: true,
+
+                            }).done(function(respuesta){
+
+                                if( respuesta.exito ){
+
+                                    if( respuesta.colores.length > 0 ){
+
+                                        var opcionesColores = '';
+
+                                        respuesta.colores.forEach(function(color){
+
+                                            if( color.hexColor !== null ){
+
+                                                opcionesColores += '<option value="'+color.hexColor+'" style="background-color: '+color.hexColor+';">'+color.color+'</option>'
+
+                                            }
+
+                                        });
+
+                                        $('.colorPieza'+pieza.id).empty();
+                                        $('.colorPieza'+pieza.id).append( opcionesColores );
+
+                                    }else{
+
+                                        Swal.fire({
+
+                                            icon: 'info',
+                                            title: 'Sin colores registrados',
+                                            allowOutsideClick: false,
+                                            showConfirmButton: true
+                
+                                        });
+                                        
+                                    }
+
+                                }else{
+
+                                    Swal.fire({
+
+                                        icon: 'error',
+                                        title: respuesta.mensaje,
+                                        allowOutsideClick: false,
+                                        showConfirmButton: true
+            
+                                    });
+
+                                }
+
+                            });
 
                         });
 

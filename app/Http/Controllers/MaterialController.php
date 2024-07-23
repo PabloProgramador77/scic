@@ -35,9 +35,28 @@ class MaterialController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( Request $request) 
     {
-        //
+        try {
+            
+            $colores = Material::select('materiales.color', 'materiales.hexColor')
+                        ->where('nombre', '=', $request->material)->get();
+
+            if( count( $colores ) > 0 ){
+
+                $datos['exito'] = true;
+                $datos['colores'] = $colores;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

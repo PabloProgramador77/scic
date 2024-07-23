@@ -30,6 +30,7 @@ class VerifyCsrfToken extends Middleware
         'material/actualizar',
         'material/borrar',
         'material/buscar',
+        'material/colores',
         'proveedor/agregar',
         'proveedor/actualizar',
         'proveedor/borrar',

@@ -34,6 +34,7 @@ Route::post('material/agregar', [App\Http\Controllers\MaterialController::class,
 Route::post('material/buscar', [App\Http\Controllers\MaterialController::class, 'show'])->name('buscar-material');
 Route::post('material/actualizar', [App\Http\Controllers\MaterialController::class, 'update'])->name('actualizar-material');
 Route::post('material/borrar', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('borrar-material');
+Route::post('material/colores', [App\Http\Controllers\MaterialController::class, 'create'])->name('colores-material');
 
 Route::get('proveedores', [App\Http\Controllers\ProveedorController::class, 'index'])->name('proveedores');
 Route::post('proveedor/agregar', [App\Http\Controllers\ProveedorController::class, 'store'])->name('agregar-proveedor');
