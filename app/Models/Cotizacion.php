@@ -44,4 +44,16 @@ class Cotizacion extends Model
 
     }
 
+    public function consumibles(){
+
+        return $this->belongsToMany( Consumible::class, 'cotizacion_has_consumibles', 'idCotizacion', 'idConsumible' );
+
+    }
+
+    public function suelas(){
+
+        return $this->belongsToMany( Suela::class, 'cotizacion_has_suelas', 'idCotizacion', 'idSuela' );
+        
+    }
+
 }

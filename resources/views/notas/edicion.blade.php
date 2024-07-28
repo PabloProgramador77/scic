@@ -50,7 +50,9 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Modelo', 'Precio Unitario', 'Descuento' ,'Numeraciones', 'Pares Totales', 'Monto'];
+                $descripcion = '';
+
+                $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Descuento' ,'Numeraciones', 'Pares Totales', 'Monto'];
             @endphp
 
             <x-adminlte-datatable id="notas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
@@ -60,7 +62,18 @@
                 <tr>
                     <td>
                         <input type="hidden" name="cotizacion" id="cotizacion{{ $cotizacion->id }}" value="{{ $cotizacion->id }}">
-                        {{ $cotizacion->modelo->nombre }}</td>
+                        {{ $cotizacion->modelo->nombre }} {{ $cotizacion->modelo->numero }}
+                    </td>
+                    <td>
+                        @foreach( $cotizacion->consumibles as $consumible )
+                            {{ $consumible->nombre.', '}}
+                        @endforeach
+
+                        @foreach( $cotizacion->suelas as $suela)
+                            {{ $suela->nombre.', ' }}
+                        @endforeach
+
+                    </td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
                     <td class="descuento{{ $cotizacion->id }}"><input type="textbox" name="descuento" class="text-center col-lg-6 col-md-6 col-sm-6" placeholder="Descuento por par" value="{{ $nota->descuento( $nota->id, $cotizacion->id ) }}" id="{{ $nota->id }}" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->precio }}"></input></td>
                     <td>

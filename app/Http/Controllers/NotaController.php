@@ -379,7 +379,17 @@ class NotaController extends Controller
                                     <tr style="padding: 5px;">
                                         <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->nombre.'</td>
                                         <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->numero.'</td>
-                                        <td style="border: 2px; font-size: 12px;">---</td>';
+                                        <td style="border: 2px; font-size: 12px;">';
+
+                                        foreach( $cotizacion->consumibles as $consumible ){
+                                            $html .= $consumible->nombre.', ';
+                                        }
+
+                                        foreach( $cotizacion->suelas as $suela ){
+                                            $html .= $suela->nombre.', ';
+                                        }
+
+                                        $html .= '</td>';
 
                                         $ultimo = $cotizacion->numeraciones->last();
 
