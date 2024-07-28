@@ -114,14 +114,18 @@ jQuery(document).ready(function(){
         var costes = new Array();
         var consumibles = new Array();
         var suelas = new Array();
+        var colores = new Array();
 
         $("input[name=pieza]:checked").each(function(){
 
             piezas.push( $(this).attr('id') );
 
             var valoresMaterial = $(".material" + $(this).attr('id') ).val().split(',');
+            var colorMaterial = $('.colorPieza' + $(this).attr('id') ).val();
 
             materiales.push( valoresMaterial[2] );
+
+            colores.push( colorMaterial );
 
         });
 
@@ -182,6 +186,7 @@ jQuery(document).ready(function(){
                         'costes' : costes,
                         'consumibles' : consumibles,
                         'suelas' : suelas,
+                        'colores' : colores,
 
                     },
                     dataType: 'json',

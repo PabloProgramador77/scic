@@ -71,6 +71,10 @@
                             {{ $suela->nombre.', ' }}
                         @endforeach
 
+                        @foreach( $cotizacion->colores as $color )
+                            {{ $color->pivot->colorMaterial.', ' }}
+                        @endforeach
+
                     </td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
                     <td class="descuento{{ $cotizacion->id }}"><input type="textbox" name="descuento" id="descuento{{ $cotizacion->id }}" class="text-center" placeholder="Descuento por par" value="{{ $nota->descuento( $nota->id, $cotizacion->id ) }}" id="{{ $nota->id }}" data-id="{{ $cotizacion->id }}"></input></td>

@@ -131,7 +131,7 @@ jQuery(document).ready(function(){
 
                                             if( color.hexColor !== null ){
 
-                                                opcionesColores += '<option value="'+color.hexColor+'" style="background-color: '+color.hexColor+';">'+color.color+'</option>'
+                                                opcionesColores += '<option value="'+color.color+'" style="background-color: '+color.hexColor+';">'+color.color+'</option>'
 
                                             }
 

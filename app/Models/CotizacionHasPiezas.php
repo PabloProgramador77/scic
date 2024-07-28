@@ -16,6 +16,7 @@ class CotizacionHasPiezas extends Model
         'idCotizacion', 
         'idPieza',
         'idMaterial',
+        'colorMaterial',
 
     ];
 

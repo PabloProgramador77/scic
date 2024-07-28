@@ -56,4 +56,10 @@ class Cotizacion extends Model
         
     }
 
+    public function colores(){
+
+        return $this->belongsToMany( Material::class, 'cotizacion_has_piezas', 'idCotizacion', 'idMaterial')->withPivot('colorMaterial');
+
+    }
+
 }

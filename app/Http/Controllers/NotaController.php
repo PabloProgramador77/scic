@@ -389,6 +389,10 @@ class NotaController extends Controller
                                             $html .= $suela->nombre.', ';
                                         }
 
+                                        foreach( $cotizacion->colores as $color){
+                                            $html .= $color->pivot->colorMaterial.', ';
+                                        }
+
                                         $html .= '</td>';
 
                                         $ultimo = $cotizacion->numeraciones->last();
@@ -793,7 +797,7 @@ class NotaController extends Controller
     public function tablaConsumos( $idNota ){
         try {
 
-            $materiales = Material::select('materiales.id', 'materiales.nombre', 'materiales.precio', 'materiales.unidades', 'materiales.color', 'piezas.alto', 'piezas.largo', 'piezas.cantidad', 'nota_has_cotizaciones.totalPares')
+            $materiales = Material::select('materiales.id', 'materiales.nombre', 'materiales.precio', 'materiales.unidades', 'materiales.color', 'piezas.alto', 'piezas.largo', 'piezas.cantidad', 'nota_has_cotizaciones.totalPares', 'cotizacion_has_piezas.colorMaterial')
                         ->join('cotizacion_has_piezas', 'materiales.id', '=', 'cotizacion_has_piezas.idMaterial')
                         ->join('nota_has_cotizaciones', 'cotizacion_has_piezas.idCotizacion', '=', 'nota_has_cotizaciones.idCotizacion')
                         ->join('piezas', 'cotizacion_has_piezas.idPieza', '=', 'piezas.id')
@@ -861,7 +865,7 @@ class NotaController extends Controller
                                                 $html .= '</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%; background-color: '.$descripcionAnterior.'">'.$descripcionAnterior.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
                                             </tr>
@@ -872,7 +876,7 @@ class NotaController extends Controller
                             
                                     $nombreMaterial = $material->nombre;
                                     $precioAnterior = $material->precio; // Guarda el precio actual para usarlo en la siguiente iteración
-                                    $descripcionAnterior = $material->color; // Guarda la descripción actual para usarla en la siguiente iteración
+                                    $descripcionAnterior = $material->colorMaterial; // Guarda la descripción actual para usarla en la siguiente iteración
                                     $totalMts = (($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares;
                                     $total = ((($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares)*($material->precio);
                             
@@ -895,7 +899,7 @@ class NotaController extends Controller
                                         $html .= '</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%; background-color: '.$descripcionAnterior.'">'.$descripcionAnterior.'</td>
+                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
                                         <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
                                     </tr>

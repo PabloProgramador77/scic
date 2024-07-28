@@ -32,6 +32,7 @@ class CotizacionHasPiezasController extends Controller
 
             $piezas = $request->piezas;
             $materiales = $request->materiales;
+            $colores = $request->colores;
             
             for($i = 0; $i < count($request->piezas); $i++){
 
@@ -40,6 +41,7 @@ class CotizacionHasPiezasController extends Controller
                     'idCotizacion' => $idCotizacion,
                     'idPieza' => $piezas[$i],
                     'idMaterial' => $materiales[$i],
+                    'colorMaterial' => $colores[$i],
 
                 ]);
 

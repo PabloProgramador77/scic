@@ -79,6 +79,10 @@
                             {{ $suela->nombre.', ' }}
                         @endforeach
 
+                        @foreach( $cotizacion->colores as $color )
+                            {{ $color->pivot->colorMaterial.', ' }}
+                        @endforeach
+
                     </td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
                     <td>
