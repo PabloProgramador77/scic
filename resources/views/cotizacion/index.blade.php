@@ -10,10 +10,15 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-1 rounded shadow" title="Inicio"><i class="fas fa-home"></i></a>
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-portrait"></i> Clientes</li>
+                    </ol>
+                </nav>
             </div>
             <div class="col-lg-3 my-2">
-                <x-adminlte-button name="cliente" id="cliente" theme="primary" icon="fas fa-plus-circle" title=" Nuevo Cliente" data-toggle="modal" data-target="#modalNuevo" class="shadow"></x-adminlte-button>
+                <x-adminlte-button name="cliente" id="cliente" theme="primary" icon="fas fa-plus-circle" title=" Nuevo Cliente" data-toggle="modal" data-target="#modalNuevo" class="shadow" label=" Cliente"></x-adminlte-button>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <p class="fs-5 fw-semibold text-center bg-warning p-1 rounded">

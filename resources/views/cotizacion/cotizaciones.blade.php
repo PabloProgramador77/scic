@@ -10,12 +10,17 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
             </div>
-            <div class="col-lg-3 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
-                <a href="{{ url('/cotizaciones') }}" class="btn btn-secondary p-2 rounded" title="Clientes"><i class="fas fa-portrait"></i></a>
+            <div class="col-lg-4 my-2">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones"><i class="fas fa-portrait"></i> Clientes</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cotizaciones de Cliente</li>
+                    </ol>
+                </nav>
             </div>
-            <div class="col-lg-3 my-2">
-                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-primary p-2 mx-1 rounded" title="Nueva cotización"><i class="fas fa-plus-circle"></i> <b>Cotización</b></a>
+            <div class="col-lg-2 my-2">
+                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-primary p-2 mx-1 rounded" title="Nueva cotización"><i class="fas fa-plus-circle"></i> <b>Cotizador</b></a>
                 <x-adminlte-button class="p-2" id="nota" theme="primary" label=" Nota" icon="fas fa-plus-circle" title="Nueva nota"></x-adminlte-button>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">

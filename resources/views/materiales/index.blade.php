@@ -5,16 +5,22 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <h1 class="fs-3 fw-semibold"><i class="fas fa-boxes"></i> Materiales</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
             <div class="col-lg-5 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
-                <a href="{{ url('/proveedores') }}" class="btn btn-secondary p-2 fw-semibold rounded" title="Proveedores de materiales"><i class="fas fa-people-carry"></i></a>
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/modelos"><i class="fas fa-socks"></i> Modelos</a></li>
+                        <li class="breadcrumb-item"><a href="/proveedores"><i class="fas fa-people-carry"></i> Proveedores</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-boxes"></i> Materiales</li>
+                    </ol>
+                </nav>
             </div>
-            <div class="col-lg-1 my-2">
-                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nuevo material"></x-adminlte-button>
+            <div class="col-lg-2 my-2">
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nuevo material" label=" Material"></x-adminlte-button>
             </div>
         </div>
 

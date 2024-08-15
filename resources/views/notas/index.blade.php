@@ -5,15 +5,23 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-8">
+            <div class="col-lg-5">
                 <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Notas de {{ $cliente->nombre }}</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
             </div>
-            <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
-                <a href="{{ url('/cotizaciones/cliente') }}/{{ $cliente->id }}" class="btn btn-secondary rounded" title="Cotizaciones"><i class="fas fa-file-invoice-dollar"></i></a>
-                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-secondary rounded text-white" title="Cotizar"><i class="fas fa-dollar-sign"></i></a>
+            <div class="col-lg-5 my-2">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones"><i class="fas fa-portrait"></i> Clientes</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones/cliente/{{ $cliente->id }}"><i class="fas fa-file-invoice-dollar"></i> Cotizaciones de Cliente</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-file"></i> Notas de Cliente</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-lg-2">
+                <a href="{{ url('/cotizador/cliente') }}/{{ $cliente->id }}" class="btn btn-primary rounded text-white" title="Cotizar"><i class="fas fa-plus-circle"></i> Cotizador</a>
             </div>
         </div>
 

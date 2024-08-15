@@ -5,17 +5,22 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <h1 class="fs-3 fw-semibold"><i class="fas fa-user-cog"></i> Permisos de usuarios</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
             </div>
-            <div class="col-lg-5 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
-                <a href="{{ url('/usuarios') }}" class="btn btn-secondary p-2 fw-semibold rounded" title="Usuarios"><i class="fas fa-users"></i></a>
-                <a href="{{ url('/roles') }}" class="btn btn-secondary p-2 fw-semibold rounded" title="Roles de usuario"><i class="fas fa-user-tag"></i></a>
+            <div class="col-lg-6 my-2">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
+                        <li class="breadcrumb-item"><a href="/roles"><i class="fas fa-user-tag"></i> Roles de Usuario</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-user-cog"></i> Permisos de Usuario</li>
+                    </ol>
+                </nav>
             </div>
-            <div class="col-lg-1 my-2">
-                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nuevo permiso de usuario"></x-adminlte-button>
+            <div class="col-lg-2 my-2">
+                <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nuevo permiso de usuario" label="Permiso" class="shadow"></x-adminlte-button>
             </div>
         </div>
 

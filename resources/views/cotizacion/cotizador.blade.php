@@ -5,14 +5,20 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <h1 class="fs-3 fw-semibold my-2"><i class="fas fa-file-invoice-dollar"></i> Cotizador de {{ $cliente->nombre }}</h1>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
             </div>
-            <div class="col-lg-5 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded shadow" title="Inicio"><i class="fas fa-home"></i></a>
-                <a href="{{ url('/cotizaciones') }}" class="btn btn-secondary p-2 rounded text-white shadow" title="Clientes"><i class="fas fa-portrait"></i></a>
-                <a href="{{ url('/cotizaciones/cliente') }}/{{ $cliente->id }}" class="btn btn-secondary p-2 rounded text-white shadow" title="Cotizaciones"><i class="fas fa-file"></i></a>
+            <div class="col-lg-6 my-2">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones"><i class="fas fa-portrait"></i> Clientes</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones/cliente/{{ $cliente->id }}"><i class="fas fa-file-invoice-dollar"></i> Cotizaciones de Cliente</a></li>
+                        <li class="breadcrumb-item"><a href="/notas/cliente/{{ $cliente->id }}"><i class="fas fa-file"></i> Notas de Cliente</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-file"></i> Cotizador</li>
+                    </ol>
+                </nav>
             </div>
             <div class="col-lg-12 my-2">
                 <p class="fs-6 fw-semibold p-1 text-center bg-info"><i class="fas fa-info-circle"></i> Elige un modelo de la lista, posterior selecciona los materiales para pieza, continuar con los costos, consumibles y suelas.</p>

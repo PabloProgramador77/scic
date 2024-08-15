@@ -291,39 +291,9 @@ return [
 
     'menu' => [
         [
-            'text' => 'Usuarios',
-            'url' => 'usuarios',
-            'icon' => 'fas fa-users',
-            'icon_color' => 'warning',
-        ],
-        [
-            'text' => 'Materiales',
-            'url' => 'materiales',
-            'icon' => 'fas fa-boxes',
-            'icon_color' => 'warning',
-        ],
-        [
-            'text' => 'Consumibles',
-            'url' => 'consumibles',
-            'icon' => 'fas fa-box',
-            'icon_color' => 'warning',
-        ],
-        [
-            'text' => 'Costos Base',
-            'url' => 'costos',
-            'icon' => 'fas fa-file-invoice-dollar',
-            'icon_color' => 'warning',
-        ],
-        [
-            'text' => 'Costos Neutros',
-            'url' => 'costes',
-            'icon' => 'fas fa-file-invoice-dollar',
-            'icon_color' => 'warning',
-        ],
-        [
-            'text' => 'Suelas',
-            'url' => 'suelas',
-            'icon' => 'fas fa-shoe-prints',
+            'text' => 'Cotizaciones',
+            'url' => 'cotizaciones',
+            'icon' => 'fas fa-file',
             'icon_color' => 'warning',
         ],
         [
@@ -333,9 +303,52 @@ return [
             'icon_color' => 'warning',
         ],
         [
-            'text' => 'Numeraciones',
-            'url' => 'numeraciones',
-            'icon' => 'fas fa-hashtag',
+            'text' => 'Desarrollo de Modelos',
+            'icon' => 'fas fa-cogs',
+            'icon_color' => 'warning',
+            'submenu' => [
+                [
+                    'text' => 'Numeraciones',
+                    'url' => 'numeraciones',
+                    'icon' => 'fas fa-hashtag',
+                    'icon_color' => 'warning',
+                ],
+                [
+                    'text' => 'Materiales',
+                    'url' => 'materiales',
+                    'icon' => 'fas fa-boxes',
+                    'icon_color' => 'warning',
+                ],
+                [
+                    'text' => 'Consumibles',
+                    'url' => 'consumibles',
+                    'icon' => 'fas fa-box',
+                    'icon_color' => 'warning',
+                ],
+                [
+                    'text' => 'Costos Base',
+                    'url' => 'costos',
+                    'icon' => 'fas fa-file-invoice-dollar',
+                    'icon_color' => 'warning',
+                ],
+                [
+                    'text' => 'Costos Neutros',
+                    'url' => 'costes',
+                    'icon' => 'fas fa-file-invoice-dollar',
+                    'icon_color' => 'warning',
+                ],
+                [
+                    'text' => 'Suelas',
+                    'url' => 'suelas',
+                    'icon' => 'fas fa-shoe-prints',
+                    'icon_color' => 'warning',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Usuarios',
+            'url' => 'usuarios',
+            'icon' => 'fas fa-users',
             'icon_color' => 'warning',
         ],
     ],
