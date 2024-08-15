@@ -68,9 +68,10 @@
         <div class="container-fluid row p-2">
             @php
                 $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Numeraciones', 'Pares Totales', 'Monto'];
+                $config = ['pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
-            <x-adminlte-datatable id="notas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="notas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
             @foreach ($nota->cotizaciones as $cotizacion)
 

@@ -5,14 +5,22 @@
 
         <div class="container-fluid row border-bottom">
 
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Nota de {{ $cliente->nombre }}</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
                 <input type="hidden" name="idNota" id="idNota" value="{{ $nota->id }}">
             </div>
-            <div class="col-lg-4 my-2">
-                <a href="{{ url('/home') }}" class="btn btn-warning p-2 mx-5 rounded" title="Inicio"><i class="fas fa-home"></i></a>
+            <div class="col-lg-6 my-2">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones"><i class="fas fa-portrait"></i> Clientes</a></li>
+                        <li class="breadcrumb-item"><a href="/cotizaciones/cliente/{{ $cliente->id }}"><i class="fas fa-file-invoice-dollar"></i> Cotizaciones de Cliente</a></li>
+                        <li class="breadcrumb-item"><a href="/notas/cliente/{{ $cliente->id }}"><i class="fas fa-file"></i> Notas de Cliente</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-file"></i> Nota de Cliente</li>
+                    </ol>
+                </nav>
             </div>
         </div>
 
@@ -53,9 +61,10 @@
                 $descripcion = '';
 
                 $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Descuento' ,'Numeraciones', 'Pares Totales', 'Monto'];
+                $config = ['pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
-            <x-adminlte-datatable id="notas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="notas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
             @foreach ($nota->cotizaciones as $cotizacion)
 

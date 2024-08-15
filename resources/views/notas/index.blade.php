@@ -28,9 +28,10 @@
         <div class="container-fluid row p-2">
             @php
                 $heads = ['Folio', 'Cliente', 'Total de Nota', 'Estado', 'Acciones'];
+                $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
-            <x-adminlte-datatable id="notas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="notas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
                 @if( count( $notas ) > 0 )
                     @foreach ($notas as $nota)

@@ -26,9 +26,10 @@
         <div class="container-fluid row p-2">
             @php
                 $heads = ['Nombre', 'Descripción', 'Total', 'Acciones'];
+                $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
-            <x-adminlte-datatable id="costes" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="costes" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
                 @if( count( $costes ) > 0 )
                     @foreach ($costes as $coste)
