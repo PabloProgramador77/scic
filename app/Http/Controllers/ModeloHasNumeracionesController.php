@@ -51,9 +51,30 @@ class ModeloHasNumeracionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $request, $numeraciones )
     {
-        //
+        try {
+            
+            if( count( $numeraciones ) > 0 ){
+
+                foreach( $numeraciones as $numeracion ){
+
+                    $modeloHasNumeraciones = ModeloHasNumeraciones::create([
+
+                        'idModelo' => $request->id,
+                        'idNumeracion' => $numeracion->id,
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

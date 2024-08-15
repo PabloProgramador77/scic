@@ -9,6 +9,7 @@ use App\Http\Requests\Modelo\Create;
 use App\Http\Requests\Modelo\Read;
 use App\Http\Requests\Modelo\Update;
 use App\Http\Requests\Modelo\Delete;
+use Illuminate\Support\Facades\Hash;
 
 class ModeloController extends Controller
 {
@@ -60,7 +61,7 @@ class ModeloController extends Controller
 
                 'nombre' => $request->nombre,
                 'numero' => $request->numero,
-                'descripcion' => $request->descripcion
+                'descripcion' => $request->descripcion,
 
             ]);
 
@@ -153,6 +154,53 @@ class ModeloController extends Controller
             if( $modelo->id ){
 
                 $modelo->delete();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
+
+    /**
+     * Encriptación de Modelos
+     */
+    public function encriptacion( Request $request ){
+        try {
+            
+            $modelo = Modelo::find( $request->modelo );
+
+            if( $modelo->id ){
+
+                $cadenaVariante = '|'.$modelo->nombre.'|'.$modelo->numero;
+
+                foreach( $modelo->piezas as $pieza ){
+
+                    $cadenaVariante .= '|'.$pieza->nombre;
+
+                }
+
+                foreach( $modelo->consumibles as $consumible ){
+
+                    $cadenaVariante .= '|'.$consumible->nombre;
+
+                }
+
+                foreach( $modelo->suelas as $suela ){
+
+                    $cadenaVariante .= '|'.$suela->nombre;
+
+                }
+
+                $modelo->variante = $cadenaVariante;
+                $modelo->save();
 
                 $datos['exito'] = true;
 

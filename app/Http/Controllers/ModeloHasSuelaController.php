@@ -51,9 +51,30 @@ class ModeloHasSuelaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $request, $suelas )
     {
-        //
+        try {
+            
+            if( count( $suelas ) > 0 ){
+
+                foreach( $suelas as $suela ){
+
+                    $modeloHasSuela = ModeloHasSuela::create([
+
+                        'idModelo' => $request->id,
+                        'idSuela' => $suela->id,
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

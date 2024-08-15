@@ -65,6 +65,7 @@ class VerifyCsrfToken extends Middleware
         'modelo/suelas',    
         'modelo/suelas/agregar',
         'modelo/suelas/buscar',
+        'modelo/encriptar',
         'consumible/agregar',
         'consumible/buscar',
         'consumible/actualizar',

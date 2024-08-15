@@ -16,6 +16,7 @@ class Modelo extends Model
         'nombre', 
         'numero', 
         'descripcion',
+        'variante',
 
     ];
 
@@ -47,6 +48,12 @@ class Modelo extends Model
 
         return $this->belongsToMany( Consumible::class, 'modelo_has_consumibles', 'idModelo', 'idConsumible' );
         
+    }
+
+    public function piezas(){
+
+        return $this->hasMany( Pieza::class, 'idModelo', 'id');
+
     }
 
 }

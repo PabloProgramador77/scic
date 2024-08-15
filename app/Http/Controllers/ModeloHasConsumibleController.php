@@ -55,9 +55,30 @@ class ModeloHasConsumibleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $request, $consumibles )
     {
-        //
+        try {
+            
+            if( count( $consumibles ) > 0 ){
+
+                foreach( $consumibles as $consumible ){
+
+                    $modeloHasConsumible = ModeloHasConsumible::create([
+
+                        'idModelo' => $request->id,
+                        'idConsumible' => $consumible->id,
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

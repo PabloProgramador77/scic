@@ -32,7 +32,7 @@ class Update extends FormRequest
         return [
             
             'id' => 'required|integer',
-            'numero' => 'required|integer',
+            'numero' => 'required|numeric',
             
         ];
     }

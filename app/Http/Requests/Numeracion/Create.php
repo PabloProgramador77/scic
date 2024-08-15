@@ -31,7 +31,7 @@ class Create extends FormRequest
     {
         return [
             
-            'numero' => 'required|integer',
+            'numero' => 'required|numeric',
             
         ];
     }

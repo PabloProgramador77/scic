@@ -26,7 +26,7 @@
                             </div>
                         </x-slot>
                         @foreach($modelos as $modelo)
-                            <option value="{{ $modelo->id }}">{{ $modelo->nombre }}</option>
+                            <option value="{{ $modelo->id }}">{{ $modelo->nombre }} {{ $modelo->numero }}</option>
                         @endforeach
                     </x-adminlte-select2>
 

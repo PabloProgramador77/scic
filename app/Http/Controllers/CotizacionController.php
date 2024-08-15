@@ -20,6 +20,12 @@ use App\Http\Controllers\CotizacionHasConsumibleController;
 use App\Http\Controllers\CotizacionHasSuelaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CotizacionHasNumeracionesController;
+use App\Http\Controllers\ModeloHasConsumibleController;
+use App\Http\Controllers\ModeloHasCosteController;
+use App\Http\Controllers\ModeloHasCostoController;
+use App\Http\Controllers\ModeloHasNumeracionesController;
+use App\Http\Controllers\ModeloHasSuelaController;
+use Illuminate\Support\Facades\Hash;
 
 class CotizacionController extends Controller
 {
@@ -97,8 +103,17 @@ class CotizacionController extends Controller
                             $cotizacionHasSuelaController = new CotizacionHasSuelaController();
     
                             if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
-    
-                                $datos['exito'] = true;
+
+                                if( $this->encriptacion( $request, $idCotizacion ) ){
+
+                                    $datos['exito'] = true;
+
+                                }else{
+
+                                    $datos['exito'] = false;
+                                    $datos['mensaje'] = 'Variante no registrada.';
+
+                                }
     
                             }else{
     
@@ -370,6 +385,115 @@ class CotizacionController extends Controller
             $notas = Nota::where('idCliente', '=', $idCliente)->get();
 
             return view('cotizacion.cotizaciones', compact('cotizaciones', 'cliente', 'notas'));
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
+
+    /**
+     * Comparación y Encriptación de Variantes
+     */
+    public function encriptacion( Request $request, $idCotizacion ){
+        try {
+            
+            $modelo = Modelo::find( $request->modelo );
+            $cotizacion = Cotizacion::find( $idCotizacion );
+
+            if( $modelo->id && $cotizacion->id ){
+
+                $cadenaVariante = '|'.$cotizacion->modelo->nombre.'|'.$cotizacion->modelo->numero;
+
+                foreach( $cotizacion->piezas as $pieza ){
+
+                    $cadenaVariante .= '|'.$pieza->nombre;
+
+                }
+
+                foreach( $cotizacion->consumibles as $consumible ){
+
+                    $cadenaVariante .= '|'.$consumible->nombre;
+
+                }
+
+                foreach( $cotizacion->suelas as $suela ){
+
+                    $cadenaVariante .= '|'.$suela->nombre;
+
+                }
+
+                $varianteModelos = Modelo::where('variante', '=', $cadenaVariante)->get();
+
+                if( count( $varianteModelos ) === 0 ){
+
+                    $ultimoModelo = Modelo::where('nombre', '=', $modelo->nombre)
+                                    ->orderBy('id', 'desc')
+                                    ->first();
+
+                    $cadenaVariante = str_replace( $cotizacion->modelo->numero, $ultimoModelo->numero + 1, $cadenaVariante);
+
+                    $nuevoModelo = Modelo::create([
+                            
+                        'nombre' => $modelo->nombre,
+                        'numero' => (string)( $ultimoModelo->numero + 1 ),
+                        'descripcion' => 'Nueva Variante de '.$modelo->nombre,
+                        'variante' => $cadenaVariante,
+
+                    ]);
+
+                    $this->nuevoModelo( $nuevoModelo, $idCotizacion );
+
+                    return true;
+
+                }else{
+
+                    return true;
+
+                }
+
+            }else{
+
+                return false;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+            return false;
+
+        }
+    }
+
+    /**
+     * Guardado de la variante de modelo
+     */
+    public function nuevoModelo( $request, $idCotizacion ){
+        try {
+            
+            $cotizacion = Cotizacion::find( $idCotizacion );
+
+            if( $cotizacion->id ){
+
+                $modHasConsCtlr = new ModeloHasConsumibleController();
+                $modHasConsCtlr->create( $request, $cotizacion->consumibles );
+
+                $modHasCosteCtrl = new ModeloHasCosteController();
+                $modHasCosteCtrl->create( $request, $cotizacion->costes );
+
+                $modHasCostoCtrl = new ModeloHasCostoController();
+                $modHasCostoCtrl->create( $request, $cotizacion->costos );
+
+                $modHasNumCtrl = new ModeloHasNumeracionesController();
+                $modHasNumCtrl->create( $request, $cotizacion->numeraciones );
+
+                $modHasSuelaCtrl = new ModeloHasSuelaController();
+                $modHasSuelaCtrl->create( $request, $cotizacion->suelas );
+
+            }
 
         } catch (\Throwable $th) {
             

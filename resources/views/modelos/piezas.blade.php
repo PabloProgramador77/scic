@@ -9,7 +9,7 @@
                 <h1 class="fs-3 fw-semibold"><i class="fas fa-cog"></i> Configuración de Modelo</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            <div class="col-lg-3 my-2">
+            <div class="col-lg-2 my-2">
                 <x-adminlte-input class="col-md-10 col-lg-10" name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
@@ -20,7 +20,7 @@
                 
                 <input type="hidden" name="idModelo" id="idModelo" value="{{ $modelo->id }}">
             </div>
-            <div class="col-lg-4 my-2">
+            <div class="col-lg-5 my-2">
                 <a href="{{ url('/home') }}" class="btn btn-warning px-2 rounded mx-5"><i class="fas fa-home" title="Inicio"></i></a>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalPieza" icon="fas fa-socks" title="Agregar pieza"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalCosto" icon="fas fa-file-invoice-dollar" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="costos" title="Agregar costos base"></x-adminlte-button>
@@ -28,6 +28,7 @@
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalConsumible" icon="fas fa-box" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="consumibles" title="Agregar consumibles"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalSuela" icon="fas fa-shoe-prints" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="suelas" title="Agregar suelas"></x-adminlte-button>
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalNumeracion" icon="fas fa-hashtag" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="numeraciones" title="Agregar numeración"></x-adminlte-button>
+                <x-adminlte-button theme="primary" icon="fas fa-save" id="encriptar" title="Proteger Modelo" data-id="{{ $modelo->id }}" class="mx-3"></x-adminlte-button>
             </div>
         </div>
 
@@ -109,5 +110,6 @@
     <script src="{{ asset('js/modelos/nuevoConsumible.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevaSuela.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevaNumeracion.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/encriptar.js') }}" type="text/javascript"></script>
 
 @stop

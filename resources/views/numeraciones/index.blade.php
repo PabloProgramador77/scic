@@ -19,17 +19,18 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['N°', 'Numeración', 'Acciones'];
+                $heads = ['#', 'Numeración', 'Acciones'];
+                $config = ['order' => [[1, 'asc']]];
             @endphp
 
-            <x-adminlte-datatable id="numeraciones" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="numeraciones" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
                 @if( count( $numeraciones ) > 0 )
                     @foreach ($numeraciones as $numeracion)
 
                         <tr>
                             <td>{{ $numeracion->id }}</td>
-                            <td>{{ $numeracion->numero }}</td>
+                            <td>{{ number_format( $numeracion->numero, 1)  }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $numeracion->id }}" title="Editar numeración"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $numeracion->id }}" data-value="{{ $numeracion->numero }}" title="Borrar numeración"></x-adminlte-button>

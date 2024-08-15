@@ -62,4 +62,16 @@ class Cotizacion extends Model
 
     }
 
+    public function costos(){
+
+        return $this->belongsToMany( Costo::class, 'cotizacion_has_costos', 'idCotizacion', 'idCosto' );
+
+    }
+
+    public function costes(){
+
+        return $this->belongsToMany( Coste::class, 'cotizacion_has_costes', 'idCotizacion', 'idCoste' );
+        
+    }
+
 }

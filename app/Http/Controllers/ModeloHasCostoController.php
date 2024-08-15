@@ -53,9 +53,30 @@ class ModeloHasCostoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $request, $costos )
     {
-        //
+        try {
+            
+            if( count( $costos ) > 0 ){
+
+                foreach( $costos as $costo ){
+
+                    $modeloHasCosto = ModeloHasCosto::create([
+
+                        'idModelo' => $request->id,
+                        'idCosto' => $costo->id,
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**
