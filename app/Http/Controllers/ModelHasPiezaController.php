@@ -19,9 +19,31 @@ class ModelHasPiezaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $request, $piezas )
     {
-        //
+        try {
+            
+            if( count( $piezas ) > 0 ){
+
+                foreach( $piezas as $pieza){
+
+                    $modelHasPieza = ModelHasPieza::create([
+
+                        'idModelo' => $request->id,
+                        'idPieza' => $pieza->id,
+                        'cantidad' => $pieza->cantidad,
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

@@ -25,6 +25,7 @@ use App\Http\Controllers\ModeloHasCosteController;
 use App\Http\Controllers\ModeloHasCostoController;
 use App\Http\Controllers\ModeloHasNumeracionesController;
 use App\Http\Controllers\ModeloHasSuelaController;
+use App\Http\Controllers\PiezaController;
 use Illuminate\Support\Facades\Hash;
 
 class CotizacionController extends Controller
@@ -181,9 +182,12 @@ class CotizacionController extends Controller
                             ->orderBy('concepto', 'asc')
                             ->get();
 
+            $modelo = Modelo::find( $request->id );
+
             $datos['exito'] = true;
             $datos['piezas'] = $piezas;
             $datos['materiales'] = $materiales;
+            $datos['modelo'] = $modelo;
 
         } catch (\Throwable $th) {
             
@@ -445,7 +449,7 @@ class CotizacionController extends Controller
                             
                         'nombre' => $modelo->nombre,
                         'numero' => (string)( $ultimoModelo->numero + 1 ),
-                        'descripcion' => 'Nueva Variante de '.$modelo->nombre,
+                        'descripcion' => 'Variante '.( $ultimoModelo->numero + 1 ).' de '.$modelo->nombre,
                         'variante' => $cadenaVariante,
 
                     ]);
@@ -485,6 +489,9 @@ class CotizacionController extends Controller
 
             if( $cotizacion->id ){
 
+                $PzsCtrl = new PiezaController();
+                $PzsCtrl->create( $request, $cotizacion->piezas );
+
                 $modHasConsCtlr = new ModeloHasConsumibleController();
                 $modHasConsCtlr->create( $request, $cotizacion->consumibles );
 
@@ -493,9 +500,6 @@ class CotizacionController extends Controller
 
                 $modHasCostoCtrl = new ModeloHasCostoController();
                 $modHasCostoCtrl->create( $request, $cotizacion->costos );
-
-                $modHasNumCtrl = new ModeloHasNumeracionesController();
-                $modHasNumCtrl->create( $request, $cotizacion->numeraciones );
 
                 $modHasSuelaCtrl = new ModeloHasSuelaController();
                 $modHasSuelaCtrl->create( $request, $cotizacion->suelas );

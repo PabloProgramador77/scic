@@ -45,6 +45,17 @@ jQuery(document).ready(function(){
                             '</thead>';
     
                 if( respuesta.exito ){
+
+                    if( respuesta.modelo.descripcion !== '' || respuesta.modelo.descripcion !== null ){
+
+                        $("#descripcion").val( respuesta.modelo.descripcion );
+
+                    }else{
+
+                        $("#descripcion").val( 'Sin descripción disponible' );
+
+                    }
+                    
     
                     if( respuesta.piezas.length > 0 && respuesta.materiales.length > 0 ){
     

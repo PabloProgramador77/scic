@@ -24,7 +24,7 @@
                 <p class="fs-6 fw-semibold p-1 text-center bg-info"><i class="fas fa-info-circle"></i> Elige un modelo de la lista, posterior selecciona los materiales para pieza, continuar con los costos, consumibles y suelas.</p>
             </div>
             <div class="container-fluid row">
-                <div class="col-lg-8 col-md-6 col-sm-12 d-flex align-items-center">
+                <div class="col-lg-10 col-md-6 col-sm-12 d-flex align-items-center">
                     <x-adminlte-select2 class="flex-grow-1" id="modelo" name="modelo" label-class="info">
                         <x-slot name="prependSlot">
                             <div class="input-group-text text-secondary">
@@ -36,7 +36,13 @@
                             <option value="{{ $modelo->id }}">{{ $modelo->nombre }} {{ $modelo->numero }}</option>
                         @endforeach
                     </x-adminlte-select2>
-
+                    <x-adminlte-input name="descripcion" id="descripcion" value="" readonly="true">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text text-success">
+                                <i class="fas fa-sticky-note"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
                     <x-adminlte-input class="ms-2" name="total" id="total" value="0" readonly="true">
                         <x-slot name="prependSlot">
                             <div class="input-group-text text-success">
@@ -45,7 +51,7 @@
                         </x-slot>
                     </x-adminlte-input>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 my-2">
+                <div class="col-lg-2 col-md-6 col-sm-12 my-2">
                     <x-adminlte-button id="costos" data-toggle="modal" data-target="#modalCostos" class="mx-4" theme="success" icon="fas fa-arrow-circle-right" label=" Continuar" disabled="true"></x-adminlte-button>
                 </div>
             </div>

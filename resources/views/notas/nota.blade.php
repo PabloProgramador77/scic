@@ -80,20 +80,7 @@
                         <input type="hidden" name="cotizacion" id="cotizacion{{ $cotizacion->id }}" value="{{ $cotizacion->id }}">
                         {{ $cotizacion->modelo->nombre }} {{ $cotizacion->modelo->numero }}
                     </td>
-                    <td>
-                        @foreach( $cotizacion->consumibles as $consumible )
-                            {{ $consumible->nombre.', '}}
-                        @endforeach
-
-                        @foreach( $cotizacion->suelas as $suela)
-                            {{ $suela->nombre.', ' }}
-                        @endforeach
-
-                        @foreach( $cotizacion->colores as $color )
-                            {{ $color->pivot->colorMaterial.', ' }}
-                        @endforeach
-
-                    </td>
+                    <td>{{ $cotizacion->modelo->descripcion }}</td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
                     <td>
                         <div class="row">

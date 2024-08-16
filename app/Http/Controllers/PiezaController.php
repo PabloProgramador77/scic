@@ -40,9 +40,34 @@ class PiezaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $request, $piezas )
     {
-        //
+        try {
+            
+            if( count( $piezas ) > 0 ){
+
+                foreach( $piezas as $pieza ){
+
+                    $pieza = Pieza::create([
+
+                        'nombre' => $pieza->nombre,
+                        'alto' => $pieza->alto,
+                        'largo' => $pieza->largo,
+                        'descripcion' => $pieza->descripcion,
+                        'idModelo' => $request->id,
+                        'cantidad' => $pieza->cantidad,
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

@@ -377,23 +377,9 @@ class NotaController extends Controller
 
                                     $html .= '
                                     <tr style="padding: 5px;">
-                                        <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->nombre.'</td>
-                                        <td style="border: 2px; font-size: 12px;">'.$cotizacion->modelo->numero.'</td>
-                                        <td style="border: 2px; font-size: 12px;">';
-
-                                        foreach( $cotizacion->consumibles as $consumible ){
-                                            $html .= $consumible->nombre.', ';
-                                        }
-
-                                        foreach( $cotizacion->suelas as $suela ){
-                                            $html .= $suela->nombre.', ';
-                                        }
-
-                                        foreach( $cotizacion->colores as $color){
-                                            $html .= $color->pivot->colorMaterial.', ';
-                                        }
-
-                                        $html .= '</td>';
+                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->nombre.'</td>
+                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->numero.'</td>
+                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->descripcion.'</td>';
 
                                         $ultimo = $cotizacion->numeraciones->last();
 
@@ -402,13 +388,13 @@ class NotaController extends Controller
                                             if( $numeracion->is( $ultimo ) ){
 
                                                 $html .= '
-                                                <td style="border: 2px; font-size: 12px;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'">'.$numeracion->numero.'/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                <td style="border: 2px; font-size: 12px; border: 1px;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
                                                 ';
 
                                             }else{
 
                                                 $html .= '
-                                                <td style="border: 2px; font-size: 12px;">'.$numeracion->numero.'/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                <td style="border: 2px; font-size: 12px; border: 1px;"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
                                                 ';
 
                                             }
@@ -417,9 +403,9 @@ class NotaController extends Controller
                                         }
 
                                     $html .= '
-                                        <td style="border: 2px; font-size: 12px;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
-                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)), 2).'</td>
-                                        <td style="border: 2px; font-size: 12px;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)) * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
+                                        <td style="border: 2px; font-size: 12px; border: 1px; text-align: center;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
+                                        <td style="border: 2px; font-size: 12px; border: 1px; text-align: center;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)), 2).'</td>
+                                        <td style="border: 2px; font-size: 12px; border: 1px; text-align: center;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)) * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
                                     </tr>
                                     ';
 
@@ -427,10 +413,10 @@ class NotaController extends Controller
 
                                 $html.= '
                                 <tr style="padding: 5px;">
-                                    <td colspan="'.($colspan+3).'" style="font-size: 12px; text-align: right;"><b>Pares:</b></td>
-                                    <td  style="font-size: 12px;">'.$nota->pares.'</td>
-                                    <td  style="font-size: 12px; text-align: right;"><b>Subtotal:</b></td>
-                                    <td  style="font-size: 12px;">$ '.number_format( $nota->total, 2).'</td>
+                                    <td colspan="'.($colspan+3).'" style="font-size: 12px; text-align: right; border: 1px;"><b>Pares:</b></td>
+                                    <td  style="font-size: 12px; border: 1px; text-align: center;">'.$nota->pares.'</td>
+                                    <td  style="font-size: 12px; text-align: right; border: 1px;"><b>Subtotal:</b></td>
+                                    <td  style="font-size: 12px; border: 1px; text-align: center;">$ '.number_format( $nota->total, 2).'</td>
                                 </tr>';
 
                                 if( $nota->iva == 'True' ){
@@ -438,7 +424,7 @@ class NotaController extends Controller
                                     $html .='
                                     <tr style="background-color: lightgray; padding: 5px;">
                                         <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>I.V.A:</b></td>
-                                        <td style="font-size: 12px;">$ '.number_format( ($nota->total*0.16), 2).'</td>
+                                        <td style="font-size: 12px; text-align: center;">$ '.number_format( ($nota->total*0.16), 2).'</td>
                                     </tr>
                                     ';
 
