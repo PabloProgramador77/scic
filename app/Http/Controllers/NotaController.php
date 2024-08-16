@@ -291,7 +291,7 @@ class NotaController extends Controller
 
                     'mode' => 'utf-8',
                     'format' => 'A4',
-                    'orientation' => 'P',
+                    'orientation' => 'L',
                     'autoPageBreak' => false,
 
                 ]);
