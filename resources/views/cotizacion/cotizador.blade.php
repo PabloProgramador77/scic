@@ -31,6 +31,7 @@
                                 <i class="fas fa-socks"></i>
                             </div>
                         </x-slot>
+                            <option value="default">Elige un modelo</option>
                         @foreach($modelos as $modelo)
                             <option value="{{ $modelo->id }}">{{ $modelo->nombre }} {{ $modelo->numero }}</option>
                         @endforeach
@@ -53,7 +54,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['', 'Pieza', 'Material', 'Color', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo']
+                $heads = ['', 'Pieza', 'Material', 'Color', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo'];
             @endphp
 
             <x-adminlte-datatable id="contenedorPiezas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
