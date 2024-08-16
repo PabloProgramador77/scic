@@ -59,6 +59,7 @@
                                 @else
                                     <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>
                                     <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota previa" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
+                                    <a href="{{ url('/cotizacion/ver') }}/{{ $cotizacion->id }}" class="btn btn-secondary rounded" role="button" title="Resumen de Cotización"><i class="fas fa-info-circle"></i></a>
                                 @endif
                                 
                             </td>

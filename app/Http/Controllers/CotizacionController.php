@@ -172,7 +172,7 @@ class CotizacionController extends Controller
                             ->orderBy('piezas.nombre', 'asc')
                             ->get();
 
-            $materiales = Material::select('nombre', 'concepto', 'precio', 'unidades', 'color', 'hexColor')
+            $materiales = Material::select('id', 'nombre', 'concepto', 'precio', 'unidades', 'color', 'hexColor')
                             ->whereIn('id', function($query) {
                                 $query->select(\DB::raw('MIN(id)'))
                                       ->from('materiales')
@@ -499,6 +499,29 @@ class CotizacionController extends Controller
 
                 $modHasSuelaCtrl = new ModeloHasSuelaController();
                 $modHasSuelaCtrl->create( $request, $cotizacion->suelas );
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
+
+    /**
+     * Resumen de Cotización
+     * * Recibe el ID 
+     * ! Muestra todos los datos y relaciones
+     */
+    public function cotizacion( $idCotizacion ){
+        try {
+            
+            $cotizacion = Cotizacion::find( $idCotizacion );
+
+            if( $cotizacion && $cotizacion->id ){
+
+                return view('cotizacion.resumen', compact('cotizacion'));
 
             }
 
