@@ -51,7 +51,7 @@ jQuery(document).ready(function(){
                         var opcionesMateriales = '<option value="0, 0">Elige un material</option>';
     
                         respuesta.materiales.forEach( function(material){
-                            opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +', ' + material.id +', '+material.nombre+'">' + material.nombre + ' - $' +material.precio + '</option>';
+                            opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +', ' + material.id +', '+material.nombre+'">'+ material.concepto + ' ' + material.nombre + ' : $' +material.precio + '</option>';
                         });
     
                         respuesta.piezas.forEach( function(pieza){

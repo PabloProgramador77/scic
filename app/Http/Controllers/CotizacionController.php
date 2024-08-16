@@ -172,7 +172,14 @@ class CotizacionController extends Controller
                             ->orderBy('piezas.nombre', 'asc')
                             ->get();
 
-            $materiales = Material::orderBy('nombre', 'asc')->get();
+            $materiales = Material::select('nombre', 'concepto', 'precio', 'unidades', 'color', 'hexColor')
+                            ->whereIn('id', function($query) {
+                                $query->select(\DB::raw('MIN(id)'))
+                                      ->from('materiales')
+                                      ->groupBy('nombre', 'concepto');
+                            })
+                            ->orderBy('concepto', 'asc')
+                            ->get();
 
             $datos['exito'] = true;
             $datos['piezas'] = $piezas;
