@@ -34,4 +34,17 @@ class Material extends Model
 
     }
 
+    public function pieza(){
+
+        return $this->piezas()->first();
+
+
+    }
+
+    public function proveedor(){
+
+        return $this->proveedores()->first();
+
+    }
+
 }
