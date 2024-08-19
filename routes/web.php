@@ -122,6 +122,7 @@ Route::post('/nota/impuestos', [App\Http\Controllers\NotaController::class, 'imp
 Route::post('/nota/consumos', [App\Http\Controllers\NotaController::class, 'consumos'])->name('consumos-nota');
 Route::get('/nota/consumos/{idNota}', [App\Http\Controllers\NotaController::class, 'consumo'])->name('descargar-consumos');
 Route::get('/notas/tabla/{idNota}', [App\Http\Controllers\NotaController::class, 'tabla'])->name('tabla-consumos');
+Route::post('/notas/tabla', [App\Http\Controllers\NotaController::class, 'tablaConsumo'])->name('tabla-consumo');
 
 Route::get('/numeraciones', [App\Http\Controllers\NumeracionController::class, 'index'])->name('numeraciones');
 Route::post('/numeracion/agregar', [App\Http\Controllers\NumeracionController::class, 'store'])->name('agregar-numeracion');

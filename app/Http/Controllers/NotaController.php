@@ -1028,6 +1028,33 @@ class NotaController extends Controller
     }
 
     /**
+     * Busca y verifica el PDF de tabla
+     */
+    public function tablaConsumo( Request $request ){
+        try {
+            
+            if( file_exists( public_path('pdf/').'tabla'.$request->id.'.pdf' ) ){
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Documento no existente';
+                
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
+
+    /**
      * Descarga de tabla de consumos
      * *Recibe el ID de la nota
      */
@@ -1050,4 +1077,5 @@ class NotaController extends Controller
             
         }
     }
+
 }
