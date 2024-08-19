@@ -80,6 +80,7 @@ class CotizacionController extends Controller
                 'estado' => 'Pendiente',
                 'idModelo' => $request->modelo,
                 'idCliente' => $request->cliente,
+                'observaciones' => $request->observaciones,
 
             ]);
 

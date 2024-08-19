@@ -17,6 +17,7 @@ class Cotizacion extends Model
         'estado',
         'idModelo',
         'idCliente',
+        'observaciones',
 
     ];
 

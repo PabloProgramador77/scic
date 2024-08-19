@@ -187,6 +187,7 @@ jQuery(document).ready(function(){
                         'consumibles' : consumibles,
                         'suelas' : suelas,
                         'colores' : colores,
+                        'observaciones' : $("#observaciones").val(),
 
                     },
                     dataType: 'json',

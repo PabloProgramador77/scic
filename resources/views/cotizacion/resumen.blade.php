@@ -154,7 +154,11 @@
                             <i class="fas fa-edit"></i>
                         </div>
                     </x-slot>
-                    Sin observaciones
+                    @if( $cotizacion->observaciones !== '' || $cotizacion->observaciones !== null )
+                        {{ $cotizacion->observaciones }}
+                    @else
+                        Sin observaciones agregadas
+                    @endif
                 </x-adminlte-textarea>
             </div>
         </div>
