@@ -702,7 +702,7 @@ class NotaController extends Controller
 
                                             $html = '
                                             <tr style="border-bottom: 2px; padding: 5px;">
-                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$cotizacion->modelo->nombre.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$cotizacion->modelo->nombre .' '.$cotizacion->modelo->numero.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->nombre.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( ($pieza->alto*$pieza->largo), 2 ).'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->alto.'</td>
