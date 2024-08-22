@@ -106,17 +106,9 @@ class CotizacionController extends Controller
     
                             if( $cotizacionHasSuelaController->store( $request, $idCotizacion ) ){
 
-                                if( $this->encriptacion( $request, $idCotizacion ) ){
+                                $datos['exito'] = true;
+                                $datos['cotizacion'] = $cotizacion->id;
 
-                                    $datos['exito'] = true;
-
-                                }else{
-
-                                    $datos['exito'] = false;
-                                    $datos['mensaje'] = 'Variante no registrada.';
-
-                                }
-    
                             }else{
     
                                 $datos['exito'] = false;
@@ -408,11 +400,11 @@ class CotizacionController extends Controller
     /**
      * Comparación y Encriptación de Variantes
      */
-    public function encriptacion( Request $request, $idCotizacion ){
+    public function encriptacion( Request $request ){
         try {
             
             $modelo = Modelo::find( $request->modelo );
-            $cotizacion = Cotizacion::find( $idCotizacion );
+            $cotizacion = Cotizacion::find( $request->cotizacion );
 
             if( $modelo->id && $cotizacion->id ){
 
@@ -455,29 +447,32 @@ class CotizacionController extends Controller
 
                     ]);
 
-                    $this->nuevoModelo( $nuevoModelo, $idCotizacion );
+                    $this->nuevoModelo( $nuevoModelo, $request->cotizacion );
 
-                    return true;
+                    $datos['exito'] = true;
+                    $datos['variante'] = true;
 
                 }else{
 
-                    return true;
+                    $datos['exito'] = true;
+                    $datos['variante'] = false;
 
                 }
 
             }else{
 
-                return false;
+                $datos['exito'] = false;
 
             }
 
         } catch (\Throwable $th) {
-            
-            echo $th->getMessage();
 
-            return false;
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
 
         }
+
+        return response()->json( $datos );
     }
 
     /**

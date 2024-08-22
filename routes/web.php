@@ -92,6 +92,7 @@ Route::post('/cotizacion/cliente', [App\Http\Controllers\CotizacionController::c
 Route::post('cotizacion/numeraciones', [App\Http\Controllers\CotizacionHasNumeracionesController::class, 'store'])->name('cotizacion-numeraciones');
 Route::get('cotizaciones/cliente/{idCliente}', [App\Http\Controllers\CotizacionController::class, 'cliente'])->name('cotizaciones-cliente');
 Route::get('cotizacion/ver/{idCotizacion}', [App\Http\Controllers\CotizacionController::class, 'cotizacion'])->name('ver-cotizacion');
+Route::post('cotizacion/variante', [App\Http\Controllers\CotizacionController::class, 'encriptacion'])->name('variante-cotizacion');
 
 Route::get('consumibles', [App\Http\Controllers\ConsumibleController::class, 'index'])->name('consumibles');
 Route::post('consumible/agregar', [App\Http\Controllers\ConsumibleController::class, 'store'])->name('agregar-consumible');

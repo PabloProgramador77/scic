@@ -199,19 +199,135 @@ jQuery(document).ready(function(){
 
                         Swal.fire({
 
-                            icon: 'success',
-                            title: 'Cotización Registrada',
+                            title: 'Verificando variantes',
+                            html: 'Un momento por favor: <b></b>',
+                            timer: 9975,
                             allowOutsideClick: false,
-                            showConfirmButton: true
+                            didOpen: ()=>{
+    
+                                Swal.showLoading();
+                                const b = Swal.getHtmlContainer().querySelector('b');
+                                procesamiento = setInterval(()=>{
+    
+                                    b.textContent = Swal.getTimerLeft();
+    
+                                }, 100);
+    
+                                $.ajax({
+    
+                                    type: 'POST',
+                                    url: '/cotizacion/variante',
+                                    data:{
+    
+                                        'cliente' : $("#idCliente").val(),
+                                        'modelo' : $("#modelo").val(),
+                                        'total' : $("#total").val(),
+                                        'piezas' : piezas,
+                                        'materiales' : materiales,
+                                        'costos' : costos,
+                                        'costes' : costes,
+                                        'consumibles' : consumibles,
+                                        'suelas' : suelas,
+                                        'colores' : colores,
+                                        'observaciones' : $("#observaciones").val(),
+                                        'cotizacion' : respuesta.cotizacion,
+    
+                                    },
+                                    dataType: 'json',
+                                    encode: true,
+    
+                                }).done( function( respuesta ){
 
-                        }).then((resultado)=>{
+                                    if( respuesta.exito ){
 
-                            if( resultado.isConfirmed ){
+                                        if( respuesta.variante ){
 
-                                window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
+                                            Swal.fire({
 
+                                                icon: 'success',
+                                                title: 'Cotización y Variante Registrada',
+                                                allowOutsideClick: false,
+                                                showConfirmButton: true
+                    
+                                            }).then((resultado)=>{
+                    
+                                                if( resultado.isConfirmed ){
+                    
+                                                    window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
+                    
+                                                }
+                    
+                                            });
+
+                                        }else{
+
+                                            Swal.fire({
+
+                                                icon: 'success',
+                                                title: 'Cotización Registrada',
+                                                allowOutsideClick: false,
+                                                showConfirmButton: true
+                    
+                                            }).then((resultado)=>{
+                    
+                                                if( resultado.isConfirmed ){
+                    
+                                                    window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
+                    
+                                                }
+                    
+                                            });
+
+                                        }
+
+                                    }else{
+
+                                        Swal.fire({
+
+                                            icon: 'error',
+                                            title: respuesta.mensaje,
+                                            allowOutsideClick: false,
+                                            showConfirmButton: true
+
+                                        }).then((resultado)=>{
+
+                                            if( resultado.isConfirmed ){
+
+                                                window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+
+                                            }
+
+                                        });
+
+                                    }
+    
+                                });
+    
                             }
+    
+                        }).then( function( resultado ){
 
+                            if( resultado.dismiss == Swal.DismissReason.timer ){
+
+                                Swal.fire({
+                
+                                    icon: 'warning',
+                                    title: 'Hubo un inconveniente. Trata de nuevo.',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: true
+                
+                                }).then((resultado)=>{
+                
+                                    if( resultado.isConfirmed ){
+                
+                                        window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+                
+                                    }
+                
+                                });
+                
+                            }
+    
                         });
 
                     }else{
