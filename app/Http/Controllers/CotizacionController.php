@@ -416,6 +416,18 @@ class CotizacionController extends Controller
 
                 }
 
+                foreach( $cotizacion->materiales as $material ){
+
+                    $cadenaVariante .= '|'.$material->nombre;
+
+                }
+
+                foreach( $cotizacion->colores as $color ){
+
+                    $cadenaVariante .= '|'.$color->pivot->colorMaterial;
+
+                }
+
                 foreach( $cotizacion->consumibles as $consumible ){
 
                     $cadenaVariante .= '|'.$consumible->nombre;
