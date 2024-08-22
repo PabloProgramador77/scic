@@ -95,13 +95,13 @@
                         
                         @endforeach
                     </tr>
-                    <tr>
+                    <!--<tr>
 
                         @foreach( $cotizacion->modelo->numeraciones as $numeracion )
                             <td class="text-center border">{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id) }}</td>
                         @endforeach
 
-                    </tr>
+                    </tr>-->
                 @else
                     <tr>
                         <td colspan="12" class="fw-semibold">No hay numeraciones registradas.</td>
@@ -148,18 +148,13 @@
 
             </div>
             <div class="col-lg-12">
-                <x-adminlte-textarea name="observaciones" id="observaciones" readonly="true">
+                <x-adminlte-input name="observaciones" id="observaciones" readonly="true" value="{{ $cotizacion->observaciones }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
                             <i class="fas fa-edit"></i>
                         </div>
                     </x-slot>
-                    @if( $cotizacion->observaciones !== '' || $cotizacion->observaciones !== null )
-                        {{ $cotizacion->observaciones }}
-                    @else
-                        Sin observaciones agregadas
-                    @endif
-                </x-adminlte-textarea>
+                </x-adminlte-input>
             </div>
         </div>
 
