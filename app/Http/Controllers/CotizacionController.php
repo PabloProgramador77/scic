@@ -500,6 +500,9 @@ class CotizacionController extends Controller
                 $modHasSuelaCtrl = new ModeloHasSuelaController();
                 $modHasSuelaCtrl->create( $request, $cotizacion->suelas );
 
+                $modHasNumCtrl = new ModeloHasNumeracionesController();
+                $modHasNumCtrl->create( $request, $cotizacion->modelo->numeraciones );
+
                 $cotizacion->idModelo = $request->id;
                 $cotizacion->save();
 
