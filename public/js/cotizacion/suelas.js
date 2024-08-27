@@ -245,18 +245,171 @@ jQuery(document).ready(function(){
                                             Swal.fire({
 
                                                 icon: 'success',
-                                                title: 'Cotización y Variante Registrada',
+                                                title: 'Nueva variante de modelo',
                                                 allowOutsideClick: false,
-                                                showConfirmButton: true
-                    
-                                            }).then((resultado)=>{
-                    
+                                                showConfirmButton: true,
+
+                                            }).then( (resultado)=>{
+
                                                 if( resultado.isConfirmed ){
-                    
-                                                    window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
-                    
+
+                                                    document.getElementById('modalEscritura').style.display = 'block';
+                                                    document.getElementById('modalEscritura').classList.add('show');
+
+                                                    $("#modeloVariante").val( respuesta.modelo.nombre );
+                                                    $("#numeroVariante").val( respuesta.modelo.numero );
+                                                    $("#descripcionVariante").val( respuesta.modelo.descripcion );
+                                                    $("#idModeloVariante").val( respuesta.modelo.id );
+                                                    $("#cadenaVariante").val( respuesta.modelo.variante );
+                                                    $("#cotizacionVariante").val( respuesta.cotizacion );
+
+                                                    if( respuesta.modelos.length > 0 ){
+
+                                                        var html = '<tr>'+
+                                                                        '<td><b>Modelo</b></td>'+
+                                                                        '<td><b>Número</b></td>'+
+                                                                        '<td><b>Descripción</b></td>'+
+                                                                        '<td></td>'
+                                                                +'</tr>';
+
+                                                        respuesta.modelos.forEach( function( modelo){
+
+                                                            if( modelo.numero !== respuesta.modelo.numero ){
+
+                                                                html += '<tr>'+
+                                                                        '<td>'+modelo.nombre+'</td>'+
+                                                                        '<td>'+modelo.numero+'</td>'+
+                                                                        '<td>'+modelo.descripcion+'</td>'+
+                                                                        '<td><button type="button" class="btn btn-warning sobreescribir" id="sobreescribir" data-id="'+modelo.id+'" title="Sobreescribir variante"><i class="fas fa-save"></i></button></td>'
+                                                                    +'</tr>';
+
+                                                            }
+
+                                                        });
+
+                                                        $("#contenedorVariantes").empty().append( html );
+
+                                                        $(".sobreescribir").on('click', function(e){
+
+                                                            e.preventDefault();
+                                                    
+                                                            var idModelo = $(this).attr('data-id');
+                                                    
+                                                            let procesamiento;
+                                                    
+                                                            Swal.fire({
+                                                    
+                                                                title: 'Sobreescribiendo Variante',
+                                                                html: 'Un momento por favor: <b></b>',
+                                                                timer: 9975,
+                                                                allowOutsideClick: false,
+                                                                didOpen: ()=>{
+                                                    
+                                                                    Swal.showLoading();
+                                                                    const b = Swal.getHtmlContainer().querySelector('b');
+                                                                    procesamiento = setInterval(()=>{
+                                                    
+                                                                    }, 100);
+                                                    
+                                                                    $.ajax({
+                                                    
+                                                                        type: 'POST',
+                                                                        url: '/cotizacion/variante/sobreescribir',
+                                                                        data:{
+                                                    
+                                                                            'nombre' : $("#modeloVariante").val(),
+                                                                            'numero' : $("#numeroVariante").val(),
+                                                                            'descripcion' : $("#descripcionVariante").val(),
+                                                                            'variante' : $("#cadenaVariante").val(),
+                                                                            'id' : $("#idModeloVariante").val(),
+                                                                            'cotizacion' : $("#cotizacionVariante").val(),
+                                                                            'idModelo' : idModelo,
+                                                    
+                                                                        },
+                                                                        dataType: 'json',
+                                                                        encode: true,
+                                                                    }).done( function( respuesta ){
+                                                    
+                                                                        if( respuesta.exito ){
+                                                    
+                                                                            Swal.fire({
+                                                    
+                                                                                icon: 'success',
+                                                                                title: 'Variante Guardada',
+                                                                                allowOutsideClick: false,
+                                                                                showConfirmButton: true,
+                                                    
+                                                                            }).then((resultado)=>{
+                                                    
+                                                                                if( resultado.isConfirmed ){
+                                                    
+                                                                                    window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+                                                    
+                                                                                }
+                                                    
+                                                                            });
+                                                    
+                                                                        }else{
+                                                    
+                                                                            Swal.fire({
+                                                    
+                                                                                icon: 'error',
+                                                                                title: respuesta.mensaje,
+                                                                                allowOutsideClick: false,
+                                                                                showConfirmButton: true
+                                                            
+                                                                            }).then((resultado)=>{
+                                                            
+                                                                                if( resultado.isConfirmed ){
+                                                            
+                                                                                    window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+                                                            
+                                                                                }
+                                                            
+                                                                            });
+                                                    
+                                                                        }
+                                                    
+                                                                    });
+                                                    
+                                                                },
+                                                                willClose: ()=>{
+                                                    
+                                                                    clearInterval( procesamiento );
+                                                    
+                                                                }
+                                                    
+                                                            }).then( (resultado)=>{
+                                                    
+                                                                if( resultado.dismiss == Swal.DismissReason.timer ){
+                                                    
+                                                                    Swal.fire({
+                                                    
+                                                                        icon: 'warning',
+                                                                        title: 'Hubo un inconveniente. Trata de nuevo.',
+                                                                        allowOutsideClick: false,
+                                                                        showConfirmButton: true
+                                                    
+                                                                    }).then((resultado)=>{
+                                                    
+                                                                        if( resultado.isConfirmed ){
+                                                    
+                                                                            window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+                                                    
+                                                                        }
+                                                    
+                                                                    });
+                                                    
+                                                                }
+                                                    
+                                                            });
+                                                    
+                                                        });
+
+                                                    }
+
                                                 }
-                    
+
                                             });
 
                                         }else{

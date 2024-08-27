@@ -459,10 +459,15 @@ class CotizacionController extends Controller
 
                     ]);
 
-                    $this->nuevoModelo( $nuevoModelo, $request->cotizacion );
+                    /*$this->nuevoModelo( $nuevoModelo, $request->cotizacion );*/
 
                     $datos['exito'] = true;
                     $datos['variante'] = true;
+                    $datos['cotizacion'] = $cotizacion->id;
+                    $datos['modelo'] = $nuevoModelo;
+                    $datos['modelos'] = Modelo::where('nombre', '=', $modelo->nombre)
+                                                ->orderBy('numero', 'asc')
+                                                ->get();
 
                 }else{
 
@@ -490,10 +495,10 @@ class CotizacionController extends Controller
     /**
      * Guardado de la variante de modelo
      */
-    public function nuevoModelo( $request, $idCotizacion ){
+    public function nuevoModelo( Request $request ){
         try {
             
-            $cotizacion = Cotizacion::find( $idCotizacion );
+            $cotizacion = Cotizacion::find( $request->cotizacion );
 
             if( $cotizacion->id ){
 
@@ -518,13 +523,18 @@ class CotizacionController extends Controller
                 $cotizacion->idModelo = $request->id;
                 $cotizacion->save();
 
+                $datos['exito'] = true;
+
             }
 
         } catch (\Throwable $th) {
             
-            echo $th->getMessage();
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
 
         }
+
+        return response()->json( $datos );
     }
 
     /**
@@ -548,5 +558,63 @@ class CotizacionController extends Controller
             echo $th->getMessage();
 
         }
+    }
+
+    /**
+     * Sobreescritura de variante
+     */
+    public function sobreescribirModelo( Request $request ){
+        try {
+            
+            $cotizacion = Cotizacion::find( $request->cotizacion );
+
+            $modelo = Modelo::find( $request->idModelo );
+            $modelo->delete();
+
+            if( $cotizacion->id ){
+
+                $modelo = Modelo::where('id', '=', $request->id )
+                                ->update([
+
+                                    'nombre' => $request->nombre,
+                                    'numero' => $request->numero,
+                                    'descripcion' => $request->descripcion,
+                                    'variante' => $request->variante,
+
+                                ]);
+
+                $PzsCtrl = new PiezaController();
+                $PzsCtrl->create( $request, $cotizacion->piezas );
+
+                $modHasConsCtlr = new ModeloHasConsumibleController();
+                $modHasConsCtlr->create( $request, $cotizacion->consumibles );
+
+                $modHasCosteCtrl = new ModeloHasCosteController();
+                $modHasCosteCtrl->create( $request, $cotizacion->costes );
+
+                $modHasCostoCtrl = new ModeloHasCostoController();
+                $modHasCostoCtrl->create( $request, $cotizacion->costos );
+
+                $modHasSuelaCtrl = new ModeloHasSuelaController();
+                $modHasSuelaCtrl->create( $request, $cotizacion->suelas );
+
+                $modHasNumCtrl = new ModeloHasNumeracionesController();
+                $modHasNumCtrl->create( $request, $cotizacion->modelo->numeraciones );
+
+                $cotizacion->idModelo = $request->id;
+                $cotizacion->save();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }
