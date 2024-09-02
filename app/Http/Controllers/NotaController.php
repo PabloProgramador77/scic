@@ -15,6 +15,7 @@ use App\Http\Requests\Nota\Search;
 use App\Http\Requests\Nota\Impuestos;
 use App\Http\Controllers\NotaHasCotizacionController;
 use App\Http\Controllers\CotizacionController;
+use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
 
 class NotaController extends Controller
@@ -780,136 +781,100 @@ class NotaController extends Controller
      * Crea el PDF de la tabla de consumos
      * ! Recibe el ID de la nota
      */
-    public function tablaConsumos( $idNota ){
-        try {
+    public function tablaConsumos($idNota)
+{
+    try {
+        $nota = Nota::find($idNota);
 
-            $materiales = Material::select('materiales.id', 'materiales.nombre', 'materiales.concepto', 'materiales.precio', 'materiales.unidades', 'materiales.color', 'piezas.alto', 'piezas.largo', 'piezas.cantidad', 'nota_has_cotizaciones.totalPares', 'cotizacion_has_piezas.colorMaterial')
-                        ->join('cotizacion_has_piezas', 'materiales.id', '=', 'cotizacion_has_piezas.idMaterial')
-                        ->join('nota_has_cotizaciones', 'cotizacion_has_piezas.idCotizacion', '=', 'nota_has_cotizaciones.idCotizacion')
-                        ->join('piezas', 'cotizacion_has_piezas.idPieza', '=', 'piezas.id')
-                        ->where('nota_has_cotizaciones.idNota', '=', $idNota)
-                        ->orderBy('materiales.nombre', 'asc')
-                        ->get();
+        $pdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'orientation' => 'P',
+            'autoPageBreak' => true,
+        ]);
 
-            $nota = Nota::find( $idNota );
+        $html = '
+            <html>
+            <body>
+                <p style="font-size: 22px; font-weight: bold;">Tabla de Consumos: ' . $idNota . '</p>
+                <table style="width: 100%; height: auto;">
+                    <thead style="width: 100%; height: auto;">
+                        <tr style="border: 2px; background-color: lightblue; padding: 5px;">
+                            <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Proveedor</b></td>
+                            <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Material</b></td>
+                            <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Color</b></td>
+                            <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Precio</b></td>
+                            <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Mts. Totales</b></td>
+                            <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Monto Aprox.</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
-            if( count( $materiales ) > 0 ){
+        $materialesTotales = []; // Arreglo para acumular los totales por material
 
-                $pdf = new \Mpdf\Mpdf([
+        foreach ($nota->cotizaciones as $cotizacion) {
+            $materiales = Material::join('proveedor_has_materiales', 'materiales.id', '=', 'proveedor_has_materiales.idMaterial')
+                ->join('proveedores', 'proveedor_has_materiales.idProveedor', '=', 'proveedores.id')
+                ->join('cotizacion_has_piezas', 'materiales.id', '=', 'cotizacion_has_piezas.idMaterial')
+                ->where('cotizacion_has_piezas.idCotizacion', '=', $cotizacion->id)
+                ->groupBy('materiales.id', 'materiales.nombre', 'materiales.concepto', 'materiales.precio', 'materiales.unidades', 'cotizacion_has_piezas.colorMaterial', 'proveedores.id')
+                ->select('materiales.id', 'materiales.nombre', 'materiales.concepto', 'materiales.precio', 'materiales.unidades', 'cotizacion_has_piezas.colorMaterial', 'proveedores.id')
+                ->get();
 
-                    'mode' => 'utf-8',
-                    'format' => 'A4',
-                    'orientation' => 'P',
-                    'autoPageBreak' => true,
-    
-                ]);
+            foreach ($materiales as $material) {
+                $totalMts = 0;
+                $total = 0;
 
-                $html = '
-                    <html>
-                    <body>
-                        <p style="font-size: 22px; font-style: bold;">Tabla de Consumos: '.$nota->id.' </p>
-                        <table style="width: 100%; height: auto;">
-                            <thead style="width: 100%; height: auto;">
-                                <tr style="border: 2px; background-color: lightblue; padding: 5px;">
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Proveedor</b></td>
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Material</b></td>
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Color</b></td>
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Precio</b></td>
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Mts. Totales</b></td>
-                                    <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Monto Aprox.</b></td>
-                                </tr>
-                            </thead>
-                            <tbody>';
-
-                            $pdf->writeHTML( $html );
-
-                            $nombreMaterial = '';
-                            $totalMts = 0;
-                            $total = 0;
-                            $precioAnterior = 0;
-                            $descripcionAnterior = '';
-
-                            foreach( $materiales as $material ){
-
-                                if( $material->nombre == $nombreMaterial ){
-                            
-                                    $totalMts += (($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares;
-                                    $total += ((($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares)*($precioAnterior);
-                            
-                                }else{
-                            
-                                    if ($nombreMaterial != '') {
-
-                                        $html = '
-                                            <tr style="width: 100%; height: auto; padding: 5px;">
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$proveedorAnterior.'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
-                                                <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
-                                            </tr>
-                                        ';
-                            
-                                        $pdf->writeHTML( $html );
-                                    }
-                            
-                                    $nombreMaterial = $material->concepto.' '.$material->nombre;
-                                    $precioAnterior = $material->precio; // Guarda el precio actual para usarlo en la siguiente iteración
-                                    $proveedorAnterior = $material->proveedor()->nombre;
-                                    $descripcionAnterior = $material->colorMaterial; // Guarda la descripción actual para usarla en la siguiente iteración
-                                    $totalMts = (($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares;
-                                    $total = ((($material->largo*$material->alto)*$material->cantidad)/($material->unidades*100)*$material->totalPares)*($material->precio);
-                            
-                                }
-                            
-                            }
-                            // Asegúrate de imprimir la última acumulación después del bucle
-                            if ($nombreMaterial != '') {
-
-                                $html = '
-                                    <tr style="width: 100%; height: auto; padding: 5px;">
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$material->proveedor()->nombre.'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$nombreMaterial.'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.$descripcionAnterior.'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($precioAnterior, 2).'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format($totalMts, 2).'</td>
-                                        <td style="font-size: 12px; text-align: center; width: 16.5%;">$ '.number_format($total, 2).'</td>
-                                    </tr>
-                                ';
-                            
-                                $pdf->writeHTML( $html );
-                            }
-
-                            $html = '
-                            </tbody>
-                        </table>
-                    </body>
-                    </html>
-                ';
-
-                $pdf->writeHTML( $html );
-                $pdf->Output( public_path('pdf/').'tabla'.$idNota.'.pdf', \Mpdf\Output\Destination::FILE );
-
-                if( file_exists( public_path('pdf/').'tabla'.$idNota.'.pdf')){
-
-                    return true;
-
-                }else{
-
-                    return false;
-
+                foreach ($material->piezas as $pieza) {
+                    $mtsCalculados = (($pieza->largo * $pieza->alto) * $pieza->cantidad) / ($material->unidades * 100) * $nota->pares($idNota, $cotizacion->id);
+                    $totalMts += $mtsCalculados;
+                    
+                    $montoCalculado = $mtsCalculados * $material->precio;
+                    $total += $montoCalculado;
                 }
 
-
+                // Acumular los valores en el arreglo
+                $key = $material->id . '_' . $material->colorMaterial;
+                if (!isset($materialesTotales[$key])) {
+                    $materialesTotales[$key] = [
+                        'proveedor' => $material->proveedores->first()->nombre,
+                        'material' => $material->nombre,
+                        'color' => $material->colorMaterial,
+                        'precio' => $material->precio,
+                        'totalMts' => 0,
+                        'totalMonto' => 0
+                    ];
+                }
+                $materialesTotales[$key]['totalMts'] += $totalMts;
+                $materialesTotales[$key]['totalMonto'] += $total;
             }
-
-        } catch (\Throwable $th) {
-            
-            echo $th->getMessage();
-
         }
+
+        // Mostrar los totales acumulados
+        foreach ($materialesTotales as $material) {
+            $html .= '<tr>';
+            $html .= '<td style="text-align: center; font-size: 12px;">' . $material['proveedor'] . '</td>';
+            $html .= '<td style="text-align: center; font-size: 12px;">' . $material['material'] . '</td>';
+            $html .= '<td style="text-align: center; font-size: 12px;">' . $material['color'] . '</td>';
+            $html .= '<td style="text-align: center; font-size: 12px;">$ ' . number_format($material['precio'], 2) . '</td>';
+            $html .= '<td style="text-align: center; font-size: 12px;">' . number_format($material['totalMts'], 2) . ' Mts.</td>';
+            $html .= '<td style="text-align: center; font-size: 12px;">$ ' . number_format($material['totalMonto'], 2) . '</td>';
+            $html .= '</tr>';
+        }
+
+        $html .= '</tbody></table></body></html>';
+
+        $pdf->writeHTML($html);
+
+        $pdf->Output(public_path('pdf/') . 'tabla' . $idNota . '.pdf', \Mpdf\Output\Destination::FILE);
+
+        return file_exists(public_path('pdf/') . 'tabla' . $idNota . '.pdf');
+    } catch (\Throwable $th) {
+        echo $th->getMessage();
+        return false;
     }
+}
+
 
     /**
      * Agregado de Impuestos
