@@ -19,6 +19,7 @@
             </div>
             <div class="col-lg-2 my-2">
                 <x-adminlte-button theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus" title="Nuevo modelo" label=" Modelo"></x-adminlte-button>
+                <x-adminlte-button theme="info" data-toggle="modal" data-target="#modalGanancia" icon="fas fa-hand-holding-usd" title="Ganancia" id="modeloGanancia"></x-adminlte-button>
             </div>
         </div>
 
@@ -63,6 +64,7 @@
 
         @include('modelos.nuevo')
         @include('modelos.editar')
+        @include('modelos.ganancia')
 
     </section>
 
@@ -72,5 +74,6 @@
     <script src="{{ asset('js/modelos/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/ganancia.js') }}" type="text/javascript"></script>
 
 @stop
