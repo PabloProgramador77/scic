@@ -9,6 +9,7 @@ use App\Models\Material;
 use App\Models\Costo;
 use App\Models\Nota;
 use App\Models\Cliente;
+use App\Models\ModeloHasGanancia;
 use Illuminate\Http\Request;
 use App\Http\Requests\Cotizacion\Modelos;
 use App\Http\Requests\Cotizacion\Create;
@@ -57,8 +58,9 @@ class CotizacionController extends Controller
             
             $modelos = Modelo::orderBy('nombre', 'asc')->get();
             $cliente = Cliente::find( $idCliente );
+            $modeloHasGanancia = ModeloHasGanancia::find( 1 );
 
-            return view('cotizacion.cotizador', compact('modelos', 'cliente'));
+            return view('cotizacion.cotizador', compact('modelos', 'cliente', 'modeloHasGanancia'));
 
         } catch (\Throwable $th) {
             

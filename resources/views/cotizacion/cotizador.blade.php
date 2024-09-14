@@ -8,6 +8,7 @@
             <div class="col-lg-6">
                 <h1 class="fs-3 fw-semibold my-2"><i class="fas fa-file-invoice-dollar"></i> Cotizador de {{ $cliente->nombre }}</h1>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
+                <input type="hidden" name="ganancia" id="ganancia" value="{{ $modeloHasGanancia->ganancia }}">
             </div>
             <div class="col-lg-6 my-2">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">

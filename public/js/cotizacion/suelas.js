@@ -87,6 +87,7 @@ jQuery(document).ready(function(){
 
         var suelas = 0;
         var total = parseFloat( $("#total").val() );
+        var ganancia = parseFloat( $("#ganancia").val() );
 
         $("input[type=checkbox][name=suela]").each(function(){
 
@@ -99,6 +100,7 @@ jQuery(document).ready(function(){
         });
 
         total += suelas;
+        total += ganancia;
 
         console.log( total );
 
