@@ -56,7 +56,7 @@ class CotizacionController extends Controller
     {
         try {
             
-            $modelos = Modelo::orderBy('nombre', 'asc')->get();
+            $modelos = Modelo::orderBy('numero', 'asc')->get();
             $cliente = Cliente::find( $idCliente );
             $modeloHasGanancia = ModeloHasGanancia::find( 1 );
 
