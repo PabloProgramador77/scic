@@ -29,19 +29,27 @@ class CotizacionHasCosteController extends Controller
     public function store(Request $request, $idCotizacion)
     {
         try {
-            
-            foreach( $request->costes as $coste ){
 
-                $cotizacionHasCostes = CotizacionHasCoste::create([
+            if( isset( $request->costes) && count( $request->costes ) > 0 ){
 
-                    'idCotizacion' => $idCotizacion,
-                    'idCoste' => $coste
+                foreach( $request->costes as $coste ){
 
-                ]);
+                    $cotizacionHasCostes = CotizacionHasCoste::create([
+    
+                        'idCotizacion' => $idCotizacion,
+                        'idCoste' => $coste
+    
+                    ]);
+    
+                }
+    
+                return true;
 
+            }else{
+
+                return true;
+                
             }
-
-            return true;
 
         } catch (\Throwable $th) {
             

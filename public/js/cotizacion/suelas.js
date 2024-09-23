@@ -50,7 +50,20 @@ jQuery(document).ready(function(){
 
                     $("#contenedorSuelas").empty().append( html );
 
-                    $("#agregarSuela").attr('disabled', false);
+                }else{
+
+                    var html = '<thead>' +
+                                    '<tr>' +
+                                        '<td></td>'+
+                                        '<td><b>Suela</b></td>'+
+                                        '<td><b>Precio</b></td>'+
+                                        '<td><b>Descripción</b></td>'+
+                                    '</tr>'+
+                                '</thead>';
+
+                    html += '<tr><td colspan="4">Sin suelas. Presiona "Terminar" por favor.</td></tr>';
+
+                    $("#contenedorSuelas").empty().append( html );
 
                 }
 

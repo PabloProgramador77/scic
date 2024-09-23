@@ -50,7 +50,20 @@ jQuery(document).ready(function(){
 
                     $("#contenedorCostos").empty().append( html );
 
-                    $("#agregar").attr('disabled', false);
+                }else{
+
+                    var html = '<thead>' +
+                                    '<tr>' +
+                                        '<td></td>'+
+                                        '<td><b>Costo</b></td>'+
+                                        '<td><b>Tipo</b></td>'+
+                                        '<td><b>Total</b></td>'+
+                                    '</tr>'+
+                                '</thead>';
+
+                    html += '<tr><td colspan="4">Sin costos base. Presiona "Continuar" por favor.</td></tr>';
+
+                    $("#contenedorCostos").empty().append( html );
 
                 }
 

@@ -153,6 +153,11 @@ class ModeloHasCosteController extends Controller
                 $datos['exito'] = true;
                 $datos['costos'] = $costos;
 
+            }else{
+
+                $datos['exito'] = true;
+                $datos['costos'] = $costos;
+                
             }
 
         } catch (\Throwable $th) {

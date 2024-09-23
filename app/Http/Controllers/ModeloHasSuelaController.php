@@ -151,6 +151,11 @@ class ModeloHasSuelaController extends Controller
                 $datos['exito'] = true;
                 $datos['suelas'] = $suelas;
 
+            }else{
+
+                $datos['exito'] = true;
+                $datos['suelas'] = $suelas;
+                
             }
 
         } catch (\Throwable $th) {

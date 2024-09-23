@@ -29,19 +29,27 @@ class CotizacionHasConsumibleController extends Controller
     public function store(Request $request, $idCotizacion)
     {
         try {
-            
-            foreach($request->consumibles as $consumible){
 
-                $cotizacionHasConsumible = CotizacionHasConsumible::create([
+            if( isset( $request->consumibles) && count( $request->consumibles ) > 0 ){
 
-                    'idCotizacion' => $idCotizacion,
-                    'idConsumible' => $consumible
+                foreach($request->consumibles as $consumible){
 
-                ]);
+                    $cotizacionHasConsumible = CotizacionHasConsumible::create([
+    
+                        'idCotizacion' => $idCotizacion,
+                        'idConsumible' => $consumible
+    
+                    ]);
+    
+                }
+    
+                return true;
+
+            }else{
+
+                return true;
 
             }
-
-            return true;
 
         } catch (\Throwable $th) {
             

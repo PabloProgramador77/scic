@@ -30,24 +30,32 @@ class CotizacionHasPiezasController extends Controller
     {
         try {
 
-            $piezas = $request->piezas;
-            $materiales = $request->materiales;
-            $colores = $request->colores;
-            
-            for($i = 0; $i < count($request->piezas); $i++){
+            if( isset( $request->piezas) && count( $request->piezas ) > 0 ){
 
-                $cotizacionHasPiezas = CotizacionHasPiezas::create([
+                $piezas = $request->piezas;
+                $materiales = $request->materiales;
+                $colores = $request->colores;
+                
+                for($i = 0; $i < count($request->piezas); $i++){
 
-                    'idCotizacion' => $idCotizacion,
-                    'idPieza' => $piezas[$i],
-                    'idMaterial' => $materiales[$i],
-                    'colorMaterial' => $colores[$i],
+                    $cotizacionHasPiezas = CotizacionHasPiezas::create([
 
-                ]);
+                        'idCotizacion' => $idCotizacion,
+                        'idPieza' => $piezas[$i],
+                        'idMaterial' => $materiales[$i],
+                        'colorMaterial' => $colores[$i],
+
+                    ]);
+
+                }
+
+                return true;
+                
+            }else{
+
+                return true;
 
             }
-
-            return true;
 
         } catch (\Throwable $th) {
             

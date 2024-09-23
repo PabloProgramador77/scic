@@ -50,7 +50,20 @@ jQuery(document).ready(function(){
 
                     $("#contenedorCostes").empty().append( html );
 
-                    $("#agregarCoste").attr('disabled', false);
+                }else{
+
+                    var html = '<thead>' +
+                                    '<tr>' +
+                                        '<td></td>'+
+                                        '<td><b>Costo</b></td>'+
+                                        '<td><b>Descripción</b></td>'+
+                                        '<td><b>Total</b></td>'+
+                                    '</tr>'+
+                                '</thead>';
+
+                    html += '<tr><td colspan="4">Sin costos neutros. Presiona "Continuar" por favor.</td></tr>';
+
+                    $("#contenedorCostes").empty().append( html );
 
                 }
 

@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
                     var html = '<thead>' +
                                     '<tr>' +
                                         '<td></td>'+
-                                        '<td><b>consumible</b></td>'+
+                                        '<td><b>Consumible</b></td>'+
                                         '<td><b>Tipo</b></td>'+
                                         '<td><b>Total</b></td>'+
                                     '</tr>'+
@@ -50,7 +50,20 @@ jQuery(document).ready(function(){
 
                     $("#contenedorConsumibles").empty().append( html );
 
-                    $("#agregarConsumible").attr('disabled', false);
+                }else{
+
+                    var html = '<thead>' +
+                                    '<tr>' +
+                                        '<td></td>'+
+                                        '<td><b>Consumible</b></td>'+
+                                        '<td><b>Tipo</b></td>'+
+                                        '<td><b>Total</b></td>'+
+                                    '</tr>'+
+                                '</thead>';
+
+                    html += '<tr><td colspan="4">Sin consumibles. Presiona "Continuar" por favor.</td></tr>';
+
+                    $("#contenedorConsumibles").empty().append( html );
 
                 }
 

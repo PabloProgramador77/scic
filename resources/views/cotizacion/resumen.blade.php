@@ -119,7 +119,7 @@
                 @php
                     $suela = implode(', ', $cotizacion->suelas->pluck('nombre')->toArray());
                 @endphp
-                <x-adminlte-input name="suela" id="suela" readonly="true" value="{{ $suela }}">
+                <x-adminlte-input name="suela" id="suela" readonly="true" value="{{ $suela ? $suela : 'Sin suela' }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
                             <i class="fas fa-shoe-prints"></i>
@@ -148,7 +148,7 @@
 
             </div>
             <div class="col-lg-12">
-                <x-adminlte-input name="observaciones" id="observaciones" readonly="true" value="{{ $cotizacion->observaciones }}">
+                <x-adminlte-input name="observaciones" id="observaciones" readonly="true" value="{{ $cotizacion->observaciones ? $cotizacion->oservaciones : 'Sin observaciones' }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
                             <i class="fas fa-edit"></i>

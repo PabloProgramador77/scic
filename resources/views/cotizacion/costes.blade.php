@@ -18,7 +18,7 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label=" Continuar" id="agregarCoste" icon="fas fa-arrow-circle-right" disabled="true"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label=" Continuar" id="agregarCoste" icon="fas fa-arrow-circle-right"></x-adminlte-button>
         <x-adminlte-button theme="danger" label=" Cerrar" id="cancelarCoste" data-dismiss="modal" icon="fas fa-window-close"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

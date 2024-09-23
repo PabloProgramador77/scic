@@ -156,6 +156,11 @@ class ModeloHasConsumibleController extends Controller
                 $datos['exito'] = true;
                 $datos['consumibles'] = $consumibles;
 
+            }else{
+
+                $datos['exito'] = true;
+                $datos['consumibles'] = $consumibles;
+                
             }
 
         } catch (\Throwable $th) {

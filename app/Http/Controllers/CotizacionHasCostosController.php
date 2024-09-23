@@ -30,18 +30,26 @@ class CotizacionHasCostosController extends Controller
     {
         try {
             
-            foreach( $request->costos as $costo ){
+            if( isset( $request->costos) && count( $request->costos ) > 0 ){
 
-                $cotizacionHasCostos = CotizacionHasCostos::create([
+                foreach( $request->costos as $costo ){
 
-                    'idCotizacion' => $idCotizacion,
-                    'idCosto' => $costo
+                    $cotizacionHasCostos = CotizacionHasCostos::create([
+    
+                        'idCotizacion' => $idCotizacion,
+                        'idCosto' => $costo
+    
+                    ]);
+    
+                }
+    
+                return true;
 
-                ]);
+            }else{
+
+                return true;
 
             }
-
-            return true;
 
         } catch (\Throwable $th) {
             
