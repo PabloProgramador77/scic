@@ -799,12 +799,13 @@ class NotaController extends Controller
                     <table style="width: 100%; height: auto;">
                         <thead style="width: 100%; height: auto;">
                             <tr style="border: 2px; background-color: lightblue; padding: 5px;">
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Proveedor</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Material</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Color</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Precio</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Mts. Totales</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Monto Aprox.</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Proveedor</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Concepto</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Material</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Color</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Precio</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Mts. Totales</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Monto Aprox.</b></td>
                             </tr>
                         </thead>
                         <tbody>';
@@ -825,6 +826,7 @@ class NotaController extends Controller
                             $totalesPorMaterial[ $material->id] = [
 
                                 'proveedor' => $material->proveedor()->nombre,
+                                'concepto' => $material->concepto,
                                 'material' => $material->nombre,
                                 'color' => $material->colores()->first()->pivot->colorMaterial ?? '',
                                 'precio' => $material->precio,
@@ -856,12 +858,13 @@ class NotaController extends Controller
                 foreach( $totalesPorMaterial as $total ){
 
                     $html .= '<tr>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.$total['proveedor'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.$total['material'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.$total['color'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;"> $'.$total['precio'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format( $total['metros'], 2).' Mts.</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">$'.number_format( $total['monto'], 2).'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['proveedor'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['concepto'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['material'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['color'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;"> $'.$total['precio'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.number_format( $total['metros'], 2).' Mts.</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">$'.number_format( $total['monto'], 2).'</td>';
                     $html .= '</tr>';
 
                 }
