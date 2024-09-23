@@ -847,6 +847,12 @@ class NotaController extends Controller
 
                 }
 
+                usort( $totalesPorMaterial, function( $a, $b ){
+
+                    return strcmp( $a['proveedor'], $b['proveedor']);
+
+                });
+
                 foreach( $totalesPorMaterial as $total ){
 
                     $html .= '<tr>';
