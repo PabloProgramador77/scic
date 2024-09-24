@@ -13,11 +13,22 @@ jQuery(document).ready(function(){
 
         $("input[name=numeracion]").each(function(){
 
+            var cantidad = 0;
+
+            if( $(this).val() === '' || $(this).val() === null || $(this).val() === 0 ){
+
+                cantidad = 0;
+
+            }else{
+
+                cantidad = $(this).val();
+
+            }
             numeraciones.push({
 
                 'idNumeracion': $(this).attr('id'),
                 'idCotizacion' : $(this).attr('data-id'),
-                'cantidad' : $(this).val(),
+                'cantidad' : cantidad,
 
             });
 

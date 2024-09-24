@@ -3,37 +3,58 @@ jQuery(document).ready(function(){
 
     $("input[name=numeracion]").change(function(){
 
-        var cotizacion = $(this).attr('data-id');
+        if( $(this).val() === '' || $(this).val() === null || $(this).val() === 0 ){
 
-        var pares = 0;
-        var total = 0;
-        var precio = parseFloat( $('.precio'+cotizacion).text() );
-        var subtotal = 0;
+            $(this).val( 0 );
 
-        $('input[name=numeracion][data-id='+cotizacion+']').each(function(){
+        }else if( Number.isInteger( parseFloat( $(this).val() ) ) ){
 
-            pares += parseInt( $(this).val() ) || 0;
+            var cotizacion = $(this).attr('data-id');
 
-        });
+            var pares = 0;
+            var total = 0;
+            var precio = parseFloat( $('.precio'+cotizacion).text() );
+            var subtotal = 0;
 
-        total = parseFloat( pares * precio );
+            $('input[name=numeracion][data-id='+cotizacion+']').each(function(){
 
-        $("input[type=text][name=pares][data-id="+cotizacion+"]").val('');
-        $("input[type=text][name=subtotal][data-id="+cotizacion+"]").val('');
+                pares += parseInt( $(this).val() ) || 0;
 
-        $("input[type=text][name=pares][data-id="+cotizacion+"]").val( pares );
-        $("input[type=text][name=subtotal][data-id="+cotizacion+"]").val( total.toFixed(2) );
+            });
 
-        $("input[name=subtotal]").each(function(){
+            total = parseFloat( pares * precio );
 
-            subtotal += parseFloat( $(this).val() );
+            $("input[type=text][name=pares][data-id="+cotizacion+"]").val('');
+            $("input[type=text][name=subtotal][data-id="+cotizacion+"]").val('');
 
-        });
+            $("input[type=text][name=pares][data-id="+cotizacion+"]").val( pares );
+            $("input[type=text][name=subtotal][data-id="+cotizacion+"]").val( total.toFixed(2) );
 
-        $("#total").val('');
-        $("#total").val( subtotal.toFixed(2) );
+            $("input[name=subtotal]").each(function(){
 
-        console.log( subtotal );
+                subtotal += parseFloat( $(this).val() );
+
+            });
+
+            $("#total").val('');
+            $("#total").val( subtotal.toFixed(2) );
+
+            console.log( subtotal );
+            
+        }else{
+
+            $(this).val( 0 );
+
+            Swal.fire({
+
+                icon: 'warning',
+                title: 'Solo se permiten cantidades en enteros.',
+                allowOutsideClick: false,
+                showConfirmButton: true,
+
+            });
+
+        }
 
     });
 
