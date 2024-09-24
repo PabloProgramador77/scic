@@ -468,6 +468,7 @@ class CotizacionController extends Controller
                     $datos['cotizacion'] = $cotizacion->id;
                     $datos['modelo'] = $nuevoModelo;
                     $datos['modelos'] = Modelo::where('nombre', '=', $modelo->nombre)
+                                                ->where('numero', 'NOT LIKE', '%00')
                                                 ->orderBy('numero', 'asc')
                                                 ->get();
 
