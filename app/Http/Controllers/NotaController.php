@@ -316,7 +316,7 @@ class NotaController extends Controller
                     <body>
                         <div style="width: 100%; height: auto; padding: 5px; display: block; overflow: auto;">
                             <div style="width: 33%; height: auto; display: inline-block; float: left; overflow: auto;">
-                                <img src="media/logo.jpg" width="175px" height="auto">
+                                <img src="media/logo.jpg" width="700px" height="auto">
                             </div>
                             <div style="width: 66.5%; height: auto; display: inline-block; float: left; overflow: auto; margin-top: 50px;">
                                 <table style="width: 100%; height: auto; overflow: auto;">
@@ -469,6 +469,10 @@ class NotaController extends Controller
                                     <td style="font-size: 12px;">$ '.number_format($totalNota/2, 2).'</td>
                                 </tr>
                             </table>
+                            <div style="padding: 5px; margin: 5px; text-align: center;">
+                                <p style="color: gray; font-size: 14px; text-align: center; font-style: bold;">Este documento no es un comprobante fiscal.</p>
+                                <p style="color: gray; font-size: 14px; text-align: center; font-style: bold;">Esta nota tiene una validez de 30 días a partir de la fecha de inicio</p>
+                            </div>
                         </div>
                     </body>
                     </html>
