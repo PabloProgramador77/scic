@@ -160,7 +160,7 @@
 
         <div class="container-fluid row p-1">
             @php
-                $heads = ['Pieza', 'Material', 'Color', 'Cantidad', 'Alto x Largo'];
+                $heads = ['Pieza', 'Material', 'Color', 'Cantidad', 'Alto x Largo', 'Costo'];
                 $config = ['pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -172,15 +172,16 @@
                         <tr>
                             <td class="border"><b>{{ $pieza->nombre }}</b></td>
                             @php
-                                $material = implode(', ', $pieza->materiales( $cotizacion->id )->pluck('nombre')->toArray());
+                                $material = $pieza->materiales( $cotizacion->id )->first();
                             @endphp
-                            <td class="border">{{ $material }}</td>
+                            <td class="border">{{ $material->nombre }}</td>
                             @php
                                 $color = implode(', ', $pieza->color( $cotizacion->id )->pluck('colorMaterial')->toArray());
                             @endphp
                             <td class="border">{{ $color }}</td>
                             <td class="border">{{ $pieza->cantidad }}</td>
                             <td class="border">{{ $pieza->alto }} X {{ $pieza->largo }}</td>
+                            <td class="border">$ {{ number_format( (($pieza->largo * $pieza->alto) * $pieza->cantidad) / ($material->unidades * 100)*$material->precio  ,2 ) }}</td>
                         </tr>     
                         
                     @endforeach

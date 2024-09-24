@@ -316,7 +316,7 @@ class NotaController extends Controller
                     <body>
                         <div style="width: 100%; height: auto; padding: 5px; display: block; overflow: auto;">
                             <div style="width: 33%; height: auto; display: inline-block; float: left; overflow: auto;">
-                                <img src="media/logo.jpg" width="175px" height="auto">
+                                <img src="media/logo.jpg" width="700px" height="auto">
                             </div>
                             <div style="width: 66.5%; height: auto; display: inline-block; float: left; overflow: auto; margin-top: 50px;">
                                 <table style="width: 100%; height: auto; overflow: auto;">
@@ -469,6 +469,10 @@ class NotaController extends Controller
                                     <td style="font-size: 12px;">$ '.number_format($totalNota/2, 2).'</td>
                                 </tr>
                             </table>
+                            <div style="padding: 5px; margin: 5px; text-align: center;">
+                                <p style="color: gray; font-size: 14px; text-align: center; font-style: bold;">Este documento no es un comprobante fiscal.</p>
+                                <p style="color: gray; font-size: 14px; text-align: center; font-style: bold;">Esta nota tiene una validez de 30 días a partir de la fecha de inicio</p>
+                            </div>
                         </div>
                     </body>
                     </html>
@@ -799,12 +803,13 @@ class NotaController extends Controller
                     <table style="width: 100%; height: auto;">
                         <thead style="width: 100%; height: auto;">
                             <tr style="border: 2px; background-color: lightblue; padding: 5px;">
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Proveedor</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Material</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Color</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Precio</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Mts. Totales</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 16.5%;"><b>Monto Aprox.</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Proveedor</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Concepto</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Material</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Color</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Precio</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Mts. Totales</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Monto Aprox.</b></td>
                             </tr>
                         </thead>
                         <tbody>';
@@ -825,6 +830,7 @@ class NotaController extends Controller
                             $totalesPorMaterial[ $material->id] = [
 
                                 'proveedor' => $material->proveedor()->nombre,
+                                'concepto' => $material->concepto,
                                 'material' => $material->nombre,
                                 'color' => $material->colores()->first()->pivot->colorMaterial ?? '',
                                 'precio' => $material->precio,
@@ -847,15 +853,22 @@ class NotaController extends Controller
 
                 }
 
+                usort( $totalesPorMaterial, function( $a, $b ){
+
+                    return strcmp( $a['proveedor'], $b['proveedor']);
+
+                });
+
                 foreach( $totalesPorMaterial as $total ){
 
                     $html .= '<tr>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.$total['proveedor'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.$total['material'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.$total['color'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;"> $'.$total['precio'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">'.number_format( $total['metros'], 2).' Mts.</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 16.5%;">$'.number_format( $total['monto'], 2).'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['proveedor'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['concepto'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['material'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['color'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;"> $'.$total['precio'].'</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.number_format( $total['metros'], 2).' Mts.</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">$'.number_format( $total['monto'], 2).'</td>';
                     $html .= '</tr>';
 
                 }

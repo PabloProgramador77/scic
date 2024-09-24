@@ -56,7 +56,7 @@ class CotizacionController extends Controller
     {
         try {
             
-            $modelos = Modelo::orderBy('nombre', 'asc')->get();
+            $modelos = Modelo::orderBy('numero', 'asc')->get();
             $cliente = Cliente::find( $idCliente );
             $modeloHasGanancia = ModeloHasGanancia::find( 1 );
 
@@ -468,6 +468,7 @@ class CotizacionController extends Controller
                     $datos['cotizacion'] = $cotizacion->id;
                     $datos['modelo'] = $nuevoModelo;
                     $datos['modelos'] = Modelo::where('nombre', '=', $modelo->nombre)
+                                                ->where('numero', 'NOT LIKE', '%00')
                                                 ->orderBy('numero', 'asc')
                                                 ->get();
 
