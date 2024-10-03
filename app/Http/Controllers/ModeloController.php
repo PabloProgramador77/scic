@@ -9,6 +9,7 @@ use App\Http\Requests\Modelo\Create;
 use App\Http\Requests\Modelo\Read;
 use App\Http\Requests\Modelo\Update;
 use App\Http\Requests\Modelo\Delete;
+use App\Models\Suaje;
 use Illuminate\Support\Facades\Hash;
 
 class ModeloController extends Controller
@@ -40,8 +41,9 @@ class ModeloController extends Controller
             
             $modelo = Modelo::find( $id );
             $piezas = Pieza::where('idModelo', '=', $modelo->id)->get();
+            $suajes = Suaje::orderBy('nombre', 'asc')->get();
 
-            return view('modelos.piezas', compact('modelo', 'piezas'));
+            return view('modelos.piezas', compact('modelo', 'piezas', 'suajes'));
 
         } catch (\Throwable $th) {
             

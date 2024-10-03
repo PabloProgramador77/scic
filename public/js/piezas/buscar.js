@@ -30,6 +30,10 @@ jQuery(document).ready(function(){
                 $("#descripcionEditar").val( respuesta.descripcion );
                 $("#idPieza").val( respuesta.id );
 
+                $("#suajeEditar").prepend('<option value="'+respuesta.idSuaje+'">'+respuesta.suaje+'</option>');
+                $("#suajeEditar").val(respuesta.idSuaje);
+                $("#suajeEditar option[value='"+respuesta.idSuaje+"']:not(:first)").remove();
+
                 $("#actualizar").attr('disabled', false);
 
             }else{
