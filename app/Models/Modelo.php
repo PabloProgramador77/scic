@@ -14,7 +14,8 @@ class Modelo extends Model
     protected $fillable = [
 
         'nombre', 
-        'numero', 
+        'numero',
+        'horma', 
         'descripcion',
         'variante',
 

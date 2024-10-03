@@ -34,6 +34,7 @@ class Update extends FormRequest
             'id' => 'required|integer',
             'nombre' => 'required|string',
             'numero' => 'required|string',
+            'horma' => 'string|nullable',
             'descripcion' => 'string|nullable',
             
         ];

@@ -26,6 +26,7 @@ jQuery(document).ready(function(){
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#descripcionEditar").val( respuesta.descripcion );
                 $("#numeroEditar").val( respuesta.numero );
+                $("#hormaEditar").val( respuesta.horma );
 
                 $("#id").val( respuesta.id );
 

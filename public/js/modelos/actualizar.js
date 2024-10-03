@@ -31,6 +31,7 @@ jQuery(document).ready(function(){
 
                         'nombre' : $("#nombreEditar").val(),
                         'numero' : $("#numeroEditar").val(),
+                        'horma' : $("#hormaEditar").val(),
                         'descripcion' : $("#descripcionEditar").val(),
                         'id' : $("#id").val()
 

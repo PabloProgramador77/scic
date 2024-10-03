@@ -23,6 +23,15 @@
                 </x-adminlte-input>
             </div>
             <div class="form-group">
+                <x-adminlte-input name="hormaEditar" id="hormaEditar" placeholder="Horma de modelo">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-shoe-print">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="form-group">
                 <x-adminlte-textarea name="descripcionEditar" id="descripcionEditar" placeholder="Descripción de modelo" label-text="text-info">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">

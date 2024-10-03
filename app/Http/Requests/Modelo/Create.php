@@ -33,6 +33,7 @@ class Create extends FormRequest
             
             'nombre' => 'required|string',
             'numero' => 'required|string',
+            'horma' => 'string|nullable',
             'descripcion' => 'string|nullable',
             
         ];

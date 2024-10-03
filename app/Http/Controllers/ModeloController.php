@@ -61,6 +61,7 @@ class ModeloController extends Controller
 
                 'nombre' => $request->nombre,
                 'numero' => $request->numero,
+                'horma' => $request->horma,
                 'descripcion' => $request->descripcion,
 
             ]);
@@ -91,6 +92,7 @@ class ModeloController extends Controller
                 $datos['exito'] = true;
                 $datos['nombre'] = $modelo->nombre;
                 $datos['numero'] = $modelo->numero;
+                $datos['horma'] = $modelo->horma;
                 $datos['descripcion'] = $modelo->descripcion;
                 $datos['id'] = $modelo->id;
 
@@ -126,6 +128,7 @@ class ModeloController extends Controller
 
                         'nombre' => $request->nombre,
                         'numero' => $request->numero,
+                        'horma' => $request->horma,
                         'descripcion' => $request->descripcion
 
                     ]);
