@@ -139,3 +139,8 @@ Route::post('/cliente/agregar', [App\Http\Controllers\ClienteController::class, 
 Route::post('/cliente/buscar', [App\Http\Controllers\ClienteController::class, 'show'])->name('buscar-cliente');
 Route::post('/cliente/actualizar', [App\Http\Controllers\ClienteController::class, 'update'])->name('actualizar-cliente');
 Route::post('/cliente/borrar', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('borrar-cliente');
+
+Route::get('/suajes', [App\Http\Controllers\SuajeController::class, 'index'])->name('suajes');
+Route::post('/suaje/agregar', [App\Http\Controllers\SuajeController::class, 'store'])->name('agregar-suaje');
+Route::post('/suaje/actualizar', [App\Http\Controllers\SuajeController::class, 'update'])->name('actualizar-suaje');
+Route::post('/suaje/borrar', [App\Http\Controllers\SuajeController::class, 'destroy'])->name('borrar-suaje');

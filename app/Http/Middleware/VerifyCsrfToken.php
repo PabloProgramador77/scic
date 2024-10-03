@@ -105,6 +105,10 @@ class VerifyCsrfToken extends Middleware
         'nota/impuestos',
         'nota/consumos',
         'notas/tabla',
+        'suaje/agregar',
+        'suaje/buscar',
+        'suaje/actualizar',
+        'suaje/borrar',
         
     ];
 }
