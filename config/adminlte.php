@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'SCIC - Aydee Footwear',
+    'title' => 'Aydee Footwear',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>SCIC</b> Aydee Footwear',
+    'logo' => '<b>Aydee</b> Footwear',
     'logo_img' => 'media/logo-wbg.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,

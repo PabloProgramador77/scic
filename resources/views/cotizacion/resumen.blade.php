@@ -122,7 +122,18 @@
                 <x-adminlte-input name="suela" id="suela" readonly="true" value="{{ $suela ? $suela : 'Sin suela' }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
-                            <i class="fas fa-shoe-prints"></i>
+                            <i class="fas fa-shoe-prints">Suela</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="col-lg-3">
+                @php
+                @endphp
+                <x-adminlte-input name="horma" id="horma" readonly="true" value="{{ $cotizacion->modelo->horma }}">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-success">
+                            <i class="fas fa-shoe-prints">Horma</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
@@ -143,17 +154,20 @@
                 <x-adminlte-input name="colores" id="colores" readonly="true" value="{{ $colores }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
-                            <i class="fas fa-palette"></i>
+                            <i class="fas fa-palette">Colores</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
 
             </div>
             <div class="col-lg-12">
-                <x-adminlte-input name="observaciones" id="observaciones" readonly="true" value="{{ $cotizacion->observaciones ? $cotizacion->oservaciones : 'Sin observaciones' }}">
+                @php
+                    $observaciones = $cotizacion->observaciones ? : 'Sin observaciones';
+                @endphp
+                <x-adminlte-input name="observaciones" id="observaciones" readonly="true" value="{{ $observaciones }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-edit">Observaciones</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
