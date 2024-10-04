@@ -91,17 +91,17 @@
                         
                         @foreach( $cotizacion->modelo->numeraciones as $numeracion)
                             
-                            <td class="bg-light border"><b>{{ $numeracion->numero }}</b></td>
+                            <td class="bg-light border"><b>{{ number_format( $numeracion->numero, 1) }}</b></td>
                         
                         @endforeach
                     </tr>
-                    <!--<tr>
+                    <tr>
 
                         @foreach( $cotizacion->modelo->numeraciones as $numeracion )
-                            <td class="text-center border">{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id) }}</td>
+                            <td class="text-center border">{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id) ? : 0 }}</td>
                         @endforeach
 
-                    </tr>-->
+                    </tr>
                 @else
                     <tr>
                         <td colspan="12" class="fw-semibold">No hay numeraciones registradas.</td>
@@ -176,7 +176,7 @@
 
         <div class="container-fluid row p-1">
             @php
-                $heads = ['Pieza', 'Material', 'Color', 'Cantidad', 'Alto x Largo', 'Costo'];
+                $heads = ['Pieza', 'Suaje', 'Material', 'Color', 'Cantidad', 'Alto x Largo', 'Costo'];
                 $config = ['pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -187,6 +187,7 @@
                     @foreach( $cotizacion->piezas as $pieza)
                         <tr>
                             <td class="border"><b>{{ $pieza->nombre }}</b></td>
+                            <td class="border">{{ $pieza->suaje->numero}}-{{ $pieza->suaje->nombre }}</td>
                             @php
                                 $material = $pieza->materiales( $cotizacion->id )->first();
                             @endphp
