@@ -56,7 +56,7 @@
                 
                 @if( $nota->estado != 'Pagada' )
                     @if( $nota->estado == 'Pendiente' )
-                        <x-adminlte-button theme="secondayr" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}" title="Pasar a producción"></x-adminlte-button>
+                        <x-adminlte-button theme="secondary" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}" title="Pasar a producción"></x-adminlte-button>
                     @else
                         <x-adminlte-button theme="info" icon="fas fa-file-invoice" id="consumos" data-id="{{ $nota->id }}" title="Consumos de nota"></x-adminlte-button>
                         <x-adminlte-button theme="danger" icon="fas fa-ban" id="cerrarNota" data-id="{{ $nota->id }}" title="Cerrar nota"></x-adminlte-button>
