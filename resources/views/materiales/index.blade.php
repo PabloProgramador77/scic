@@ -26,7 +26,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Concepto', 'Proveedor', 'Material', 'Color', 'Precio', 'Ancho de Material', 'Acciones'];
+                $heads = ['Tipo', 'Proveedor', 'Material', 'Color', 'Precio', 'Ancho de Material', 'Acciones'];
                 $config = [ 'order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 

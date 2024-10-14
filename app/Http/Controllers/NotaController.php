@@ -804,7 +804,7 @@ class NotaController extends Controller
                         <thead style="width: 100%; height: auto;">
                             <tr style="border: 2px; background-color: lightblue; padding: 5px;">
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Proveedor</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Concepto</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Tipo</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Material</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Color</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Precio</b></td>

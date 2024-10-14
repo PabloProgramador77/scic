@@ -22,7 +22,7 @@
                         </x-slot>
                     </x-adminlte-input>
                 </div>
-                <x-adminlte-input name="conceptoEditar" id="conceptoEditar" placeholder="Concepto de material">
+                <x-adminlte-input name="conceptoEditar" id="conceptoEditar" placeholder="Tipo de material">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-tag">*</i>
