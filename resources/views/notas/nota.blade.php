@@ -82,7 +82,7 @@
                         <input type="hidden" name="cotizacion" id="cotizacion{{ $cotizacion->id }}" value="{{ $cotizacion->id }}">
                         {{ $cotizacion->modelo->nombre }} {{ $cotizacion->modelo->numero }}
                     </td>
-                    <td>{{ $cotizacion->modelo->descripcion }}</td>
+                    <td>{{ $cotizacion->descripcion }}</td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
                     <td>
                         <div class="row">

@@ -78,6 +78,7 @@ class CotizacionController extends Controller
 
             $cotizacion = Cotizacion::create([
 
+                'descripcion' => $request->descripcion,
                 'precio' => $request->total,
                 'estado' => 'Pendiente',
                 'idModelo' => $request->modelo,

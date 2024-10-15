@@ -32,7 +32,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['[ ]', 'Folio', 'Modelo', 'Precio Unitario', 'Estado', 'Acciones'];
+                $heads = ['[ ]', 'Folio', 'Descripción', 'Modelo', 'Precio Unitario', 'Estado', 'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -49,13 +49,13 @@
                             @endif
                             
                             <td>{{ $cotizacion->id }}</td>
+                            <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
                             <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td>{{ $cotizacion->estado }}</td>
                             <td>
                                 @if( $cotizacion->estado == "Nota" )
-                                    <!--<a href="" class="btn btn-secondary" role="button" title="Ver nota"><i class="fas fa-info-circle"></i></a>-->
-                                    <span class="p-2 text-secondary">Agregada a nota</span>
+                                    <span class="p-1 rounded bg-teal">Agregada a nota</span>
                                 @else
                                     <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>
                                     <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota previa" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>

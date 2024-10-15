@@ -283,6 +283,7 @@ class NotaController extends Controller
             $nota = Nota::find( $idNota );
             $colspan = 0;
             $totalNota = 0;
+            $html = '';
 
             if( $nota->id ){
 
@@ -307,7 +308,7 @@ class NotaController extends Controller
 
                 }
 
-                $html ='
+                $html .='
                     <html>
                     <head>
                         <style>
@@ -380,7 +381,7 @@ class NotaController extends Controller
                                     <tr style="padding: 5px;">
                                         <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->nombre.'</td>
                                         <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->numero.'</td>
-                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->descripcion.'</td>';
+                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->descripcion.'</td>';
 
                                         $ultimo = $cotizacion->numeraciones->last();
 
@@ -479,6 +480,8 @@ class NotaController extends Controller
                 ';
 
                 $pdf->writeHTML( $html );
+
+                unset( $html );
 
                 $pdf->Output( public_path('pdf/').'nota'.$idNota.'.pdf', \Mpdf\Output\Destination::FILE );
 
@@ -657,6 +660,7 @@ class NotaController extends Controller
         try {
 
             $nota = Nota::find( $idNota );
+            $html = '';
 
             if( $nota->id ){
 
@@ -669,7 +673,7 @@ class NotaController extends Controller
 
                 ]);
 
-                $html = '
+                $html .= '
                     <html>
                         <body>
                             <h2 style="width: 100%; border-bottom: 2px;">Cálculo de Consumos</h2>
@@ -741,6 +745,8 @@ class NotaController extends Controller
                 ';
 
                 $pdf->writeHTML( $html );
+
+                unset( $html );
                 $pdf->Output( public_path('pdf/').'consumos'.$idNota.'.pdf', \Mpdf\Output\Destination::FILE );
                 
                 if( file_exists( public_path('pdf/').'consumos'.$idNota.'.pdf')){
@@ -788,6 +794,7 @@ class NotaController extends Controller
     public function tablaConsumos($idNota){
         try {
             $nota = Nota::find($idNota);
+            $html = '';
 
             $pdf = new \Mpdf\Mpdf([
                 'mode' => 'utf-8',
@@ -796,7 +803,7 @@ class NotaController extends Controller
                 'autoPageBreak' => true,
             ]);
 
-            $html = '
+            $html .= '
                 <html>
                 <body>
                     <p style="font-size: 22px; font-weight: bold;">Tabla de Consumos: ' . $idNota . '</p>
@@ -877,16 +884,22 @@ class NotaController extends Controller
             
             $html .= '</tbody></table></body></html>';
 
-            echo $html;
+            //echo $html;
 
-            //$pdf->writeHTML($html);
+            $pdf->writeHTML($html);
 
-            //$pdf->Output(public_path('pdf/') . 'tabla' . $idNota . '.pdf', \Mpdf\Output\Destination::FILE);
+            unset( $html );
+
+            $pdf->Output(public_path('pdf/') . 'tabla' . $idNota . '.pdf', \Mpdf\Output\Destination::FILE);
 
             return file_exists(public_path('pdf/') . 'tabla' . $idNota . '.pdf');
+
         } catch (\Throwable $th) {
+            
             echo $th->getMessage();
+            
             return false;
+
         }
     }
 
@@ -1052,6 +1065,7 @@ class NotaController extends Controller
         try {
             
             $nota = Nota::find( $idNota );
+            $html = '';
 
             $pdf = new \Mpdf\Mpdf([
                 'mode' => 'utf-8',
@@ -1078,21 +1092,23 @@ class NotaController extends Controller
 
                     }
                     
-                    $html = '
+                    $html .= '
                         <html>
                             <body>
                                 <h4 style="text-align: center; font-weight: bold; font-size: 16px; display: block;">Formato de Seguimiento</h4>
                                 <table style="width: 100%; height: auto; overflow: auto;">
                                     <tbody style="width: 100%; height: auto; overflow: auto;">
                                         <tr>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;" colspan="2"><b>'.$cotizacion->created_at.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;" colspan="2"></td>
-                                        </tr>
-                                        <tr>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->created_at.'</b></td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
+                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->descripcion.'</td>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Realizo</td>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.auth()->user()->name.'</b></td>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
@@ -1325,8 +1341,12 @@ class NotaController extends Controller
                     ';
 
                     echo $html;
-                    //$pdf->writeHTML( $html );
-                    //$pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
+                    
+                    $pdf->writeHTML( $html );
+
+                    unset( $html );
+
+                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
 
                 }
 
