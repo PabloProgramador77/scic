@@ -29,10 +29,15 @@ jQuery(document).ready(function(){
                     url: '/cliente/agregar',
                     data:{
 
+                        'numero' : $("#numero").val(),
                         'nombre' : $("#nombre").val(),
                         'telefono' : $("#telefono").val(),
                         'email' : $("#email").val(),
-                        'domicilio' : $("#domicilio").val()
+                        'estado' : $("#estado").val(),
+                        'ciudad' : $("#ciudad").val(),
+                        'empresa' : $("#empresa").val(),
+                        'razon' : $("#razon").val(),
+                        'rfc' : $("#rfc").val(),
 
                     },
                     dataType: 'json',

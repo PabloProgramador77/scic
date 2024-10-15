@@ -23,10 +23,15 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
+                $("#numeroEditar").val( respuesta.numero );
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#telefonoEditar").val( respuesta.telefono );
                 $("#emailEditar").val( respuesta.email );
-                $("#domicilioEditar").val( respuesta.domicilio );
+                $("#estadoEditar").val( respuesta.estado );
+                $("#ciudadEditar").val( respuesta.ciudad );
+                $("#empresaEditar").val( respuesta.empresa );
+                $("#razonEditar").val( respuesta.razon );
+                $("#rfcEditar").val( respuesta.rfc );
 
                 $("#idCliente").val( respuesta.id );
 

@@ -29,10 +29,15 @@ jQuery(document).ready(function(){
                     url: '/cliente/actualizar',
                     data:{
 
+                        'numero' : $("#numeroEditar").val(),
                         'nombre' : $("#nombreEditar").val(),
                         'telefono' : $("#telefonoEditar").val(),
                         'email' : $("#emailEditar").val(),
-                        'domicilio' : $("#domicilioEditar").val(),
+                        'estado' : $("#estadoEditar").val(),
+                        'ciudad' : $("#ciudadEditar").val(),
+                        'empresa' : $("#empresaEditar").val(),
+                        'razon' : $("#razonEditar").val(),
+                        'rfc' : $("#rfcEditar").val(),
                         'id' : $("#idCliente").val()
 
                     },

@@ -29,7 +29,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['N°', 'Cliente', 'Telefono', 'Correo Electrónico' ,'Domicilio', 'Acciones'];
+                $heads = ['N°', 'Cliente', 'Telefono', 'Correo Electrónico', 'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -39,11 +39,10 @@
                     @foreach ($clientes as $cliente)
 
                         <tr>
-                            <td>{{ $cliente->id }}</td>
+                            <td>{{ $cliente->numero ? : 'N° Desconocido' }}</td>
                             <td>{{ $cliente->nombre }}</td>
-                            <td>{{ $cliente->telefono }}</td>
-                            <td>{{ $cliente->email }}</td>
-                            <td>{{ $cliente->domicilio }}</td>
+                            <td>{{ $cliente->telefono ? : 'Sin telefono' }}</td>
+                            <td>{{ $cliente->email ? : 'Sin correo electrónico' }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-id="{{ $cliente->id }}" data-toggle="modal" data-target="#modalEditar" title="Editar cliente"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cliente->id }}" data-value="{{ $cliente->nombre }}" title="Borrar cotización"></x-adminlte-button>

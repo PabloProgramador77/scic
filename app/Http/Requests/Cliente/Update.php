@@ -31,10 +31,15 @@ class Update extends FormRequest
     {
         return [
             
+            'numero' => 'required|string',
             'nombre' => 'required|string',
             'telefono' => 'required|string',
             'email' => 'string|nullable',
-            'domicilio' => 'string|nullable',
+            'estado' => 'string|nullable',
+            'ciudad' => 'string|nullable',
+            'empresa' => 'string|nullable',
+            'razon' => 'string|nullable',
+            'rfc' => 'string|nullable',
             'id' => 'required|integer',
             
         ];

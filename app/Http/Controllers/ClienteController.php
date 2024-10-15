@@ -22,10 +22,15 @@ class ClienteController extends Controller
             
             $cliente = Cliente::create([
 
+                'numero' => $request->numero,
                 'nombre' => $request->nombre,
                 'telefono' => $request->telefono,
-                'domicilio' => $request->domicilio,
+                'estado' => $request->estado,
+                'ciudad' => $request->ciudad,
                 'email' => $request->email,
+                'empresa' => $request->empresa,
+                'razon' => $request->razon,
+                'rfc' => $request->rfc,
 
             ]);
 
@@ -83,10 +88,15 @@ class ClienteController extends Controller
 
             $cliente = Cliente::create([
 
+                'numero' => $request->numero,
                 'nombre' => $request->nombre,
                 'telefono' => $request->telefono,
-                'domicilio' => $request->domicilio,
-                'email' => $request->email
+                'estado' => $request->estado,
+                'ciudad' => $request->ciudad,
+                'email' => $request->email,
+                'empresa' => $request->empresa,
+                'razon' => $request->razon,
+                'rfc' => $request->rfc,
 
             ]);
 
@@ -120,10 +130,15 @@ class ClienteController extends Controller
             if( $cliente && $cliente->id ){
 
                 $datos['exito'] = true;
+                $datos['numero'] = $cliente->numero;
                 $datos['nombre'] = $cliente->nombre;
                 $datos['telefono'] = $cliente->telefono;
                 $datos['email'] = $cliente->email;
-                $datos['domicilio'] = $cliente->domicilio;
+                $datos['estado'] = $cliente->estado;
+                $datos['ciudad'] = $cliente->ciudad;
+                $datos['empresa'] = $cliente->empresa;
+                $datos['razon'] = $cliente->razon;
+                $datos['rfc'] = $cliente->rfc;
                 $datos['id'] = $cliente->id;
 
             }
@@ -156,10 +171,15 @@ class ClienteController extends Controller
             $cliente = Cliente::where('id', '=', $request->id)
                     ->update([
 
+                        'numero' => $request->numero,
                         'nombre' => $request->nombre,
                         'telefono' => $request->telefono,
                         'email' => $request->email,
-                        'domicilio' => $request->domicilio
+                        'estado' => $request->estado,
+                        'ciudad' => $request->ciudad,
+                        'empresa' => $request->empresa,
+                        'razon' => $request->razon,
+                        'rfc' => $request->rfc,
 
             ]);
 
