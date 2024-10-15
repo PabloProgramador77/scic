@@ -31,6 +31,7 @@ jQuery(document).ready(function(){
 
                         'nombre' : $("#nombreEditar").val(),
                         'precio' : $("#precioEditar").val(),
+                        'proveedor' : $("#proveedorEditar").val(),
                         'descripcion' : $("#descripcionEditar").val(),
                         'id' : $("#id").val()
 

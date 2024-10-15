@@ -56,6 +56,7 @@ class SuelaController extends Controller
 
                 'nombre' => $request->nombre,
                 'precio' => $request->precio,
+                'proveedor' => $request->proveedor,
                 'descripcion' => $request->descripcion,
 
             ]);
@@ -86,6 +87,7 @@ class SuelaController extends Controller
                 $datos['id'] = $suela->id;
                 $datos['nombre'] = $suela->nombre;
                 $datos['precio'] = $suela->precio;
+                $datos['proveedor'] = $suela->proveedor;
                 $datos['descripcion'] = $suela->descripcion;
                 $datos['exito'] = true;
 
@@ -121,6 +123,7 @@ class SuelaController extends Controller
 
                         'nombre' => $request->nombre,
                         'precio' => $request->precio,
+                        'proveedor' => $request->proveedor,
                         'descripcion' => $request->descripcion,
 
                     ]);

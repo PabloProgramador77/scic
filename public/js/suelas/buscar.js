@@ -25,6 +25,7 @@ jQuery(document).ready(function(){
 
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#precioEditar").val( respuesta.precio );
+                $("#proveedorEditar").val( respuesta.proveedor );
                 $("#descripcionEditar").val( respuesta.descripcion );
 
                 $("#id").val( respuesta.id );

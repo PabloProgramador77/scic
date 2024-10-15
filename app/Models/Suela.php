@@ -15,6 +15,7 @@ class Suela extends Model
 
         'nombre', 
         'precio',
+        'proveedor',
         'descripcion'
 
     ];

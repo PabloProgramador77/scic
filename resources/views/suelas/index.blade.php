@@ -25,7 +25,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Suela', 'Precio', 'Descripción', 'Acciones'];
+                $heads = ['Suela', 'Precio', 'Proveedor', 'Descripción', 'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -37,17 +37,8 @@
                         <tr>
                             <td>{{ $suela->nombre }}</td>
                             <td>$ {{ $suela->precio }}</td>
-                            <td>
-                                @if( $suela->descripcion == NULL )
-
-                                    Descripción desconocida
-
-                                @else
-
-                                    {{ $suela->descripcion }}
-
-                                @endif
-                            </td>
+                            <td>{{ $suela->proveedor ? : 'Proveedor desconocido' }}</td>
+                            <td>{{ $suela->descripcion ? : 'Sin descripción' }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $suela->id }}" title="Editar suela"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $suela->id }}" title="Borrar suela"></x-adminlte-button>

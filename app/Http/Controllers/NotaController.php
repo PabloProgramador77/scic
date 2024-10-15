@@ -877,9 +877,11 @@ class NotaController extends Controller
             
             $html .= '</tbody></table></body></html>';
 
-            $pdf->writeHTML($html);
+            echo $html;
 
-            $pdf->Output(public_path('pdf/') . 'tabla' . $idNota . '.pdf', \Mpdf\Output\Destination::FILE);
+            //$pdf->writeHTML($html);
+
+            //$pdf->Output(public_path('pdf/') . 'tabla' . $idNota . '.pdf', \Mpdf\Output\Destination::FILE);
 
             return file_exists(public_path('pdf/') . 'tabla' . $idNota . '.pdf');
         } catch (\Throwable $th) {
@@ -1060,8 +1062,6 @@ class NotaController extends Controller
 
             if( $nota->cotizaciones &&  !empty($nota->cotizaciones) && count( $nota->cotizaciones ) > 0 ){
 
-                $html = '';
-
                 foreach( $nota->cotizaciones as $cotizacion ){
 
                     $numeraciones = $cotizacion->modelo->numeraciones;
@@ -1078,7 +1078,7 @@ class NotaController extends Controller
 
                     }
                     
-                    $html .= '
+                    $html = '
                         <html>
                             <body>
                                 <h4 style="text-align: center; font-weight: bold; font-size: 16px; display: block;">Formato de Seguimiento</h4>
@@ -1325,8 +1325,8 @@ class NotaController extends Controller
                     ';
 
                     echo $html;
-                    $pdf->writeHTML( $html );
-                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
+                    //$pdf->writeHTML( $html );
+                    //$pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
 
                 }
 

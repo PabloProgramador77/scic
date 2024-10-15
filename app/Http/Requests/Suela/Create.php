@@ -33,6 +33,7 @@ class Create extends FormRequest
             
             'nombre' => 'required|string',
             'precio' => 'required|numeric',
+            'proveedor' => 'required|string',
             'descripcion' => 'string|nullable',
             
         ];

@@ -5,7 +5,7 @@
 
         <form novalidate>
             <div class="form-group">
-                <x-adminlte-input name="nombreEditar" id="nombreEditar" placeholder="Nombre de material" required>
+                <x-adminlte-input name="nombreEditar" id="nombreEditar" placeholder="Nombre de suela" required>
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-shoe-prints">*</i>
@@ -14,7 +14,7 @@
                 </x-adminlte-input>
             </div>
             <div class="form-group">
-                <x-adminlte-input name="precioEditar" id="precioEditar" placeholder="Precio de material" required>
+                <x-adminlte-input name="precioEditar" id="precioEditar" placeholder="Precio de suela" required>
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-dollar-sign">*</i>
@@ -23,7 +23,16 @@
                 </x-adminlte-input>
             </div>
             <div class="form-group">
-                <x-adminlte-textarea name="descripcionEditar" id="descripcionEditar" label-class="text-info" placeholder="Descripción breve de la suela">
+                <x-adminlte-input name="proveedorEditar" id="proveedorEditar" placeholder="Poveedor de suela" required>
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-user-tie">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="form-group">
+                <x-adminlte-textarea name="descripcionEditar" id="descripcionEditar" label-class="text-info" placeholder="Descripción breve de la suela (OPCIONAL)">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-edit"></i>
