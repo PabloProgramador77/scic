@@ -14,7 +14,7 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Terminar" id="agregarSuela" icon="fas fa-save"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Terminar" id="preeliminar" icon="fas fa-file" data-toggle="modal" data-target="#modalPreeliminar"></x-adminlte-button>
         <x-adminlte-button theme="danger" label="Regresar" id="cancelarSuela" data-dismiss="modal" icon="fas fa-undo-alt"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

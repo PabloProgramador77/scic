@@ -62,13 +62,13 @@ jQuery(document).ready(function(){
                         var opcionesMateriales = '<option value="0, 0">Elige un material</option>';
     
                         respuesta.materiales.forEach( function(material){
-                            opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +', ' + material.id +', '+material.nombre+'">'+ material.concepto + ' ' + material.nombre + ' : $' +material.precio + '</option>';
+                            opcionesMateriales += '<option value="' + material.precio + ', '+ material.unidades +', ' + material.id +', '+material.nombre+', '+material.concepto+'">'+ material.concepto + ' ' + material.nombre + ' : $' +material.precio + '</option>';
                         });
     
                         respuesta.piezas.forEach( function(pieza){
     
                             filas += '<tr>' +
-                                        '<td><input type="checkbox" name="pieza" id="'+pieza.id+'" class="form-control pieza'+pieza.id+'"></td>' +
+                                        '<td><input type="checkbox" name="pieza" id="'+pieza.id+'" class="form-control pieza'+pieza.id+'" data-value="'+pieza.nombre+', '+pieza.cantidad+', '+pieza.alto+', '+pieza.largo+'"></td>' +
                                         '<td>' + pieza.nombre + '</td>' +
                                         '<td><select id="material'+pieza.id+'" name="material" class="form-control material'+pieza.id+'">' + opcionesMateriales + '</select></td>'+
                                         '<td><select name="colorPieza" id="color'+pieza.id+'" class="form-control colorPieza'+pieza.id+'"></select></td>'+

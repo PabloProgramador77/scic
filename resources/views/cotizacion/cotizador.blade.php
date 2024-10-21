@@ -8,6 +8,7 @@
             <div class="col-lg-6">
                 <h1 class="fs-3 fw-semibold my-2"><i class="fas fa-file-invoice-dollar"></i> Cotizador de {{ $cliente->nombre }}</h1>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
+                <input type="hidden" name="cliente" id="cliente" value="{{ $cliente->nombre }}">
                 <input type="hidden" name="ganancia" id="ganancia" value="{{ $modeloHasGanancia->ganancia }}">
             </div>
             <div class="col-lg-6 my-2">
@@ -34,7 +35,7 @@
                         </x-slot>
                             <option value="default">Elige un modelo</option>
                         @foreach($modelos as $modelo)
-                            <option value="{{ $modelo->id }}">{{ $modelo->nombre }} {{ $modelo->numero }}</option>
+                            <option value="{{ $modelo->id }}" data-value="{{ $modelo->nombre }}, {{ $modelo->numero }}, {{ $modelo->horma }}">{{ $modelo->nombre }} {{ $modelo->numero }}</option>
                         @endforeach
                     </x-adminlte-select2>
                 </div>
@@ -56,7 +57,7 @@
                         </x-slot>
                     </x-adminlte-input>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <x-adminlte-input class="mx-1" name="observaciones" id="observaciones" placeholder="Introduce las observaciones de la cotización">
                         <x-slot name="prependSlot">
                             <div class="input-group-text text-info">
@@ -100,6 +101,7 @@
     @include('cotizacion.consumible')
     @include('cotizacion.suelas')
     @include('cotizacion.escritura')
+    @include('cotizacion.preeliminar')
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
@@ -112,5 +114,6 @@
     <script src="{{ asset('js/cotizacion/asignar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/guardar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/sobreescribir.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/preeliminar.js') }}" type="text/javascript"></script>
 
 @stop

@@ -40,7 +40,7 @@ jQuery(document).ready(function(){
                     respuesta.suelas.forEach(function(suela){
 
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" value="' + suela.precio + '" data-id="' + suela.id + '"></td>' +
+                                    '<td><input type="checkbox" checked="true" name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" value="' + suela.precio + '" data-id="' + suela.id + '" data-value="'+suela.nombre+'"></td>' +
                                     '<td>' + suela.nombre + '</td>' +
                                     '<td>' + suela.precio + '</td>' +
                                     '<td>$ ' + suela.descripcion + '</td>' +
