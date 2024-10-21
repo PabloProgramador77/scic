@@ -37,6 +37,7 @@ class Create extends FormRequest
             'descripcion' => 'string|nullable',
             'idModelo' => 'required|integer',
             'cantidad' => 'required|integer',
+            'suaje' => 'required|string',
             
         ];
     }

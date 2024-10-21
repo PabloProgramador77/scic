@@ -187,7 +187,7 @@
                     @foreach( $cotizacion->piezas as $pieza)
                         <tr>
                             <td class="border"><b>{{ $pieza->nombre }}</b></td>
-                            <td class="border">{{ $pieza->suaje->numero}}-{{ $pieza->suaje->nombre }}</td>
+                            <td class="border">{{ $pieza->suaje }}</td>
                             @php
                                 $material = $pieza->materiales( $cotizacion->id )->first();
                             @endphp

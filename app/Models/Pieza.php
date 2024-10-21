@@ -19,7 +19,7 @@ class Pieza extends Model
         'descripcion',
         'idModelo', 
         'cantidad',
-        'idSuaje',
+        'suaje',
 
     ];
 
@@ -43,12 +43,6 @@ class Pieza extends Model
                     ->withPivot('idCotizacion', 'colorMaterial')
                     ->wherePivot('idCotizacion', '=', $idCotizacion);
                     
-    }
-
-    public function suaje(){
-
-        return $this->hasOne( Suaje::class, 'id', 'idSuaje');
-        
     }
 
 }

@@ -40,17 +40,13 @@
                 </x-adminlte-input>
             </div>
             <div class="form-group">
-                <x-adminlte-select name="suajeEditar" id="suajeEditar">
+                <x-adminlte-input name="suajeEditar" id="suajeEditar" placeholder="Suaje de pieza">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-secondary">
                             <i class="fas fa-shoe-prints">*</i>
                         </div>
                     </x-slot>
-                    <option value="0">Elige un suaje</option>
-                    @foreach( $suajes as $suaje)
-                        <option value="{{ $suaje->id }}">{{ $suaje->numero }}-{{ $suaje->nombre }}</option>
-                    @endforeach
-                </x-adminlte-select>
+                </x-adminlte-input>
             </div>
             <div class="form-group">
                 <x-adminlte-textarea name="descripcionEditar" id="descripcionEditar" placeholder="Descripción de pieza" label-text="text-info">

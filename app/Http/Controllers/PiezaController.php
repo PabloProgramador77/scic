@@ -85,7 +85,7 @@ class PiezaController extends Controller
                 'descripcion' => $request->descripcion,
                 'idModelo' => $request->idModelo,
                 'cantidad' => $request->cantidad,
-                'idSuaje' => $request->idSuaje,
+                'suaje' => $request->suaje,
 
             ]);
 
@@ -118,8 +118,7 @@ class PiezaController extends Controller
                 $datos['largo'] = $pieza->largo;
                 $datos['cantidad'] = $pieza->cantidad;
                 $datos['descripcion'] = $pieza->descripcion;
-                $datos['idSuaje'] = $pieza->suaje->id;
-                $datos['suaje'] = $pieza->suaje->numero.'-'.$pieza->suaje->nombre;
+                $datos['suaje'] = $pieza->suaje;
                 $datos['id'] = $pieza->id;
 
             }
@@ -158,7 +157,7 @@ class PiezaController extends Controller
                     'cantidad' => $request->cantidad,
                     'descripcion' => $request->descripcion,
                     'idModelo' => $request->idModelo,
-                    'idSuaje' => $request->idSuaje,
+                    'suaje' => $request->suaje,
 
                 ]);
 

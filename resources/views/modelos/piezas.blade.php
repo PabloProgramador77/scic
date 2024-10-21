@@ -42,7 +42,7 @@
         <div class="container-fluid row p-2">
 
             @php
-                $heads = ['Pieza', 'Alto x Largo', 'Cantidad de Piezas', 'Descripción', ''];
+                $heads = ['Suaje', 'Pieza', 'Alto x Largo', 'Cantidad de Piezas', 'Descripción', ''];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
             <x-adminlte-datatable id="piezas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
@@ -52,6 +52,7 @@
                     @foreach( $piezas as $pieza )
                     
                         <tr>
+                            <td>{{ $pieza->suaje }}</td>
                             <td>{{ $pieza->nombre }}</td>
                             <td>{{ $pieza->alto }} X {{ $pieza->largo }}</td>
                             <td>{{ $pieza->cantidad }}</td>

@@ -1105,7 +1105,7 @@ class NotaController extends Controller
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->created_at.'</b></td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">'.$nota->fecha_entrega.'</td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$nota->fecha_entrega.'</b></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
@@ -1306,7 +1306,7 @@ class NotaController extends Controller
                                             foreach( $cotizacion->piezas as $pieza ){
 
                                                 $html .= '<tr>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje->numero.'-'.$pieza->suaje->nombre.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje.'</td>
                                                             <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</td>
                                                             <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
                                                             
@@ -1314,7 +1314,7 @@ class NotaController extends Controller
 
                                                                 foreach( $numeraciones as $numeracion ){
     
-                                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->cantidad( $cotizacion->id, $numeracion->id).'</td>';
+                                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"></td>';
         
                                                                 }
 

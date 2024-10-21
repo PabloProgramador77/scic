@@ -35,7 +35,7 @@ jQuery(document).ready(function(){
                         'descripcion' : $("#descripcion").val(),
                         'cantidad' : $("#cantidad").val(),
                         'idModelo' : $("#idModelo").val(),
-                        'idSuaje' : $("#suaje").val(),
+                        'suaje' : $("#suaje").val(),
 
                     },
                     dataType: 'json',
