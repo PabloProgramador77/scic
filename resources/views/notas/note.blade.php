@@ -26,32 +26,50 @@
 
         <div class="container-fluid row p-1">
             <p class="col-lg-12 col-md-12 text-center bg-info p-1 rounded fw-semibold"><i class="fas fa-info-circle"></i> A continuación, introduce la cantidad de pares de cada numeración y termina pulsando el bóton con el icono <i class="fas fa-save"></i></p>
-            <x-adminlte-input class="col-lg-2" name="folio" id="folio" readonly="true" value="{{ $nota->id }}">
+            <div class="col-lg-2">
+                <x-adminlte-input name="folio" id="folio" readonly="true" value="{{ $nota->id }}">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text text-info">
+                                <i class="fas fa-sticky-note"></i> Folio
+                            </div>
+                        </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="col-lg-4">
+                <x-adminlte-input name="cliente" id="cliente" readonly="true" value="{{ $nota->cliente->nombre }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
-                            <i class="fas fa-sticky-note"></i> Folio
+                            <i class="fas fa-user"></i> Cliente
                         </div>
                     </x-slot>
-            </x-adminlte-input>
-            <x-adminlte-input class="col-lg-7" name="cliente" id="cliente" readonly="true" value="{{ $nota->cliente->nombre }}">
-                <x-slot name="prependSlot">
-                    <div class="input-group-text text-info">
-                        <i class="fas fa-portrait"></i> Cliente
-                    </div>
-                </x-slot>
-            </x-adminlte-input>
-            <x-adminlte-input class="col-lg-5" name="total" id="total" readonly="true" value="{{ $nota->total }}">
-                <x-slot name="prependSlot">
-                    <div class="input-group-text text-info">
-                        <i class="fas fa-dollar-sign"></i> Total
-                    </div>
-                </x-slot>
-            </x-adminlte-input>
-            <div class="col-lg-1">
-                <x-adminlte-button theme="primary" icon="fas fa-save" id="agregarNum" title="Agregar numeración"></x-adminlte-button>
+                </x-adminlte-input>
             </div>
             <div class="col-lg-2">
-                <x-adminlte-button theme="secondary" icon="fas fa-truck-loading" id="impuestos" title=" Costo(s) extra y envio" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
+                <x-adminlte-input name="total" id="total" readonly="true" value="{{ $nota->total }}">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-dollar-sign"></i> Total
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+            </div>
+            <div class="col-lg-2">
+                <x-adminlte-select name="dias" id="dias">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-calendar"></i> 
+                        </div>
+                    </x-slot>
+                    <option value="0">Días de entrega</option>
+                    <option value="7">7 días</option>
+                    <option value="14">14 días</option>
+                    <option value="21">21 días</option>
+                    <option value="30">30 días</option>
+                </x-adminlte-select>
+            </div>
+            <div class="col-lg-2">
+                <x-adminlte-button class="shadow mx-1" theme="secondary" icon="fas fa-truck-loading" id="impuestos" title=" Costo(s) extra y envio" data-toggle="modal" data-target="#modalImpuesto" data-id="{{ $nota->id }}"></x-adminlte-button>
+                <x-adminlte-button class="shadow mx-1" theme="primary" icon="fas fa-save" id="agregarNum" title="Terminar nota"></x-adminlte-button>
             </div>
             
         </div>

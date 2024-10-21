@@ -172,15 +172,18 @@ class NotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( $pares, $total, $idNota )
+    public function update( $pares, $total, $idNota, $dias )
     {
         try {
+
+            $nota = Nota::find( $idNota );
             
-            $nota = Nota::where('id', '=', $idNota)
+            Nota::where('id', '=', $idNota)
                     ->update([
 
                         'pares' => $pares,
                         'total' => $total,
+                        'fecha_entrega' => \Carbon\Carbon::parse( $nota->updated_at )->addDays( $dias ),
 
             ]);
 
@@ -328,7 +331,7 @@ class NotaController extends Controller
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; font-size: 12px;"><b>Fecha de Entrega Aprox:</b></td>
-                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">---</td>
+                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.$nota->fecha_entrega.'</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; font-size: 12px;"><b>Pedido:</b></td>
@@ -602,7 +605,7 @@ class NotaController extends Controller
 
             ]);
 
-            if( $this->pdfConsumo( $request->nota ) && $this->tablaConsumos( $request->nota ) && $this->hojaViajera( $request->nota ) ){
+            if( $this->hojaViajera( $request->nota ) ){
 
                 $datos['exito'] = true;
 
@@ -711,7 +714,7 @@ class NotaController extends Controller
 
                                             $html = '
                                             <tr style="border-bottom: 2px; padding: 5px;">
-                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$cotizacion->modelo->nombre .' '.$cotizacion->modelo->numero.'</td>
+                                                <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->nombre.'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.number_format( ($pieza->alto*$pieza->largo), 2 ).'</td>
                                                 <td style="font-size: 12px; text-align: center; width: 7.6%;">'.$pieza->alto.'</td>
@@ -1080,7 +1083,7 @@ class NotaController extends Controller
 
                     $numeraciones = $cotizacion->modelo->numeraciones;
 
-                    if( $cotizacion->modelo && !empty( $numeraciones ) && count( $numeraciones ) > 0){
+                    if( $cotizacion->modelo && !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
                         $ancho = (100/count( $numeraciones));
                         $colspan = count( $numeraciones )+1;
@@ -1093,8 +1096,6 @@ class NotaController extends Controller
                     }
                     
                     $html .= '
-                        <html>
-                            <body>
                                 <h4 style="text-align: center; font-weight: bold; font-size: 16px; display: block;">Formato de Seguimiento</h4>
                                 <table style="width: 100%; height: auto; overflow: auto;">
                                     <tbody style="width: 100%; height: auto; overflow: auto;">
@@ -1104,7 +1105,7 @@ class NotaController extends Controller
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->created_at.'</b></td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"></td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">'.$nota->fecha_entrega.'</td>
                                         </tr>
                                         <tr>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
@@ -1112,7 +1113,7 @@ class NotaController extends Controller
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Realizo</td>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.auth()->user()->name.'</b></td>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre ? : ''.'</b></td>
+                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.'</b></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">N° de Modelo</td>
@@ -1127,7 +1128,7 @@ class NotaController extends Controller
                                 <table style="width: 100%; height: auto; overflow: auto;">
                                     <tbody style="width: 100%; height: auto; overflow: auto;">
                                         <tr style="border: 1px solid #626567;">
-                                            <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 14px; font-weight: bold;" colspan="'.$colspan.'"><b>Numeración</b></td>
+                                            <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567;" colspan="'.$colspan.'"><b>Numeración</b></td>
                                         </tr>
                                         <tr style="background-color: #AED6F1">
                                             <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Total</td>';
@@ -1138,6 +1139,10 @@ class NotaController extends Controller
                                                     $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
     
                                                 }
+
+                                            }else{
+
+                                                $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
 
                                             }
                                             
@@ -1153,6 +1158,10 @@ class NotaController extends Controller
     
                                                 }
 
+                                            }else{
+
+                                                $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
+                                                
                                             }
                                             
                                         $html .= '
@@ -1172,23 +1181,27 @@ class NotaController extends Controller
 
                                             foreach( $cotizacion->consumibles as $consumible ){
 
-                                                $html .= '<tr><td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->tipo ? : ''.'</td>';
-                                                $html .= '<td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->nombre ? : ''.'</td></tr>';
+                                                $html .= '<tr><td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->tipo.'</td>';
+                                                $html .= '<td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->nombre.'</td></tr>';
     
                                             }
 
+                                        }else{
+
+                                            $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin consumibles</td>';
+                                            
                                         }
                                         
                                     $html .='
                                         <tr style="background-color: #F1C40F;">
                                             <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">Observaciones</td>
-                                            <td style="width: 80% height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->observaciones ? : ''.'</td>
+                                            <td style="width: 80%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->observaciones.'</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <table style="width: 100%; height: auto; overflow: auto;">
+                                    <h5 style="display: block; text-align: center;">Ficha de Preliminar de Pespunte</h5>
                                     <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <h5 style="display: block; text-align: center;">Ficha de Preliminar de Pespunte</h5>
                                         <tr>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
@@ -1197,7 +1210,7 @@ class NotaController extends Controller
                                         </tr>
                                         <tr>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre ? : ''.' '.$cotizacion->modelo->numero.'</b></td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
                                         </tr>
@@ -1215,6 +1228,10 @@ class NotaController extends Controller
     
                                                 }
 
+                                            }else{
+
+                                                $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
+                                                
                                             }
                                             
                                         $html .='
@@ -1224,7 +1241,7 @@ class NotaController extends Controller
                                             foreach( $cotizacion->piezas as $pieza ){
 
                                                 $html .= '<tr>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre ? : ''.'</td>';
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
     
                                                             if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
@@ -1240,23 +1257,27 @@ class NotaController extends Controller
     
                                             }
 
+                                        }else{
+
+                                            $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td>';
+                                            
                                         }
                                         
                                     $html .= '
                                     </tbody>
                                 </table>
                                 <table style="width: 100%; height: auto; overflow: auto;">
+                                    <h5 style="display: block; text-align: center;">Ficha de Corte</h5>
                                     <tbody style="width: 100%; height: auto; overflow: hidden;">
-                                        <h5 style="display: block; text-align: center;">Ficha de Corte</h5>
-                                                                                <tr>
+                                        <tr>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de'.( count( $nota->cotizaciones) ).'</b></td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.( count( $nota->cotizaciones) ).'</b></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre ? : ''.' '.$cotizacion->modelo->numero.'</b></td>
+                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
                                             <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
                                         </tr>
@@ -1280,21 +1301,20 @@ class NotaController extends Controller
                                             
                                         $html .='
                                         </tr>';
-
                                         if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
 
                                             foreach( $cotizacion->piezas as $pieza ){
 
                                                 $html .= '<tr>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje->nombre ? : ''.'</td>
-                                                            <td style="witdh: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</t>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre ? : ''.'</td>';
-    
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje->numero.'-'.$pieza->suaje->nombre.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
+                                                            
                                                             if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
                                                                 foreach( $numeraciones as $numeracion ){
     
-                                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b></b></td>';
+                                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->cantidad( $cotizacion->id, $numeracion->id).'</td>';
         
                                                                 }
 
@@ -1304,6 +1324,10 @@ class NotaController extends Controller
     
                                             }
 
+                                        }else{
+
+                                            $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td></tr>';
+                                            
                                         }
                                         
                                     $html .= '
@@ -1312,41 +1336,47 @@ class NotaController extends Controller
                                 <table style="width: 100%; height: auto; overflow: auto;">
                                     <tbody style="width: 100%; height: auto; overflow: hidden;">
                                         <tr>
-                                            <td style="width: 20%; height: auto; overflow: hidden;"><b>Proveedor</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden;"><b>Tipo</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden;"><b>Material</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden;"><b>Color</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden;"><b>Piezas</b></td>
+                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Proveedor</b></td>
+                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Tipo</b></td>
+                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Material</b></td>
+                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Color</b></td>
+                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Piezas</b></td>
                                         </tr>';
-                                        foreach( $cotizacion->materiales as $material ){
+                                        if( !empty( $cotizacion->materiales) && count( $cotizacion->materiales ) > 0){
 
-                                            $piezas = implode(', ', $material->piezas()->pluck('nombre')->filter()->toArray());
-                                            $piezas = array_unique( explode(', ', $piezas));
-                                            $piezas = implode(', ', $piezas);
+                                            foreach( $cotizacion->materiales as $material ){
 
-                                            $html .= '<tr>
-                                                        <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre ? : ''.'</td>
-                                                        <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
-                                                        <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->nombre ? : ''.'</td>
-                                                        <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
-                                                        <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$piezas.'</td>
-                                                    </tr>';
+                                                $piezas = implode(', ', $material->piezas()->pluck('nombre')->filter()->toArray());
+                                                $piezas = array_unique( explode(', ', $piezas));
+                                                $piezas = implode(', ', $piezas);
+    
+                                                $html .= '<tr>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->nombre.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
+                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$piezas.'</td>
+                                                        </tr>';
+    
+                                            }
 
+                                        }else{
+
+                                            $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td></tr>';
+                                            
                                         }
+                                        
                                     $html .= '
                                     </tbody>
-                                </table>
-                            </body>
-                        </html>
-                    ';
-
-                    echo $html;
+                                </table>';
                     
+                    echo $html;
+
                     $pdf->writeHTML( $html );
 
                     unset( $html );
 
-                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
+                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera.pdf', \Mpdf\Output\Destination::FILE );
 
                 }
 

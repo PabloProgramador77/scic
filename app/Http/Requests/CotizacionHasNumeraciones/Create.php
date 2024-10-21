@@ -34,6 +34,7 @@ class Create extends FormRequest
             'numeraciones' => 'required|array',
             'pares' => 'required|array',
             'montos' => 'required|array',
+            'dias' => 'required|integer',
 
         ];
     }

@@ -98,6 +98,7 @@ jQuery(document).ready(function(){
                         'pares' : pares,
                         'montos' : montos,
                         'descuentos' : descuentos,
+                        'dias' : $("#dias").val(),
 
                     },
                     dataType: 'json',

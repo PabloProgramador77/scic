@@ -158,7 +158,7 @@ class NotaHasCotizacionController extends Controller
 
             $nota = new NotaController();
             
-            if( $nota->update( $pares, $total, $idNota ) ){
+            if( $nota->update( $pares, $total, $idNota, $request->dias ) ){
 
                 return true;
 

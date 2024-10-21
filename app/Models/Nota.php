@@ -19,6 +19,7 @@ class Nota extends Model
         'estado',
         'iva',
         'envio',
+        'fecha_entrega',
 
     ];
 
