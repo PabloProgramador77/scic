@@ -605,7 +605,7 @@ class NotaController extends Controller
 
             ]);
 
-            if( $this->hojaViajera( $request->nota ) ){
+            if( $this->pdf( $request->nota ) && $this->pdfConsumo( $request->nota ) && $this->hojaViajera( $request->nota ) ){
 
                 $datos['exito'] = true;
 
@@ -1096,287 +1096,299 @@ class NotaController extends Controller
                     }
                     
                     $html .= '
-                                <h4 style="text-align: center; font-weight: bold; font-size: 16px; display: block;">Formato de Seguimiento</h4>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <tr>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->created_at.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$nota->fecha_entrega.'</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->descripcion.'</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Realizo</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.auth()->user()->name.'</b></td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.'</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">N° de Modelo</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->numero.'</b></td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.count( $nota->cotizaciones ).'</b></td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                            <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <tr style="border: 1px solid #626567;">
-                                            <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567;" colspan="'.$colspan.'"><b>Numeración</b></td>
-                                        </tr>
-                                        <tr style="background-color: #AED6F1">
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Total</td>';
-                                            if( !empty( $numeraciones ) && count( $numeraciones ) > 0){
+                        <h4 style="text-align: center; font-size: 16px; display: block;">Formato de Seguimiento</h4>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            <tbody style="width: 100%; height: auto; overflow: auto;">
+                                <tr>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->created_at.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$nota->fecha_entrega.'</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->descripcion.'</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Realizo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.auth()->user()->name.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.'</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">N° de Modelo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->numero.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.count( $nota->cotizaciones ).'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            <tbody style="width: 100%; height: auto; overflow: auto;">
+                                <tr style="border: 1px solid #626567;">
+                                    <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567;" colspan="'.$colspan.'"><b>Numeración</b></td>
+                                </tr>
+                                <tr style="background-color: #AED6F1">
+                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Total</td>';
+                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0){
 
-                                                foreach( $numeraciones as $numeracion ){
+                                        foreach( $numeraciones as $numeracion ){
 
-                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
-    
-                                                }
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
 
-                                            }else{
-
-                                                $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
-
-                                            }
-                                            
-                                        $html .='
-                                        </tr>
-                                        <tr style="border: 1px solid #626567;">
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.$nota->pares( $nota->id, $cotizacion->id).'</b></td>';
-                                            if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
-
-                                                foreach( $numeraciones as $numeracion){
-
-                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</b></td>';
-    
-                                                }
-
-                                            }else{
-
-                                                $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
-                                                
-                                            }
-                                            
-                                        $html .= '
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <tr style="border: 1px solid #626567;">
-                                            <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 14px; font-weight: bold;" colspan="3"><b>Insumos & Consumibles</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Horma</td>
-                                            <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->modelo->horma.'</td>
-                                        </tr>';
-                                        if( !empty( $cotizacion->consumibles ) && count( $cotizacion->consumibles ) > 0 ){
-
-                                            foreach( $cotizacion->consumibles as $consumible ){
-
-                                                $html .= '<tr><td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->tipo.'</td>';
-                                                $html .= '<td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->nombre.'</td></tr>';
-    
-                                            }
-
-                                        }else{
-
-                                            $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin consumibles</td>';
-                                            
                                         }
-                                        
-                                    $html .='
-                                        <tr style="background-color: #F1C40F;">
-                                            <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">Observaciones</td>
-                                            <td style="width: 80%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->observaciones.'</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <h5 style="display: block; text-align: center;">Ficha de Preliminar de Pespunte</h5>
-                                    <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <tr>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de'.( count( $nota->cotizaciones) ).'</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <tr style="background-color: #AED6F1">';
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Total</td>';
-                                            if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
-                                                foreach( $numeraciones as $numeracion ){
+                                    }else{
 
-                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
-    
-                                                }
+                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
 
-                                            }else{
+                                    }
+                                    
+                                $html .='
+                                </tr>
+                                <tr style="border: 1px solid #626567;">
+                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.$nota->pares( $nota->id, $cotizacion->id).'</b></td>';
+                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
-                                                $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
-                                                
-                                            }
-                                            
-                                        $html .='
-                                        </tr>';
-                                        if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
+                                        foreach( $numeraciones as $numeracion){
 
-                                            foreach( $cotizacion->piezas as $pieza ){
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</b></td>';
 
-                                                $html .= '<tr>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
-    
-                                                            if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
-
-                                                                foreach( $numeraciones as $numeracion ){
-    
-                                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id ) * $pieza->cantidad).'</b></td>';
-        
-                                                                }
-
-                                                            }
-
-                                                $html .= '</tr>';
-    
-                                            }
-
-                                        }else{
-
-                                            $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td>';
-                                            
                                         }
+
+                                    }else{
+
+                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
                                         
-                                    $html .= '
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <h5 style="display: block; text-align: center;">Ficha de Corte</h5>
-                                    <tbody style="width: 100%; height: auto; overflow: hidden;">
-                                        <tr>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.( count( $nota->cotizaciones) ).'</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                            <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <tbody style="width: 100%; height: auto; overflow: auto;">
-                                        <tr style="background-color: #AED6F1">';
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Suaje</td>
-                                                    <td style="width: '.$ancho.'; height: auto; overflow: auto; border: 1px solid #626567;">Cantidad P/P</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Numeración</td>';
-                                            if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
+                                    }
+                                    
+                                $html .= '
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            <tbody style="width: 100%; height: auto; overflow: auto;">
+                                <tr style="border: 1px solid #626567;">
+                                    <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 14px; font-weight: bold;" colspan="3"><b>Insumos & Consumibles</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Horma</td>
+                                    <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->modelo->horma.'</td>
+                                </tr>';
+                                if( !empty( $cotizacion->consumibles ) && count( $cotizacion->consumibles ) > 0 ){
 
-                                                foreach( $numeraciones as $numeracion ){
+                                    foreach( $cotizacion->consumibles as $consumible ){
 
-                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
-    
-                                                }
+                                        $html .= '<tr><td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->tipo.'</td>';
+                                        $html .= '<td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->nombre.'</td></tr>';
 
-                                            }
-                                            
-                                        $html .='
-                                        </tr>';
-                                        if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
+                                    }
 
-                                            foreach( $cotizacion->piezas as $pieza ){
+                                }else{
 
-                                                $html .= '<tr>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje.'</td>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</td>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
-                                                            
-                                                            if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
+                                    $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin consumibles</td>';
+                                    
+                                }
+                                
+                            $html .='
+                                <tr style="background-color: #F1C40F;">
+                                    <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">Observaciones</td>
+                                    <td style="width: 80%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->observaciones.'</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h5 style="display: block; text-align: center;">Ficha de Preliminar de Pespunte</h5>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            
+                            <tbody style="width: 100%; height: auto; overflow: auto;">
+                                <tr>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de'.( count( $nota->cotizaciones) ).'</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            <tbody style="width: 100%; height: auto; overflow: auto;">
+                                <tr style="background-color: #AED6F1">';
+                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Total</td>';
+                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
-                                                                foreach( $numeraciones as $numeracion ){
-    
-                                                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"></td>';
-        
-                                                                }
+                                        foreach( $numeraciones as $numeracion ){
 
-                                                            }
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
 
-                                                $html .= '</tr>';
-    
-                                            }
-
-                                        }else{
-
-                                            $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td></tr>';
-                                            
                                         }
+
+                                    }else{
+
+                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
                                         
-                                    $html .= '
-                                    </tbody>
-                                </table>
-                                <table style="width: 100%; height: auto; overflow: auto;">
-                                    <tbody style="width: 100%; height: auto; overflow: hidden;">
-                                        <tr>
-                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Proveedor</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Tipo</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Material</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Color</b></td>
-                                            <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Piezas</b></td>
-                                        </tr>';
-                                        if( !empty( $cotizacion->materiales) && count( $cotizacion->materiales ) > 0){
+                                    }
+                                    
+                                $html .='
+                                </tr>';
+                                if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
 
-                                            foreach( $cotizacion->materiales as $material ){
+                                    foreach( $cotizacion->piezas as $pieza ){
 
-                                                $piezas = implode(', ', $material->piezas()->pluck('nombre')->filter()->toArray());
-                                                $piezas = array_unique( explode(', ', $piezas));
-                                                $piezas = implode(', ', $piezas);
-    
-                                                $html .= '<tr>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->nombre.'</td>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
-                                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$piezas.'</td>
-                                                        </tr>';
-    
-                                            }
+                                        $html .= '<tr>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
 
-                                        }else{
+                                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
-                                            $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td></tr>';
-                                            
+                                                        foreach( $numeraciones as $numeracion ){
+
+                                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id ) * $pieza->cantidad).'</b></td>';
+
+                                                        }
+
+                                                    }else{
+
+                                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
+                                                        
+                                                    }
+
+                                        $html .= '</tr>';
+
+                                    }
+
+                                }else{
+
+                                    $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td>';
+                                    
+                                }
+                                
+                            $html .= '
+                            </tbody>
+                        </table>
+                        <h5 style="display: block; text-align: center;">Ficha de Corte</h5>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            
+                            <tbody style="width: 100%; height: auto; overflow: hidden;">
+                                <tr>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.( count( $nota->cotizaciones) ).'</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            <tbody style="width: 100%; height: auto; overflow: auto;">
+                                <tr style="background-color: #AED6F1">';
+                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Suaje</td>
+                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Cantidad P/P</td>
+                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Numeración</td>';
+                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
+
+                                        foreach( $numeraciones as $numeracion ){
+
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$numeracion->numero.'</td>';
+
                                         }
+
+                                    }else{
+
+                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
                                         
-                                    $html .= '
-                                    </tbody>
-                                </table>';
-                    
-                    echo $html;
+                                    }
+                                    
+                                $html .='
+                                </tr>';
+                                if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
+
+                                    foreach( $cotizacion->piezas as $pieza ){
+
+                                        $html .= '<tr>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
+                                                    
+                                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
+
+                                                        foreach( $numeraciones as $numeracion ){
+
+                                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"></td>';
+
+                                                        }
+
+                                                    }else{
+
+                                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
+                                                        
+                                                    }
+
+                                        $html .= '</tr>';
+
+                                    }
+
+                                }else{
+
+                                    $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td></tr>';
+                                    
+                                }
+                                
+                            $html .= '
+                            </tbody>
+                        </table>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                            <tbody style="width: 100%; height: auto; overflow: hidden;">
+                                <tr>
+                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Proveedor</b></td>
+                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Tipo</b></td>
+                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Material</b></td>
+                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Color</b></td>
+                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567;"><b>Piezas</b></td>
+                                </tr>';
+                                if( !empty( $cotizacion->materiales) && count( $cotizacion->materiales ) > 0){
+
+                                    foreach( $cotizacion->materiales as $material ){
+
+                                        $piezas = implode(',', $material->piezas()->pluck('nombre')->filter()->toArray());
+                                        $piezas = array_unique( explode(',', $piezas));
+                                        $piezas = implode(',', $piezas);
+
+                                        $html .= '<tr>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->nombre.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$piezas.'</td>
+                                                </tr>';
+
+                                    }
+
+                                }else{
+
+                                    $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td></tr>';
+                                    
+                                }
+                                
+                            $html .= '
+                            </tbody>
+                        </table>';
+
+                    //echo $html;
 
                     $pdf->writeHTML( $html );
 
-                    unset( $html );
-
-                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera.pdf', \Mpdf\Output\Destination::FILE );
+                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
 
                 }
 
