@@ -605,7 +605,7 @@ class NotaController extends Controller
 
             ]);
 
-            if( $this->pdf( $request->nota ) && $this->pdfConsumo( $request->nota ) && $this->hojaViajera( $request->nota ) ){
+            if( $this->pdf( $request->nota ) && $this->pdfConsumo( $request->nota ) && $this->hojaViajera( $request->nota ) && $this->tablaConsumos( $request->nota ) ){
 
                 $datos['exito'] = true;
 
