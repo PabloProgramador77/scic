@@ -326,16 +326,16 @@ class NotaController extends Controller
                                 <table style="width: 100%; height: auto; overflow: auto;">
                                     <tbody>
                                         <tr>
-                                            <td style="text-align: right; font-size: 12px;"><b>Fecha de Inicio:</b></td>
+                                            <td style="text-align: right; font-size: 12px;"><b>Folio Nota:</b></td>
+                                            <td style="text-align: right; font-size: 12px;">'.$nota->id.'</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right; font-size: 12px;"><b>Fecha de Emisión:</b></td>
                                             <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.$nota->updated_at.'</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; font-size: 12px;"><b>Fecha de Entrega Aprox:</b></td>
                                             <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.$nota->fecha_entrega.'</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right; font-size: 12px;"><b>Pedido:</b></td>
-                                            <td style="text-align: center; font-size: 12px; background-color: lightgray;">'.$nota->id.'</td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right; font-size: 12px;"><b>Vendedor:</b></td>
@@ -354,15 +354,15 @@ class NotaController extends Controller
                                 </tr>
                                 <tr>
                                     <td style="font-size: 12px;"><b>Domicilio:</b></td>
-                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->domicilio.'</td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->domicilio ? : 'Sin domicilio registrado'.'</td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 12px;"><b>Telefono:</b></td>
-                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->telefono.'</td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->telefono ? : 'Sin telefono registrado'.'</td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 12px;"><b>Correo:</b></td>
-                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->email.'</td>
+                                    <td style="font-size: 12px; text-align: center;">'.$nota->cliente->email ? : 'Sin email registrado'.'</td>
                                 </tr>
                             </table>
                         </div>
@@ -382,9 +382,9 @@ class NotaController extends Controller
 
                                     $html .= '
                                     <tr style="padding: 5px;">
-                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->nombre.'</td>
-                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->modelo->numero.'</td>
-                                        <td style="border: 2px; font-size: 12px; border: 1px;">'.$cotizacion->descripcion.'</td>';
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D;">'.$cotizacion->modelo->nombre.'</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D;">'.$cotizacion->modelo->numero.'</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D;">'.$cotizacion->descripcion.'</td>';
 
                                         $ultimo = $cotizacion->numeraciones->last();
 
@@ -393,13 +393,13 @@ class NotaController extends Controller
                                             if( $numeracion->is( $ultimo ) ){
 
                                                 $html .= '
-                                                <td style="border: 2px; font-size: 12px; border: 1px;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                <td style="font-size: 12px; border: 1px solid #7B7D7D;;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
                                                 ';
 
                                             }else{
 
                                                 $html .= '
-                                                <td style="border: 2px; font-size: 12px; border: 1px;"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                <td style="font-size: 12px; border: 1px solid #7B7D7D;"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
                                                 ';
 
                                             }
@@ -408,9 +408,9 @@ class NotaController extends Controller
                                         }
 
                                     $html .= '
-                                        <td style="border: 2px; font-size: 12px; border: 1px; text-align: center;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
-                                        <td style="border: 2px; font-size: 12px; border: 1px; text-align: center;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)), 2).'</td>
-                                        <td style="border: 2px; font-size: 12px; border: 1px; text-align: center;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)) * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
+                                        <td style="border: 1px solid #7B7D7D; font-size: 12px; text-align: center;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
+                                        <td style="border: 1px solid #7B7D7D; font-size: 12px; text-align: center;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)), 2).'</td>
+                                        <td style="border: 1px solid #7B7D7D; font-size: 12px; text-align: center;">$ '.number_format( ($cotizacion->precio - $nota->descuento( $nota->id, $cotizacion->id)) * $nota->pares( $nota->id, $cotizacion->id ), 2).'</td>
                                     </tr>
                                     ';
 
@@ -418,18 +418,18 @@ class NotaController extends Controller
 
                                 $html.= '
                                 <tr style="padding: 5px;">
-                                    <td colspan="'.($colspan+3).'" style="font-size: 12px; text-align: right; border: 1px;"><b>Pares:</b></td>
-                                    <td  style="font-size: 12px; border: 1px; text-align: center;">'.$nota->pares.'</td>
-                                    <td  style="font-size: 12px; text-align: right; border: 1px;"><b>Subtotal:</b></td>
-                                    <td  style="font-size: 12px; border: 1px; text-align: center;">$ '.number_format( $nota->total, 2).'</td>
+                                    <td colspan="'.($colspan+3).'" style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>Total de Pares:</b></td>
+                                    <td  style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$nota->pares.'</td>
+                                    <td  style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>Subtotal:</b></td>
+                                    <td  style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">$ '.number_format( $nota->total, 2).'</td>
                                 </tr>';
 
                                 if( $nota->iva == 'True' ){
 
                                     $html .='
                                     <tr style="background-color: lightgray; padding: 5px;">
-                                        <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right;"><b>I.V.A:</b></td>
-                                        <td style="font-size: 12px; text-align: center;">$ '.number_format( ($nota->total*0.16), 2).'</td>
+                                        <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>I.V.A:</b></td>
+                                        <td style="font-size: 12px; text-align: center; border: 1px solid #7B7D7D;">$ '.number_format( ($nota->total*0.16), 2).'</td>
                                     </tr>
                                     ';
 
@@ -475,7 +475,7 @@ class NotaController extends Controller
                             </table>
                             <div style="padding: 5px; margin: 5px; text-align: center;">
                                 <p style="color: gray; font-size: 14px; text-align: center; font-weight: bold;">Este documento no es un comprobante fiscal.</p>
-                                <p style="color: gray; font-size: 14px; text-align: center; font-weight: bold;">Esta nota tiene una validez de 30 días a partir de la fecha de inicio</p>
+                                <p style="color: gray; font-size: 14px; text-align: center; font-weight: bold;">Esta nota tiene una validez de 30 días a partir de la fecha de emisión</p>
                             </div>
                         </div>
                     </body>
