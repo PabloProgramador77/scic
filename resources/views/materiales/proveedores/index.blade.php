@@ -37,8 +37,8 @@
 
                         <tr>
                             <td>{{ $proveedor->nombre }}</td>
-                            <td>{{ $proveedor->telefono }}</td>
-                            <td>{{ $proveedor->direccion }}</td>
+                            <td>{{ ($proveedor->telefono ? $proveedor->telefono : 'Sin telefono registrado') }}</td>
+                            <td>{{ ($proveedor->direccion ? $proveedor->direccion : 'Sin dirección registrada') }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $proveedor->id }}" title="Editar proveedor"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $proveedor->id }}" title="Borrar proveedor"></x-adminlte-button>

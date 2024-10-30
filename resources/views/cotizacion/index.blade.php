@@ -39,10 +39,10 @@
                     @foreach ($clientes as $cliente)
 
                         <tr>
-                            <td>{{ $cliente->numero ? : 'N° Desconocido' }}</td>
+                            <td>{{ ($cliente->numero ? : 'N° Desconocido') }}</td>
                             <td>{{ $cliente->nombre }}</td>
-                            <td>{{ $cliente->telefono ? : 'Sin telefono' }}</td>
-                            <td>{{ $cliente->email ? : 'Sin correo electrónico' }}</td>
+                            <td>{{ ($cliente->telefono ? : 'Sin telefono') }}</td>
+                            <td>{{ ($cliente->email ? : 'Sin correo electrónico') }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-id="{{ $cliente->id }}" data-toggle="modal" data-target="#modalEditar" title="Editar cliente"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cliente->id }}" data-value="{{ $cliente->nombre }}" title="Borrar cotización"></x-adminlte-button>

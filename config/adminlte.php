@@ -343,12 +343,6 @@ return [
                     'icon' => 'fas fa-shoe-prints',
                     'icon_color' => 'warning',
                 ],
-                [
-                    'text' => 'Suajes',
-                    'url' => 'suajes',
-                    'icon' => 'fas fa-shoe-prints',
-                    'icon_color' => 'warning',
-                ],
             ],
         ],
         [

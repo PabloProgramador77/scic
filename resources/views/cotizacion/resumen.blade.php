@@ -140,9 +140,9 @@
             </div>
             <div class="col-lg-6">
                 @php
-                    $colores = implode(', ', $cotizacion->colores()->pluck('colorMaterial')->filter()->toArray());
-                    $colores = array_unique( explode( ', ', $colores) );
-                    $colores = implode( ', ', $colores );
+                    $colores = implode(',', $cotizacion->colores()->pluck('colorMaterial')->filter()->toArray());
+                    $colores = array_unique( explode( ',', $colores) );
+                    $colores = implode( ',', $colores );
 
                     if( $colores === '' || $colores === NULL ){
 

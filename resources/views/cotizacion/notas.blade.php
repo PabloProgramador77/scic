@@ -13,7 +13,7 @@
                             <td>{{ $nota->id }}</td>
                             <td>{{ $nota->pares }}</td>
                             <td>$ {{ $nota->total }}</td>
-                            <td>{{ $nota->estado }}</td>
+                            <td><span class="p-1 rounded bg-teal">{{ $nota->estado }}</span></td>
                             <td>
                                 @if( $nota->estado == 'Pendiente')
                                     <a class="btn btn-info rounded nota" id="nota{{ $nota->id }}" data-id="{{ $nota->id }}"><i class="fas fa-plus-circle"></i></a>

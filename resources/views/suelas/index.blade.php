@@ -37,8 +37,8 @@
                         <tr>
                             <td>{{ $suela->nombre }}</td>
                             <td>$ {{ $suela->precio }}</td>
-                            <td>{{ $suela->proveedor ? : 'Proveedor desconocido' }}</td>
-                            <td>{{ $suela->descripcion ? : 'Sin descripción' }}</td>
+                            <td>{{ ($suela->proveedor ? : 'Proveedor desconocido') }}</td>
+                            <td>{{ ($suela->descripcion ? : 'Sin descripción') }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $suela->id }}" title="Editar suela"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $suela->id }}" title="Borrar suela"></x-adminlte-button>

@@ -52,7 +52,7 @@
                             <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
                             <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
-                            <td>{{ $cotizacion->estado }}</td>
+                            <td><span class="p-1 rounded bg-red">{{ $cotizacion->estado }}</span></td>
                             <td>
                                 @if( $cotizacion->estado == "Nota" )
                                     <span class="p-1 rounded bg-teal">Agregada a nota</span>

@@ -40,7 +40,7 @@
                             <td>{{ $nota->id }}</td>
                             <td>{{ $nota->cliente->nombre }}</td>
                             <td>$ {{ $nota->total }}</td>
-                            <td>{{ $nota->estado }}</td>
+                            <td><span class="p-1 rounded bg-teal">{{ $nota->estado }}</span></td>
                             <td>
                                 @if( $nota->estado == 'Pendiente' )
                                     <a href="{{ url('/nota/editar') }}/{{ $nota->id }}/{{ $cliente->id }}" class="btn btn-info editar" title="Editar nota"><i class="fas fa-edit"></i></a>

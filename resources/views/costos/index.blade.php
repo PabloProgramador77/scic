@@ -36,7 +36,7 @@
 
                         <tr>
                             <td>{{ $costo->nombre }}</td>
-                            <td>{{ $costo->descripcion }}</td>
+                            <td>{{ ($costo->descripcion ? $costo->descripcion : 'Sin descripción') }}</td>
                             <td>$ {{ $costo->total }} MXN</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $costo->id }}" title="Editar costo"></x-adminlte-button>
