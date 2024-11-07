@@ -373,15 +373,29 @@ class NotaController extends Controller
                             </table>
                         </div>
                         <div style="width: 100%; height: auto; overflow: auto; display: block; margin-top: 40px;">
-                            <table style="width: 100%; height: auto; overflow: auto;">
+                            <table style="width: 100%; height: auto; overflow: auto; border-collapse: collapse;">
                                 <tr style="background-color: #3498DB;">
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;"><b>Nombre</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;"><b>Modelo</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;"><b>Descripción</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;" colspan="'.$colspan.'"><b>Numeraciones</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;"><b>Pares</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;"><b>Precio U.</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949;"><b>Importe</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Nombre</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Modelo</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Descripción</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding-top: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;" colspan="'.$colspan.'"><b>Numeraciones</b>';
+
+                                    $html .= '<table style="width: 100%; height: auto; overflow: auto; margin: 0 auto;"><tr style="width: 100%; height: auto; overflow:auto; margin: 0 auto;">';
+
+                                    foreach( $cotizacion->numeraciones as $numeracion ){
+
+                                        $html .= '
+                                        <td style="width: '.number_format( 100 / count($cotizacion->numeraciones), 1 ).'%; height: auto; font-size: 12px; color: #FDFEFE; text-align: center; padding-top: 10px; margin: 0 auto;"><b>#'.number_format( $numeracion->numero, 1).'</b></td>
+                                        ';
+                                        
+                                    }
+
+                                    $html .= '</tr></table></td>';
+                                    
+                                    $html .= '
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Pares</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Precio U.</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Importe</b></td>
                                 </tr>';
 
                                 foreach( $nota->cotizaciones as $cotizacion ){
@@ -399,13 +413,13 @@ class NotaController extends Controller
                                             if( $numeracion->is( $ultimo ) ){
 
                                                 $html .= '
-                                                <td style="font-size: 12px; border: 1px solid #7B7D7D;;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                <td style="font-size: 12px; border: 1px solid #7B7D7D;;" colspan="'.($colspan - count($cotizacion->numeraciones)+1).'"><b>'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</b></td>
                                                 ';
 
                                             }else{
 
                                                 $html .= '
-                                                <td style="font-size: 12px; border: 1px solid #7B7D7D;"><b>#'.number_format($numeracion->numero, 1).'</b>/'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</td>
+                                                <td style="font-size: 12px; border: 1px solid #7B7D7D;"><b>'.$numeracion->cantidad( $cotizacion->id, $numeracion->id ).'</b></td>
                                                 ';
 
                                             }

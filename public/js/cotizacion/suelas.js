@@ -176,7 +176,7 @@ jQuery(document).ready(function(){
             input: 'text',
             inputLabel: 'Descripción:',
             inputPlaceholder: 'Descripción breve',
-            shownCancelButton: true,
+            showCancelButton: true,
             confirmButtonText: 'Guardar',
             cancelButtonText: 'Cancelar',
         
