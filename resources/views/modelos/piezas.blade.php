@@ -27,15 +27,23 @@
                 <x-adminlte-button theme="secondary" data-toggle="modal" data-target="#modalNumeracion" icon="fas fa-hashtag" data-value="{{ $modelo->nombre }}" data-id="{{ $modelo->id }}" class="numeraciones" title="Agregar numeración"></x-adminlte-button>
                 <x-adminlte-button theme="primary" icon="fas fa-save" id="encriptar" title="Proteger Modelo" data-id="{{ $modelo->id }}" class="mx-5"></x-adminlte-button>
             </div>
-            <div class="col-lg-12 my-2">
-                <x-adminlte-input class="col-md-6 col-lg-3 col-sm-12" name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
-                    <x-slot name="prependSlot">
-                        <div class="input-group-text text-secondary">
-                            <i class="fas fa-socks"></i>
-                        </div>
-                    </x-slot>
-                </x-adminlte-input>
+            <div class="container-fluid row my-2">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <x-adminlte-input name="nombreModelo" id="nombreModelo" readonly="true" value="{{ $modelo->nombre }} - {{ $modelo->numero }}">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text text-secondary">
+                                <i class="fas fa-socks"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+                </div>
                 <input type="hidden" name="idModelo" id="idModelo" value="{{ $modelo->id }}">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="puntoMenor">
+                        <label class="form-check-label" for="puntoMenor">Punto Menor</label>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -120,5 +128,6 @@
     <script src="{{ asset('js/modelos/nuevaSuela.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/nuevaNumeracion.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/modelos/encriptar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/modelos/puntoMenor.js') }}" type="text/javascript"></script>
 
 @stop

@@ -84,6 +84,7 @@ Route::post('modelo/costes/buscar', [App\Http\Controllers\ModeloHasCosteControll
 Route::post('modelo/encriptar', [App\Http\Controllers\ModeloController::class, 'encriptacion'])->name('encriptar-modelo');
 Route::post('modelo/ganancia', [App\Http\Controllers\ModeloHasGananciaController::class, 'store'])->name('ganancia-modelos');
 Route::post('modelo/ganancia/buscar', [App\Http\Controllers\ModeloHasGananciaController::class, 'show'])->name('buscar-ganancia-modelos');
+Route::post('modelo/punto', [App\Http\Controllers\ModeloController::class, 'punto'])->name('punto-menor-modelo');
 
 Route::get('cotizaciones', [App\Http\Controllers\CotizacionController::class, 'index'])->name('cotizaciones');
 Route::get('cotizador/cliente/{idCliente}', [App\Http\Controllers\CotizacionController::class, 'create'])->name('cotizador');

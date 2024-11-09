@@ -220,4 +220,42 @@ class ModeloController extends Controller
 
         return response()->json( $datos );
     }
+
+    /**
+     * Activado y desactivado de punto menor
+     */
+    public function punto( Request $request ){
+        try {
+            
+            $modelo = Modelo::find( $request->id );
+
+            if( $modelo && $modelo->id ){
+
+                Modelo::where('id', '=', $request->id)
+                        ->update([
+
+                            'puntoMenor' => $request->punto,
+
+                        ]);
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Modelo no identificado';
+
+            }
+
+            return response()->json( $datos );
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
 }

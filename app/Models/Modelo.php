@@ -18,6 +18,7 @@ class Modelo extends Model
         'horma', 
         'descripcion',
         'variante',
+        'puntoMenor',
 
     ];
 

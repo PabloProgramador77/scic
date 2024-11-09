@@ -1113,7 +1113,23 @@ class NotaController extends Controller
 
                 foreach( $nota->cotizaciones as $cotizacion ){
 
-                    $numeraciones = $cotizacion->modelo->numeraciones;
+                    if( $cotizacion->modelo->puntoMenor === 'Activado' ){
+
+                        foreach( $cotizacion->modelo->numeraciones as $numeracion ){
+                            
+                            $numeracion->numero = floatval( $numeracion->numero - 1);
+
+                        }
+
+                        $numeraciones = $cotizacion->modelo->numeraciones;
+
+                    }else{
+
+                        $numeraciones = $cotizacion->modelo->numeraciones;
+
+                    }
+
+                    
 
                     if( $cotizacion->modelo && !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
