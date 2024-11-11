@@ -1242,8 +1242,8 @@ class NotaController extends Controller
                                 
                             $html .='
                                 <tr style="background-color: #F1C40F;">
-                                    <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">Observaciones</td>
-                                    <td style="width: 80%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->observaciones.'</td>
+                                    <td style="width: 20%; height: auto; overflow: auto; border: 2px solid #626567;"><b>OBSERVACIONES</b></td>
+                                    <td style="width: 80%; height: auto; overflow: auto; border: 2px solid #626567;"><b>'.strtoupper( $cotizacion->observaciones ).'</b></td>
                                 </tr>
                             </tbody>
                         </table>
