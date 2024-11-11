@@ -139,19 +139,7 @@
                 </x-adminlte-input>
             </div>
             <div class="col-lg-6">
-                @php
-                    $colores = implode(',', $cotizacion->colores()->pluck('colorMaterial')->filter()->toArray());
-                    $colores = array_unique( explode( ',', $colores) );
-                    $colores = implode( ',', $colores );
-
-                    if( $colores === '' || $colores === NULL ){
-
-                        $colores = 'Sin colores agregados';
-
-                    }
-
-                @endphp
-                <x-adminlte-input name="colores" id="colores" readonly="true" value="{{ $colores }}">
+                <x-adminlte-input name="colores" id="colores" readonly="true" value="{{ $cotizacion->color }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-success">
                             <i class="fas fa-palette">Colores</i>
@@ -192,10 +180,7 @@
                                 $material = $pieza->materiales( $cotizacion->id )->first();
                             @endphp
                             <td class="border">{{ $material->nombre }}</td>
-                            @php
-                                $color = implode(', ', $pieza->color( $cotizacion->id )->pluck('colorMaterial')->toArray());
-                            @endphp
-                            <td class="border">{{ $color }}</td>
+                            <td class="border">{{ $cotizacion->color }}</td>
                             <td class="border">{{ $pieza->cantidad }}</td>
                             <td class="border">{{ $pieza->alto }} X {{ $pieza->largo }}</td>
                             <td class="border">$ {{ number_format( (($pieza->largo * $pieza->alto) * $pieza->cantidad) / ($material->unidades * 100)*$material->precio  ,2 ) }}</td>

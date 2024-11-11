@@ -14,6 +14,7 @@ class Cotizacion extends Model
     protected $fillable = [
         
         'descripcion',
+        'color',
         'precio',
         'estado',
         'idModelo',

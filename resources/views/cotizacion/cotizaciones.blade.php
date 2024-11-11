@@ -32,7 +32,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['[ ]', 'Folio', 'Descripción', 'Modelo', 'Precio Unitario', 'Estado', 'Acciones'];
+                $heads = ['[ ]', 'Folio', 'Descripción', 'Color', 'Modelo', 'Precio Unitario', 'Estado', 'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -49,8 +49,9 @@
                             @endif
                             
                             <td>{{ $cotizacion->id }}</td>
-                            <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
                             <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
+                            <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
+                            <td>{{ ( $cotizacion->color ? : 'Sin color' ) }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td><span class="p-1 rounded bg-red">{{ $cotizacion->estado }}</span></td>
                             <td>

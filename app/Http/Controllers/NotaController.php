@@ -1096,7 +1096,6 @@ class NotaController extends Controller
         try {
             
             $nota = Nota::find( $idNota );
-            $html = '';
 
             $pdf = new \Mpdf\Mpdf([
                 'mode' => 'utf-8',
@@ -1111,7 +1110,12 @@ class NotaController extends Controller
 
             if( $nota->cotizaciones &&  !empty($nota->cotizaciones) && count( $nota->cotizaciones ) > 0 ){
 
+                $elementos = 0;
+
                 foreach( $nota->cotizaciones as $cotizacion ){
+
+                    $elementos++;
+                    $html = '';
 
                     if( $cotizacion->modelo->puntoMenor === 'Activado' ){
 
@@ -1127,9 +1131,7 @@ class NotaController extends Controller
 
                         $numeraciones = $cotizacion->modelo->numeraciones;
 
-                    }
-
-                    
+                    }                    
 
                     if( $cotizacion->modelo && !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
@@ -1144,7 +1146,7 @@ class NotaController extends Controller
                     }
                     
                     $html .= '
-                        <h4 style="text-align: center; font-size: 16px; display: block;">Formato de Seguimiento</h4>
+                        <h4 style="page-break-before: always; text-align: center; font-size: 16px; display: block;">Formato de Seguimiento</h4>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr>
@@ -1167,9 +1169,9 @@ class NotaController extends Controller
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">N° de Modelo</td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->numero.'</b></td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.count( $nota->cotizaciones ).'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de '.count( $nota->cotizaciones ).'</b></td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->color.'</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1255,13 +1257,13 @@ class NotaController extends Controller
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de'.( count( $nota->cotizaciones) ).'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de'.( count( $nota->cotizaciones) ).'</b></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->color.'</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1327,13 +1329,13 @@ class NotaController extends Controller
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>1 de '.( count( $nota->cotizaciones) ).'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de '.( count( $nota->cotizaciones) ).'</b></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.' '.$cotizacion->modelo->numero.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b></b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->color.'</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1432,13 +1434,11 @@ class NotaController extends Controller
                             </tbody>
                         </table>';
 
-                    //echo $html;
-
                     $pdf->writeHTML( $html );
 
-                    $pdf->Output( public_path('pdf/hojasViajeras/').'hojaViajera'.$cotizacion->id.'.pdf', \Mpdf\Output\Destination::FILE );
-
                 }
+
+                $pdf->Output( public_path('pdf/hojasViajeras/').'hojasViajera'.$nota->id.'.pdf', \Mpdf\Output\Destination::FILE );
 
             }else{
 

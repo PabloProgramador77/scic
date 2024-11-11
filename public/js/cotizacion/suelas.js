@@ -184,119 +184,142 @@ jQuery(document).ready(function(){
 
             if( result.isConfirmed && result.value ){
 
+                var descripcion = result.value;
+
                 Swal.fire({
 
-                    title: 'Registrando Cotización',
-                    html: 'Un momento por favor: <b></b>',
-                    timer: 9975,
-                    allowOutsideClick: false,
-                    didOpen: ()=>{
-        
-                        Swal.showLoading();
-                        const b = Swal.getHtmlContainer().querySelector('b');
-                        procesamiento = setInterval(()=>{
-        
-                            b.textContent = Swal.getTimerLeft();
-        
-                        }, 100);
-        
-                        $.ajax({
-        
-                            type: 'POST',
-                            url: '/cotizacion/agregar',
-                            data:{
-        
-                                'cliente' : $("#idCliente").val(),
-                                'modelo' : $("#modelo").val(),
-                                'total' : $("#total").val(),
-                                'piezas' : piezas,
-                                'materiales' : materiales,
-                                'costos' : costos,
-                                'costes' : costes,
-                                'consumibles' : consumibles,
-                                'suelas' : suelas,
-                                'colores' : colores,
-                                'observaciones' : $("#observaciones").val(),
-                                'descripcion' : result.value,
-        
-                            },
-                            dataType: 'json',
-                            encode: true
-        
-                        }).done(function(respuesta){
-        
-                            if( respuesta.exito ){
-        
-                                Swal.fire({
-        
-                                    icon: 'success',
-                                    title: 'Cotización Registrada',
-                                    allowOutsideClick: false,
-                                    showConfirmButton: true
-        
-                                }).then((resultado)=>{
-        
-                                    if( resultado.isConfirmed ){
-        
-                                        window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
-        
-                                    }
-        
-                                });                                        
-        
-                            }else{
-        
-                                Swal.fire({
-        
-                                    icon: 'error',
-                                    title: respuesta.mensaje,
-                                    allowOutsideClick: false,
-                                    showConfirmButton: true
-        
-                                }).then((resultado)=>{
-        
-                                    if( resultado.isConfirmed ){
-        
-                                        window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
-        
-                                    }
-        
-                                });
-        
-                            }
-        
-                        });
-        
-                    },
-                    willClose: ()=>{
-        
-                        clearInterval(procesamiento);
-        
-                    }
-        
-                }).then((resultado)=>{
-        
-                    if( resultado.dismiss == Swal.DismissReason.timer ){
-        
+                    title: 'Ingresa el color del modelo en la cotización',
+                    input: 'text',
+                    inputLabel: 'Color(es):',
+                    inputPlaceholder: 'Color(es)',
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                    cancelButtonText: 'Cancelar',
+
+                }).then( (resultado) => {
+
+                    if( resultado.isConfirmed && resultado.value ){
+
+                        var color = resultado.value;
+
                         Swal.fire({
-        
-                            icon: 'warning',
-                            title: 'Hubo un inconveniente. Trata de nuevo.',
+
+                            title: 'Registrando Cotización',
+                            html: 'Un momento por favor: <b></b>',
+                            timer: 9975,
                             allowOutsideClick: false,
-                            showConfirmButton: true
-        
-                        }).then((resultado)=>{
-        
-                            if( resultado.isConfirmed ){
-        
-                                window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
-        
+                            didOpen: ()=>{
+                
+                                Swal.showLoading();
+                                const b = Swal.getHtmlContainer().querySelector('b');
+                                procesamiento = setInterval(()=>{
+                
+                                    b.textContent = Swal.getTimerLeft();
+                
+                                }, 100);
+                
+                                $.ajax({
+                
+                                    type: 'POST',
+                                    url: '/cotizacion/agregar',
+                                    data:{
+                
+                                        'cliente' : $("#idCliente").val(),
+                                        'modelo' : $("#modelo").val(),
+                                        'total' : $("#total").val(),
+                                        'piezas' : piezas,
+                                        'materiales' : materiales,
+                                        'costos' : costos,
+                                        'costes' : costes,
+                                        'consumibles' : consumibles,
+                                        'suelas' : suelas,
+                                        'colores' : colores,
+                                        'observaciones' : $("#observaciones").val(),
+                                        'descripcion' : descripcion,
+                                        'color' : color,
+                
+                                    },
+                                    dataType: 'json',
+                                    encode: true
+                
+                                }).done(function(respuesta){
+                
+                                    if( respuesta.exito ){
+                
+                                        Swal.fire({
+                
+                                            icon: 'success',
+                                            title: 'Cotización Registrada',
+                                            allowOutsideClick: false,
+                                            showConfirmButton: true
+                
+                                        }).then((resultado)=>{
+                
+                                            if( resultado.isConfirmed ){
+                
+                                                window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
+                
+                                            }
+                
+                                        });                                        
+                
+                                    }else{
+                
+                                        Swal.fire({
+                
+                                            icon: 'error',
+                                            title: respuesta.mensaje,
+                                            allowOutsideClick: false,
+                                            showConfirmButton: true
+                
+                                        }).then((resultado)=>{
+                
+                                            if( resultado.isConfirmed ){
+                
+                                                window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+                
+                                            }
+                
+                                        });
+                
+                                    }
+                
+                                });
+                
+                            },
+                            willClose: ()=>{
+                
+                                clearInterval(procesamiento);
+                
                             }
-        
+                
+                        }).then((resultado)=>{
+                
+                            if( resultado.dismiss == Swal.DismissReason.timer ){
+                
+                                Swal.fire({
+                
+                                    icon: 'warning',
+                                    title: 'Hubo un inconveniente. Trata de nuevo.',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: true
+                
+                                }).then((resultado)=>{
+                
+                                    if( resultado.isConfirmed ){
+                
+                                        window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+                
+                                    }
+                
+                                });
+                
+                            }
+                
                         });
-        
+
                     }
-        
+
                 });
 
             }
