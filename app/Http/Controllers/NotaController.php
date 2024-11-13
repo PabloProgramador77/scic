@@ -1150,28 +1150,29 @@ class NotaController extends Controller
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Realizo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.auth()->user()->name.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de '.count( $nota->cotizaciones ).'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->descripcion.'<b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->color.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">N° de Modelo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->numero.'</b></td>
+                                    
+                                </tr>
+                                <tr>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de solicitud</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->created_at.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Fecha de Entrega</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$nota->fecha_entrega.'</b></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Descripción:</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->descripcion.'</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Realizo</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.auth()->user()->name.'</b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->nombre.'</b></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">N° de Modelo</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->numero.'</b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de '.count( $nota->cotizaciones ).'</b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;">Color</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->color.'</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1225,14 +1226,14 @@ class NotaController extends Controller
                                 </tr>
                                 <tr>
                                     <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Horma</td>
-                                    <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$cotizacion->modelo->horma.'</td>
+                                    <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->horma.'</b></td>
                                 </tr>';
                                 if( !empty( $cotizacion->consumibles ) && count( $cotizacion->consumibles ) > 0 ){
 
                                     foreach( $cotizacion->consumibles as $consumible ){
 
                                         $html .= '<tr><td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->tipo.'</td>';
-                                        $html .= '<td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;">'.$consumible->nombre.'</td></tr>';
+                                        $html .= '<td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$consumible->nombre.'</b></td></tr>';
 
                                     }
 
@@ -1249,7 +1250,7 @@ class NotaController extends Controller
                                 </tr>
                             </tbody>
                         </table>
-                        <h5 style="display: block; text-align: center; border: 2px dotted black;">Ficha de Preliminar de Pespunte</h5>
+                        <h5 style="display: block; text-align: center; border-bottom: 2px dotted black;">Ficha de Preliminar de Pespunte</h5>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             
                             <tbody style="width: 100%; height: auto; overflow: auto;">
@@ -1257,7 +1258,7 @@ class NotaController extends Controller
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Folio</td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->id.'</b></td>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Elemento</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de'.( count( $nota->cotizaciones) ).'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$elementos.' de '.( count( $nota->cotizaciones) ).'</b></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567;">Modelo</td>
@@ -1321,7 +1322,7 @@ class NotaController extends Controller
                             $html .= '
                             </tbody>
                         </table>
-                        <h5 style="display: block; text-align: center; border: 2px dotted black;">Ficha de Corte</h5>
+                        <h5 style="display: block; text-align: center; border-bottom: 2px dotted black;">Ficha de Corte</h5>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             
                             <tbody style="width: 100%; height: auto; overflow: hidden;">
@@ -1343,8 +1344,8 @@ class NotaController extends Controller
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr style="background-color: #AED6F1">';
                                     $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Suaje</td>
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Cantidad P/P</td>
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Numeración</td>';
+                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Pieza</td>
+                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">Cantidad P/P</td>';
                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
                                         foreach( $numeraciones as $numeracion ){
@@ -1367,8 +1368,8 @@ class NotaController extends Controller
 
                                         $html .= '<tr>
                                                     <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->suaje.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->cantidad.'</td>';
                                                     
                                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
@@ -1417,9 +1418,9 @@ class NotaController extends Controller
                                         $html .= '<tr>
                                                     <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
                                                     <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->nombre.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$material->nombre.'</b></td>
                                                     <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$piezas.'</td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$piezas.'</b></td>
                                                 </tr>';
 
                                     }
@@ -1441,7 +1442,7 @@ class NotaController extends Controller
                 $pdf->Output( public_path('pdf/hojasViajeras/').'hojasViajera'.$nota->id.'.pdf', \Mpdf\Output\Destination::FILE );
 
             }else{
-
+                
                 echo "Sin cotizaciones disponibles para crear el documento.";
 
             }
