@@ -59,6 +59,7 @@
                         <x-adminlte-button theme="secondary" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}" title="Pasar a producción"></x-adminlte-button>
                     @else
                         <x-adminlte-button theme="info" icon="fas fa-file-invoice" id="consumos" data-id="{{ $nota->id }}" title="Consumos de nota"></x-adminlte-button>
+                        <x-adminlte-button theme="secondary" icon="fas fa-file" id="viajeras" data-id="{{ $nota->id }}" title="Hoja(s) Viajera(s)"></x-adminlte-button>
                         <x-adminlte-button theme="danger" icon="fas fa-ban" id="cerrarNota" data-id="{{ $nota->id }}" title="Cerrar nota"></x-adminlte-button>
                     @endif
                 @endif
@@ -115,5 +116,6 @@
     <script src="{{ asset('js/notas/anticipar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/cerrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/consumos.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/notas/hojaViajera.js') }}" type="text/javascript"></script>
 
 @stop

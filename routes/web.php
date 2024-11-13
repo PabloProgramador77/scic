@@ -129,6 +129,8 @@ Route::post('/nota/consumos', [App\Http\Controllers\NotaController::class, 'cons
 Route::get('/nota/consumos/{idNota}', [App\Http\Controllers\NotaController::class, 'consumo'])->name('descargar-consumos');
 Route::get('/notas/tabla/{idNota}', [App\Http\Controllers\NotaController::class, 'tabla'])->name('tabla-consumos');
 Route::post('/notas/tabla', [App\Http\Controllers\NotaController::class, 'tablaConsumo'])->name('tabla-consumo');
+Route::post('/nota/viajera', [App\Http\Controllers\NotaController::class, 'viajeras'])->name('hojas-viajeras');
+Route::get('/notas/viajera/{id}', [App\Http\Controllers\NotaController::class, 'viajera'])->name('hoja-viajera');
 
 Route::get('/numeraciones', [App\Http\Controllers\NumeracionController::class, 'index'])->name('numeraciones');
 Route::post('/numeracion/agregar', [App\Http\Controllers\NumeracionController::class, 'store'])->name('agregar-numeracion');

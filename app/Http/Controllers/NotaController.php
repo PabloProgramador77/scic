@@ -1458,4 +1458,46 @@ class NotaController extends Controller
         }
     }
 
+    /**
+     * Búsqueda e identificación de hoja viajerra
+     */
+    public function viajeras( Request $request ){
+        try {
+            
+            if( file_exists( public_path('pdf/hojasViajeras/').'hojasViajera'.$request->nota.'.pdf' ) ){
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Documento no encontrado';
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
+
+    /**
+     * Descarga de Hoja Viajera
+     */
+    public function viajera( $id ){
+        try {
+            
+            return response()->download( public_path('pdf/hojasViajeras/').'hojasViajera'.$id.'.pdf' );            
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
+
 }
