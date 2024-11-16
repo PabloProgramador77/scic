@@ -83,7 +83,7 @@ jQuery(document).ready(function(){
                         $("#modalSuela").css('display', 'none');
                         $(".modal-backdrop").remove();
 
-                    }
+                     }
 
                 });
 
@@ -111,9 +111,6 @@ jQuery(document).ready(function(){
             }
 
         });
-
-        total += suelas;
-        total += ganancia;
 
         console.log( total );
 
