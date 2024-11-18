@@ -1071,7 +1071,7 @@ class NotaController extends Controller
      */
     public function tabla( $idNota ){
         try {
-            
+
             if( file_exists( public_path('pdf/').'tabla'.$idNota.'.pdf' ) ){
 
                 return response()->download( public_path('pdf/').'tabla'.$idNota.'.pdf' );
@@ -1365,9 +1365,9 @@ class NotaController extends Controller
                                     foreach( $cotizacion->piezas as $pieza ){
 
                                         $html .= '<tr>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 13px;">'.$pieza->suaje.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 13px;">'.$pieza->nombre.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 13px;">'.$pieza->cantidad.'</td>';
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->suaje.'</b></td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->nombre.'</b></td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->cantidad.'</b></td>';
                                                     
                                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 

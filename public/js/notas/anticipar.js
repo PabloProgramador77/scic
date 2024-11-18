@@ -53,7 +53,7 @@ jQuery(document).ready(function(){
                             if( resultado.isConfirmed ){
 
                                 window.location.href = '/notas/tabla/'+nota;
-
+                            
                             }
 
                         });

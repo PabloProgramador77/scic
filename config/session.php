@@ -210,5 +210,6 @@ return [
     */
 
     'partitioned' => false,
+    'lifetime' => 720,
 
 ];

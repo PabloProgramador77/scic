@@ -65,8 +65,6 @@
                     <option value="14">14 días</option>
                     <option value="21">21 días</option>
                     <option value="30">30 días</option>
-                    <option value="45">45 días</option>
-                    <option value="60">60 días</option>
                 </x-adminlte-select>
             </div>
             <div class="col-lg-2">
