@@ -45,6 +45,7 @@ jQuery(document).ready(function(){
 
                         'nombre' : $("#nombreSuela").val(),
                         'precio' : $("#precioSuela").val(),
+                        'proveedor' : $("#proveedorSuela").val(),
                         'descripcion' : $("#descripcionSuela").val(),
 
                     },
