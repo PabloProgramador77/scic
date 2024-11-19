@@ -54,6 +54,21 @@ jQuery(document).ready(function(){
 
                                 window.location.href = '/notas/tabla/'+nota;
                             
+                                Swal.fire({
+                                    icon: 'info',
+                                    title: 'Hoja(s) Viajera(s) creada',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: true,
+                                }).then( (resultado)=>{
+
+                                    if( resultado.isConfirmed ){
+
+                                        window.location.href = '/notas/viajera/'+nota;
+                                        
+                                    }
+
+                                });
+
                             }
 
                         });
