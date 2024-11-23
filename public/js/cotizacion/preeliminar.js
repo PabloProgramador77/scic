@@ -37,6 +37,8 @@ jQuery(document).ready(function(){
         var suelas = new Array();
         var colores = new Array();
         var conceptos = new Array();
+        var precios = new Array();
+        var unidades = new Array();
 
         $("input[name=pieza]:checked").each(function(){
 
@@ -48,6 +50,8 @@ jQuery(document).ready(function(){
 
             materiales.push( valoresMaterial[3] );
             conceptos.push ( valoresMaterial[4] );
+            precios.push( valoresMaterial[0] );
+            unidades.push( valoresMaterial[1] );
 
             colores.push( colorMaterial );
 
@@ -87,12 +91,12 @@ jQuery(document).ready(function(){
         $("#observacionesPreeliminar").val( observaciones );
         $("#hormaPreeliminar").val( modelo[2] );
 
-        $("#suelaPreeliminar").val( suelas.join('') );
-        $("#coloresPreeliminar").val( colores.join('') );
+        $("#suelaPreeliminar").val( suelas.join(',') );
+        $("#coloresPreeliminar").val( colores.join(',') );
 
         $("#PreeliminarPiezas").empty();
 
-        var html = '<tr><th>Pieza</th><th>Material</th><th>Color</th><th>Cantidad</th><th>Alto x Largo</th></tr>';
+        var html = '<tr><th>Pieza</th><th>Material</th><th>Color</th><th>Cantidad</th><th>Alto x Largo</th><th>Costo</th></tr>';
 
         piezas.forEach( function( pieza, i){
 
@@ -102,6 +106,7 @@ jQuery(document).ready(function(){
             html += '<td>'+(colores[i] ? colores[i] : '')+'</td>';
             html += '<td>'+pieza[1]+'</td>';
             html += '<td>'+pieza[2]+' x '+pieza[3]+'</td>';
+            html += '<td>$ '+( ( ( pieza[2]*pieza[3] ) * ( pieza[1] ) / (unidades[i]*100) ) * precios[i] ).toFixed(4)+'</td>';
             html += '</tr>';
 
         });
