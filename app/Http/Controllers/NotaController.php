@@ -802,7 +802,9 @@ class NotaController extends Controller
     public function cliente( $idCliente ){
         try {
             
-            $notas = Nota::where('idCliente', '=', $idCliente)->get();
+            $notas = Nota::where('idCliente', '=', $idCliente)
+                    ->where('estado', '!=', 'Pagada')
+                    ->get();
             $cliente = Cliente::find( $idCliente );
 
             return view('notas.index', compact('notas', 'cliente'));

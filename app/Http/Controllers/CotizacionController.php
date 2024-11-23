@@ -388,7 +388,9 @@ class CotizacionController extends Controller
     public function cliente( $idCliente ){
         try {
             
-            $cotizaciones = Cotizacion::where('idCliente','=', $idCliente)->get();
+            $cotizaciones = Cotizacion::where('idCliente','=', $idCliente)
+                            ->where('estado', '!=', 'Nota')
+                            ->get();
             $cliente = Cliente::find( $idCliente );
             $notas = Nota::where('idCliente', '=', $idCliente)->get();
 
