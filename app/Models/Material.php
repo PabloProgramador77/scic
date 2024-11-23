@@ -53,4 +53,13 @@ class Material extends Model
 
     }
 
+    public function corte( $idCotizacion, $idMaterial ){
+
+        return $this->belongsToMany( Pieza::class, 'cotizacion_has_piezas', 'idMaterial', 'idPieza' )
+                    ->wherePivot( 'idCotizacion', $idCotizacion )
+                    ->wherePivot( 'idMaterial', $idMaterial )
+                    ->get();
+                    
+    }
+
 }

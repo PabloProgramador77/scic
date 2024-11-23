@@ -1409,7 +1409,7 @@ class NotaController extends Controller
 
                                     foreach( $cotizacion->materiales as $material ){
 
-                                        $piezas = implode(',', $material->piezas()->pluck('nombre')->filter()->toArray());
+                                        $piezas = implode(',', $material->corte( $cotizacion->id, $material->id )->pluck('nombre')->filter()->toArray());
                                         $piezas = array_unique( explode(',', $piezas));
                                         $piezas = implode(',', $piezas);
 
