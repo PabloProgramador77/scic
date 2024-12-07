@@ -1227,6 +1227,10 @@ class NotaController extends Controller
                                     <td style="width: 100%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 14px; font-weight: bold;" colspan="3"><b>Insumos & Consumibles</b></td>
                                 </tr>
                                 <tr>
+                                    <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Suela</td>
+                                    <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->suelas->first()->nombre.'</b></td>
+                                </tr>
+                                <tr>
                                     <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Horma</td>
                                     <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->modelo->horma.'</b></td>
                                 </tr>';
@@ -1366,7 +1370,7 @@ class NotaController extends Controller
                                 </tr>';
                                 if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
 
-                                    foreach( $cotizacion->piezas as $pieza ){
+                                    foreach( $cotizacion->piezas->sortBy('suaje') as $pieza ){
 
                                         $html .= '<tr>
                                                     <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->suaje.'</b></td>
