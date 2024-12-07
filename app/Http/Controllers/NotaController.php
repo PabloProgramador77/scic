@@ -1101,9 +1101,11 @@ class NotaController extends Controller
 
             $pdf = new \Mpdf\Mpdf([
                 'mode' => 'utf-8',
-                'format' => 'A4',
+                'format' => 'legal',
                 'orientation' => 'P',
                 'autoPageBreak' => true,
+                'autoTopMargin' => 'stretch',
+                'autoBottomMargin' => 'stretch',
                 'margin_left' => 10,
                 'margin_right' => 10,
                 'margin_top' => 10,
@@ -1152,8 +1154,8 @@ class NotaController extends Controller
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Realizo</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.auth()->user()->name.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Cliente</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->cliente->nombre.'</b></td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Elemento</td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$elementos.' de '.count( $nota->cotizaciones ).'</b></td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Modelo</td>
@@ -1411,7 +1413,7 @@ class NotaController extends Controller
 
                                     foreach( $cotizacion->materiales as $material ){
 
-                                        $piezas = implode(',', $material->corte( $cotizacion->id, $material->id )->pluck('nombre')->filter()->toArray());
+                                        $piezas = implode('<br>', $material->corte( $cotizacion->id, $material->id )->pluck('nombre')->filter()->toArray());
                                         $piezas = array_unique( explode(',', $piezas));
                                         $piezas = implode(',', $piezas);
 
@@ -1435,7 +1437,9 @@ class NotaController extends Controller
                             </tbody>
                         </table>';
 
-                    $pdf->writeHTML( $html );
+                    $pdf->SetDisplayMode('real', 'single');
+                    $pdf->setHtmlFooter('Página {PAGENO}');
+                    $pdf->writeHTML( $html, 2 );
 
                 }
 
