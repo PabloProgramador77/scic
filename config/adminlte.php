@@ -346,6 +346,25 @@ return [
             ],
         ],
         [
+            'text' => 'Desarrollo de Procesos',
+            'icon' => 'fas fa-network-wired',
+            'icon_color' => 'warning',
+            'submenu' => [
+                [
+                    'text' => 'Procesos',
+                    'url' => 'procesos',
+                    'icon' => 'fas fa-clipboard-list',
+                    'icon_color' => 'warning',
+                ],
+                [
+                    'text' => 'Actividades',
+                    'url' => 'actividades',
+                    'icon' => 'fas fa-tasks',
+                    'icon_color' => 'warning',
+                ]
+            ],
+        ],
+        [
             'text' => 'Usuarios',
             'url' => 'usuarios',
             'icon' => 'fas fa-users',
