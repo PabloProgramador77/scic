@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proceso;
+use App\Models\Actividad;
 use Illuminate\Http\Request;
-use App\Http\Requests\Procesos\Create;
-use App\Http\Requests\Procesos\Update;
-use App\Http\Requests\Procesos\Delete;
+use App\Http\Requests\Actividades\Create;
+use App\Http\Requests\Actividades\Update;
+use App\Http\Requests\Actividades\Delete;
 use App\Models\User;
 
-class ProcesoController extends Controller
+class ActividadController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if( auth()->check() ) {
+        try {
             
-            $procesos = Proceso::all();
+            $actividades = Actividad::all();
             $usuarios = User::all();
 
-            return view('procesos.index', compact('procesos', 'usuarios'));
-        
-        } else {
+            return view('actividades.index', compact('actividades', 'usuarios'));
 
+        } catch (\Throwable $th) {
+            
             return redirect()->route('login');
-        
+
         }
     }
 
@@ -45,15 +45,19 @@ class ProcesoController extends Controller
     {
         try {
             
-            $proceso = Proceso::create([
+            $actividad = Actividad::create([
 
                 'nombre' => $request->nombre,
                 'descripcion' => $request->descripcion,
                 'orden' => $request->orden,
+                'duracion' => $request->duracion,
+                'idProceso' => $request->idProceso,
+                'idUsuario' => $request->idUsuario,
+                'tipo' => $request->tipo
 
             ]);
 
-            if( $proceso->id ){
+            if( $actividad->id ){
 
                 $datos['exito'] = true;
 
@@ -72,7 +76,7 @@ class ProcesoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Proceso $proceso)
+    public function show(Actividad $actividad)
     {
         //
     }
@@ -80,7 +84,7 @@ class ProcesoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Proceso $proceso)
+    public function edit(Actividad $actividad)
     {
         //
     }
@@ -92,20 +96,25 @@ class ProcesoController extends Controller
     {
         try {
             
-            $proceso = Proceso::where('id', '=', $request->id)
-                    ->update([
-                        'nombre' => $request->nombre,
-                        'descripcion' => $request->descripcion,
-                        'orden' => $request->orden,
-                    ]);
+            $actividad = Actividad::find($request->id);
 
-            $datos['exito'] = true;
+            $actividad->nombre = $request->nombre;
+            $actividad->descripcion = $request->descripcion;
+            $actividad->orden = $request->orden;
+            $actividad->duracion = $request->duracion;
+            $actividad->idUsuario = $request->idUsuario;
+            $actividad->tipo = $request->tipo;
+
+            if( $actividad->save() ){
+
+                $datos['exito'] = true;
+
+            }
 
         } catch (\Throwable $th) {
             
             $datos['exito'] = false;
             $datos['mensaje'] = $th->getMessage();
-
         }
 
         return response()->json($datos);
@@ -118,9 +127,9 @@ class ProcesoController extends Controller
     {
         try {
             
-            $proceso = Proceso::find($request->id);
+            $actividad = Actividad::find($request->id);
 
-            if( $proceso->delete() ){
+            if( $actividad->delete() ){
 
                 $datos['exito'] = true;
 
@@ -129,8 +138,8 @@ class ProcesoController extends Controller
         } catch (\Throwable $th) {
             
             $datos['exito'] = false;
-            $datos['mensaje'] = $th->getMessage();  
-        
+            $datos['mensaje'] = $th->getMessage();
+
         }
 
         return response()->json($datos);

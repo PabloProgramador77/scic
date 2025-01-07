@@ -153,3 +153,7 @@ Route::get('/procesos', [App\Http\Controllers\ProcesoController::class, 'index']
 Route::post('/proceso/agregar', [App\Http\Controllers\ProcesoController::class, 'store'])->name('agregar-proceso');
 Route::post('/proceso/actualizar', [App\Http\Controllers\ProcesoController::class, 'update'])->name('actualizar-proceso');
 Route::post('/proceso/borrar', [App\Http\Controllers\ProcesoController::class, 'destroy'])->name('borrar-proceso');
+Route::post('/actividad/agregar', [App\Http\Controllers\ActividadController::class, 'store'])->name('agregar-actividad');
+Route::post('/actividad/actualizar', [App\Http\Controllers\ActividadController::class, 'update'])->name('actualizar-actividad');
+Route::post('/actividad/borrar', [App\Http\Controllers\ActividadController::class, 'destroy'])->name('borrar-actividad');
+Route::get('/actividades', [App\Http\Controllers\ActividadController::class, 'index'])->name('actividades');

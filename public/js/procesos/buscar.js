@@ -38,4 +38,35 @@ jQuery(document).ready(function(){
 
     });
 
+    $(".actividades").on('click', function(e){
+
+        e.preventDefault();
+
+        var id = $(this).attr('data-id');
+
+        if( id === null || id === 0 || id === '' ){
+
+            Swal.fire({
+
+                icon: 'warning',
+                title: 'Error de lectura',
+                allowOutsideClick: false,
+                showConfirmButton: true,
+
+            });
+
+            $("#agregar").attr('disabled', true);
+
+        }else{
+
+            console.log(id);
+
+            $("#idProceso").val( id );
+
+            $("#agregar").attr('disabled', false);
+
+        }
+
+    });
+
 });

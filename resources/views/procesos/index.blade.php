@@ -46,6 +46,7 @@
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $proceso->id }}" data-value="{{ $proceso->id }}, {{ $proceso->nombre }}, {{ $proceso->descripcion }}, {{ $proceso->orden }}" title="Editar proceso"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $proceso->id }}" data-value="{{ $proceso->nombre }}" title="Borrar proceso"></x-adminlte-button>
+                                <x-adminlte-button class="actividades" icon="fas fa-tags" theme="secondary" data-toggle="modal" data-target="#modalActividad" data-id="{{ $proceso->id }}" data-value="{{ $proceso->nombre }}" title="Agregar actividad"></x-adminlte-button>
                             </td>
                         </tr>
                         
@@ -62,6 +63,7 @@
 
         @include('procesos.nuevo')
         @include('procesos.editar')
+        @include('procesos.actividad')
 
     </section>
 
@@ -71,5 +73,6 @@
     <script src="{{ asset('js/procesos/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/procesos/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/procesos/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/actividades/agregar.js') }}" type="text/javascript"></script>
 
 @stop

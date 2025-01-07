@@ -114,6 +114,9 @@ class VerifyCsrfToken extends Middleware
         'proceso/agregar',
         'proceso/actualizar',
         'proceso/borrar',
+        'actividad/agregar',
+        'actividad/actualizar',
+        'actividad/borrar',
         
     ];
 }
