@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -147,3 +148,8 @@ Route::get('/suajes', [App\Http\Controllers\SuajeController::class, 'index'])->n
 Route::post('/suaje/agregar', [App\Http\Controllers\SuajeController::class, 'store'])->name('agregar-suaje');
 Route::post('/suaje/actualizar', [App\Http\Controllers\SuajeController::class, 'update'])->name('actualizar-suaje');
 Route::post('/suaje/borrar', [App\Http\Controllers\SuajeController::class, 'destroy'])->name('borrar-suaje');
+
+Route::get('/procesos', [App\Http\Controllers\ProcesoController::class, 'index'])->name('procesos');
+Route::post('/proceso/agregar', [App\Http\Controllers\ProcesoController::class, 'store'])->name('agregar-proceso');
+Route::post('/proceso/actualizar', [App\Http\Controllers\ProcesoController::class, 'update'])->name('actualizar-proceso');
+Route::post('/proceso/borrar', [App\Http\Controllers\ProcesoController::class, 'destroy'])->name('borrar-proceso');
