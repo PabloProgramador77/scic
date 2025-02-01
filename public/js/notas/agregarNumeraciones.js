@@ -140,6 +140,12 @@ jQuery(document).ready(function(){
 
                                     window.location.href = '/nota/descargar/'+$("#idNota").val();
 
+                                    setTimeout(()=>{
+
+                                        window.location.href = '/notas/cliente/'+$("#idCliente").val();
+
+                                    }, 3000);
+
                                 }
 
                             });
