@@ -1312,7 +1312,7 @@ class NotaController extends Controller
 
                                                         foreach( $numeraciones as $numeracion ){
 
-                                                            if( ($numeracion->cantidad( $cotizacion->id, $numeracion->id ) * $pieza->cantidad) > 0 ){
+                                                            if( ($numeracion->cantidad( $cotizacion->id, $numeracion->id ) ) > 0 ){
 
                                                                 $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )).'</b></td>';
 
