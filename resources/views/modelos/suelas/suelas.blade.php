@@ -16,7 +16,7 @@
             </div>
             <div class="form-group container-fluid">
                 @php
-                    $heads = [ '', 'Suela', 'Precio', 'Descripción' ];
+                    $heads = [ '', 'Suela', 'Proveedor', 'Precio', 'Descripción' ];
                 @endphp
                 <x-adminlte-datatable id="contenedorSuelas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
 

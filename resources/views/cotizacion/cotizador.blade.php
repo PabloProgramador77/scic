@@ -58,7 +58,7 @@
                     </x-adminlte-input>
                 </div>
                 <div class="col-lg-4">
-                    <x-adminlte-input class="mx-1" name="observaciones" id="observaciones" placeholder="Introduce las observaciones de la cotización">
+                    <x-adminlte-input class="mx-1" name="observaciones" id="observaciones" placeholder="Observaciones">
                         <x-slot name="prependSlot">
                             <div class="input-group-text text-info">
                                 <i class="fas fa-sticky-note"></i>

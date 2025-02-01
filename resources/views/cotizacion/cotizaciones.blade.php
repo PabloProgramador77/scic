@@ -49,9 +49,9 @@
                             @endif
                             
                             <td>{{ $cotizacion->id }}</td>
-                            <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
                             <td>{{ ( $cotizacion->color ? : 'Sin color' ) }}</td>
+                            <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td><span class="p-1 rounded bg-red">{{ $cotizacion->estado }}</span></td>
                             <td>

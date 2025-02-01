@@ -76,7 +76,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Descuento' ,'Numeraciones', 'Pares Totales', 'Monto'];
+                $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Color', 'Descuento' ,'Numeraciones', 'Pares Totales', 'Monto'];
                 $config = ['pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -91,6 +91,7 @@
                     </td>
                     <td>{{ $cotizacion->descripcion }}</td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
+                    <td>{{ $cotizacion->color }}</td>
                     <td class="descuento{{ $cotizacion->id }}"><input type="textbox" name="descuento" id="descuento{{ $cotizacion->id }}" class="text-center" placeholder="Descuento por par" value="{{ $nota->descuento( $nota->id, $cotizacion->id ) }}" id="{{ $nota->id }}" data-id="{{ $cotizacion->id }}"></input></td>
                     <td>
                         <div class="row">

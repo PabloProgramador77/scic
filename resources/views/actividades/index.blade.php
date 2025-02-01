@@ -24,7 +24,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['N°', 'Actividad', 'Proceso', 'Acciones'];
+                $heads = ['Orden', 'Actividad', 'Usuario responsable', 'Proceso', 'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -34,8 +34,9 @@
                     @foreach ($actividades as $actividad)
 
                         <tr>
-                            <td>{{ $actividad->id }}</td>
+                            <td>{{ $actividad->orden }}</td>
                             <td>{{ $actividad->nombre }}</td>
+                            <td>{{ $actividad->usuario->name }}</td>
                             <td>{{ $actividad->proceso->nombre }}</td>
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $actividad->id }}" data-value="{{ $actividad->id }}, {{ $actividad->nombre }}, {{ $actividad->descripcion }}, {{ $actividad->orden }}, {{ $actividad->duracion }}, {{ $actividad->idProceso }}, {{ $actividad->idUsuario }}, {{ $actividad->usuario->name }}, {{ $actividad->tipo }}" title="Editar actividad"></x-adminlte-button>

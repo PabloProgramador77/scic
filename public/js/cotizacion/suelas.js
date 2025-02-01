@@ -199,7 +199,7 @@ jQuery(document).ready(function(){
 
                         var color = resultado.value;
 
-                        if( $("#observaciones").val() == '' || $("#observaciones").val() == NULL ){
+                        if( $("#observaciones").val() === '' || $("#observaciones").val() === null ){
 
                             Swal.fire({
 

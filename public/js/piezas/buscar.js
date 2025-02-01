@@ -29,7 +29,7 @@ jQuery(document).ready(function(){
                 $("#cantidadEditar").val( respuesta.cantidad );
                 $("#descripcionEditar").val( respuesta.descripcion );
                 $("#idPieza").val( respuesta.id );
-                $("#suaje").val( respuesta.suaje );
+                $("#suajeEditar").val( respuesta.suaje );
 
                 $("#actualizar").attr('disabled', false);
 

@@ -24,7 +24,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['N°', 'Proceso', 'Descripción', 'Acciones'];
+                $heads = ['Orden', 'Proceso', 'Descripción', 'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -34,7 +34,7 @@
                     @foreach ($procesos as $proceso)
 
                         <tr>
-                            <td>{{ $proceso->id }}</td>
+                            <td>{{ $proceso->orden }}</td>
                             <td>{{ $proceso->nombre }}</td>
                             <td>
                                 @if( $proceso->descripcion == NULL )

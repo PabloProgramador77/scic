@@ -30,6 +30,7 @@ jQuery(document).ready(function(){
                                     '<tr>' +
                                         '<td></td>'+
                                         '<td><b>Suela</b></td>'+
+                                        '<td><b>Proveedor</b></td>'+
                                         '<td><b>Precio</b></td>'+
                                         '<td><b>Descripción</b></td>'+
                                     '</tr>'+
@@ -56,6 +57,7 @@ jQuery(document).ready(function(){
                         html += '<tr>' +
                                     '<td><input type="checkbox" '+( checked ? 'checked="true"' : '' )+' name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" data-id="' + suela.id + '"></td>' +
                                     '<td>' + suela.nombre + '</td>' +
+                                    '<td>' + suela.proveedor + '</td>' +
                                     '<td>$ ' + suela.precio + '</td>' +
                                     '<td>' + suela.descripcion + '</td>' +
                                 '</tr>';
@@ -73,6 +75,7 @@ jQuery(document).ready(function(){
                             html += '<tr>' +
                                         '<td><input type="checkbox" checked="true" name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" data-id="' + suela.id + '"></td>' +
                                         '<td>' + suela.nombre + '</td>' +
+                                        '<td>' + suela.proveedor + '</td>' +
                                         '<td>' + suela.precio + '</td>' +
                                         '<td>$ ' + suela.descripcion + '</td>' +
                                     '</tr>';

@@ -70,7 +70,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Numeraciones', 'Pares Totales', 'Monto'];
+                $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Color', 'Numeraciones', 'Pares Totales', 'Monto'];
                 $config = ['pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -85,6 +85,7 @@
                     </td>
                     <td>{{ $cotizacion->descripcion }}</td>
                     <td class="precio{{ $cotizacion->id }}">{{ $cotizacion->precio }}</td>
+                    <td>{{ $cotizacion->color }}</td>
                     <td>
                         <div class="row">
                             @foreach ($cotizacion->modelo->numeraciones as $numeracion)

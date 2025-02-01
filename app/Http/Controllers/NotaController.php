@@ -296,7 +296,7 @@ class NotaController extends Controller
 
                     'mode' => 'utf-8',
                     'format' => 'A4',
-                    'orientation' => 'P',
+                    'orientation' => 'L',
                     'autoPageBreak' => false,
                     'margin_left' => 10,
                     'margin_right' => 10,
@@ -378,6 +378,7 @@ class NotaController extends Controller
                                     <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Nombre</b></td>
                                     <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Modelo</b></td>
                                     <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Descripción</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Color</b></td>
                                     <td style="font-size: 12px; text-align: center; padding-top: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;" colspan="'.$colspan.'"><b>Numeraciones</b>';
 
                                     $html .= '<table style="width: 100%; height: auto; overflow: auto; margin: 0 auto;"><tr style="width: 100%; height: auto; overflow:auto; margin: 0 auto;">';
@@ -404,7 +405,8 @@ class NotaController extends Controller
                                     <tr style="padding: 5px;">
                                         <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$cotizacion->modelo->nombre.'</td>
                                         <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$cotizacion->modelo->numero.'</td>
-                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$cotizacion->descripcion.'</td>';
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$cotizacion->descripcion.'</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$cotizacion->color.'</td>';
 
                                         $ultimo = $cotizacion->numeraciones->last();
 
@@ -438,7 +440,7 @@ class NotaController extends Controller
 
                                 $html.= '
                                 <tr style="padding: 5px; border-bottom: 2px solid black;">
-                                    <td colspan="'.($colspan+3).'" style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>Total de Pares:</b></td>
+                                    <td colspan="'.($colspan+4).'" style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>Total de Pares:</b></td>
                                     <td  style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">'.$nota->pares.'</td>
                                     <td  style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>Subtotal:</b></td>
                                     <td  style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">$ '.number_format( $nota->total, 2).'</td>
@@ -448,7 +450,7 @@ class NotaController extends Controller
 
                                     $html .='
                                     <tr>
-                                        <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>I.V.A:</b></td>
+                                        <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>I.V.A:</b></td>
                                         <td style="font-size: 12px; text-align: center; padding: 5px;">$ '.number_format( ($nota->total*0.16), 2).'</td>
                                     </tr>
                                     ';
@@ -463,7 +465,7 @@ class NotaController extends Controller
 
                                         $html .='
                                         <tr>
-                                            <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>Envió:</b></td>
+                                            <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>Envió:</b></td>
                                             <td style="font-size: 12px; padding: 5px;">POR COBRAR</td>
                                         </tr>
                                         ';
@@ -472,7 +474,7 @@ class NotaController extends Controller
 
                                         $html .='
                                         <tr>
-                                            <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>Envió:</b></td>
+                                            <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>Envió:</b></td>
                                             <td style="font-size: 12px; padding: 5px;">$ '.number_format( $nota->envio, 2).'</td>
                                         </tr>
                                         ';
@@ -485,11 +487,11 @@ class NotaController extends Controller
                                 
                                 $html .='
                                 <tr>
-                                    <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right; color: #3894DB; padding: 5px;"><b>TOTAL:</b></td>
+                                    <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; color: #3894DB; padding: 5px;"><b>TOTAL:</b></td>
                                     <td style="font-size: 12px; border-bottom: 2px solid black; color: #3894DB; padding: 5px;"><b>$ '.number_format( $totalNota, 2).'</b></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="'.($colspan+5).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>ANTICIPO:</b></td>
+                                    <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>ANTICIPO:</b></td>
                                     <td style="font-size: 12px; border-bottom: 2px solid black; padding: 5px;">$ '.number_format(($totalNota/2), 2).'</td>
                                 </tr>
                             </table>
