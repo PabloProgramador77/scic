@@ -864,30 +864,30 @@ class NotaController extends Controller
                     foreach( $cotizacion->piezas as $pieza ){
 
                         $material = $pieza->materiales( $cotizacion->id )->first();
-                        $mtsTotales = number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2);
 
-                        if( !isset( $totalesPorMaterial[ $material->id ] ) ){
+                        if( $material && $material->id ){
 
-                            $totalesPorMaterial[ $material->id] = [
+                            $mtsTotales = number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2);
 
-                                'proveedor' => $material->proveedor()->nombre,
-                                'concepto' => $material->concepto,
-                                'material' => $material->nombre,
-                                'color' => $material->colores()->first()->pivot->colorMaterial ?? '',
-                                'precio' => $material->precio,
-                                'metros' => 0,
-                                'monto' => 0,
+                            if( !isset( $totalesPorMaterial[ $material->id ] ) ){
 
-                            ];
+                                $totalesPorMaterial[ $material->id ] = [
+
+                                    'proveedor' => $material->proveedor()->nombre,
+                                    'concepto' => $material->concepto,
+                                    'material' => $material->nombre,
+                                    'color' => $material->colores()->first()->pivot->colorMaterial ?? '',
+                                    'precio' => $material->precio,
+                                    'metros' => 0,
+                                    'monto' => 0,
+
+                                ];
+
+                            }
 
                             $totalesPorMaterial[ $material->id ]['metros'] += $mtsTotales;
-                            $totalesPorMaterial[ $material->id ]['monto'] += $mtsTotales * $material->precio;
+                            $totalesPorMaterial[ $material->id ]['monto'] += ($mtsTotales * $material->precio);
 
-                        }else{
-
-                            $totalesPorMaterial[ $material->id ]['metros'] += $mtsTotales;
-                            $totalesPorMaterial[ $material->id ]['monto'] += $mtsTotales * $material->precio;
-                            
                         }
 
                     }
