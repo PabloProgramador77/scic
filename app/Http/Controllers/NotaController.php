@@ -1151,7 +1151,6 @@ class NotaController extends Controller
                     }
                     
                     $html .= '
-                        <h4 style="page-break-before: always; text-align: center; font-size: 16px; display: block;">Formato de Seguimiento</h4>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr>
@@ -1315,7 +1314,7 @@ class NotaController extends Controller
 
                                                             if( ($numeracion->cantidad( $cotizacion->id, $numeracion->id ) * $pieza->cantidad) > 0 ){
 
-                                                                $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id ) * $pieza->cantidad).'</b></td>';
+                                                                $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )).'</b></td>';
 
                                                             }else{
 
