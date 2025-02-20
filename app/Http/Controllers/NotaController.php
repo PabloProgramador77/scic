@@ -386,7 +386,7 @@ class NotaController extends Controller
                                     foreach( $cotizacion->numeraciones as $numeracion ){
 
                                         $html .= '
-                                        <td style="width: '.number_format( 100 / count($cotizacion->numeraciones), 1 ).'%; height: auto; font-size: 12px; color: #FDFEFE; text-align: center; padding-top: 10px; margin: 0 auto;"><b>#'.number_format( $numeracion->numero, 0).'</b></td>
+                                        <td style="width: '.number_format( 100 / count($cotizacion->numeraciones), 1 ).'%; height: auto; font-size: 12px; color: #FDFEFE; text-align: center; padding-top: 10px; margin: 0 auto;"><b>#'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</b></td>
                                         ';
                                         
                                     }
@@ -1151,6 +1151,7 @@ class NotaController extends Controller
                     }
                     
                     $html .= '
+                        <div style="page-break-before: always;"></div>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr>
@@ -1189,7 +1190,7 @@ class NotaController extends Controller
 
                                         foreach( $numeraciones as $numeracion ){
 
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.number_format($numeracion->numero, 0).'</td>';
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</td>';
 
                                         }
 
@@ -1289,7 +1290,7 @@ class NotaController extends Controller
 
                                         foreach( $numeraciones as $numeracion ){
 
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.number_format($numeracion->numero, 0).'</td>';
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</td>';
 
                                         }
 
@@ -1371,7 +1372,7 @@ class NotaController extends Controller
 
                                         foreach( $numeraciones as $numeracion ){
 
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.number_format( $numeracion->numero, 0 ).'</td>';
+                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</td>';
 
                                         }
 
