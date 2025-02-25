@@ -18,9 +18,29 @@ class CotizacionHasCostosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $idCotizacion, $cotizacionId)
     {
-        //
+        try {
+
+            $cotizacionHasCostos = CotizacionHasCostos::where('idCotizacion', $idCotizacion)->get();
+
+            if( count( $cotizacionHasCostos ) > 0 ){
+
+                foreach($cotizacionHasCostos as $cotizacionHasCosto){
+
+                    $nuevaCotizacionHasCosto = $cotizacionHasCosto->replicate();
+                    $nuevaCotizacionHasCosto->idCotizacion = $cotizacionId;
+                    $nuevaCotizacionHasCosto->save();
+    
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

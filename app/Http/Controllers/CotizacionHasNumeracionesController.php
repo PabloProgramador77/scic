@@ -20,9 +20,29 @@ class CotizacionHasNumeracionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $idCotizacion, $cotizacionId)
     {
-        //
+        try {
+
+            $cotizacionHasNumeraciones = CotizacionHasNumeraciones::where('idCotizacion', $idCotizacion)->get();
+
+            if( count( $cotizacionHasNumeraciones ) > 0 ){
+
+                foreach($cotizacionHasNumeraciones as $cotizacionHasNumeracione){
+
+                    $nuevaCotizacionHasNumeracione = $cotizacionHasNumeracione->replicate();
+                    $nuevaCotizacionHasNumeracione->idCotizacion = $cotizacionId;
+                    $nuevaCotizacionHasNumeracione->save();
+    
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

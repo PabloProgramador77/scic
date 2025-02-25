@@ -18,9 +18,29 @@ class CotizacionHasConsumibleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $idCotizacion, $cotizacionId )
     {
-        //
+        try {
+
+            $cotizacionHasConsumibles = CotizacionHasConsumible::where('idCotizacion', $idCotizacion)->get();
+
+            if( count( $cotizacionHasConsumibles ) > 0 ){
+
+                foreach($cotizacionHasConsumibles as $cotizacionHasConsumible){
+
+                    $nuevaCotizacionHasConsumible = $cotizacionHasConsumible->replicate();
+                    $nuevaCotizacionHasConsumible->idCotizacion = $cotizacionId;
+                    $nuevaCotizacionHasConsumible->save();
+    
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**

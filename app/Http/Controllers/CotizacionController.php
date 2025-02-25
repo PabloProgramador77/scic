@@ -388,13 +388,13 @@ class CotizacionController extends Controller
     public function cliente( $idCliente ){
         try {
             
-            $cotizaciones = Cotizacion::where('idCliente','=', $idCliente)
-                            ->where('estado', '!=', 'Nota')
-                            ->get();
+            $cotizaciones = Cotizacion::where('idCliente','=', $idCliente)->get();
+
             $cliente = Cliente::find( $idCliente );
             $notas = Nota::where('idCliente', '=', $idCliente)->get();
+            $clientes = Cliente::orderBy('nombre', 'asc')->get();
 
-            return view('cotizacion.cotizaciones', compact('cotizaciones', 'cliente', 'notas'));
+            return view('cotizacion.cotizaciones', compact('cotizaciones', 'cliente', 'notas', 'clientes'));
 
         } catch (\Throwable $th) {
             
@@ -617,6 +617,77 @@ class CotizacionController extends Controller
 
         } catch (\Throwable $th) {
             
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
+
+    /**
+     * Edición de cotización
+     */
+    public function editar( $id ){
+        try {
+            
+            $cotizacion = Cotizacion::find( $id );
+            $modelos = Modelo::orderBy('numero', 'asc')->get();
+            $cliente = Cliente::find( $cotizacion->idCliente );
+            $modeloHasGanancia = ModeloHasGanancia::find( 1 );
+            $materiales = Material::orderBy('concepto', 'asc')->get();
+            $costosModelo = $cotizacion->modelo->costos();
+            $costesModelo = $cotizacion->modelo->costes();
+            $consumiblesModelo = $cotizacion->modelo->consumibles();
+            $suelasModelo = $cotizacion->modelo->suelas();
+
+            return view('cotizacion.editar', compact('cotizacion', 'modelos', 'cliente', 'modeloHasGanancia', 'materiales', 'costosModelo', 'costesModelo', 'consumiblesModelo', 'suelasModelo'));
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
+
+    /**
+     * Copia de cotización
+     */
+    public function copiar( Request $request ){
+        try{
+
+            foreach( $request->cotizaciones as $registro ){
+
+                $cotizacion = Cotizacion::find( $registro );
+
+                $nuevaCotizacion = $cotizacion->replicate();
+                $nuevaCotizacion->idCliente = $request->customer;
+                $nuevaCotizacion->save();
+
+                $cotizacionHasConsumibleController = new CotizacionHasConsumibleController();
+                $cotizacionHasConsumibleController->create( $cotizacion->id, $nuevaCotizacion->id );
+
+                $cotizacionHasCosteController = new CotizacionHasCosteController();
+                $cotizacionHasCosteController->create( $cotizacion->id, $nuevaCotizacion->id );
+
+                $cotizacionHasCostosController = new CotizacionHasCostosController();
+                $cotizacionHasCostosController->create( $cotizacion->id, $nuevaCotizacion->id );
+
+                $cotizacionHasNumeracionesController = new CotizacionHasNumeracionesController();
+                $cotizacionHasNumeracionesController->create( $cotizacion->id, $nuevaCotizacion->id );
+
+                $cotizacionHasPiezasController = new CotizacionHasPiezasController();
+                $cotizacionHasPiezasController->create( $cotizacion->id, $nuevaCotizacion->id );
+
+                $cotizacionHasSuelasController = new CotizacionHasSuelaController();
+                $cotizacionHasSuelasController->create( $cotizacion->id, $nuevaCotizacion->id );
+
+            }
+
+            $datos['exito'] = true;
+
+        }catch(\Throwable $th){
+
             $datos['exito'] = false;
             $datos['mensaje'] = $th->getMessage();
 

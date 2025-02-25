@@ -37,7 +37,7 @@ class Cotizacion extends Model
 
     public function numeraciones(){
 
-        return $this->belongsToMany( Numeracion::class, 'cotizacion_has_numeraciones', 'idCotizacion', 'idNumeracion' )->withPivot('cantidad');
+        return $this->belongsToMany( Numeracion::class, 'cotizacion_has_numeraciones', 'idCotizacion', 'idNumeracion' )->withPivot('cantidad')->orderBy('numero', 'asc');
     
     }
 
@@ -84,5 +84,6 @@ class Cotizacion extends Model
                 ->groupBy('cotizacion_has_piezas.idMaterial', 'cotizacion_has_piezas.idCotizacion');
         
     }
+
 
 }
