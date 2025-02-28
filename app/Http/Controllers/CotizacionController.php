@@ -695,4 +695,47 @@ class CotizacionController extends Controller
 
         return response()->json( $datos );
     }
+
+    /**
+     * Actualización de cotización
+     */
+    public function actualizar( Request $request){
+        try{
+
+            Cotizacion::where('id', '=', $request->id)
+                        ->update([
+
+                            'descripcion' => $request->descripcion,
+                            'color' => $request->color,
+                            'precio' => $request->total,
+                            'observaciones' => $request->observaciones,
+
+                        ]);
+
+            $cotizacionHasConsumibleCtrl = new CotizacionHasConsumibleController();
+            $cotizacionHasConsumibleCtrl->update( $request );
+
+            $cotizacionHasCosteCtrl = new CotizacionHasCosteController();
+            $cotizacionHasCosteCtrl->update( $request );
+
+            $cotizacionHasCostosCtrl = new CotizacionHasCostosController();
+            $cotizacionHasCostosCtrl->update( $request );
+
+            $cotizacionHasPiezasCtrl = new CotizacionHasPiezasController();
+            $cotizacionHasPiezasCtrl->update( $request );
+
+            $cotizacionHasSuelasCtrl = new CotizacionHasSuelaController();
+            $cotizacionHasSuelasCtrl->update( $request );
+
+            $datos['exito'] = true;
+
+        }catch(\Throwable $th){
+
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+    }
 }

@@ -84,6 +84,7 @@ class VerifyCsrfToken extends Middleware
         'cotizacion/variante/agregar',
         'cotizacion/variante/sobreescribir',
         'cotizacion/copiar',
+        'cotizacion/actualizar',
         'nota/agregar',
         'cotizacion/cliente',
         'nota/cotizacion',

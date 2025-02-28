@@ -1315,7 +1315,7 @@ class NotaController extends Controller
 
                                                             if( ($numeracion->cantidad( $cotizacion->id, $numeracion->id ) ) > 0 ){
 
-                                                                $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )).'</b></td>';
+                                                                $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )*($pieza->cantidad/2)).'</b></td>';
 
                                                             }else{
 
@@ -1367,7 +1367,7 @@ class NotaController extends Controller
                                 <tr style="background-color: #AED6F1">';
                                     $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Suaje</td>
                                             <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Pieza</td>
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Cantidad P/P</td>';
+                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">P/P</td>';
                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
                                         foreach( $numeraciones as $numeracion ){

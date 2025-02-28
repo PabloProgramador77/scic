@@ -99,9 +99,51 @@ class CotizacionHasCosteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CotizacionHasCoste $cotizacionHasCoste)
+    public function update(Request $request)
     {
-        //
+        try{
+
+            $costesCotizacion = CotizacionHasCoste::where('idCotizacion', '=', $request->id)->get();
+
+            if( count( $costesCotizacion ) > 0 ){
+
+                foreach( $costesCotizacion as $coste ){
+                    
+                    $coste->delete();
+
+                }
+
+                foreach( $request->costes as $coste ){
+                    
+                    CotizacionHasCoste::create([
+    
+                        'idCotizacion' => $request->id,
+                        'idCoste' => $coste
+    
+                    ]);
+
+                }
+
+            }else{
+
+                foreach( $request->costes as $coste ){
+                    
+                    CotizacionHasCoste::create([
+    
+                        'idCotizacion' => $request->id,
+                        'idCoste' => $coste
+    
+                    ]);
+
+                }
+
+            }
+
+        }catch(\Throwable $th){
+
+            echo $th->getMessage();
+
+        }
     }
 
     /**

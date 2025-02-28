@@ -218,7 +218,7 @@ jQuery(document).ready(function(){
 
                                     Swal.fire({
 
-                                        title: 'Registrando Cotización',
+                                        title: 'Actualizando cotización',
                                         html: 'Un momento por favor: <b></b>',
                                         timer: 9975,
                                         allowOutsideClick: false,
@@ -235,7 +235,7 @@ jQuery(document).ready(function(){
                                             $.ajax({
                             
                                                 type: 'POST',
-                                                url: '/cotizacion/agregar',
+                                                url: '/cotizacion/actualizar',
                                                 data:{
                             
                                                     'cliente' : $("#idCliente").val(),
@@ -251,6 +251,7 @@ jQuery(document).ready(function(){
                                                     'observaciones' : observaciones,
                                                     'descripcion' : descripcion,
                                                     'color' : color,
+                                                    'id' : $("#idCotizacion").val(),
                             
                                                 },
                                                 dataType: 'json',
@@ -263,7 +264,7 @@ jQuery(document).ready(function(){
                                                     Swal.fire({
                             
                                                         icon: 'success',
-                                                        title: 'Cotización Registrada',
+                                                        title: 'Cotización actualizada',
                                                         allowOutsideClick: false,
                                                         showConfirmButton: true
                             
@@ -340,7 +341,7 @@ jQuery(document).ready(function(){
 
                             Swal.fire({
 
-                                title: 'Registrando Cotización',
+                                title: 'Actualizando cotización',
                                 html: 'Un momento por favor: <b></b>',
                                 timer: 9975,
                                 allowOutsideClick: false,
@@ -357,7 +358,7 @@ jQuery(document).ready(function(){
                                     $.ajax({
                     
                                         type: 'POST',
-                                        url: '/cotizacion/agregar',
+                                        url: '/cotizacion/actualizar',
                                         data:{
                     
                                             'cliente' : $("#idCliente").val(),
@@ -373,6 +374,7 @@ jQuery(document).ready(function(){
                                             'observaciones' : $("#observaciones").val(),
                                             'descripcion' : descripcion,
                                             'color' : color,
+                                            'id' : $("#idCotizacion").val(),
                     
                                         },
                                         dataType: 'json',
@@ -385,7 +387,7 @@ jQuery(document).ready(function(){
                                             Swal.fire({
                     
                                                 icon: 'success',
-                                                title: 'Cotización Registrada',
+                                                title: 'Cotización actualizada',
                                                 allowOutsideClick: false,
                                                 showConfirmButton: true
                     

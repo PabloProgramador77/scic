@@ -99,9 +99,51 @@ class CotizacionHasSuelaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CotizacionHasSuela $cotizacionHasSuela)
+    public function update(Request $request)
     {
-        //
+        try {
+            
+            $suelasCotizacion = CotizacionHasSuela::where('idCotizacion', $request->id)->get();
+
+            if( count( $suelasCotizacion ) > 0 ){
+
+                foreach( $suelasCotizacion as $suela ){
+
+                    $suela->delete();
+
+                }
+
+                foreach( $request->suelas as $suela ){
+
+                    CotizacionHasSuela::create([
+
+                        'idCotizacion' => $request->id,
+                        'idSuela' => $suela,
+
+                    ]);
+
+                }
+
+            }else{
+
+                foreach( $request->suelas as $suela ){
+
+                    CotizacionHasSuela::create([
+
+                        'idCotizacion' => $request->id,
+                        'idSuela' => $suela,
+                        
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
     }
 
     /**

@@ -105,9 +105,63 @@ class CotizacionHasPiezasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CotizacionHasPiezas $cotizacionHasPiezas)
+    public function update(Request $request)
     {
-        //
+        try {
+    
+            $cotizacionHasPiezas = CotizacionHasPiezas::where('idCotizacion', '=', $request->id)->get();
+
+            if( count( $cotizacionHasPiezas ) > 0 ){
+
+                foreach( $cotizacionHasPiezas as $pieza ){
+                    
+                    $pieza->delete();   
+
+                }
+
+                $piezas = $request->piezas;
+                $materiales = $request->materiales;
+                $colores = $request->colores;
+                
+                for($i = 0; $i < count($request->piezas); $i++){
+
+                    $cotizacionHasPiezas = CotizacionHasPiezas::create([
+
+                        'idCotizacion' => $request->id,
+                        'idPieza' => $piezas[$i],
+                        'idMaterial' => $materiales[$i],
+                        'colorMaterial' => $colores[$i],
+
+                    ]);
+
+                }
+
+            }else{
+
+                $piezas = $request->piezas;
+                $materiales = $request->materiales;
+                $colores = $request->colores;
+                
+                for($i = 0; $i < count($request->piezas); $i++){
+
+                    $cotizacionHasPiezas = CotizacionHasPiezas::create([
+
+                        'idCotizacion' => $request->id,
+                        'idPieza' => $piezas[$i],
+                        'idMaterial' => $materiales[$i],
+                        'colorMaterial' => $colores[$i],
+
+                    ]);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
     }
 
     /**

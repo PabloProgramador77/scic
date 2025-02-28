@@ -20,10 +20,17 @@ jQuery(document).ready(function(){
 
                 icon: 'info',
                 title: 'Elige las cotizaciones para copiar.',
-                showConfirmButton: true,
+                showConfirmButton: false,
                 allowOutsideClick: false,
+                timer: 1500,
+                timerProgressBar: true,
 
             });
+
+            setTimeout(()=>{
+                location.href = '/cotizaciones/cliente/'+cliente;
+            },1250);
+
 
         }else{
 

@@ -122,7 +122,7 @@ class CotizacionHasNumeracionesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CotizacionHasNumeraciones $cotizacionHasNumeraciones)
+    public function update(Request $request)
     {
         //
     }

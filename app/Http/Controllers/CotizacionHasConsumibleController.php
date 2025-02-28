@@ -99,9 +99,51 @@ class CotizacionHasConsumibleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CotizacionHasConsumible $cotizacionHasConsumible)
+    public function update(Request $request)
     {
-        //
+        try{
+
+            $consumiblesCotizacion = CotizacionHasConsumible::where('idCotizacion', '=', $request->id)->get();
+
+            if( count( $consumiblesCotizacion ) > 0 ){
+
+                foreach( $consumiblesCotizacion as $consumible ){
+                    
+                    $consumible->delete();
+
+                }
+
+                foreach( $request->consumibles as $consumible ){
+                    
+                    CotizacionHasConsumible::create([
+    
+                        'idCotizacion' => $request->id,
+                        'idConsumible' => $consumible
+    
+                    ]);
+
+                }
+
+            }else{
+
+                foreach( $request->consumibles as $consumible ){
+                    
+                    CotizacionHasConsumible::create([
+    
+                        'idCotizacion' => $request->id,
+                        'idConsumible' => $consumible
+    
+                    ]);
+
+                }
+
+            }
+
+        }catch(\Throwable $th){
+
+            echo $th->getMessage();
+
+        }
     }
 
     /**

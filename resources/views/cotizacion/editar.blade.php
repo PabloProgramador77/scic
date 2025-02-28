@@ -10,6 +10,7 @@
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
                 <input type="hidden" name="cliente" id="cliente" value="{{ $cliente->nombre }}">
                 <input type="hidden" name="ganancia" id="ganancia" value="{{ $modeloHasGanancia->ganancia }}">
+                <input type="hidden" name="idCotizacion" id="idCotizacion" value="{{ $cotizacion->id }}">
             </div>
             <div class="col-lg-6 my-2">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
