@@ -82,5 +82,23 @@
     <script src="{{ asset('js/notas/cotizacion.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/agregarCotizacion.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/copiar.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery(document).ready(function(){
+            $('.editar').on('click', function() {
+                Swal.fire({
+                    title: 'Cargando...',
+                    html: 'Espere un momento por favor',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    timer: 25000,
+                    timerProgressBar: true,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    },
+                });
+            });
+        });
+    </script>
 
 @stop
