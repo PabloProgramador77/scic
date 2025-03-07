@@ -122,7 +122,7 @@
     @include('cotizacion.consumibles')
     @include('cotizacion.suela')
     @include('cotizacion.escritura')
-    @include('cotizacion.preeliminar')
+    @include('cotizacion.previa')
 
     <script src="{{ asset('js/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/sweetAlert.js') }}" type="text/javascript"></script>
@@ -136,5 +136,6 @@
     <script src="{{ asset('js/cotizacion/guardar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/sobreescribir.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/preeliminarEdicion.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/nuevaCotizacion.js') }}" type="text/javascript"></script>
 
 @stop
