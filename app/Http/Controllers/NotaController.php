@@ -1155,30 +1155,30 @@ class NotaController extends Controller
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Cliente</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->cliente->nombre.'</b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Elemento</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$elementos.' de '.count( $nota->cotizaciones ).'</b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Modelo</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->modelo->nombre.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Cliente</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->cliente->nombre.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Elemento</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$elementos.' de '.count( $nota->cotizaciones ).'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Modelo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->modelo->nombre.'</b></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Descripción:</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->descripcion.'<b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Folio</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->id.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Descripción:</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->descripcion.'<b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Folio</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->id.'</b></td>
 
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">N° de Modelo</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->modelo->numero.'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">N° de Modelo</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->modelo->numero.'</b></td>
                                     
                                 </tr>
                                 <tr>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Fecha de solicitud</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->created_at.'</b></td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Fecha de Entrega</td>
-                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.\Carbon\Carbon::parse($nota->fecha_entrega)->format('d-m-Y').'</b></td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;">Color</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 13px;"><b>'.$cotizacion->color.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Fecha de solicitud</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->created_at.'</b></td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Fecha de Entrega</td>
+                                    <td style="width: 25%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.\Carbon\Carbon::parse($nota->fecha_entrega)->format('d-m-Y').'</b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;">Color</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 17px;"><b>'.$cotizacion->color.'</b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1389,9 +1389,9 @@ class NotaController extends Controller
                                     foreach( $cotizacion->piezas->sortBy('suaje') as $pieza ){
 
                                         $html .= '<tr>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->suaje.'</b></td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->nombre.'</b></td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px;"><b>'.$pieza->cantidad.'</b></td>';
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px; font-size: 17px;"><b>'.$pieza->suaje.'</b></td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px; font-size: 17px;"><b>'.$pieza->nombre.'</b></td>
+                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px; font-size: 17px;"><b>'.$pieza->cantidad.'</b></td>';
                                                     
                                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
