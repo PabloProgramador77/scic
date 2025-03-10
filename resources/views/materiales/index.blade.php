@@ -54,6 +54,7 @@
                             <td>
                                 <x-adminlte-button class="editar" icon="fas fa-edit" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $material->id }}" title="Editar material"></x-adminlte-button>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $material->id }}" title="Borrar material"></x-adminlte-button>
+                                <x-adminlte-button class="color" icon="fas fa-plus-circle" theme="secondary" data-id="{{ $material->id }}" title="Nuevo color" data-value="{{ $material->nombre }}, {{ $material->concepto }}, {{ $material->precio }}, {{ $material->unidades }}, {{ $material->color }}, {{ $material->hexColor }}, {{ $material->proveedor()->id }}, {{ $material->proveedor()->nombre }}" data-toggle="modal" data-target="#modalColor"></x-adminlte-button>
                             </td>
                         </tr>
                         
@@ -70,6 +71,7 @@
 
         @include('materiales.nuevo')
         @include('materiales.editar')
+        @include('materiales.color')
 
     </section>
 
@@ -79,5 +81,6 @@
     <script src="{{ asset('js/materiales/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/materiales/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/materiales/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/materiales/color.js') }}" type="text/javascript"></script>
 
 @stop
