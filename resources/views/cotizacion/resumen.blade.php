@@ -180,7 +180,7 @@
                                 $material = $pieza->materiales( $cotizacion->id )->first();
                             @endphp
                             <td class="border">{{ $material->nombre }}</td>
-                            <td class="border">{{ $cotizacion->color }}</td>
+                            <td class="border">{{ $pieza->color( $cotizacion->id )->pluck('colorMaterial')->implode(',') }}</td>
                             <td class="border">{{ $pieza->cantidad }}</td>
                             <td class="border">{{ $pieza->alto }} X {{ $pieza->largo }}</td>
                             <td class="border">$ {{ number_format( (($pieza->largo * $pieza->alto) * $pieza->cantidad) / ($material->unidades * 100)*$material->precio  ,2 ) }}</td>

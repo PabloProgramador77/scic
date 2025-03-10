@@ -85,6 +85,7 @@ class MaterialController extends Controller
                 ]);
 
                 $datos['exito'] = true;
+                $datos['id'] = $material->id;
 
             }
 

@@ -229,6 +229,7 @@ jQuery(document).ready(function(){
                         $("input[type=checkbox]").prop('checked', true);
     
                         $("#costos").attr('disabled', false);
+                        $("#rapido").attr('disabled', false);
     
                     }else{
     
@@ -244,6 +245,7 @@ jQuery(document).ready(function(){
                         });
     
                         $("#costos").attr('disabled', true);
+                        $("#rapido").attr('disabled', true);
     
                     }
     
