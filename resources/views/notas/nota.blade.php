@@ -9,6 +9,7 @@
                 <h1 class="fs-3 fw-semibold"><i class="fas fa-file"></i> Nota de {{ $cliente->nombre }}</h1>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-tie"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCliente" id="idCliente" value="{{ $cliente->id }}">
+                <input type="hidden" name="idNota" id="idNota" value="{{ $nota->id }}">
             </div>
             <div class="col-lg-5 my-2">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -56,7 +57,7 @@
                 
                 @if( $nota->estado != 'Pagada' )
                     @if( $nota->estado == 'Pendiente' )
-                        <x-adminlte-button theme="secondary" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}" title="Pasar a producción"></x-adminlte-button>
+                        <x-adminlte-button theme="secondary" icon="fas fa-hand-holding-usd" id="anticiparNota" data-id="{{ $nota->id }}" title="Pasar a producción" data-toggle="modal" data-target="#modalNumero"></x-adminlte-button>
                     @else
                         <x-adminlte-button theme="info" icon="fas fa-file-invoice" id="consumos" data-id="{{ $nota->id }}" title="Consumos de nota"></x-adminlte-button>
                         <x-adminlte-button theme="secondary" icon="fas fa-file" id="viajeras" data-id="{{ $nota->id }}" title="Hoja(s) Viajera(s)"></x-adminlte-button>
@@ -108,6 +109,8 @@
             </x-adminlte-datatable>
 
         </div>
+
+        @include('notas.numero')
 
     </section>
 

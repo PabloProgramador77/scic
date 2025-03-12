@@ -324,8 +324,8 @@ class NotaController extends Controller
                     <body>
                         <div style="width: 100%; height: auto; padding: 5px; display: block; overflow: auto;">
                             <div style="width: 100%; height: auto; display: block; overflow: auto; margin: 0 auto; text-align: center;">
-                                <img src="media/logo.jpg" width="200px" height="auto">
-                                <h2 style="text-align: center; width: 100%; display: block; margin-top: 0px;">NOTA DE VENTA</h2>
+                                <img src="media/logo.jpg" width="200px" height="auto" style="display: inline-block; float: left;">
+                                <h3 style="text-align: right; width: 100%; display: inline-block; margin-top: 0px; float: left;">NOTA DE VENTA</h3>
                             </div>
                         </div>
                         <div style="width: 49.4%; height: auto; display: inline-block; float: left; overflow: hidden;">
@@ -333,8 +333,8 @@ class NotaController extends Controller
                             <table style="width: 100%; height: auto; overflow: auto;">
                                 <tbody>
                                     <tr>
-                                        <td style="font-size: 11px;"><b>Folio Nota:</b></td>
-                                        <td style="font-size: 11px;">'.$nota->id.'</td>
+                                        <td style="font-size: 11px;"><b>Folio de Nota:</b></td>
+                                        <td style="font-size: 11px;">'.$nota->folio.'</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 11px;"><b>Fecha de Emisión:</b></td>
@@ -622,6 +622,7 @@ class NotaController extends Controller
             $nota = Nota::where('id', '=', $request->nota)
                     ->update([
 
+                        'numero' => $request->numero,
                         'estado' => 'Abierta',
 
             ]);
@@ -1163,11 +1164,10 @@ class NotaController extends Controller
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;"><b>'.$cotizacion->modelo->nombre.'</b></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;">Descripción:</td>
-                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;"><b>'.$cotizacion->descripcion.'<b></td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 3px solid #F1C40F; font-size: 16px;">N° de Nota:</td>
+                                    <td style="width: 16.6%; height: auto; overflow: auto; border: 3px solid #F1C40F; font-size: 16px;"><b>'.$nota->numero.'<b></td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;">Folio</td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;"><b>'.$cotizacion->id.'</b></td>
-
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;">N° de Modelo</td>
                                     <td style="width: 16.6%; height: auto; overflow: auto; border: 1px solid #626567; font-size: 16px;"><b>'.$cotizacion->modelo->numero.'</b></td>
                                     

@@ -1,11 +1,11 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#anticiparNota").on('click', function(e){
+    $("#producir").on('click', function(e){
 
         e.preventDefault();
 
-        var nota = $(this).attr('data-id');
+        var nota = $("#idNota").val();
 
         let procesamiento;
 
@@ -32,6 +32,7 @@ jQuery(document).ready(function(){
                     data:{
 
                         'nota' : nota,
+                        'numero' : $("#numeroNota").val(),
 
                     },
                     dataType: 'json',
@@ -64,6 +65,12 @@ jQuery(document).ready(function(){
                                     if( resultado.isConfirmed ){
 
                                         window.location.href = '/notas/viajera/'+nota;
+
+                                        setTimeout(() => {
+
+                                            window.location.href = '/notas/cliente/'+$("#idCliente").val();
+                                        
+                                        }, 5000);
                                         
                                     }
 

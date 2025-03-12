@@ -13,6 +13,7 @@ class Nota extends Model
 
     protected $fillable = [
 
+        'numero',
         'idCliente', 
         'pares', 
         'total', 
