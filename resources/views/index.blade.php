@@ -21,7 +21,7 @@
                 <div class="container-fluid">
                     @php
                         $heads = ['Cotización', 'Modelo', 'Proceso', 'Usuario', 'Progreso', 'Estatus', 'Fecha Límite', 'Observaciones'];
-                        $config = ['order' => [[1, 'asc']], 'pageLength' => [25], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                        $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
                     @endphp
                     <p class="p-1 fw-semibold text-primary"><i class="fas fa-file"></i> <b>Nota #84</b></p>
                     <x-adminlte-datatable id="cronogramas" :heads="$heads" :config="$config" theme="light" hoverable bordered compressed beautify>

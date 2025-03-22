@@ -38,6 +38,8 @@ jQuery(document).ready(function(){
         
             $(".cliente").on('click', function(e){
 
+                e.preventDefault();
+
                 var customer = $(this).attr('data-id');
             
                 Swal.fire({

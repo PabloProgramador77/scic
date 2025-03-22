@@ -333,8 +333,8 @@ class NotaController extends Controller
                             <table style="width: 100%; height: auto; overflow: auto;">
                                 <tbody>
                                     <tr>
-                                        <td style="font-size: 11px;"><b>Folio de Nota:</b></td>
-                                        <td style="font-size: 11px;">'.$nota->folio.'</td>
+                                        <td style="font-size: 11px;"><b>N° de Nota:</b></td>
+                                        <td style="font-size: 11px;">'.($nota->numero ? $nota->numero : 'S/N').'</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 11px;"><b>Fecha de Emisión:</b></td>
@@ -494,9 +494,12 @@ class NotaController extends Controller
                                     <td style="font-size: 12px; border-bottom: 2px solid black; padding: 5px;">$ '.number_format(($totalNota/2), 2).'</td>
                                 </tr>
                             </table>
-                            <div style="padding: 5px; margin: 5px; text-align: center; margin-top: 40px;">
-                                <p style="color: gray; font-size: 12px; text-align: center; font-weight: bold;">Este documento no es un comprobante fiscal.</p>
-                                <p style="color: gray; font-size: 12px; text-align: center; font-weight: bold;">Este documento tiene una validez de 30 días a partir de la fecha de emisión</p>
+                            <div style="padding: 5px; border-left: 6px solid #3894DB; border-radius: 4px; display: block;">
+                                <p style="font-size: 14px; font-weight: bold;">Datos Fiscales</p>
+                                <p style="font-size: 12px;"><b>Nombre:</b> ANDREA DE GUADALUPE GUTIERREZ LOPEZ</p>
+                                <p style="font-size: 12px;"><b>RFC:</b> GULA9303247N6</p>
+                                <p style="font-size: 12px;"><b>Domicilio:</b> ALVARO OBREGON 110, EL CARMEN, PURISIMA DEL RINCON</p>
+                                <p style="font-size: 12px;">Régimen de Incorporación Fiscal</p>
                             </div>
                         </div>
                     </body>
@@ -1285,12 +1288,12 @@ class NotaController extends Controller
                         <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: auto;">
                                 <tr style="background-color: #AED6F1">';
-                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Total</td>';
+                                    $html .= '<td style="width: '.($ancho*2).'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Pieza</td>';
                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
                                         foreach( $numeraciones as $numeracion ){
 
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</td>';
+                                            $html .= '<td style="width: '.((100 - ($ancho*2))/count($numeraciones)).'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</td>';
 
                                         }
 
@@ -1307,7 +1310,7 @@ class NotaController extends Controller
                                     foreach( $cotizacion->piezas as $pieza ){
 
                                         $html .= '<tr>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
+                                                    <td style="width: '.($ancho*2).'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$pieza->nombre.'</td>';
 
                                                     if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
 
@@ -1315,11 +1318,11 @@ class NotaController extends Controller
 
                                                             if( ($numeracion->cantidad( $cotizacion->id, $numeracion->id ) ) > 0 ){
 
-                                                                $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )*($pieza->cantidad/2)).'</b></td>';
+                                                                $html .= '<td style="width: '.((100 - ($ancho*2))/count($numeraciones)).'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )*($pieza->cantidad/2)).'</b></td>';
 
                                                             }else{
 
-                                                                $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"></td>';
+                                                                $html .= '<td style="width: '.((100 - ($ancho*2))/count($numeraciones)).'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"></td>';
 
                                                             }
 
@@ -1344,6 +1347,7 @@ class NotaController extends Controller
                             $html .= '
                             </tbody>
                         </table>
+                        <div style="page-break-before: always;"></div>
                         <h5 style="display: block; text-align: center; border-bottom: 2px dotted black;">Ficha de Corte</h5>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             
@@ -1363,86 +1367,41 @@ class NotaController extends Controller
                             </tbody>
                         </table>
                         <table style="width: 100%; height: auto; overflow: auto;">
-                            <tbody style="width: 100%; height: auto; overflow: auto;">
-                                <tr style="background-color: #AED6F1">';
-                                    $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Suaje</td>
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">Pieza</td>
-                                            <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">P/P</td>';
-                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
-
-                                        foreach( $numeraciones as $numeracion ){
-
-                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;">'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</td>';
-
-                                        }
-
-                                    }else{
-
-                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
-                                        
-                                    }
-                                    
-                                $html .='
-                                </tr>';
-                                if( !empty( $cotizacion->piezas ) && count( $cotizacion->piezas ) > 0 ){
-
-                                    foreach( $cotizacion->piezas->sortBy('suaje') as $pieza ){
-
-                                        $html .= '<tr>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px; font-size: 16px;"><b>'.$pieza->suaje.'</b></td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px; font-size: 16px;"><b>'.$pieza->nombre.'</b></td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center; font-size: 12px; font-size: 16px;"><b>'.$pieza->cantidad.'</b></td>';
-                                                    
-                                                    if( !empty( $numeraciones ) && count( $numeraciones ) > 0 ){
-
-                                                        foreach( $numeraciones as $numeracion ){
-
-                                                            $html .= '<td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"></td>';
-
-                                                        }
-
-                                                    }else{
-
-                                                        $html .= '<td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin numeraciones</td>';
-                                                        
-                                                    }
-
-                                        $html .= '</tr>';
-
-                                    }
-
-                                }else{
-
-                                    $html .= '<tr><td style="border: 1px solid #626567;" colspan="'.$colspan.'">Sin piezas</td></tr>';
-                                    
-                                }
-                                
-                            $html .= '
-                            </tbody>
-                        </table>
-                        <table style="width: 100%; height: auto; overflow: auto;">
                             <tbody style="width: 100%; height: auto; overflow: hidden;">
                                 <tr style="background-color: #AED6F1">
                                     <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567; text-align: center;"><b>Proveedor</b></td>
                                     <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567; text-align: center;"><b>Tipo</b></td>
                                     <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567; text-align: center;"><b>Material</b></td>
                                     <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567; text-align: center;"><b>Color</b></td>
-                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567; text-align: center;"><b>Piezas</b></td>
+                                    <td style="width: 20%; height: auto; overflow: hidden; border: 1px solid #626567; text-align: center;"><b>Piezas y Suajes</b></td>
                                 </tr>';
                                 if( !empty( $cotizacion->materiales) && count( $cotizacion->materiales ) > 0){
 
                                     foreach( $cotizacion->materiales as $material ){
 
-                                        $piezas = implode('<br>', $material->corte( $cotizacion->id, $material->id )->pluck('nombre')->filter()->toArray());
-                                        $piezas = array_unique( explode(',', $piezas));
-                                        $piezas = implode(',', $piezas);
+                                        // En tu archivo blade.php o controlador
+                                        $piezas = $material->corte($cotizacion->id, $material->id)
+                                                ->filter(function($pieza) {
+                                                    // Filtramos solo piezas con nombre válido
+                                                    return !empty($pieza->nombre);
+                                                })
+                                                ->map(function($pieza) {
+                                                    // Obtenemos el suaje relacionado con manejo de nulos
+                                                    $claveSuaje = $pieza->suaje ? $pieza->suaje : 'Sin suaje';
+                                                    
+                                                    // Combinamos nombre y suaje en un string único
+                                                    return $pieza->nombre.":".$claveSuaje;
+                                                })
+                                                ->unique() // Elimina duplicados basado en el string completo
+                                                ->implode('<br>'); // Convierte a string HTML
+
 
                                         $html .= '<tr>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$material->nombre.'</b></td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
-                                                    <td style="width: '.$ancho.'%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$piezas.'</b></td>
+                                                    <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
+                                                    <td style="width: 10%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
+                                                    <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$material->nombre.'</b></td>
+                                                    <td style="width: 10%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
+                                                    <td style="width: 40%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$piezas.'</b></td>
                                                 </tr>';
 
                                     }

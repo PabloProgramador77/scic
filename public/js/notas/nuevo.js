@@ -135,7 +135,7 @@ jQuery(document).ready(function(){
 
     });
 
-    $("input[name=cotizacion][type=checkbox]").on('click', function(){
+    /*$("input[name=cotizacion][type=checkbox]").on('click', function(){
 
         if( $(this).is(':checked') ){
 
@@ -175,6 +175,6 @@ jQuery(document).ready(function(){
 
         console.log( clientes );
 
-    });
+    });*/
 
 });

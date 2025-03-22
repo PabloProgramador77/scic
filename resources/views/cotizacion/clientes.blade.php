@@ -5,8 +5,9 @@
             <p class="text-center bg-warning p-1 rounded"><i class="fas fa-info-circle"></i> Elige el cliente destino de las cotizaciones elegidas.</p>
             @php
                 $heads = ['N°', 'Cliente', 'Telefono', 'Email', ''];
+                $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
-            <x-adminlte-datatable id="contenedorclientes" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+            <x-adminlte-datatable id="contenedorclientes" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
                 @if ( count( $clientes ) > 0 )
                     @foreach ($clientes as $cliente)
                         <tr>
