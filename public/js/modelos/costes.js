@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
 
                     var html = '<thead>' +
                                     '<tr>' +
-                                        '<td></td>'+
+                                        '<td><input type="checkbox" id="todoCostes" name="todoCostes" checked></td>'+
                                         '<td><b>Costo</b></td>'+
                                         '<td><b>Descripción</b></td>'+
                                         '<td><b>Total</b></td>'+
@@ -64,9 +64,37 @@ jQuery(document).ready(function(){
 
                     $("#contenedorCostes").empty().append( html );
 
+                    /**Selección rapida de todo o nada */
+                    $("#todoCostes").on('click', function(){
+
+                        if( $(this).prop('checked') ){
+
+                            $("input[type=checkbox][name=coston]").prop('checked', true);         
+
+                        }else{
+
+                            $("input[type=checkbox][name=coston]").prop('checked', false);
+
+                        }
+
+                    });
+
                 }else{
 
                     if( respuesta.costos.length > 0 ){
+
+                        var html = '<thead>' +
+                                    '<tr>' +
+                                        '<td><input type="checkbox" id="todoCostes" name="todoCostes" checked></td>'+
+                                        '<td><b>Costo</b></td>'+
+                                        '<td><b>Descripción</b></td>'+
+                                        '<td><b>Total</b></td>'+
+                                    '</tr>'+
+                                '</thead>';
+
+                        delete respuesta.exito;
+
+                        $("#costes input").remove();
 
                         respuesta.costos.forEach( function( costo ){
 
@@ -80,6 +108,21 @@ jQuery(document).ready(function(){
                         });
 
                         $("#contenedorCostes").empty().append( html );
+
+                        /**Selección rapida de todo o nada */
+                        $("#todoCostes").on('click', function(){
+
+                            if( $(this).prop('checked') ){
+
+                                $("input[type=checkbox][name=coston]").prop('checked', true);         
+
+                            }else{
+
+                                $("input[type=checkbox][name=coston]").prop('checked', false);
+
+                            }
+
+                        });
 
                     }else{
 

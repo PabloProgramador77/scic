@@ -26,7 +26,7 @@ jQuery(document).ready(function(){
 
                     var html = '<thead>' +
                                     '<tr>' +
-                                        '<td></td>'+
+                                        '<td><input type="checkbox" id="todoConsumibles" name="todoConsumibles" checked></td>'+
                                         '<td><b>Consumible</b></td>'+
                                         '<td><b>Tipo</b></td>'+
                                         '<td><b>Total</b></td>'+
@@ -49,6 +49,21 @@ jQuery(document).ready(function(){
                     });
 
                     $("#contenedorConsumibles").empty().append( html );
+
+                    /**Selección rapida de todo o nada */
+                    $("#todoConsumibles").on('click', function(){
+
+                        if( $(this).prop('checked') ){
+
+                            $("input[type=checkbox][name=consumible]").prop('checked', true);         
+
+                        }else{
+
+                            $("input[type=checkbox][name=consumible]").prop('checked', false);
+
+                        }
+
+                    });
 
                 }else{
 

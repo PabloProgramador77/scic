@@ -26,7 +26,7 @@ jQuery(document).ready(function(){
 
                     var html = '<thead>' +
                                     '<tr>' +
-                                        '<td></td>'+
+                                        '<td><input type="checkbox" id="todoCostos" name="todoCostos" checked/></td>'+
                                         '<td><b>Costo</b></td>'+
                                         '<td><b>Tipo</b></td>'+
                                         '<td><b>Total</b></td>'+
@@ -49,6 +49,21 @@ jQuery(document).ready(function(){
                     });
 
                     $("#contenedorCostos").empty().append( html );
+
+                    /**Selección rapida de todo o nada */
+                    $("#todoCostos").on('click', function(){
+
+                        if( $(this).prop('checked') ){
+
+                            $("input[type=checkbox][name=costo]").prop('checked', true);         
+
+                        }else{
+
+                            $("input[type=checkbox][name=costo]").prop('checked', false);
+
+                        }
+
+                    });
 
                 }else{
 

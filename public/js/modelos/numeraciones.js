@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
 
                     var html = '<thead>' +
                                     '<tr>' +
-                                        '<td></td>'+
+                                        '<td><input type="checkbox" id="todoNumeraciones" name="todoNumeraciones" checked></td>'+
                                         '<td><b>Numeración</b></td>'+
                                     '</tr>'+
                                 '</thead>';
@@ -60,9 +60,35 @@ jQuery(document).ready(function(){
 
                     $("#contenedorNumeraciones").empty().append( html );
 
+                    /**Selección rapida de todo o nada */
+                    $("#todoNumeraciones").on('click', function(){
+
+                        if( $(this).prop('checked') ){
+
+                            $("input[type=checkbox][name=numeracion]").prop('checked', true);         
+
+                        }else{
+
+                            $("input[type=checkbox][name=numeracion]").prop('checked', false);
+
+                        }
+
+                    });
+
                 }else{
 
                     if( respuesta.numeraciones.length > 0 ){
+
+                        var html = '<thead>' +
+                                    '<tr>' +
+                                        '<td><input type="checkbox" id="todoNumeraciones" name="todoNumeraciones" checked></td>'+
+                                        '<td><b>Numeración</b></td>'+
+                                    '</tr>'+
+                                '</thead>';
+
+                        delete respuesta.exito;
+
+                        $("#numeraciones input").remove();
 
                         respuesta.numeraciones.forEach( function( numeracion ){
 
@@ -74,6 +100,21 @@ jQuery(document).ready(function(){
                         });
 
                         $("#contenedorNumeraciones").empty().append( html );
+
+                        /**Selección rapida de todo o nada */
+                    $("#todoNumeraciones").on('click', function(){
+
+                        if( $(this).prop('checked') ){
+
+                            $("input[type=checkbox][name=numeracion]").prop('checked', true);         
+
+                        }else{
+
+                            $("input[type=checkbox][name=numeracion]").prop('checked', false);
+
+                        }
+
+                    });
 
                     }else{
 

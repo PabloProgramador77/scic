@@ -17,8 +17,9 @@
             <div class="row col-lg-12 col-md-12 col-sm-12">
                 @php
                     $heads = [ '', 'Costo', 'Descripción', 'Total' ];
+                    $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
                 @endphp
-                <x-adminlte-datatable id="contenedorCostos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                <x-adminlte-datatable id="contenedorCostos" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
                 </x-adminlte-datatable>
             </div>

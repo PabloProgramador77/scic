@@ -26,7 +26,7 @@ jQuery(document).ready(function(){
 
                     var html = '<thead>' +
                                     '<tr>' +
-                                        '<td></td>'+
+                                        '<td><input type="checkbox" id="todoSuelas" name="todoSuelas" checked></td>'+
                                         '<td><b>Suela</b></td>'+
                                         '<td><b>Precio</b></td>'+
                                         '<td><b>Descripción</b></td>'+
@@ -49,6 +49,21 @@ jQuery(document).ready(function(){
                     });
 
                     $("#contenedorSuelas").empty().append( html );
+
+                    /**Selección rapida de todo o nada */
+                    $("#todoSuelas").on('click', function(){
+
+                        if( $(this).prop('checked') ){
+
+                            $("input[type=checkbox][name=suela]").prop('checked', true);         
+
+                        }else{
+
+                            $("input[type=checkbox][name=suela]").prop('checked', false);
+
+                        }
+
+                    });
 
                 }else{
 
