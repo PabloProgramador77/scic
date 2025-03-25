@@ -4,10 +4,11 @@
         <form novalidate>
             <div class="form-group">
                 @php
-                    $heads = ['', 'Costo', 'Descripción', 'Total']
+                    $heads = ['', 'Costo', 'Descripción', 'Total'];
+                    $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
                 @endphp
 
-                <x-adminlte-datatable id="contenedorCostes" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                <x-adminlte-datatable id="contenedorCostes" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 
                     <tr>
                         <td colspan="12" class="fw-semibold text-center bg-light"><i class="fas fa-info-circle"></i> Elige un modelo para observar los costos.</td>

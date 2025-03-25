@@ -33,7 +33,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['[ ]', 'Folio', 'Descripción', 'Color', 'Modelo', 'Precio Unitario', 'Acciones'];
+                $heads = ['[ ]', 'Folio', 'Descripción', 'Color', 'Modelo', 'Precio Unitario', 'Observaciones',  'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -51,6 +51,7 @@
                             <td>{{ ( $cotizacion->color ? : 'Sin color' ) }}</td>
                             <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
+                            <td>{{ $cotizacion->observaciones }}</td>
                             <td>
                                 <a href="{{ url('cotizacion/editar') }}/{{ $cotizacion->id }}" class="btn btn-primary editar" title="Editar cotización"><i class="fas fa-edit"></i></a>
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>

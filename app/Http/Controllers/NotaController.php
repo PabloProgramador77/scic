@@ -845,6 +845,7 @@ class NotaController extends Controller
                 <html>
                 <body>
                     <p style="font-size: 22px; font-weight: bold;">Solicitud de materiales: ' . $idNota . '</p>
+                    <p style="font-size: 18px;">N° de nota: '.$nota->numero.'</p>
                     <table style="width: 100%; height: auto;">
                         <thead style="width: 100%; height: auto;">
                             <tr style="border: 2px; background-color: lightblue; padding: 5px;">
@@ -1348,6 +1349,45 @@ class NotaController extends Controller
                             </tbody>
                         </table>
                         <div style="page-break-before: always;"></div>
+                        <h5 style="display: block; text-align: center; border-bottom: 2px dotted black; margin-top: 20px;">Talones de Producción</h5>
+                        <table style="width: 100%; height: auto; overflow: auto;">
+                                <tbody style="width: 100%; height: auto; overflow: hidden;">
+                                    <tr>
+                                        <td colspan="3" style="border: 1px solid #626567; width: 16.6%; height: auto; border-right: 2px dotted black;"><b>Talon de Pespunte</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Fecha de entrega</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"></td>
+                                        <td rowspan="5" style="border: 1px solid #626567; width: 16.6%; height: auto;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Nota</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Folio</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto; border-right: 2px dotted black;">'.$cotizacion->id.'</td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Folio</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;">'.$cotizacion->id.'</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;">'.$nota->numero.'</td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Modelo</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto; border-right: 2px dotted black;">'.$cotizacion->modelo->nombre.'</td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Modelo</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;">'.$cotizacion->modelo->nombre.'</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Completo</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Pares</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto; border-right: 2px dotted black;">'.$nota->pares( $nota->id, $cotizacion->id).'</td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Numeracion</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Maquila</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto; border-right: 2px dotted black;"></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;"><b>Pares</b></td>
+                                        <td style="border: 1px solid #626567; width: 16.6%; height: auto;">'.$nota->pares( $nota->id, $cotizacion->id ).'</td>
+                                    </tr>
+                                </tbody>
+                        </table>
                         <h5 style="display: block; text-align: center; border-bottom: 2px dotted black;">Ficha de Corte</h5>
                         <table style="width: 100%; height: auto; overflow: auto;">
                             

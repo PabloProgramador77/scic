@@ -29,7 +29,7 @@ jQuery(document).ready(function(){
             }).done(function(respuesta){
                 var filas = '<thead>' +
                                 '<tr>' +
-                                    '<td></td>'+
+                                    '<td><input type="checkbox" id="todoPiezas" name="todoPiezas" checked/></td>'+
                                     '<td><b>Pieza</b></td>'+
                                     '<td><b>Material</b></td>'+
                                     '<td><b>Color</b></td>'+
@@ -85,6 +85,21 @@ jQuery(document).ready(function(){
                         });
     
                         $("#contenedorPiezas").empty().append( filas );
+
+                        /**Selección rapida de todo o nada */
+                        $("#todoPiezas").on('click', function(){
+
+                            if( $(this).prop('checked') ){
+
+                                $("input[type=checkbox][name=pieza]").prop('checked', true);         
+
+                            }else{
+
+                                $("input[type=checkbox][name=pieza]").prop('checked', false);
+
+                            }
+
+                        });
     
                         //Evento de selección de material
                         respuesta.piezas.forEach( function(pieza){

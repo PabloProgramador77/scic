@@ -74,7 +74,7 @@
         <div class="container-fluid row p-2">
             @php
                 $heads = ['', 'Pieza', 'Material', 'Color', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo'];
-                $config = ['order' => [[1, 'asc']], 'pageLength' => [50],, 'lengthMenu' => [10, 25, 50, 75, 100]];
+                $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
             <x-adminlte-datatable id="contenedorPiezas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
