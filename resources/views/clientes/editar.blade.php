@@ -45,6 +45,34 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-input name="coloniaEditar" id="coloniaEditar" placeholder="Colonia de residencia de cliente">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+                <x-adminlte-input name="calleEditar" id="calleEditar" placeholder="Calle de residencia de cliente">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+                <x-adminlte-input name="exteriorEditar" id="exteriorEditar" placeholder="N° exterior de residencia de cliente">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+                <x-adminlte-input name="cpEditar" id="cpEditar" placeholder="C.P. de cliente">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
                 <x-adminlte-input name="empresaEditar" id="empresaEditar" placeholder="Empresa de cliente">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">

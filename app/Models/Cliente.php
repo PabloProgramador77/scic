@@ -22,6 +22,10 @@ class Cliente extends Model
         'empresa',
         'razon',
         'rfc',
+        'colonia',
+        'calle',
+        'exterior',
+        'cp',
 
     ];
 }

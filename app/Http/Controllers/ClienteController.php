@@ -28,6 +28,10 @@ class ClienteController extends Controller
                 'estado' => $request->estado,
                 'ciudad' => $request->ciudad,
                 'email' => $request->email,
+                'colonia' => $request->colonia,
+                'calle' => $request->calle,
+                'exterior' => $request->exterior,
+                'cp' => $request->cp,
                 'empresa' => $request->empresa,
                 'razon' => $request->razon,
                 'rfc' => $request->rfc,
@@ -94,6 +98,10 @@ class ClienteController extends Controller
                 'estado' => $request->estado,
                 'ciudad' => $request->ciudad,
                 'email' => $request->email,
+                'colonia' => $request->colonia,
+                'calle' => $request->calle,
+                'exterior' => $request->exterior,
+                'cp' => $request->cp,
                 'empresa' => $request->empresa,
                 'razon' => $request->razon,
                 'rfc' => $request->rfc,
@@ -136,6 +144,10 @@ class ClienteController extends Controller
                 $datos['email'] = $cliente->email;
                 $datos['estado'] = $cliente->estado;
                 $datos['ciudad'] = $cliente->ciudad;
+                $datos['colonia'] = $cliente->colonia;
+                $datos['calle'] = $cliente->calle;
+                $datos['exterior'] = $cliente->exterior;
+                $datos['cp'] = $cliente->cp;
                 $datos['empresa'] = $cliente->empresa;
                 $datos['razon'] = $cliente->razon;
                 $datos['rfc'] = $cliente->rfc;
@@ -177,6 +189,10 @@ class ClienteController extends Controller
                         'email' => $request->email,
                         'estado' => $request->estado,
                         'ciudad' => $request->ciudad,
+                        'colonia' => $request->colonia,
+                        'calle' => $request->calle,
+                        'exterior' => $request->exterior,
+                        'cp' => $request->cp,
                         'empresa' => $request->empresa,
                         'razon' => $request->razon,
                         'rfc' => $request->rfc,

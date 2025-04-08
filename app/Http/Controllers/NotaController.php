@@ -331,24 +331,22 @@ class NotaController extends Controller
                         <div style="width: 49.4%; height: auto; display: inline-block; float: left; overflow: hidden;">
                             <p style="font-size: 12px; display: block;"><b>Datos de Nota</b></p>
                             <table style="width: 100%; height: auto; overflow: auto;">
-                                <tbody>
-                                    <tr>
-                                        <td style="font-size: 11px;"><b>N° de Nota:</b></td>
-                                        <td style="font-size: 11px;">'.($nota->numero ? $nota->numero : 'S/N').'</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size: 11px;"><b>Fecha de Emisión:</b></td>
-                                        <td style="font-size: 11px;">'.$nota->updated_at.'</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size: 11px;"><b>Fecha de Entrega Aprox:</b></td>
-                                        <td style="font-size: 11px; ">'.$nota->fecha_entrega.'</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size: 11px;"><b>Vendedor:</b></td>
-                                        <td style="font-size: 11px;">'.auth()->user()->name.'</td>
-                                    </tr>
-                                </tbody>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>N° de Nota:</b></td>
+                                    <td style="font-size: 11px;">'.($nota->numero ? $nota->numero : 'S/N').'</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>Fecha de Emisión:</b></td>
+                                    <td style="font-size: 11px;">'.$nota->updated_at.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>Fecha de Entrega Aprox:</b></td>
+                                    <td style="font-size: 11px; ">'.$nota->fecha_entrega.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>Vendedor:</b></td>
+                                    <td style="font-size: 11px;">'.auth()->user()->name.'</td>
+                                </tr>
                             </table>
                         </div>
                         <div style="width: 49.4%; height: auto; display: inline-block; float: left; overflow: hidden;">
@@ -375,11 +373,11 @@ class NotaController extends Controller
                         <div style="width: 100%; height: auto; overflow: auto; display: block; margin-top: 40px;">
                             <table style="width: 100%; height: auto; overflow: auto; border-collapse: collapse;">
                                 <tr style="background-color: #3498DB;">
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Nombre</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Modelo</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Descripción</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Color</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding-top: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;" colspan="'.$colspan.'"><b>Numeraciones</b>';
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 15%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Nombre</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 5%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Modelo</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 15%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Descripción</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 10%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Color</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding-top: 20px; width: 25%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;" colspan="'.$colspan.'"><b>Numeraciones</b>';
 
                                     $html .= '<table style="width: 100%; height: auto; overflow: auto; margin: 0 auto;"><tr style="width: 100%; height: auto; overflow:auto; margin: 0 auto;">';
 
@@ -394,9 +392,9 @@ class NotaController extends Controller
                                     $html .= '</tr></table></td>';
                                     
                                     $html .= '
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Pares</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Precio U.</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Importe</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 5%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Pares</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 5%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Precio U.</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 10%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Importe</b></td>
                                 </tr>';
 
                                 foreach( $nota->cotizaciones as $cotizacion ){
@@ -844,8 +842,8 @@ class NotaController extends Controller
             $html .= '
                 <html>
                 <body>
-                    <p style="font-size: 22px; font-weight: bold;">Solicitud de materiales: ' . $idNota . '</p>
-                    <p style="font-size: 18px;">N° de nota: '.$nota->numero.'</p>
+                    <p style="font-size: 20px; font-weight: bold;">Solicitud de materiales: ' . $idNota . '</p>
+                    <p style="font-size: 22px;"><b>N° de nota: '.$nota->numero.'</b></p>
                     <table style="width: 100%; height: auto;">
                         <thead style="width: 100%; height: auto;">
                             <tr style="border: 2px; background-color: lightblue; padding: 5px;">

@@ -29,6 +29,10 @@ jQuery(document).ready(function(){
                 $("#emailEditar").val( respuesta.email );
                 $("#estadoEditar").val( respuesta.estado );
                 $("#ciudadEditar").val( respuesta.ciudad );
+                $("#coloniaEditar").val( respuesta.colonia );
+                $("#calleEditar").val( respuesta.calle );
+                $("#exteriorEditar").val( respuesta.exterior );
+                $("#cpEditar").val( respuesta.cp );
                 $("#empresaEditar").val( respuesta.empresa );
                 $("#razonEditar").val( respuesta.razon );
                 $("#rfcEditar").val( respuesta.rfc );

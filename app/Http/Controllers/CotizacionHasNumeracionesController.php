@@ -32,6 +32,7 @@ class CotizacionHasNumeracionesController extends Controller
 
                     $nuevaCotizacionHasNumeracione = $cotizacionHasNumeracione->replicate();
                     $nuevaCotizacionHasNumeracione->idCotizacion = $cotizacionId;
+                    $nuevaCotizacionHasNumeracione->cantidad = 0;
                     $nuevaCotizacionHasNumeracione->save();
     
                 }

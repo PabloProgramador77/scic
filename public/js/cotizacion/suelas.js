@@ -50,6 +50,12 @@ jQuery(document).ready(function(){
 
                     $("#contenedorSuelas").empty().append( html );
 
+                    $("input[type=checkbox][name=suela]").on('click', function(){
+
+                        $("input[type=checkbox][name=suela]").not(this).prop('checked', false);
+
+                    });
+
                     /**Selección rapida de todo o nada */
                     $("#todoSuelas").on('click', function(){
 
