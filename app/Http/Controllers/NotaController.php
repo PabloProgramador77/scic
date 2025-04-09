@@ -287,6 +287,7 @@ class NotaController extends Controller
             $colspan = 0;
             $totalNota = 0;
             $html = '';
+            $items = count( $nota->cotizaciones );
 
             if( $nota->id ){
 
@@ -328,20 +329,20 @@ class NotaController extends Controller
                                 <h3 style="text-align: right; width: 100%; display: inline-block; margin-top: 0px; float: left;">NOTA DE VENTA</h3>
                             </div>
                         </div>
-                        <div style="width: 49.4%; height: auto; display: inline-block; float: left; overflow: hidden;">
+                        <div style="width: 33.3%; height: auto; display: inline-block; float: left; overflow: hidden;">
                             <p style="font-size: 12px; display: block;"><b>Datos de Nota</b></p>
-                            <table style="width: 100%; height: auto; overflow: auto;">
+                            <table style="witdh: 100%; height: auto; overflow: auto;">
                                 <tr>
-                                    <td style="font-size: 11px;"><b>N° de Nota:</b></td>
+                                    <td style="font-size: 11px;"><b>N° de nota:</b></td>
                                     <td style="font-size: 11px;">'.($nota->numero ? $nota->numero : 'S/N').'</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size: 11px;"><b>Fecha de Emisión:</b></td>
+                                    <td style="font-size: 11px;"><b>Fecha de emisión:</b></td>
                                     <td style="font-size: 11px;">'.$nota->updated_at.'</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size: 11px;"><b>Fecha de Entrega Aprox:</b></td>
-                                    <td style="font-size: 11px; ">'.$nota->fecha_entrega.'</td>
+                                    <td style="font-size: 11px;"><b>Fecha de entrega aprox:</b></td>
+                                    <td style="font-size: 11px;">'.$nota->fecha_entrega.'</td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 11px;"><b>Vendedor:</b></td>
@@ -349,7 +350,7 @@ class NotaController extends Controller
                                 </tr>
                             </table>
                         </div>
-                        <div style="width: 49.4%; height: auto; display: inline-block; float: left; overflow: hidden;">
+                        <div style="width: 33.3%; height: auto; display: inline-block; float: left; overflow: hidden;">
                             <p style="font-size: 12px; display: block;"><b>Datos de Cliente</b></p>
                             <table style="witdh: 100%; height: auto; overflow: auto;">
                                 <tr>
@@ -368,23 +369,44 @@ class NotaController extends Controller
                                     <td style="font-size: 11px;"><b>Correo:</b></td>
                                     <td style="font-size: 11px;">'.($nota->cliente->email ? $nota->cliente->email : 'Sin email registrado').'</td>
                                 </tr>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>RFC:</b></td>
+                                    <td style="font-size: 11px;">'.($nota->cliente->rfc ? $nota->cliente->rfc : 'Sin RFC registrado').'</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width: 33.3%; height: auto; display: inline-block; float: left; overflow: hidden;">
+                            <p style="font-size: 12px; display: block;"><b>Datos de Embarque</b></p>
+                            <table style="witdh: 100%; height: auto; overflow: auto;">
+                                <tr>
+                                    <td style="font-size: 11px;"><b>Paquetería:</b></td>
+                                    <td style="font-size: 11px;">Castores</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>Entrega:</b></td>
+                                    <td style="font-size: 11px;">'.$nota->cliene.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 11px;"><b>Cobrar:</b></td>
+                                    <td style="font-size: 11px;">'.$nota->envio.'</td>
+                                </tr>
                             </table>
                         </div>
                         <div style="width: 100%; height: auto; overflow: auto; display: block; margin-top: 40px;">
                             <table style="width: 100%; height: auto; overflow: auto; border-collapse: collapse;">
                                 <tr style="background-color: #3498DB;">
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 15%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Nombre</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 5%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Modelo</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 15%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Descripción</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 10%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Color</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding-top: 20px; width: 25%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;" colspan="'.$colspan.'"><b>Numeraciones</b>';
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 10%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Nombre</b></td>
+                                    <td style="font-size: 11px; text-align: center; padding: 20px; width: 8%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Modelo</b></td>
+                                    <td style="font-size: 11px; text-align: center; padding: 20px; width: 21%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Descripción</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 8%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Color</b></td>
+                                    <td style="font-size: 12px; text-align: center; padding-top: 20px; width: 28%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;" colspan="'.$colspan.'"><b>Numeraciones</b>';
 
                                     $html .= '<table style="width: 100%; height: auto; overflow: auto; margin: 0 auto;"><tr style="width: 100%; height: auto; overflow:auto; margin: 0 auto;">';
 
                                     foreach( $cotizacion->numeraciones as $numeracion ){
 
                                         $html .= '
-                                        <td style="width: '.number_format( 100 / count($cotizacion->numeraciones), 1 ).'%; height: auto; font-size: 12px; color: #FDFEFE; text-align: center; padding-top: 10px; margin: 0 auto;"><b>#'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</b></td>
+                                        <td style="width: '.number_format( 100 / count($cotizacion->numeraciones), 1 ).'%; height: auto; font-size: 10px; color: #FDFEFE; text-align: center; padding-top: 10px; margin: 0 auto;"><b>#'.(floor($numeracion->numero) == $numeracion->numero ? number_format( $numeracion->numero, 0 ) : number_format( $numeracion->numero, 1 ) ).'</b></td>
                                         ';
                                         
                                     }
@@ -392,8 +414,8 @@ class NotaController extends Controller
                                     $html .= '</tr></table></td>';
                                     
                                     $html .= '
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 5%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Pares</b></td>
-                                    <td style="font-size: 12px; text-align: center; padding: 20px; width: 5%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Precio U.</b></td>
+                                    <td style="font-size: 11px; text-align: center; padding: 20px; width: 7%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Pares</b></td>
+                                    <td style="font-size: 11px; text-align: center; padding: 20px; width: 8%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Precio</b></td>
                                     <td style="font-size: 12px; text-align: center; padding: 20px; width: 10%; height: 40px; color: white; border-top: 2px solid #424949; border-bottom: 2px solid #424949; border-left: 1px solid #FDFEFE;"><b>Importe</b></td>
                                 </tr>';
 
@@ -435,6 +457,23 @@ class NotaController extends Controller
 
                                 }
 
+                                for( $i = 0; $i < (10 - $items); $i++ ){
+
+                                    $html .= '
+                                    <tr style="padding: 5px;">
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">-</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">-</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">-</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;">-</td>
+                                        <td style="font-size: 12px; border: 1px solid #7B7D7D; text-align: center;" colspan="'.$colspan.'">-</td>
+                                        <td style="border: 1px solid #7B7D7D; font-size: 12px; text-align: center;">0</td>
+                                        <td style="border: 1px solid #7B7D7D; font-size: 12px; text-align: center;">$ 0.00</td>
+                                        <td style="border: 1px solid #7B7D7D; font-size: 12px; text-align: center;">$ 0.00</td>
+                                    </tr>
+                                    ';
+
+                                }
+
                                 $html.= '
                                 <tr style="padding: 5px; border-bottom: 2px solid black;">
                                     <td colspan="'.($colspan+4).'" style="font-size: 12px; text-align: right; border: 1px solid #7B7D7D;"><b>Total de Pares:</b></td>
@@ -447,8 +486,8 @@ class NotaController extends Controller
 
                                     $html .='
                                     <tr>
-                                        <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>I.V.A:</b></td>
-                                        <td style="font-size: 12px; text-align: center; padding: 5px;">$ '.number_format( ($nota->total*0.16), 2).'</td>
+                                        <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 3px;"><b>I.V.A:</b></td>
+                                        <td style="font-size: 12px; text-align: center; padding: 3px;">$ '.number_format( ($nota->total*0.16), 2).'</td>
                                     </tr>
                                     ';
 
@@ -462,8 +501,8 @@ class NotaController extends Controller
 
                                         $html .='
                                         <tr>
-                                            <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>Envió:</b></td>
-                                            <td style="font-size: 12px; padding: 5px;">POR COBRAR</td>
+                                            <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 3px;"><b>Envió:</b></td>
+                                            <td style="font-size: 12px; padding: 3px;">POR COBRAR</td>
                                         </tr>
                                         ';
 
@@ -471,8 +510,8 @@ class NotaController extends Controller
 
                                         $html .='
                                         <tr>
-                                            <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>Envió:</b></td>
-                                            <td style="font-size: 12px; padding: 5px;">$ '.number_format( $nota->envio, 2).'</td>
+                                            <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 3px;"><b>Envió:</b></td>
+                                            <td style="font-size: 12px; padding: 3px;">$ '.number_format( $nota->envio, 2).'</td>
                                         </tr>
                                         ';
 
@@ -484,20 +523,25 @@ class NotaController extends Controller
                                 
                                 $html .='
                                 <tr>
-                                    <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; color: #3894DB; padding: 5px;"><b>TOTAL:</b></td>
-                                    <td style="font-size: 12px; border-bottom: 2px solid black; color: #3894DB; padding: 5px;"><b>$ '.number_format( $totalNota, 2).'</b></td>
+                                    <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; color: #3894DB; padding: 3px;"><b>TOTAL:</b></td>
+                                    <td style="font-size: 12px; border-bottom: 2px solid black; color: #3894DB; padding: 3px;"><b>$ '.number_format( $totalNota, 2).'</b></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 5px;"><b>ANTICIPO:</b></td>
-                                    <td style="font-size: 12px; border-bottom: 2px solid black; padding: 5px;">$ '.number_format(($totalNota/2), 2).'</td>
+                                    <td colspan="'.($colspan+6).'" style="font-size: 12px; text-align: right; padding: 3px;"><b>ANTICIPO:</b></td>
+                                    <td style="font-size: 12px; border-bottom: 2px solid black; padding: 3px;">$ '.number_format(($totalNota/2), 2).'</td>
                                 </tr>
                             </table>
-                            <div style="padding: 5px; border-left: 6px solid #3894DB; border-radius: 4px; display: block;">
-                                <p style="font-size: 14px; font-weight: bold;">Datos Fiscales</p>
-                                <p style="font-size: 12px;"><b>Nombre:</b> ANDREA DE GUADALUPE GUTIERREZ LOPEZ</p>
-                                <p style="font-size: 12px;"><b>RFC:</b> GULA9303247N6</p>
-                                <p style="font-size: 12px;"><b>Domicilio:</b> ALVARO OBREGON 110, EL CARMEN, PURISIMA DEL RINCON</p>
-                                <p style="font-size: 12px;">Régimen de Incorporación Fiscal</p>
+                            <div style="border-left: 3px solid #3894DB; border-radius: 5px; float:left; overflow: hidden; width: 48.5%; display: inline-block;">
+                                <p style="font-size: 12px; margin: 0; font-weight: bold;">DATOS FISCALES</p>
+                                <p style="font-size: 11px; margin: 0;"><b>Nombre:</b> ANDREA DE GUADALUPE GUTIERREZ LOPEZ</p>
+                                <p style="font-size: 11px; margin: 0;"><b>RFC:</b> GULA9303247N6</p>
+                                <p style="font-size: 11px; margin: 0;"><b>Domicilio:</b> ALVARO OBREGON 110, EL CARMEN, PURISIMA DEL RINCON</p>
+                                <p style="font-size: 11px; margin: 0;">PERSONA FISICA CON ACTIVIDAD EMPRESARIAL</p>
+                            </div>
+                            <div style="float:left; overflow: hidden; width: 48.5%; display: inline-block;">
+                                <p style="font-size: 12px; font-weight: bold; color: #424949;">Este documento no es un comprobante fiscal ni sustituye una factura.
+                                Conforme al artículo 170 de la Ley General de Títulos y Operaciones de Crédito, el suscriptor se obliga a pagar incondicionalmente la cantidad señalada en esta nota, 
+                                misma que constituye un pagaré para efectos legales.</p>
                             </div>
                         </div>
                     </body>
