@@ -384,7 +384,7 @@ class NotaController extends Controller
                                 </tr>
                                 <tr>
                                     <td style="font-size: 11px;"><b>Entrega:</b></td>
-                                    <td style="font-size: 11px;">'.$nota->cliene.'</td>
+                                    <td style="font-size: 11px;">'.$nota->cliente->estado.', '.$nota->cliente->ciudad.', '.$nota->cliente->colonia.', '.$nota->cliente->calle.' #'.$nota->cliente->exterior.', CP '.$nota->cliente->cp.'</td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 11px;"><b>Cobrar:</b></td>
