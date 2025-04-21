@@ -33,7 +33,7 @@
 
         <div class="container-fluid row p-2">
             @php
-                $heads = ['[ ]', 'Folio', 'Descripción', 'Color', 'Modelo', 'Precio Unitario', 'Observaciones',  'Acciones'];
+                $heads = ['[ ]', 'Folio', 'Modelo', 'Descripción', 'Color', 'Precio Unitario', 'Observaciones',  'Acciones'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
@@ -47,9 +47,9 @@
                                 <input type="checkbox" name="cotizacion" id="cotizacion" class="custom-checkbox" data-id="{{ $cotizacion->id }}">
                             </td>
                             <td>{{ $cotizacion->id }}</td>
+                            <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
                             <td>{{ ( $cotizacion->color ? : 'Sin color' ) }}</td>
-                            <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td>{{ $cotizacion->observaciones }}</td>
                             <td>
