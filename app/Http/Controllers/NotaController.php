@@ -911,19 +911,20 @@ class NotaController extends Controller
                     foreach( $cotizacion->piezas as $pieza ){
 
                         $material = $pieza->materiales( $cotizacion->id )->first();
+                        $color = $pieza->color( $cotizacion->id )->first()->pivot->colorMaterial;
 
                         if( $material && $material->id ){
 
                             $mtsTotales = number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2);
 
-                            if( !isset( $totalesPorMaterial[ $material->id ] ) ){
+                            if( !isset( $totalesPorMaterial[ $material->id.':'.$color ] ) ){
 
-                                $totalesPorMaterial[ $material->id ] = [
+                                $totalesPorMaterial[ $material->id.':'.$color ] = [
 
                                     'proveedor' => $material->proveedor()->nombre,
                                     'concepto' => $material->concepto,
                                     'material' => $material->nombre,
-                                    'color' => $material->colores()->first()->pivot->colorMaterial ?? '',
+                                    'color' => $color,
                                     'precio' => $material->precio,
                                     'metros' => 0,
                                     'monto' => 0,
@@ -932,8 +933,8 @@ class NotaController extends Controller
 
                             }
 
-                            $totalesPorMaterial[ $material->id ]['metros'] += $mtsTotales;
-                            $totalesPorMaterial[ $material->id ]['monto'] += ($mtsTotales * $material->precio);
+                            $totalesPorMaterial[ $material->id.':'.$color ]['metros'] += $mtsTotales;
+                            $totalesPorMaterial[ $material->id.':'.$color ]['monto'] += ($mtsTotales * $material->precio);
 
                         }
 
