@@ -5,7 +5,7 @@
             <div class="form-group">
                 @php
                     $heads = ['', 'Costo', 'Descripción', 'Total'];
-                    $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                    $config = ['order' => [[1, 'asc']], 'pageLength' => [100], 'lengthMenu' => [10, 25, 50, 75, 100]];
                 @endphp
 
                 <x-adminlte-datatable id="contenedorCostes" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>

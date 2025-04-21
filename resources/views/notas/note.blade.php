@@ -77,7 +77,7 @@
         <div class="container-fluid row p-2">
             @php
                 $heads = ['Modelo', 'Descripción', 'Precio Unitario', 'Color', 'Descuento' ,'Numeraciones', 'Pares Totales', 'Monto'];
-                $config = ['pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                $config = ['pageLength' => [100], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
             <x-adminlte-datatable id="notas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>

@@ -17,7 +17,7 @@
             <div class="form-group container-fluid">
                 @php
                     $heads = [ '', 'Consumible', 'Tipo', 'Total' ];
-                    $config = ['order' => [[1, 'asc']], 'pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                    $config = ['order' => [[1, 'asc']], 'pageLength' => [100], 'lengthMenu' => [10, 25, 50, 75, 100]];
                 @endphp
                 <x-adminlte-datatable id="contenedorConsumibles" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
 

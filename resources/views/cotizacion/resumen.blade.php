@@ -165,7 +165,7 @@
         <div class="container-fluid row p-1">
             @php
                 $heads = ['Pieza', 'Suaje', 'Material', 'Color', 'Cantidad', 'Alto x Largo', 'Costo'];
-                $config = ['pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                $config = ['pageLength' => [100], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
             <x-adminlte-datatable id="contenedorPiezas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
@@ -201,7 +201,7 @@
 
             @php
                 $heads = ['Tipo', 'Consumible', 'Precio'];
-                $config = ['pageLength' => [50], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                $config = ['pageLength' => [100], 'lengthMenu' => [10, 25, 50, 75, 100]];
             @endphp
 
             <x-adminlte-datatable id="contenedorConsumibles" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
