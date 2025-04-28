@@ -911,19 +911,20 @@ class NotaController extends Controller
                     foreach( $cotizacion->piezas as $pieza ){
 
                         $material = $pieza->materiales( $cotizacion->id )->first();
+                        $color = $pieza->color( $cotizacion->id )->first()->pivot->colorMaterial;
 
                         if( $material && $material->id ){
 
                             $mtsTotales = number_format( (($pieza->largo*$pieza->alto)*$pieza->cantidad)/($material->unidades*100)*$nota->pares( $idNota, $cotizacion->id), 2);
 
-                            if( !isset( $totalesPorMaterial[ $material->id ] ) ){
+                            if( !isset( $totalesPorMaterial[ $material->id.':'.$color ] ) ){
 
-                                $totalesPorMaterial[ $material->id ] = [
+                                $totalesPorMaterial[ $material->id.':'.$color ] = [
 
                                     'proveedor' => $material->proveedor()->nombre,
                                     'concepto' => $material->concepto,
                                     'material' => $material->nombre,
-                                    'color' => $material->colores()->first()->pivot->colorMaterial ?? '',
+                                    'color' => $color,
                                     'precio' => $material->precio,
                                     'metros' => 0,
                                     'monto' => 0,
@@ -932,8 +933,8 @@ class NotaController extends Controller
 
                             }
 
-                            $totalesPorMaterial[ $material->id ]['metros'] += $mtsTotales;
-                            $totalesPorMaterial[ $material->id ]['monto'] += ($mtsTotales * $material->precio);
+                            $totalesPorMaterial[ $material->id.':'.$color ]['metros'] += $mtsTotales;
+                            $totalesPorMaterial[ $material->id.':'.$color ]['monto'] += ($mtsTotales * $material->precio);
 
                         }
 
@@ -1461,30 +1462,36 @@ class NotaController extends Controller
 
                                     foreach( $cotizacion->materiales as $material ){
 
-                                        // En tu archivo blade.php o controlador
                                         $piezas = $material->corte($cotizacion->id, $material->id)
-                                                ->filter(function($pieza) {
-                                                    // Filtramos solo piezas con nombre válido
-                                                    return !empty($pieza->nombre);
-                                                })
-                                                ->map(function($pieza) {
-                                                    // Obtenemos el suaje relacionado con manejo de nulos
-                                                    $claveSuaje = $pieza->suaje ? $pieza->suaje : 'Sin suaje';
-                                                    
-                                                    // Combinamos nombre y suaje en un string único
-                                                    return $pieza->nombre.":".$claveSuaje;
-                                                })
-                                                ->unique() // Elimina duplicados basado en el string completo
-                                                ->implode('<br>'); // Convierte a string HTML
+                                                ->filter(function ($pieza) use ($cotizacion) {
+                                                    // Asegura que tenga nombre y color
+                                                    return !empty($pieza->nombre) && $pieza->color($cotizacion->id)->first()->pivot->colorMaterial;
+                                                });
 
+                                            // Agrupar por colorMaterial (desde el pivot)
+                                            $piezasPorColor = $piezas->groupBy(function ($pieza) use ($cotizacion) {
+                                                return $pieza->color($cotizacion->id)->first()->pivot->colorMaterial ?? 'Sin color';
+                                            });
 
-                                        $html .= '<tr>
-                                                    <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->proveedor()->nombre.'</td>
-                                                    <td style="width: 10%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->concepto.'</td>
-                                                    <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$material->nombre.'</b></td>
-                                                    <td style="width: 10%; height: auto; overflow: auto; border: 1px solid #626567;">'.$material->colores()->first()->pivot->colorMaterial.'</td>
-                                                    <td style="width: 40%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$piezas.'</b></td>
-                                                </tr>';
+                                            // Una fila por cada color
+                                            foreach ($piezasPorColor as $color => $grupo) {
+                                                $piezasStr = $grupo->map(function ($pieza) {
+                                                    $suaje = $pieza->suaje ?? 'Sin suaje';
+                                                    return "{$pieza->nombre}: {$suaje}";
+                                                })->unique()->implode('<br>');
+
+                                                $proveedor = $material->proveedor()->nombre ?? 'Sin proveedor';
+                                                $concepto = $material->concepto ?? 'Sin concepto';
+                                                $nombreMaterial = $material->nombre ?? 'Sin nombre';
+
+                                                $html .= '<tr>
+                                                            <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;">' . $proveedor . '</td>
+                                                            <td style="width: 10%; height: auto; overflow: auto; border: 1px solid #626567;">' . $concepto . '</td>
+                                                            <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;"><b>' . $nombreMaterial . '</b></td>
+                                                            <td style="width: 10%; height: auto; overflow: auto; border: 1px solid #626567;">' . $color . '</td>
+                                                            <td style="width: 20%; height: auto; overflow: auto; border: 1px solid #626567;"><b>' . $piezasStr . '</b></td>
+                                                        </tr>';
+                                            }
 
                                     }
 
