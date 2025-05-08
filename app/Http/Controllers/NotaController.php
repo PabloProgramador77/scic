@@ -888,6 +888,7 @@ class NotaController extends Controller
                 <body>
                     <p style="font-size: 20px; font-weight: bold;">Solicitud de materiales: ' . $idNota . '</p>
                     <p style="font-size: 22px;"><b>N° de nota: '.$nota->numero.'</b></p>
+                    <p style="font-size: 22px;"><b>N° de nota: '.$nota->cliente->nombre.'</b></p>
                     <table style="width: 100%; height: auto;">
                         <thead style="width: 100%; height: auto;">
                             <tr style="border: 2px; background-color: lightblue; padding: 5px;">
@@ -895,8 +896,8 @@ class NotaController extends Controller
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Tipo</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Material</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Color</b></td>
-                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Precio</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Mts. Totales</b></td>
+                                <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Precio</b></td>
                                 <td style="font-size: 12px; text-align: center; width: 14.25%;"><b>Monto Aprox.</b></td>
                             </tr>
                         </thead>
@@ -955,8 +956,8 @@ class NotaController extends Controller
                     $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['concepto'].'</td>';
                     $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['material'].'</td>';
                     $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.$total['color'].'</td>';
-                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;"> $'.$total['precio'].'</td>';
                     $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">'.number_format( $total['metros'], 2).' Mts.</td>';
+                    $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">$'.$total['precio'].'</td>';
                     $html .= '<td style="font-size: 12px; text-align: center; width: 14.25%;">$'.number_format( $total['monto'], 2).'</td>';
                     $html .= '</tr>';
 
