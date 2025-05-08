@@ -88,8 +88,36 @@ jQuery(document).ready(function(){
 
                     });
 
-                    $('.colorPieza'+pieza).empty();
-                    $('.colorPieza'+pieza).append( opcionesColores );
+                    /*$('.colorPieza'+pieza).empty();
+                    $('.colorPieza'+pieza).append( opcionesColores );*/
+
+                    if( respuesta.colores.length > 1 ){
+
+                        var selectColores = $('.colorPieza'+pieza);
+
+                        selectColores.addClass('border border-danger');
+                        selectColores.empty().append( opcionesColores ).prop('required', true);
+
+                        $('select[name=material]').prop('disabled', true);
+
+                        selectColores.off('blur').on('blur', function(){
+
+                            if($(this).val()){
+                                
+                                $(this).removeClass('border border-danger');
+                                
+                                $('select[name=material]').prop('disabled', false);
+                            
+                            }
+
+                        });
+
+                    }else{
+
+                        $('.colorPieza'+pieza).empty();
+                        $('.colorPieza'+pieza).append( opcionesColores );
+
+                    }
 
                 }else{
 
