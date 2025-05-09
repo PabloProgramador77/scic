@@ -102,6 +102,7 @@ Route::post('cotizacion/variante/sobreescribir', [App\Http\Controllers\Cotizacio
 Route::get('cotizacion/editar/{id}', [App\Http\Controllers\CotizacionController::class, 'editar'])->name('editar-cotizacion');
 Route::post('cotizacion/copiar', [App\Http\Controllers\CotizacionController::class, 'copiar'])->name('copiar-cotizacion');
 Route::post('cotizacion/actualizar', [App\Http\Controllers\CotizacionController::class, 'actualizar'])->name('actualizar-cotizacion');
+Route::post('/cotizacion/observaciones', [App\Http\Controllers\CotizacionController::class, 'observaciones'])->name('observaciones.cotizacion');
 
 Route::get('consumibles', [App\Http\Controllers\ConsumibleController::class, 'index'])->name('consumibles');
 Route::post('consumible/agregar', [App\Http\Controllers\ConsumibleController::class, 'store'])->name('agregar-consumible');

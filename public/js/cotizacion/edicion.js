@@ -88,9 +88,6 @@ jQuery(document).ready(function(){
 
                     });
 
-                    /*$('.colorPieza'+pieza).empty();
-                    $('.colorPieza'+pieza).append( opcionesColores );*/
-
                     if( respuesta.colores.length > 1 ){
 
                         var selectColores = $('.colorPieza'+pieza);

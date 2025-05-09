@@ -119,6 +119,7 @@ class VerifyCsrfToken extends Middleware
         'actividad/agregar',
         'actividad/actualizar',
         'actividad/borrar',
+        'cotizacion/observaciones',
         
     ];
 }

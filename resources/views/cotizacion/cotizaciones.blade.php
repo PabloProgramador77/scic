@@ -58,6 +58,7 @@
                                 <x-adminlte-button class="borrar" icon="fas fa-trash" theme="danger" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->folio }}" title="Borrar cotización"></x-adminlte-button>
                                 <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota previa" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
                                 <a href="{{ url('/cotizacion/ver') }}/{{ $cotizacion->id }}" class="btn btn-secondary rounded" role="button" title="Resumen de Cotización"><i class="fas fa-info-circle"></i></a>
+                                <x-adminlte-button class="observaciones border border-secondary" icon="fas fa-comment-alt" theme="light" data-toggle="modal" data-target="#modalObservaciones" data-value="{{ $cotizacion->id }}, {{ $cotizacion->observaciones }}"></x-adminlte-button>
                             </td>
                         </tr>
                         
@@ -74,6 +75,7 @@
 
         @include('cotizacion.notas')
         @include('cotizacion.clientes')
+        @include('cotizacion.observaciones')
 
     </section>
 
@@ -84,6 +86,8 @@
     <script src="{{ asset('js/notas/cotizacion.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/notas/agregarCotizacion.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/copiar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/observaciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/actualizarObservaciones.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery.noConflict();
         jQuery(document).ready(function(){

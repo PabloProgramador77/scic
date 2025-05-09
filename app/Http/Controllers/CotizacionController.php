@@ -740,4 +740,30 @@ class CotizacionController extends Controller
 
         return response()->json( $datos );
     }
+
+    /**
+     * Actualización de observaciones
+     */
+    public function observaciones(Request $request){
+        try{
+
+            Cotizacion::where('id', '=', $request->id)
+                        ->update([
+
+                            'observaciones' => $request->observaciones,
+
+                        ]);
+
+            $datos['exito'] = true;
+
+        }catch(\Throwable $th){
+
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
+        
+    }
 }
