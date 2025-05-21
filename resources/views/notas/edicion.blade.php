@@ -98,8 +98,10 @@
                     <td class="descuento{{ $cotizacion->id }}"><input type="textbox" name="descuento" class="text-center col-lg-6 col-md-6 col-sm-6" placeholder="Descuento por par" value="{{ $nota->descuento( $nota->id, $cotizacion->id ) }}" id="{{ $nota->id }}" data-id="{{ $cotizacion->id }}" data-value="{{ $cotizacion->precio }}"></input></td>
                     <td>
                         <div class="row">
+
                             @foreach ($cotizacion->modelo->numeraciones as $numeracion)
                                 
+                                <small for="{{ $numeracion->id }}" class="py-2 px-1 text-center"><i class="fas fa-hashtag"></i><b>{{ number_format( $numeracion->numero, 1) }}:</b></small>
                                 <input type="number" name="numeracion" id="{{ $numeracion->id }}" data-id="{{ $cotizacion->id }}" class="col-lg-1 col-md-1 col-sm-1 text-center" placeholder="#{{ $numeracion->numero }}" value="{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id ) }}">
                                 
                             @endforeach

@@ -97,6 +97,7 @@
                         <div class="row">
                             @foreach ($cotizacion->modelo->numeraciones as $numeracion)
                                 
+                                <small for="{{ $numeracion->id }}" class="py-2 px-1 text-center"><i class="fas fa-hashtag"></i><b>{{ number_format( $numeracion->numero, 1) }}:</b></small>
                                 <input type="number" name="numeracion" id="{{ $numeracion->id }}" data-id="{{ $cotizacion->id }}" class="text-center" placeholder="#{{ $numeracion->numero }}" value="{{ $numeracion->cantidad( $cotizacion->id, $numeracion->id ) }}">
                                 
                             @endforeach
