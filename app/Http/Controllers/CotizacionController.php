@@ -39,7 +39,7 @@ class CotizacionController extends Controller
     {
         try {
             
-            $clientes = Cliente::orderBy('updated_at', 'desc')->get();
+            $clientes = Cliente::orderBy('nombre', 'asc')->get();
             
             return view('cotizacion.index', compact('clientes'));
 

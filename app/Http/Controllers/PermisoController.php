@@ -18,13 +18,13 @@ class PermisoController extends Controller
     {
         if( auth()->user()->id ){
 
-            $permisos = Permission::all();
+            $permisos = Permission::orderBy('name', 'asc')->get();
 
             return view('usuarios.permisos.index', compact('permisos'));
 
         }else{
 
-            return redireect('/');
+            return redirect('/');
 
         }
     }

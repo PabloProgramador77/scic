@@ -19,7 +19,7 @@ class UsuarioController extends Controller
     {
         if( auth()->user()->id ){
 
-            $usuarios = User::all();
+            $usuarios = User::orderBy('name', 'asc')->get();
 
             return view('usuarios.index', compact('usuarios'));
 
