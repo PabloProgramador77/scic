@@ -146,6 +146,7 @@ class ModeloHasCosteController extends Controller
             $costos = Coste::select('costes.id', 'costes.nombre', 'costes.monto')
                     ->join('modelo_has_costes', 'costes.id', '=', 'modelo_has_costes.idCoste')
                     ->where('modelo_has_costes.idModelo', '=', $request->modelo)
+                    ->orderBy('costes.nombre', 'asc')
                     ->get();
 
             if( count( $costos ) > 0 ){

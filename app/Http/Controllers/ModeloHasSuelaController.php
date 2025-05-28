@@ -144,6 +144,7 @@ class ModeloHasSuelaController extends Controller
             $suelas = Suela::select('suelas.id', 'suelas.nombre', 'suelas.precio', 'suelas.descripcion')
                     ->join('modelo_has_suelas', 'suelas.id', '=', 'modelo_has_suelas.idSuela')
                     ->where('modelo_has_suelas.idModelo', '=', $request->modelo)
+                    ->orderBy('suelas.nombre', 'asc')
                     ->get();
 
             if( count( $suelas ) > 0 ){

@@ -634,7 +634,7 @@ class CotizacionController extends Controller
         try {
             
             $cotizacion = Cotizacion::find( $id );
-            $modelos = Modelo::orderBy('numero', 'asc')->get();
+            $modelos = Modelo::orderBy('nombre', 'asc')->get();
             $cliente = Cliente::find( $cotizacion->idCliente );
             $modeloHasGanancia = ModeloHasGanancia::find( 1 );
             $materiales = Material::orderBy('concepto', 'asc')->get();

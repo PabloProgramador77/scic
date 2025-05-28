@@ -127,6 +127,7 @@ class NotaController extends Controller
                             ->join('modelos', 'cotizaciones.idModelo', '=', 'modelos.id')
                             ->join('nota_has_cotizaciones', 'cotizaciones.id', '=', 'nota_has_cotizaciones.idCotizacion')
                             ->where('nota_has_cotizaciones.idNota', '=', $request->id)
+                            ->orderBy('modelos.nombre', 'asc')
                             ->get();
 
             if( count( $cotizaciones ) > 0 ){
