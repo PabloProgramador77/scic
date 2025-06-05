@@ -50,6 +50,8 @@ class Create extends FormRequest
             'colores.*' => 'string|nullable',
             'observaciones' => 'string|nullable',
             'descripcion' => 'required|string',
+            'colorPiso' => 'string|nullable',
+            'colorCuna' => 'string|nullable',
             
         ];
     }
