@@ -13,6 +13,7 @@ jQuery(document).ready(function(){
             data:{
 
                 'modelo' : modelo,
+                'cotizacion' : $("#idCotizacion").val(),
 
             },
             dataType: 'json',
@@ -30,6 +31,7 @@ jQuery(document).ready(function(){
                                         '<td><b>Suela</b></td>'+
                                         '<td><b>Precio</b></td>'+
                                         '<td><b>Descripción</b></td>'+
+                                        '<td><b>Color(es) de suela</b></td>'+
                                     '</tr>'+
                                 '</thead>';
 
@@ -44,6 +46,8 @@ jQuery(document).ready(function(){
                                     '<td>' + suela.nombre + '</td>' +
                                     '<td>' + suela.precio + '</td>' +
                                     '<td>$ ' + suela.descripcion + '</td>' +
+                                    '<td><input type="text" class="form-control" name="colorSuelaPiso" placeholder="Color de piso en suela" id="suela'+suela.id+'" disabled="true" value="'+(suela.colorPiso ?? '')+'"></td>'+
+                                    '<td><input type="text" class="form-control" name="colorSuelaCuna" placeholder="Color de cuña en suela" id="suela'+suela.id+'" disabled="true" value="'+(suela.colorCuna ?? '')+'"></td>'+
                                 '</tr>';
 
                     });
@@ -51,6 +55,14 @@ jQuery(document).ready(function(){
                     $("#contenedorSuelas").empty().append( html );
 
                     $("input[type=checkbox][name=suela]").on('click', function(){
+
+                        var id_suela = $(this).attr('id');
+
+                        $("input[type=text][name=colorSuelaPiso]").prop('disabled', true );
+                        $("input[type=text][name=colorSuelaCuna]").prop('disabled', true );
+
+                        $("input[type=text][name=colorSuelaPiso][id="+id_suela+"]").prop('disabled', false );
+                        $("input[type=text][name=colorSuelaCuna][id="+id_suela+"]").prop('disabled', false );
 
                         $("input[type=checkbox][name=suela]").not(this).prop('checked', false);
 
@@ -79,6 +91,7 @@ jQuery(document).ready(function(){
                                         '<td><b>Suela</b></td>'+
                                         '<td><b>Precio</b></td>'+
                                         '<td><b>Descripción</b></td>'+
+                                        '<td><b>Color(es) de suela</b></td>'
                                     '</tr>'+
                                 '</thead>';
 
@@ -148,6 +161,8 @@ jQuery(document).ready(function(){
         var consumibles = new Array();
         var suelas = new Array();
         var colores = new Array();
+        var colorPiso = '';
+        var colorCuna = '';
 
         $("input[name=pieza][type=checkbox]:checked").each(function(){
 
@@ -181,6 +196,11 @@ jQuery(document).ready(function(){
         });
 
         $("input[name=suela]:checked").each(function(){
+
+            var id = $(this).attr('id');
+
+            colorPiso = $("input[type=text][name=colorSuelaPiso][id="+id+"]").val();
+            colorCuna = $("input[type=text][name=colorSuelaCuna][id="+id+"]").val();
 
             suelas.push( $(this).attr('data-id') );
 
@@ -273,6 +293,8 @@ jQuery(document).ready(function(){
                                                     'descripcion' : descripcion,
                                                     'color' : color,
                                                     'id' : $("#idCotizacion").val(),
+                                                    'piso' : colorPiso,
+                                                    'cuna' : colorCuna,
                             
                                                 },
                                                 dataType: 'json',
@@ -396,6 +418,8 @@ jQuery(document).ready(function(){
                                             'descripcion' : descripcion,
                                             'color' : color,
                                             'id' : $("#idCotizacion").val(),
+                                            'piso' : colorPiso,
+                                            'cuna' : colorCuna,
                     
                                         },
                                         dataType: 'json',

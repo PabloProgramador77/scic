@@ -206,6 +206,7 @@ jQuery(document).ready(function(){
         });
 
         let procesamiento;
+        console.log( colorCuna+' '+colorPiso );
 
         Swal.fire({
 
@@ -291,8 +292,8 @@ jQuery(document).ready(function(){
                                                     'observaciones' : observaciones,
                                                     'descripcion' : descripcion,
                                                     'color' : color,
-                                                    'colorPiso' : colorPiso,
-                                                    'colorCuna' : colorCuna,
+                                                    'piso' : colorPiso,
+                                                    'cuna' : colorCuna,
                             
                                                 },
                                                 dataType: 'json',
@@ -415,6 +416,8 @@ jQuery(document).ready(function(){
                                             'observaciones' : $("#observaciones").val(),
                                             'descripcion' : descripcion,
                                             'color' : color,
+                                            'piso' : colorPiso,
+                                            'cuna' : colorCuna,
                     
                                         },
                                         dataType: 'json',

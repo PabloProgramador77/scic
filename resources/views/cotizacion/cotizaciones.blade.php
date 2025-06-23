@@ -50,7 +50,7 @@
                             <td>{{ $cotizacion->modelo->nombre }} - {{ $cotizacion->modelo->numero }}</td>
                             <td>{{ $cotizacion->descripcion ? : 'Sin descripción' }}</td>
                             <td>{{ ( $cotizacion->color ? : 'Sin color' ) }}</td>
-                            <td>{{ ( $cotizacion->suelas()->first()->nombre ?? 'Sin suela' ) }}</td>
+                            <td>{{ $cotizacion->suelas()->first()->nombre }} {{ $cotizacion->suelas()->first()->pivot->colorPiso }} {{ $cotizacion->suelas()->first()->pivot->colorCuna }}</td>
                             <td>$ {{ $cotizacion->precio }}</td>
                             <td>{{ $cotizacion->observaciones }}</td>
                             <td>

@@ -54,10 +54,12 @@ class CotizacionHasSuelaController extends Controller
 
                 foreach($request->suelas as $suela){
 
-                    $cotizacionHasSuela = CotizacionHasSuela::create([
+                    CotizacionHasSuela::create([
     
                         'idCotizacion' => $idCotizacion,
-                        'idSuela' => $suela
+                        'idSuela' => $suela,
+                        'colorPiso' => $request->piso,
+                        'colorCuna' => $request->cuna,
     
                     ]);
     
@@ -119,6 +121,8 @@ class CotizacionHasSuelaController extends Controller
 
                         'idCotizacion' => $request->id,
                         'idSuela' => $suela,
+                        'colorPiso' => $request->piso,
+                        'colorCuna' => $request->cuna,
 
                     ]);
 
@@ -132,6 +136,8 @@ class CotizacionHasSuelaController extends Controller
 
                         'idCotizacion' => $request->id,
                         'idSuela' => $suela,
+                        'colorPiso' => $request->piso,
+                        'colorCuna' => $request->cuna,
                         
                     ]);
 

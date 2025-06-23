@@ -82,6 +82,11 @@ jQuery(document).ready(function(){
 
         $("input[name=suela]:checked").each(function(){
 
+            var id = $(this).attr('id');
+
+            colorPiso = $("input[type=text][name=colorSuelaPiso][id="+id+"]").val();
+            colorCuna = $("input[type=text][name=colorSuelaCuna][id="+id+"]").val();
+
             suelas.push( $(this).attr('data-value') );
 
         });
@@ -95,7 +100,7 @@ jQuery(document).ready(function(){
         $("#observacionesPreeliminar").val( observaciones );
         $("#hormaPreeliminar").val( modelo[2] );
 
-        $("#suelaPreeliminar").val( suelas.join(',') );
+        $("#suelaPreeliminar").val( suelas.join(',')+' '+colorPiso+' '+colorCuna );
         $("#coloresPreeliminar").val( colores.join(',') );
 
         $("#PreeliminarPiezas").empty();

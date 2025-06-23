@@ -104,6 +104,11 @@ class NotaController extends Controller
                 $datos['exito'] = true;
                 $datos['id'] = $idNota;
 
+            }else{
+
+                $datos['exito'] = false;
+                $datos['mensaje'] = 'Nota no creada. Intenta de nuevo.';
+
             }
 
         } catch (\Throwable $th) {
@@ -516,7 +521,7 @@ class NotaController extends Controller
                                         </tr>
                                         ';
 
-                                        $totalNota += $nota->envio;
+                                        $totalNota += is_numeric( $nota->envio ) ? floatval( $nota->envio ) : 0;
 
                                     }
 
@@ -1287,7 +1292,7 @@ class NotaController extends Controller
                                 </tr>
                                 <tr>
                                     <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Suela</td>
-                                    <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->suelas->first()->nombre.'</b></td>
+                                    <td style="width: 70%; height: auto; overflow: auto; border: 1px solid #626567;"><b>'.$cotizacion->suelas->first()->nombre.' Cuña: '.$cotizacion->suelas()->first()->pivot->colorCuna.' Piso: '.$cotizacion->suelas()->first()->pivot->colorPiso.'</b></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 30%; height: auto; overflow: auto; border: 1px solid #626567;">Horma</td>
@@ -1366,7 +1371,7 @@ class NotaController extends Controller
 
                                                             if( ($numeracion->cantidad( $cotizacion->id, $numeracion->id ) ) > 0 ){
 
-                                                                $html .= '<td style="width: '.((100 - ($ancho*2))/count($numeraciones)).'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.($numeracion->cantidad( $cotizacion->id, $numeracion->id )*($pieza->cantidad/2)).'</b></td>';
+                                                                $html .= '<td style="width: '.((100 - ($ancho*2))/count($numeraciones)).'%; height: auto; overflow: auto; border: 1px solid #626567; text-align: center;"><b>'.(($numeracion->cantidad( $cotizacion->id, $numeracion->id )*($pieza->cantidad))/2).'</b></td>';
 
                                                             }else{
 

@@ -141,11 +141,16 @@ class ModeloHasSuelaController extends Controller
     {
         try {
             
-            $suelas = Suela::select('suelas.id', 'suelas.nombre', 'suelas.precio', 'suelas.descripcion')
-                    ->join('modelo_has_suelas', 'suelas.id', '=', 'modelo_has_suelas.idSuela')
-                    ->where('modelo_has_suelas.idModelo', '=', $request->modelo)
-                    ->orderBy('suelas.nombre', 'asc')
-                    ->get();
+            $suelas = Suela::select('suelas.id', 'suelas.nombre', 'suelas.precio', 'suelas.descripcion','cotizacion_has_suelas.colorPiso', 'cotizacion_has_suelas.colorCuna')
+                            ->join('modelo_has_suelas', 'suelas.id', '=', 'modelo_has_suelas.idSuela')
+                            ->leftJoin('cotizacion_has_suelas', function ($join) use ($request) {
+                                $join->on('suelas.id', '=', 'cotizacion_has_suelas.idSuela')
+                                    ->where('cotizacion_has_suelas.idCotizacion', '=', $request->cotizacion);
+                            })
+                            ->where('modelo_has_suelas.idModelo', '=', $request->modelo)
+                            ->orderBy('suelas.nombre', 'asc')
+                            ->get();
+
 
             if( count( $suelas ) > 0 ){
 

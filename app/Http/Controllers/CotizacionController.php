@@ -642,8 +642,10 @@ class CotizacionController extends Controller
             $costesModelo = $cotizacion->modelo->costes();
             $consumiblesModelo = $cotizacion->modelo->consumibles();
             $suelasModelo = $cotizacion->modelo->suelas();
+            $colorPiso = $cotizacion->suelas()->first()->pivot->colorPiso;
+            $colorCuna = $cotizacion->suelas()->first()->pivot->colorCuna;
 
-            return view('cotizacion.editar', compact('cotizacion', 'modelos', 'cliente', 'modeloHasGanancia', 'materiales', 'costosModelo', 'costesModelo', 'consumiblesModelo', 'suelasModelo'));
+            return view('cotizacion.editar', compact('cotizacion', 'modelos', 'cliente', 'modeloHasGanancia', 'materiales', 'costosModelo', 'costesModelo', 'consumiblesModelo', 'suelasModelo', 'colorPiso', 'colorCuna'));
 
         } catch (\Throwable $th) {
             

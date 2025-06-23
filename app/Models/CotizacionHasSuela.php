@@ -15,6 +15,8 @@ class CotizacionHasSuela extends Model
 
         'idCotizacion',
         'idSuela',
+        'colorPiso',
+        'colorCuna',
 
     ];
 

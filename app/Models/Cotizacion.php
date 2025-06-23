@@ -55,7 +55,7 @@ class Cotizacion extends Model
 
     public function suelas(){
 
-        return $this->belongsToMany( Suela::class, 'cotizacion_has_suelas', 'idCotizacion', 'idSuela' );
+        return $this->belongsToMany( Suela::class, 'cotizacion_has_suelas', 'idCotizacion', 'idSuela' )->withPivot('colorPiso', 'colorCuna');
         
     }
 
