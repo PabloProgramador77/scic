@@ -59,6 +59,7 @@
                                 <x-adminlte-button class="agregar" icon="fas fa-plus" theme="info" data-id="{{ $cotizacion->id }}" title="Agregar a nota previa" data-toggle="modal" data-target="#modalNotas"></x-adminlte-button>
                                 <a href="{{ url('/cotizacion/ver') }}/{{ $cotizacion->id }}" class="btn btn-secondary rounded" role="button" title="Resumen de Cotización"><i class="fas fa-info-circle"></i></a>
                                 <x-adminlte-button class="observaciones border border-secondary" icon="fas fa-comment-alt" theme="light" data-toggle="modal" data-target="#modalObservaciones" data-value="{{ $cotizacion->id }}, {{ $cotizacion->observaciones }}"></x-adminlte-button>
+                                <x-adminlte-button class="colores border border-purple" icon="fas fa-palette" theme="warning" data-toggle="modal" data-target="#modalColores" data-value="{{ $cotizacion->id }}, {{ $cotizacion->suelas()->first()->nombre }}, {{ $cotizacion->suelas()->first()->pivot->colorPiso }}, {{ $cotizacion->suelas()->first()->pivot->colorCuna }}"></x-adminlte-button>
                             </td>
                         </tr>
                         
@@ -76,6 +77,7 @@
         @include('cotizacion.notas')
         @include('cotizacion.clientes')
         @include('cotizacion.observaciones')
+        @include('cotizacion.colores')
 
     </section>
 
@@ -88,6 +90,8 @@
     <script src="{{ asset('js/cotizacion/copiar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/observaciones.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cotizacion/actualizarObservaciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/colores.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cotizacion/actualizarColores.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery.noConflict();
         jQuery(document).ready(function(){

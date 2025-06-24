@@ -768,4 +768,17 @@ class CotizacionController extends Controller
         return response()->json( $datos );
         
     }
+
+    /**
+     * Actualización de colores
+     */
+    public function colores( Request $request ){
+        try{
+
+            
+
+        }catch(\Throwable $th){
+
+        }
+    }
 }

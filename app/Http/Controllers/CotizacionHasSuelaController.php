@@ -93,9 +93,30 @@ class CotizacionHasSuelaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CotizacionHasSuela $cotizacionHasSuela)
+    public function edit( Request $request )
     {
-        //
+        try{
+
+            CotizacionHasSuela::where('idCotizacion', '=', $request->id)
+                                ->update([
+
+                                    'colorPiso' => $request->piso,
+                                    'colorCuna' => $request->cuna,
+
+                                ]);
+
+            $datos['exito'] = true;
+
+        }catch(\Throwable $th){
+
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }finally{
+
+            return response()->json( $datos );
+            
+        }
     }
 
     /**
