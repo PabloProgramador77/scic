@@ -42,12 +42,12 @@ jQuery(document).ready(function(){
                     respuesta.suelas.forEach(function(suela){
 
                         html += '<tr>' +
-                                    '<td><input type="checkbox" checked="true" name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" value="' + suela.precio + '" data-id="' + suela.id + '" data-value="'+suela.nombre+'"></td>' +
+                                    '<td><input type="checkbox" '+(suela.colorPiso||suela.colorCuna ? 'checked' : '')+' name="suela" id="suela' + suela.id + '" class="form-control suela' + suela.id + '" value="' + suela.precio + '" data-id="' + suela.id + '" data-value="'+suela.nombre+'"></td>' +
                                     '<td>' + suela.nombre + '</td>' +
                                     '<td>' + suela.precio + '</td>' +
                                     '<td>$ ' + suela.descripcion + '</td>' +
-                                    '<td><input type="text" class="form-control" name="colorSuelaPiso" placeholder="Color de piso en suela" id="suela'+suela.id+'" disabled="true" value="'+(suela.colorPiso ?? '')+'"></td>'+
-                                    '<td><input type="text" class="form-control" name="colorSuelaCuna" placeholder="Color de cuña en suela" id="suela'+suela.id+'" disabled="true" value="'+(suela.colorCuna ?? '')+'"></td>'+
+                                    '<td><input type="text" class="form-control" name="colorSuelaPiso" placeholder="Color de piso en suela" id="suela'+suela.id+'" '+(suela.colorPiso ? '' : 'disabled')+' value="'+(suela.colorPiso ?? '')+'"></td>'+
+                                    '<td><input type="text" class="form-control" name="colorSuelaCuna" placeholder="Color de cuña en suela" id="suela'+suela.id+'" '+(suela.colorCuna ? '' :  'disabled')+' value="'+(suela.colorCuna ?? '')+'"></td>'+
                                 '</tr>';
 
                     });
