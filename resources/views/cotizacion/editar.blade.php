@@ -97,7 +97,7 @@
                         </td>
                         <td>
                             <select name="colorPieza" id="color{{ $pieza->id }}" class="form-control colorPieza{{ $pieza->id }}" data-id="{{ $pieza->id }}">
-                                <option value="{{ $pieza->color( $cotizacion->id )->first()->color }}">{{ $pieza->color( $cotizacion->id )->first()->color }}</option>
+                                <option value="{{ $pieza->color( $cotizacion->id )->first()->pivot->colorMateria }}">{{ $pieza->color( $cotizacion->id )->first()->pivot->colorMaterial }}</option>
                             </select>
                         </td>
                         <td class="medidas{{ $pieza->id }}">{{ $pieza->largo }} x {{ $pieza->alto }}</td>
