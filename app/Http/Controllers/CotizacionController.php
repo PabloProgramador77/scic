@@ -709,8 +709,6 @@ class CotizacionController extends Controller
             Cotizacion::where('id', '=', $request->id)
                         ->update([
 
-                            'descripcion' => $request->descripcion,
-                            'color' => $request->color,
                             'precio' => $request->total,
                             'observaciones' => $request->observaciones,
 

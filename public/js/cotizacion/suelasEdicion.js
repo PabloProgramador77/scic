@@ -210,298 +210,112 @@ jQuery(document).ready(function(){
 
         Swal.fire({
 
-            title: 'Ingresa la descripción de la cotización del modelo',
-            input: 'text',
-            inputLabel: 'Descripción:',
-            inputPlaceholder: 'Descripción breve',
-            showCancelButton: true,
-            confirmButtonText: 'Guardar',
-            cancelButtonText: 'Cancelar',
-        
-        }).then( (result) => {
+            title: 'Actualizando cotización',
+            html: 'Un momento por favor: <b></b>',
+            timer: 9975,
+            allowOutsideClick: false,
+            didOpen: ()=>{
 
-            if( result.isConfirmed && result.value ){
+                Swal.showLoading();
+                const b = Swal.getHtmlContainer().querySelector('b');
+                procesamiento = setInterval(()=>{
 
-                var descripcion = result.value;
+                    b.textContent = Swal.getTimerLeft();
+
+                }, 100);
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: '/cotizacion/actualizar',
+                    data:{
+
+                        'cliente' : $("#idCliente").val(),
+                        'modelo' : $("#modelo").val(),
+                        'total' : $("#total").val(),
+                        'piezas' : piezas,
+                        'materiales' : materiales,
+                        'costos' : costos,
+                        'costes' : costes,
+                        'consumibles' : consumibles,
+                        'suelas' : suelas,
+                        'colores' : colores,
+                        'observaciones' : $("#observaciones").val(),
+                        'id' : $("#idCotizacion").val(),
+                        'piso' : colorPiso,
+                        'cuna' : colorCuna,
+
+                    },
+                    dataType: 'json',
+                    encode: true
+
+                }).done(function(respuesta){
+
+                    if( respuesta.exito ){
+
+                        Swal.fire({
+
+                            icon: 'success',
+                            title: 'Cotización actualizada',
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+
+                        }).then((resultado)=>{
+
+                            if( resultado.isConfirmed ){
+
+                                window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
+
+                            }
+
+                        });                                        
+
+                    }else{
+
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: respuesta.mensaje,
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+
+                        }).then((resultado)=>{
+
+                            if( resultado.isConfirmed ){
+
+                                window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
+            },
+            willClose: ()=>{
+
+                clearInterval(procesamiento);
+
+            }
+
+        }).then((resultado)=>{
+
+            if( resultado.dismiss == Swal.DismissReason.timer ){
 
                 Swal.fire({
 
-                    title: 'Ingresa el color del modelo en la cotización',
-                    input: 'text',
-                    inputLabel: 'Color(es):',
-                    inputPlaceholder: 'Color(es)',
-                    showCancelButton: true,
-                    confirmButtonText: 'Guardar',
-                    cancelButtonText: 'Cancelar',
+                    icon: 'warning',
+                    title: 'Hubo un inconveniente. Trata de nuevo.',
+                    allowOutsideClick: false,
+                    showConfirmButton: true
 
-                }).then( (resultado) => {
+                }).then((resultado)=>{
 
-                    if( resultado.isConfirmed && resultado.value ){
+                    if( resultado.isConfirmed ){
 
-                        var color = resultado.value;
-
-                        if( $("#observaciones").val() === '' || $("#observaciones").val() === null ){
-
-                            Swal.fire({
-
-                                title: 'Ingresa las observaciones de la cotización',
-                                input: 'text',
-                                inputLabel: 'Observaciones:',
-                                showCancelButton: true,
-                                confirmButtonText: 'Guardar',
-                                cancelButtonText: 'Cancelar',
-
-                            }).then( (res)=>{
-
-                                var observaciones = res.value;
-
-                                if( res.isConfirmed && res.value ){
-
-                                    Swal.fire({
-
-                                        title: 'Actualizando cotización',
-                                        html: 'Un momento por favor: <b></b>',
-                                        timer: 9975,
-                                        allowOutsideClick: false,
-                                        didOpen: ()=>{
-                            
-                                            Swal.showLoading();
-                                            const b = Swal.getHtmlContainer().querySelector('b');
-                                            procesamiento = setInterval(()=>{
-                            
-                                                b.textContent = Swal.getTimerLeft();
-                            
-                                            }, 100);
-                            
-                                            $.ajax({
-                            
-                                                type: 'POST',
-                                                url: '/cotizacion/actualizar',
-                                                data:{
-                            
-                                                    'cliente' : $("#idCliente").val(),
-                                                    'modelo' : $("#modelo").val(),
-                                                    'total' : $("#total").val(),
-                                                    'piezas' : piezas,
-                                                    'materiales' : materiales,
-                                                    'costos' : costos,
-                                                    'costes' : costes,
-                                                    'consumibles' : consumibles,
-                                                    'suelas' : suelas,
-                                                    'colores' : colores,
-                                                    'observaciones' : observaciones,
-                                                    'descripcion' : descripcion,
-                                                    'color' : color,
-                                                    'id' : $("#idCotizacion").val(),
-                                                    'piso' : colorPiso,
-                                                    'cuna' : colorCuna,
-                            
-                                                },
-                                                dataType: 'json',
-                                                encode: true
-                            
-                                            }).done(function(respuesta){
-                            
-                                                if( respuesta.exito ){
-                            
-                                                    Swal.fire({
-                            
-                                                        icon: 'success',
-                                                        title: 'Cotización actualizada',
-                                                        allowOutsideClick: false,
-                                                        showConfirmButton: true
-                            
-                                                    }).then((resultado)=>{
-                            
-                                                        if( resultado.isConfirmed ){
-                            
-                                                            window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
-                            
-                                                        }
-                            
-                                                    });                                        
-                            
-                                                }else{
-                            
-                                                    Swal.fire({
-                            
-                                                        icon: 'error',
-                                                        title: respuesta.mensaje,
-                                                        allowOutsideClick: false,
-                                                        showConfirmButton: true
-                            
-                                                    }).then((resultado)=>{
-                            
-                                                        if( resultado.isConfirmed ){
-                            
-                                                            window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
-                            
-                                                        }
-                            
-                                                    });
-                            
-                                                }
-                            
-                                            });
-                            
-                                        },
-                                        willClose: ()=>{
-                            
-                                            clearInterval(procesamiento);
-                            
-                                        }
-                            
-                                    }).then((resultado)=>{
-                            
-                                        if( resultado.dismiss == Swal.DismissReason.timer ){
-                            
-                                            Swal.fire({
-                            
-                                                icon: 'warning',
-                                                title: 'Hubo un inconveniente. Trata de nuevo.',
-                                                allowOutsideClick: false,
-                                                showConfirmButton: true
-                            
-                                            }).then((resultado)=>{
-                            
-                                                if( resultado.isConfirmed ){
-                            
-                                                    window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
-                            
-                                                }
-                            
-                                            });
-                            
-                                        }
-                            
-                                    });
-
-                                }
-
-                            });
-
-                        }else{
-
-                            Swal.fire({
-
-                                title: 'Actualizando cotización',
-                                html: 'Un momento por favor: <b></b>',
-                                timer: 9975,
-                                allowOutsideClick: false,
-                                didOpen: ()=>{
-                    
-                                    Swal.showLoading();
-                                    const b = Swal.getHtmlContainer().querySelector('b');
-                                    procesamiento = setInterval(()=>{
-                    
-                                        b.textContent = Swal.getTimerLeft();
-                    
-                                    }, 100);
-                    
-                                    $.ajax({
-                    
-                                        type: 'POST',
-                                        url: '/cotizacion/actualizar',
-                                        data:{
-                    
-                                            'cliente' : $("#idCliente").val(),
-                                            'modelo' : $("#modelo").val(),
-                                            'total' : $("#total").val(),
-                                            'piezas' : piezas,
-                                            'materiales' : materiales,
-                                            'costos' : costos,
-                                            'costes' : costes,
-                                            'consumibles' : consumibles,
-                                            'suelas' : suelas,
-                                            'colores' : colores,
-                                            'observaciones' : $("#observaciones").val(),
-                                            'descripcion' : descripcion,
-                                            'color' : color,
-                                            'id' : $("#idCotizacion").val(),
-                                            'piso' : colorPiso,
-                                            'cuna' : colorCuna,
-                    
-                                        },
-                                        dataType: 'json',
-                                        encode: true
-                    
-                                    }).done(function(respuesta){
-                    
-                                        if( respuesta.exito ){
-                    
-                                            Swal.fire({
-                    
-                                                icon: 'success',
-                                                title: 'Cotización actualizada',
-                                                allowOutsideClick: false,
-                                                showConfirmButton: true
-                    
-                                            }).then((resultado)=>{
-                    
-                                                if( resultado.isConfirmed ){
-                    
-                                                    window.location.href = '/cotizaciones/cliente/'+$("#idCliente").val();
-                    
-                                                }
-                    
-                                            });                                        
-                    
-                                        }else{
-                    
-                                            Swal.fire({
-                    
-                                                icon: 'error',
-                                                title: respuesta.mensaje,
-                                                allowOutsideClick: false,
-                                                showConfirmButton: true
-                    
-                                            }).then((resultado)=>{
-                    
-                                                if( resultado.isConfirmed ){
-                    
-                                                    window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
-                    
-                                                }
-                    
-                                            });
-                    
-                                        }
-                    
-                                    });
-                    
-                                },
-                                willClose: ()=>{
-                    
-                                    clearInterval(procesamiento);
-                    
-                                }
-                    
-                            }).then((resultado)=>{
-                    
-                                if( resultado.dismiss == Swal.DismissReason.timer ){
-                    
-                                    Swal.fire({
-                    
-                                        icon: 'warning',
-                                        title: 'Hubo un inconveniente. Trata de nuevo.',
-                                        allowOutsideClick: false,
-                                        showConfirmButton: true
-                    
-                                    }).then((resultado)=>{
-                    
-                                        if( resultado.isConfirmed ){
-                    
-                                            window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
-                    
-                                        }
-                    
-                                    });
-                    
-                                }
-                    
-                            });
-
-                        }
+                        window.location.href = '/cotizador/cliente/'+$("#idCliente").val();
 
                     }
 
