@@ -57,6 +57,7 @@ jQuery(document).ready(function(){
         console.log('Total:' +total );
 
         $("#total").val( total.toFixed(2) );
+        $("#totalBase").val( total.toFixed(2) );
 
         $.ajax({
 
@@ -159,6 +160,7 @@ jQuery(document).ready(function(){
             total += costo;
 
             $("#total").val( total.toFixed(4) );
+            $("#totalBase").val( total.toFixed(4) );
 
         }else{
 
@@ -168,6 +170,7 @@ jQuery(document).ready(function(){
             total -= costo;
 
             $("#total").val( total.toFixed(4) );
+            $("#totalBase").val( total.toFixed(4) );
 
         }
 

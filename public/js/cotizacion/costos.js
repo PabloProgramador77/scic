@@ -114,8 +114,8 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
         var costos = 0;
-        var total = parseFloat( $("#total").val() );
-
+        var total = parseFloat( $("#totalBase").val() );
+        
         $("input[type=checkbox][name=costo]").each(function(){
 
             if( $(this).is(':checked') ){

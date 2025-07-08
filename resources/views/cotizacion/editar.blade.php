@@ -75,6 +75,7 @@
             @php
                 $heads = ['', 'Pieza', 'Material', 'Color', 'Largo y Alto', 'Piezas', 'Área', 'Cm2', 'Dm', 'Unidades', 'MtsxPar', 'Costo'];
                 $config = ['order' => [[1, 'asc']], 'pageLength' => [100], 'lengthMenu' => [10, 25, 50, 75, 100]];
+                $totalBase = 0;
             @endphp
 
             <x-adminlte-datatable id="contenedorPiezas" :heads="$heads" :config="$config" theme="light" striped hoverable bordered compressed beautify>
@@ -113,11 +114,14 @@
                         <td class="unidades{{ $pieza->id }}">{{ number_format( $pieza->materiales( $cotizacion->id )->first()->unidades , 1) }}</td>
                         <td class="mts{{ $pieza->id }}">{{ number_format( (( $pieza->largo*$pieza->alto )*( $pieza->cantidad )/( $pieza->materiales( $cotizacion->id )->first()->unidades*100 )) , 4) }}</td>
                         <td data-name="costo" class="costo{{ $pieza->id }}">{{ number_format( (( $pieza->largo*$pieza->alto )*( $pieza->cantidad )/( $pieza->materiales( $cotizacion->id )->first()->unidades*100 ))*( $pieza->materiales( $cotizacion->id )->first()->precio ) , 1 ) }}</td>
+                        @php
+                            $totalBase += (( $pieza->largo*$pieza->alto )*( $pieza->cantidad )/( $pieza->materiales( $cotizacion->id )->first()->unidades*100 ))*( $pieza->materiales( $cotizacion->id )->first()->precio );
+                        @endphp
                     </tr>
                 @endforeach
 
             </x-adminlte-datatable>
-
+            <input type="hidden" name="totalBase" id="totalBase" value="{{ number_format( $totalBase, 4) }}">
         </div>
 
     </section>
