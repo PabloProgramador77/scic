@@ -99,7 +99,7 @@
                         <td>
                             <select name="colorPieza" id="color{{ $pieza->id }}" class="form-control colorPieza{{ $pieza->id }}" data-id="{{ $pieza->id }}">
                                 <option value="{{ $pieza->color( $cotizacion->id )->first()->pivot->colorMaterial }}">{{ $pieza->color( $cotizacion->id )->first()->pivot->colorMaterial }}</option>
-                                @foreach( $pieza->colores( $pieza->id, $cotizacion->id )->pluck('color')->toArray() as $color )
+                                @foreach( $pieza->colores( $pieza->materiales( $cotizacion->id )->first()->nombre )->pluck('color')->toArray() as $color )
                                     @if ( $pieza->color( $cotizacion->id )->first()->pivot->colorMaterial != $color )
                                         <option value="{{ $color }}">{{ $color }}</option>    
                                     @endif
