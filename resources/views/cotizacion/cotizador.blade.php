@@ -92,7 +92,7 @@
                 @endif
 
             </x-adminlte-datatable>
-
+            <input type="hidden" name="totalBase" id="totalBase" value="0">
         </div>
 
     </section>
